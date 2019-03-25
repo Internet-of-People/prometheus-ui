@@ -1,0 +1,139 @@
+/*12 column grid*/
+/* line 2, ../sass/app.scss */
+.col-1 {
+  width: 8.33%;
+}
+
+/* line 3, ../sass/app.scss */
+.col-2 {
+  width: 16.66%;
+}
+
+/* line 4, ../sass/app.scss */
+.col-3 {
+  width: 25%;
+}
+
+/* line 5, ../sass/app.scss */
+.col-4 {
+  width: 33.33%;
+}
+
+/* line 6, ../sass/app.scss */
+.col-5 {
+  width: 41.66%;
+}
+
+/* line 7, ../sass/app.scss */
+.col-6 {
+  width: 50%;
+}
+
+/* line 8, ../sass/app.scss */
+.col-7 {
+  width: 58.33%;
+}
+
+/* line 9, ../sass/app.scss */
+.col-8 {
+  width: 66.66%;
+}
+
+/* line 10, ../sass/app.scss */
+.col-9 {
+  width: 75%;
+}
+
+/* line 11, ../sass/app.scss */
+.col-10 {
+  width: 83.33%;
+}
+
+/* line 12, ../sass/app.scss */
+.col-11 {
+  width: 91.66%;
+}
+
+/* line 13, ../sass/app.scss */
+.col-12 {
+  width: 100%;
+}
+
+/* line 14, ../sass/app.scss */
+.col-20-percent {
+  width: 20%;
+}
+
+/* line 15, ../sass/app.scss */
+.col-40-percent {
+  width: 40%;
+}
+
+/* line 16, ../sass/app.scss */
+.col-60-percent {
+  width: 60%;
+}
+
+/* line 17, ../sass/app.scss */
+.col-80-percent {
+  width: 80%;
+}
+
+/* line 18, ../sass/app.scss */
+.width-inherit {
+  width: inherit;
+}
+
+/*Variables*/
+/* Color Palette */
+/* line 71, ../sass/app.scss */
+body {
+  height: 100%;
+  font-size: 13px;
+  font-family: "Segoe UI", "SF UI text", sans-serif !important;
+  margin: 0px;
+}
+
+/* line 78, ../sass/app.scss */
+.micro-fontsize {
+  font-size: 11px !important;
+  line-height: 16px;
+}
+
+/* line 82, ../sass/app.scss */
+.small-fontsize {
+  font-size: 12px;
+  line-height: 16px;
+}
+
+/* line 87, ../sass/app.scss */
+.regular-fontsize {
+  font-size: 13px;
+  line-height: 16px;
+}
+
+/* line 92, ../sass/app.scss */
+.large-fontsize {
+  font-size: 14px;
+  line-height: 16px;
+}
+
+/* line 97, ../sass/app.scss */
+.sans-serif-bold {
+  font-weight: bold;
+}
+
+/* line 101, ../sass/app.scss */
+.sans-serif-header {
+  font-weight: 400;
+}
+
+/* line 105, ../sass/app.scss */
+.float-left {
+  float: left;
+}
+
+/* line 109, ../sass/app.scss */
+.float-right {
+  float: right;
+}

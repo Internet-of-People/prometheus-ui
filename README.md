@@ -5,6 +5,13 @@
 yarn install
 ```
 
+## Dev Stylesheets
+
+```bash
+cd ~/src/assets/css/
+compass watch --poll
+```
+
 ### Compiles and hot-reloads for development
 ```
 yarn run serve
@@ -24,6 +31,3 @@ yarn run test
 ```
 yarn run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
