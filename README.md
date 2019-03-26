@@ -8,16 +8,16 @@ yarn install
 ## Dev Stylesheets
 
 ```bash
-cd ~/src/assets/css/
+cd src/assets/css/
 compass watch --poll
 ```
 
-### Compiles and hot-reloads for development
+### Compile and hot-reload for development
 ```
 yarn run serve
 ```
 
-### Compiles and minifies for production
+### Compile and minify for production
 ```
 yarn run build
 ```
@@ -27,7 +27,7 @@ yarn run build
 yarn run test
 ```
 
-### Lints and fixes files
+### Lint and fix files
 ```
 yarn run lint
 ```
