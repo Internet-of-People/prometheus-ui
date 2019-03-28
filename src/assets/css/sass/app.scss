@@ -109,3 +109,15 @@ body{
 .float-right{
   float: right;
 }
+
+a{
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  outline: none;
+}
+
+.display-inline-flex{
+  display: inline-flex !important;
+  display:-ms-inline-flexbox !important;
+}

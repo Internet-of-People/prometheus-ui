@@ -137,3 +137,17 @@ body {
 .float-right {
   float: right;
 }
+
+/* line 113, ../sass/app.scss */
+a {
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  outline: none;
+}
+
+/* line 120, ../sass/app.scss */
+.display-inline-flex {
+  display: inline-flex !important;
+  display: -ms-inline-flexbox !important;
+}

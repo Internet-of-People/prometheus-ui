@@ -1,33 +1,52 @@
 # influencer-app
 
+## Table of Contents
+
+1. [Project setup](#project-setup)
+    1. [Dev Stylesheets](#dev-stylesheets)
+    2. [Compiles and hot-reloads for development](#compiles-and-hot-reloads-for-development)
+    3. [Compiles and minifies for production](#compiles-and-minifies-for-production)
+    4. [Run your tests](#run-your-tests)
+    5. [Lint and fix files](#lint-and-fix-files)
+2. [Vuejs Guidelines](#vuejs-guidelines)
+
 ## Project setup
-```
+
+```bash
 yarn install
 ```
 
-## Dev Stylesheets
+### Dev Stylesheets
 
 ```bash
 cd src/assets/css/
 compass watch --poll
 ```
 
-### Compile and hot-reload for development
-```
+### Compiles and hot-reloads for development
+
+```bash
 yarn run serve
 ```
 
-### Compile and minify for production
-```
+### Compiles and minifies for production
+
+```bash
 yarn run build
 ```
 
 ### Run your tests
-```
+
+```bash
 yarn run test
 ```
 
 ### Lint and fix files
-```
+
+```bash
 yarn run lint
 ```
+
+## Vuejs Guidelines
+
+[Styling Guide](https://vuejs.org/v2/style-guide/)
