@@ -121,3 +121,11 @@ a{
   display: inline-flex !important;
   display:-ms-inline-flexbox !important;
 }
+
+.cursor-pointer{
+  cursor: pointer;
+}
+
+button, i{
+  @extend .cursor-pointer
+}

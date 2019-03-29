@@ -151,3 +151,8 @@ a {
   display: inline-flex !important;
   display: -ms-inline-flexbox !important;
 }
+
+/* line 125, ../sass/app.scss */
+.cursor-pointer, button, i {
+  cursor: pointer;
+}
