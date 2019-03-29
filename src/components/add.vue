@@ -12,18 +12,19 @@
       </div>
       <div>
         <br/>
-        <button v-on:click="save">Save Account</button>
+        <Button name="Save Account" v-bind:onClick="save"/>
       </div>
     </div>
-    <button v-else v-on:click="add">Add</button>
+    <Button v-else name="Add" v-bind:onClick="add"/>
   </div>
 </template>
 
 <script>
-
+import Button from '@/components/common/Button'
 export default {
   name: 'Add',
   components: {
+    Button,
   },
   data() {
     return {
