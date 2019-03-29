@@ -6,7 +6,7 @@
         {{ i.site }} - {{ i.handle }}
       </li>
     </ul>
-    <button v-on:click="add">Add</button>
+    <Add/>
     <Footer/>
   </div>
 </template>
@@ -14,16 +14,15 @@
 <script>
 import Header from '@/components/common/Header'
 import Footer from '@/components/common/Footer'
+import Add from '@/components/add'
 export default {
   name: 'AccountsPage',
   components: {
     Header,
     Footer,
+    Add,
   },
   methods: {
-    add(){
-      alert('Adding account.');
-    }
   },
 }
 </script>
