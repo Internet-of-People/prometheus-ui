@@ -16,7 +16,7 @@ export default {
 </script>
 
 <style scoped>
-.header-inner-wrapper{
+.header-inner-wrapper {
   width: 100%;
   height: 40px;
   z-index: 94;
