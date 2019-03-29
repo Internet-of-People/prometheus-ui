@@ -36,8 +36,8 @@ export default {
       this.expanded = true;
     },
     save(){
-      alert('TODO: save to the store.');
-      this.expanded = false;
+      // TODO: Pass new account on dispatch
+      this.$store.dispatch('saveAccount')
     }
   },
 }

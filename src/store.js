@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+const store =  new Vuex.Store({
   state: {
     "accounts": [
       {"site": "twitter", "handle": "lez"},
@@ -12,9 +12,15 @@ export default new Vuex.Store({
     ]
   },
   mutations: {
-
+    'SAVE_ACCOUNT': function (state, param) {
+      state.accounts.push(param)
+    },
   },
   actions: {
-
+    saveAccount (param) {
+      store.commit('SAVE_ACCOUNT', param)
+    }
   }
 })
+
+export default store
