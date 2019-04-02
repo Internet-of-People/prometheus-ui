@@ -183,17 +183,141 @@ a {
 
 /* line 158, ../sass/app.scss */
 .header-inner-wrapper {
-  width: 100%;
   height: 40px;
   z-index: 94;
   background-color: #FFFFFF;
   box-shadow: 0 0 10px 0 #DADADA;
 }
 
-/* line 166, ../sass/app.scss */
+/* line 165, ../sass/app.scss */
 .page-title {
   color: #D85760;
   height: 22px;
   padding: 12px 24px 6px;
   font-weight: 400;
+}
+
+/* line 173, ../sass/app.scss */
+* {
+  box-sizing: border-box;
+}
+
+/* line 177, ../sass/app.scss */
+body {
+  margin: 0;
+}
+
+/* line 181, ../sass/app.scss */
+nav {
+  background: #002452;
+  float: left;
+  height: 100vh;
+  left: 0;
+  margin-right: 0;
+  overflow: auto;
+  padding: 0;
+  transition: width .3s ease;
+  position: fixed;
+  top: 0;
+  width: 63px;
+  z-index: 1;
+}
+/* line 194, ../sass/app.scss */
+nav ul {
+  margin: 0;
+  padding: 0;
+}
+/* line 197, ../sass/app.scss */
+nav ul li {
+  display: inline-flex;
+  list-style: none;
+}
+/* line 200, ../sass/app.scss */
+nav ul li + li {
+  border-top: 1px solid rgba(237, 237, 237, 0.05);
+}
+/* line 203, ../sass/app.scss */
+nav ul li a {
+  color: #FFFFFF;
+  display: block;
+  font-size: 13px;
+  height: 63px;
+  opacity: .3;
+  padding: 22px 0 22px 8px;
+  position: relative;
+  text-decoration: none;
+  white-space: nowrap;
+}
+/* line 213, ../sass/app.scss */
+nav ul li a:hover {
+  opacity: 1;
+}
+/* line 217, ../sass/app.scss */
+nav ul li i {
+  color: #FFFFFF;
+  display: block;
+  font-size: 13px;
+  opacity: 1;
+  padding: 24px 26px;
+  position: relative;
+  text-decoration: none;
+  white-space: nowrap;
+}
+/* line 226, ../sass/app.scss */
+nav ul li i:hover {
+  opacity: 1;
+}
+/* line 232, ../sass/app.scss */
+nav.hovered {
+  width: 210px;
+}
+/* line 234, ../sass/app.scss */
+nav.hovered i {
+  padding: 22px 0 22px 48px;
+}
+
+/* line 241, ../sass/app.scss */
+nav ul li a:before {
+  content: "";
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  top: 24%;
+  right: auto;
+  bottom: auto;
+  left: 12px;
+}
+
+/* line 253, ../sass/app.scss */
+#mainContent {
+  height: 100vh;
+  margin-left: 63px;
+  position: relative;
+  width: calc(100% - 63px);
+  transition: margin-left 0.5s ease;
+}
+/* line 259, ../sass/app.scss */
+#mainContent span {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 40px;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transition: all 2s ease-in-out;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+}
+
+/* line 271, ../sass/app.scss */
+.shift-main-content {
+  margin-left: 210px !important;
+  width: calc(100% - 210px) !important;
+}
+
+@media all and (min-height: 500px) {
+  /* line 277, ../sass/app.scss */
+  .support, .support span {
+    bottom: 20px;
+    position: absolute;
+  }
 }

@@ -1,16 +1,12 @@
 <template>
   <div>
-    <Header/>
+    <div>Profile Overview</div>
   </div>
 </template>
 
 <script>
-import Header from '@/components/common/Header'
 export default {
-  name: 'Overview',
-  components: {
-    Header
-  }
+  name: 'Overview'
 }
 </script>
 
