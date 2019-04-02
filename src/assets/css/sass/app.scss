@@ -68,6 +68,9 @@ $brand-highlight:       $silver;
 $brand-divider:         $ash;
 $button-save:           #0365C0;
 
+$brand-main-color:      #D85760;
+$brand-sub-color:       #999999;
+
 body{
   height: 100%;
   font-size: 13px;
@@ -113,19 +116,56 @@ body{
 a{
   cursor: pointer;
   text-decoration: none;
-  color: inherit;
+  color: $brand-link;
   outline: none;
 }
 
 .display-inline-flex{
   display: inline-flex !important;
-  display:-ms-inline-flexbox !important;
+  display: -ms-inline-flexbox;
 }
 
 .cursor-pointer{
   cursor: pointer;
 }
 
+.primary-btn {
+  @extend .cursor-pointer !optional;
+  color: $brand-info;
+  padding: 12px 24px;
+  i {
+    padding: 0 4px;
+  }
+  &:hover{
+    color: $brand-link;
+  }
+}
+
+.secondary-btn {
+  @extend .cursor-pointer !optional;
+  color: $brand-inverse;
+  padding: 12px 24px;
+  i {
+    padding: 0 4px;
+  }
+}
+
+
 button, i{
   @extend .cursor-pointer
+}
+
+.header-inner-wrapper {
+  width: 100%;
+  height: 40px;
+  z-index: 94;
+  background-color: $brand-inverse;
+  box-shadow: 0 0 10px 0 $brand-divider;
+}
+
+.page-title {
+  color: $brand-main-color;
+  height: 22px;
+  padding: 12px 24px 6px;
+  font-weight: 400;
 }

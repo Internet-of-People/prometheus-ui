@@ -14,9 +14,9 @@
 <script>
 import Header from '@/components/common/Header'
 import Footer from '@/components/common/Footer'
-import Add from '@/components/add'
+import Add from '@/components/account/Add'
 export default {
-  name: 'AccountsPage',
+  name: 'Accounts',
   components: {
     Header,
     Footer,

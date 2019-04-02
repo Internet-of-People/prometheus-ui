@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 const store =  new Vuex.Store({
   state: {
+    "appname": "Prometheus",
     "accounts": [
       {"site": "twitter", "handle": "lez"},
       {"site": "facebook", "handle": "lezlancs"},

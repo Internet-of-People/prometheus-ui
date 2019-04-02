@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import MainPage from './components/index'
-import AccountsPage from './components/accounts'
-import Register from './components/register/register'
+import Overview from './components/overview/ProfileList'
+import Accounts from './components/account/Accounts'
+import Register from './components/register/Register'
 
 Vue.use(Router)
 
@@ -11,12 +11,12 @@ export default new Router({
     {
       path: '/',
       name: 'main',
-      component: MainPage
+      component: Overview
     },
     {
       path: '/accounts',
       name: 'accounts',
-      component: AccountsPage
+      component: Accounts
     },
     {
       path: '/register',

@@ -1,7 +1,10 @@
 <template>
   <div class="header-inner-wrapper">
-    <div class="page-title sans-serif-normal float-left regular-fontsize">Influencer App  
-        <div class="display-inline-flex" v-if="name.length">{{'> '+ name}}</div>
+    <div class="page-title sans-serif-normal float-left regular-fontsize">{{this.$store.state.appname}}
+        <div class="display-inline-flex" v-if="name && name.length">{{'> '+ name}}</div>
+    </div>
+    <div class="primary-btn sans-serif-normal float-right regular-fontsize">
+        <i class="fa fa-power-off" title="Logout"></i>Logout
     </div>
   </div>
 </template>
@@ -16,20 +19,4 @@ export default {
 </script>
 
 <style scoped>
-.header-inner-wrapper {
-  width: 100%;
-  height: 40px;
-  z-index: 94;
-  background-color: white;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
-}
-
-.page-title {
-  color: #e22e71;
-  height: 22px;
-  padding: 12px 0px 6px 12px;
-  font-weight: 400;
-  margin-left: 12px;
-}
-
 </style>

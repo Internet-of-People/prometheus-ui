@@ -86,7 +86,7 @@
 
 /*Variables*/
 /* Color Palette */
-/* line 71, ../sass/app.scss */
+/* line 74, ../sass/app.scss */
 body {
   height: 100%;
   font-size: 13px;
@@ -94,65 +94,106 @@ body {
   margin: 0px;
 }
 
-/* line 78, ../sass/app.scss */
+/* line 81, ../sass/app.scss */
 .micro-fontsize {
   font-size: 11px !important;
   line-height: 16px;
 }
 
-/* line 82, ../sass/app.scss */
+/* line 85, ../sass/app.scss */
 .small-fontsize {
   font-size: 12px;
   line-height: 16px;
 }
 
-/* line 87, ../sass/app.scss */
+/* line 90, ../sass/app.scss */
 .regular-fontsize {
   font-size: 13px;
   line-height: 16px;
 }
 
-/* line 92, ../sass/app.scss */
+/* line 95, ../sass/app.scss */
 .large-fontsize {
   font-size: 14px;
   line-height: 16px;
 }
 
-/* line 97, ../sass/app.scss */
+/* line 100, ../sass/app.scss */
 .sans-serif-bold {
   font-weight: bold;
 }
 
-/* line 101, ../sass/app.scss */
+/* line 104, ../sass/app.scss */
 .sans-serif-header {
   font-weight: 400;
 }
 
-/* line 105, ../sass/app.scss */
+/* line 108, ../sass/app.scss */
 .float-left {
   float: left;
 }
 
-/* line 109, ../sass/app.scss */
+/* line 112, ../sass/app.scss */
 .float-right {
   float: right;
 }
 
-/* line 113, ../sass/app.scss */
+/* line 116, ../sass/app.scss */
 a {
   cursor: pointer;
   text-decoration: none;
-  color: inherit;
+  color: #0067C5;
   outline: none;
 }
 
-/* line 120, ../sass/app.scss */
+/* line 123, ../sass/app.scss */
 .display-inline-flex {
   display: inline-flex !important;
-  display: -ms-inline-flexbox !important;
+  display: -ms-inline-flexbox;
 }
 
-/* line 125, ../sass/app.scss */
-.cursor-pointer, button, i {
+/* line 128, ../sass/app.scss */
+.cursor-pointer, .primary-btn, .secondary-btn, button, i {
   cursor: pointer;
+}
+
+/* line 132, ../sass/app.scss */
+.primary-btn {
+  color: #34428B;
+  padding: 12px 24px;
+}
+/* line 136, ../sass/app.scss */
+.primary-btn i {
+  padding: 0 4px;
+}
+/* line 139, ../sass/app.scss */
+.primary-btn:hover {
+  color: #0067C5;
+}
+
+/* line 144, ../sass/app.scss */
+.secondary-btn {
+  color: #FFFFFF;
+  padding: 12px 24px;
+}
+/* line 148, ../sass/app.scss */
+.secondary-btn i {
+  padding: 0 4px;
+}
+
+/* line 158, ../sass/app.scss */
+.header-inner-wrapper {
+  width: 100%;
+  height: 40px;
+  z-index: 94;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 10px 0 #DADADA;
+}
+
+/* line 166, ../sass/app.scss */
+.page-title {
+  color: #D85760;
+  height: 22px;
+  padding: 12px 24px 6px;
+  font-weight: 400;
 }
