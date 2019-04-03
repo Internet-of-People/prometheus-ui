@@ -189,7 +189,7 @@ nav {
   transition: width .3s ease;
   position: fixed;
   top: 0;
-  width: 63px;
+  width: 210px;
   z-index: 1;
   ul {
     margin: 0;
@@ -205,7 +205,7 @@ nav {
         display: block;
         font-size: 13px;
         height: 63px;
-        opacity: .3;
+        opacity: 1;
         padding: 22px 0 22px 8px;
         position: relative;
         text-decoration: none;
@@ -219,7 +219,7 @@ nav {
         display: block;
         font-size: 13px;
         opacity: 1;
-        padding: 24px 26px;
+        padding: 22px 0 22px 48px;
         position: relative;
         text-decoration: none;
         white-space: nowrap;
@@ -227,12 +227,6 @@ nav {
           opacity: 1;
         }
       }
-    }
-  }
-  &.hovered {
-    width: 210px;
-    i {
-      padding: 22px 0 22px 48px;
     }
   }
 }
@@ -273,9 +267,15 @@ nav ul li {
   width: calc(100% - 210px) !important;
 }
 
-@media all and (min-height: 500px) {
-  .support,.support span {
-    bottom: 20px;
-    position: absolute;
+.app-title{
+  @extend .display-inline-flex;
+  padding: 8px 32px;
+  img {
+    width: 44px;
+    height: 44px;
+  }
+  div {
+    color: $brand-inverse;
+    padding: 16px;
   }
 }

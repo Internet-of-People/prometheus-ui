@@ -6,9 +6,6 @@ Vue.use(Vuex)
 const store =  new Vuex.Store({
   state: {
     "appname": "Prometheus",
-    "layoutActions": {
-      "expandSideBar": false
-    },
     "accounts": [
       {"site": "twitter", "handle": "lez"},
       {"site": "facebook", "handle": "lezlancs"},
@@ -18,9 +15,6 @@ const store =  new Vuex.Store({
   mutations: {
     'SAVE_ACCOUNT': function (state, param) {
       state.accounts.push(param)
-    },
-    setSideBarHover (state, newValue) {
-      state.layoutActions.expandSideBar = newValue
     }
   },
   actions: {

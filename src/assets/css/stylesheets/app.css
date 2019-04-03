@@ -147,7 +147,7 @@ a {
 }
 
 /* line 123, ../sass/app.scss */
-.display-inline-flex {
+.display-inline-flex, .app-title {
   display: inline-flex !important;
   display: -ms-inline-flexbox;
 }
@@ -219,7 +219,7 @@ nav {
   transition: width .3s ease;
   position: fixed;
   top: 0;
-  width: 63px;
+  width: 210px;
   z-index: 1;
 }
 /* line 194, ../sass/app.scss */
@@ -242,7 +242,7 @@ nav ul li a {
   display: block;
   font-size: 13px;
   height: 63px;
-  opacity: .3;
+  opacity: 1;
   padding: 22px 0 22px 8px;
   position: relative;
   text-decoration: none;
@@ -258,7 +258,7 @@ nav ul li i {
   display: block;
   font-size: 13px;
   opacity: 1;
-  padding: 24px 26px;
+  padding: 22px 0 22px 48px;
   position: relative;
   text-decoration: none;
   white-space: nowrap;
@@ -267,16 +267,8 @@ nav ul li i {
 nav ul li i:hover {
   opacity: 1;
 }
-/* line 232, ../sass/app.scss */
-nav.hovered {
-  width: 210px;
-}
-/* line 234, ../sass/app.scss */
-nav.hovered i {
-  padding: 22px 0 22px 48px;
-}
 
-/* line 241, ../sass/app.scss */
+/* line 235, ../sass/app.scss */
 nav ul li a:before {
   content: "";
   width: 35px;
@@ -288,7 +280,7 @@ nav ul li a:before {
   left: 12px;
 }
 
-/* line 253, ../sass/app.scss */
+/* line 247, ../sass/app.scss */
 #mainContent {
   height: 100vh;
   margin-left: 63px;
@@ -296,7 +288,7 @@ nav ul li a:before {
   width: calc(100% - 63px);
   transition: margin-left 0.5s ease;
 }
-/* line 259, ../sass/app.scss */
+/* line 253, ../sass/app.scss */
 #mainContent span {
   color: rgba(255, 255, 255, 0.5);
   font-size: 40px;
@@ -308,16 +300,23 @@ nav ul li a:before {
   white-space: nowrap;
 }
 
-/* line 271, ../sass/app.scss */
+/* line 265, ../sass/app.scss */
 .shift-main-content {
   margin-left: 210px !important;
   width: calc(100% - 210px) !important;
 }
 
-@media all and (min-height: 500px) {
-  /* line 277, ../sass/app.scss */
-  .support, .support span {
-    bottom: 20px;
-    position: absolute;
-  }
+/* line 270, ../sass/app.scss */
+.app-title {
+  padding: 8px 32px;
+}
+/* line 273, ../sass/app.scss */
+.app-title img {
+  width: 44px;
+  height: 44px;
+}
+/* line 277, ../sass/app.scss */
+.app-title div {
+  color: #FFFFFF;
+  padding: 16px;
 }
