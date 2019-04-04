@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav @mouseover="expand = true" @mouseleave="expand = false" class="hovered">
+    <nav class="hovered">
       <ul>
           <div class="app-title">
             <img src="../../assets/images/logo.svg"/>
@@ -21,17 +21,7 @@
 
 <script>
 export default {
-  name: 'SideBar',
-  computed: {
-    expand: {
-      get: function () {
-        return this.$store.state.layoutActions.expandSideBar
-      },
-      set: function (newValue) {
-        this.$store.commit('setSideBarHover', newValue)
-      }
-    }
-  }
+  name: 'SideBar'
 }
 </script>
 

@@ -132,8 +132,9 @@ a{
 .primary-btn {
   @extend .cursor-pointer !optional;
   color: $brand-info;
-  padding: 12px 24px;
+  padding: 12px;
   i {
+    font-size: 24px;
     padding: 0 4px;
   }
   &:hover{
@@ -278,4 +279,15 @@ nav ul li {
     color: $brand-inverse;
     padding: 16px;
   }
+}
+
+.keyvault-title{
+  padding: 32px;
+  font-size: 24px;
+  font-weight: 100;
+}
+
+.key-count{
+  font-size: 11px;
+  color: $brand-action;
 }

@@ -160,28 +160,29 @@ a {
 /* line 132, ../sass/app.scss */
 .primary-btn {
   color: #34428B;
-  padding: 12px 24px;
+  padding: 12px;
 }
 /* line 136, ../sass/app.scss */
 .primary-btn i {
+  font-size: 24px;
   padding: 0 4px;
 }
-/* line 139, ../sass/app.scss */
+/* line 140, ../sass/app.scss */
 .primary-btn:hover {
   color: #0067C5;
 }
 
-/* line 144, ../sass/app.scss */
+/* line 145, ../sass/app.scss */
 .secondary-btn {
   color: #FFFFFF;
   padding: 12px 24px;
 }
-/* line 148, ../sass/app.scss */
+/* line 149, ../sass/app.scss */
 .secondary-btn i {
   padding: 0 4px;
 }
 
-/* line 158, ../sass/app.scss */
+/* line 159, ../sass/app.scss */
 .header-inner-wrapper {
   height: 40px;
   z-index: 94;
@@ -189,7 +190,7 @@ a {
   box-shadow: 0 0 10px 0 #DADADA;
 }
 
-/* line 165, ../sass/app.scss */
+/* line 166, ../sass/app.scss */
 .page-title {
   color: #D85760;
   height: 22px;
@@ -197,17 +198,17 @@ a {
   font-weight: 400;
 }
 
-/* line 173, ../sass/app.scss */
+/* line 174, ../sass/app.scss */
 * {
   box-sizing: border-box;
 }
 
-/* line 177, ../sass/app.scss */
+/* line 178, ../sass/app.scss */
 body {
   margin: 0;
 }
 
-/* line 181, ../sass/app.scss */
+/* line 182, ../sass/app.scss */
 nav {
   background: #002452;
   float: left;
@@ -222,21 +223,21 @@ nav {
   width: 210px;
   z-index: 1;
 }
-/* line 194, ../sass/app.scss */
+/* line 195, ../sass/app.scss */
 nav ul {
   margin: 0;
   padding: 0;
 }
-/* line 197, ../sass/app.scss */
+/* line 198, ../sass/app.scss */
 nav ul li {
   display: inline-flex;
   list-style: none;
 }
-/* line 200, ../sass/app.scss */
+/* line 201, ../sass/app.scss */
 nav ul li + li {
   border-top: 1px solid rgba(237, 237, 237, 0.05);
 }
-/* line 203, ../sass/app.scss */
+/* line 204, ../sass/app.scss */
 nav ul li a {
   color: #FFFFFF;
   display: block;
@@ -248,11 +249,11 @@ nav ul li a {
   text-decoration: none;
   white-space: nowrap;
 }
-/* line 213, ../sass/app.scss */
+/* line 214, ../sass/app.scss */
 nav ul li a:hover {
   opacity: 1;
 }
-/* line 217, ../sass/app.scss */
+/* line 218, ../sass/app.scss */
 nav ul li i {
   color: #FFFFFF;
   display: block;
@@ -263,12 +264,12 @@ nav ul li i {
   text-decoration: none;
   white-space: nowrap;
 }
-/* line 226, ../sass/app.scss */
+/* line 227, ../sass/app.scss */
 nav ul li i:hover {
   opacity: 1;
 }
 
-/* line 235, ../sass/app.scss */
+/* line 236, ../sass/app.scss */
 nav ul li a:before {
   content: "";
   width: 35px;
@@ -280,7 +281,7 @@ nav ul li a:before {
   left: 12px;
 }
 
-/* line 247, ../sass/app.scss */
+/* line 248, ../sass/app.scss */
 #mainContent {
   height: 100vh;
   margin-left: 63px;
@@ -288,7 +289,7 @@ nav ul li a:before {
   width: calc(100% - 63px);
   transition: margin-left 0.5s ease;
 }
-/* line 253, ../sass/app.scss */
+/* line 254, ../sass/app.scss */
 #mainContent span {
   color: rgba(255, 255, 255, 0.5);
   font-size: 40px;
@@ -300,23 +301,36 @@ nav ul li a:before {
   white-space: nowrap;
 }
 
-/* line 265, ../sass/app.scss */
+/* line 266, ../sass/app.scss */
 .shift-main-content {
   margin-left: 210px !important;
   width: calc(100% - 210px) !important;
 }
 
-/* line 270, ../sass/app.scss */
+/* line 271, ../sass/app.scss */
 .app-title {
   padding: 8px 32px;
 }
-/* line 273, ../sass/app.scss */
+/* line 274, ../sass/app.scss */
 .app-title img {
   width: 44px;
   height: 44px;
 }
-/* line 277, ../sass/app.scss */
+/* line 278, ../sass/app.scss */
 .app-title div {
   color: #FFFFFF;
   padding: 16px;
+}
+
+/* line 284, ../sass/app.scss */
+.keyvault-title {
+  padding: 32px;
+  font-size: 24px;
+  font-weight: 100;
+}
+
+/* line 290, ../sass/app.scss */
+.key-count {
+  font-size: 11px;
+  color: #727272;
 }
