@@ -10,7 +10,13 @@ const store =  new Vuex.Store({
       {"site": "twitter", "handle": "lez"},
       {"site": "facebook", "handle": "lezlancs"},
       {"site": "hackernews", "handle": "lezhn"}
-    ]
+    ],
+    "claims": [
+      // mandatory fields: type, summary
+      {type: "age", summary: "I am over 18.", date: "1990-01-01", claim: "birth-before"},
+      {type: "nationality", summary: "I am Hungarian.", nationality: "Hungarian"},
+      {type: "property", summary: "I am 190cm tall.", height: "190cm"},
+    ],
   },
   mutations: {
     'SAVE_ACCOUNT': function (state, param) {

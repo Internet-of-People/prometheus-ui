@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Overview from './components/overview/ProfileList'
 import Accounts from './components/account/Accounts'
 import Register from './components/register/Register'
+import ClaimsPage from './components/claims/ClaimsPage'
 
 Vue.use(Router)
 
@@ -22,6 +23,11 @@ export default new Router({
       path: '/register',
       name: 'register',
       component: Register
-    }
+    },
+    {
+      path: '/claims',
+      name: 'claims',
+      component: ClaimsPage
+    },
   ]
 })
