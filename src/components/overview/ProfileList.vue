@@ -8,11 +8,13 @@
         </div>
        </div> 
     </div>
+    <ProfileCharts/>
   </div>
 </template>
 
 <script>
 import ProfileCard from '@/components/overview/ProfileCard'
+import ProfileCharts from '@/components/overview/ProfileCharts'
 
 var keyVaults= [
   {"Devices": [
@@ -45,74 +47,6 @@ var keyVaults= [
     "keyCount": 4
     }]
   },
-  {
-    "Groups":[
-      {
-        "type": "group",
-        "name": "Gardening Club",
-        "icon": "fas fa-seedling",
-        "desc": "Personal device",
-        "keyCount": 4
-      },
-      {
-        "type": "group",
-        "name": "Aviato Org",
-        "icon": "fab fa-aviato",
-        "desc": "Personal device",
-        "keyCount": 4
-      },
-      {
-        "type": "group",
-        "name": "PTA at Charlie's School",
-        "icon": "fas fa-university",
-        "desc": "Personal device",
-        "keyCount": 4
-      },
-      {
-        "type": "group",
-        "name": "Game Nighters",
-        "icon": "fas fa-chess",
-        "desc": "Personal device",
-        "keyCount": 4
-      },
-      {
-        "type": "group",
-        "name": "PTA",
-        "icon": "fas fa-university",
-        "desc": "Personal device",
-        "keyCount": 4
-      }]
-  },
-  {"Wallets":[
-  {
-    "name": "Bitcoin Cold Store",
-    "type": "wallet",
-    "icon": "fab fa-bitcoin",
-    "desc": "Personal device",
-    "keyCount": 4
-  },
-  {
-    "name": "Daily Expenses Wallet",
-    "type": "wallet",
-    "icon": "fas fa-money-check",
-    "desc": "Personal device",
-    "keyCount": 4
-  },
-  {
-    "name": "College Savings",
-    "type": "wallet",
-    "icon": "fas fa-piggy-bank",
-    "desc": "Personal device",
-    "keyCount": 4
-  },
-  {
-    "name": "Holiday Savings",
-    "type": "wallet",
-    "icon": "fas fa-glass-cheers",
-    "desc": "Personal device",
-    "keyCount": 4
-  }]
-},
   {"Profile": [
     {
       "type": "profile",
@@ -156,12 +90,81 @@ var keyVaults= [
       "desc": "Personal device",
       "keyCount": 4
     }]
+  },
+  {
+    "Groups":[
+      {
+        "type": "group",
+        "name": "Gardening Club",
+        "icon": "fas fa-seedling",
+        "desc": "Personal device",
+        "keyCount": 4
+      },
+      {
+        "type": "group",
+        "name": "Aviato Org",
+        "icon": "fab fa-aviato",
+        "desc": "Personal device",
+        "keyCount": 4
+      },
+      {
+        "type": "group",
+        "name": "PTA at Charlie's School",
+        "icon": "fas fa-university",
+        "desc": "Personal device",
+        "keyCount": 4
+      },
+      {
+        "type": "group",
+        "name": "Game Nighters",
+        "icon": "fas fa-chess",
+        "desc": "Personal device",
+        "keyCount": 4
+      },
+      {
+        "type": "group",
+        "name": "PTA",
+        "icon": "fas fa-university",
+        "desc": "Personal device",
+        "keyCount": 4
+      }]
+  },
+  {"Wallets":[
+    {
+      "name": "Bitcoin Cold Store",
+      "type": "wallet",
+      "icon": "fab fa-bitcoin",
+      "desc": "Personal device",
+      "keyCount": 4
+    },
+    {
+      "name": "Daily Expenses Wallet",
+      "type": "wallet",
+      "icon": "fas fa-money-check",
+      "desc": "Personal device",
+      "keyCount": 4
+    },
+    {
+      "name": "College Savings",
+      "type": "wallet",
+      "icon": "fas fa-piggy-bank",
+      "desc": "Personal device",
+      "keyCount": 4
+    },
+    {
+      "name": "Holiday Savings",
+      "type": "wallet",
+      "icon": "fas fa-glass-cheers",
+      "desc": "Personal device",
+      "keyCount": 4
+    }]
   }
 ]
 export default {
   name: 'Overview',
   components: {
     ProfileCard,
+    ProfileCharts,
   },
   data() {
     return {

@@ -38,7 +38,7 @@ export default {
   width: 200px;
   height: 140px;
   border-radius: 5px;
-  margin: 0 32px 12px;
+  margin: 0px 16px 12px;
 }
 
 .card:hover {
