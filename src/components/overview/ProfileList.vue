@@ -6,7 +6,7 @@
         <div v-for="(row, index2) in keyvault[fetchKey(keyvault)]" v-bind:key="index2">
           <ProfileCard :card-details="row"/>
         </div>
-       </div> 
+      </div>
     </div>
     <ProfileCharts/>
   </div>
