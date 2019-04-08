@@ -43,9 +43,9 @@ $white:                 #FFFFFF;
 
 //Product
 $brand-primary:         $aqua;
-$brand-secondary:       #002452;
+$brand-secondary:       #378A81;
 
-$brand-info:            $sapphire;
+$brand-info:            #40975D;
 $brand-stable:          #00882B;
 $brand-alert:           $citrine;
 $brand-warning:         #F0BB2B;
@@ -136,9 +136,6 @@ a{
   i {
     font-size: 24px;
     padding: 0 4px;
-  }
-  &:hover{
-    color: $brand-link;
   }
 }
 
@@ -270,14 +267,16 @@ nav ul li {
 
 .app-title{
   @extend .display-inline-flex;
-  padding: 8px 32px;
+  padding: 12px 40px;
+  background-color: $brand-inverse;
   img {
     width: 44px;
     height: 44px;
   }
   div {
-    color: $brand-inverse;
-    padding: 16px;
+    color: $brand-sub-color;
+    padding: 16px 8px;
+    font-weight: 400;
   }
 }
 
