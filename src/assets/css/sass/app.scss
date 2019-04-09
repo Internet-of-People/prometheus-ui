@@ -71,6 +71,8 @@ $button-save:           #0365C0;
 $brand-main-color:      #D85760;
 $brand-sub-color:       #999999;
 
+$footer-height:         32px;
+
 body{
   height: 100%;
   font-size: 13px;
@@ -243,11 +245,11 @@ nav ul li {
 }
 
 #mainContent {
-  height: 100vh;
   margin-left: 63px;
   position: relative;
   width: calc(100% - 63px);
   transition: margin-left 0.5s ease;
+  padding-bottom: $footer-height;
   span {
     color: rgba(255,255,255,0.5);
     font-size: 40px;
@@ -289,4 +291,8 @@ nav ul li {
 .key-count{
   font-size: 11px;
   color: $brand-action;
+}
+
+.footer-wrapper {
+  height: $footer-height;
 }

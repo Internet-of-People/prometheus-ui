@@ -28,7 +28,6 @@ export default {
   left: 0px;
   color: #53585F;
   /* padding: 0px 16px; */
-  height: 32px;
   box-shadow: 0 0 10px 0 rgba(0,0,0,0.20);
   display: inline-block;
   z-index: 100;
