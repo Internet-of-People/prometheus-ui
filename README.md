@@ -1,4 +1,4 @@
-# influencer-app
+# Prometheus UI
 
 ## Table of Contents
 
