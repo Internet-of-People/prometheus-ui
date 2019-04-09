@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Header/>
     <div class="container">
         <h1>Claims</h1>
         <input v-model="search" placeholder="Search in claims summary" type="text"/>
@@ -19,12 +18,10 @@
 </template>
 
 <script>
-import Header from '@/components/common/Header'
 import Footer from '@/components/common/Footer'
 export default {
   name: 'ClaimsPage',
   components: {
-    Header,
     Footer,
   },
   data: function() {

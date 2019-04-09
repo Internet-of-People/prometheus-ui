@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Header/>
     <div class="container">
         <h1>Register Account</h1>
         <p>Please fill in this form to create an account.</p>
@@ -28,13 +27,11 @@
 </template>
 
 <script>
-import Header from '@/components/common/Header'
 import Button from '@/components/common/Button'
 export default {
   name: 'Register',
   components: {
-    Header,
-    Button
+    Button,
   }
 }
 </script>

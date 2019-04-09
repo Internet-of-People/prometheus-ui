@@ -2,7 +2,6 @@
   <div id="app">
     <SideBar/>
     <div id="mainContent" class="shift-main-content">
-      <!-- <Header/> -->
       <router-view/>
     </div>
     <Footer/>
@@ -10,13 +9,11 @@
 </template>
 
 <script>
-// import Header from '@/components/common/Header'
 import Footer from '@/components/common/Footer'
 import SideBar from '@/components/common/SideBar'
 export default {
   name: 'app',
   components: {
-    // Header,
     Footer,
     SideBar
   }
