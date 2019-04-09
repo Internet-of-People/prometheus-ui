@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="page">
+    <div>
         <div class="page-title">Claims</div>
         <input v-model="search" placeholder="Search in claims" type="text"/>
         <ul>

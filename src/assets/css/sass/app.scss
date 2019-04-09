@@ -155,10 +155,6 @@ button, i{
   @extend .cursor-pointer
 }
 
-.page {
-  margin-left: 11px;
-}
-
 .page-title {
   color: $brand-main-color;
   font-weight: 501;
@@ -242,9 +238,8 @@ nav ul li {
 }
 
 #mainContent {
-  margin-left: 63px;
   position: relative;
-  width: calc(100% - 63px);
+  width: 100%;
   transition: margin-left 0.5s ease;
   padding-bottom: $footer-height;
   span {
@@ -260,8 +255,8 @@ nav ul li {
 }
 
 .shift-main-content {
-  margin-left: 210px !important;
-  width: calc(100% - 210px) !important;
+  margin-left: 220px !important;
+  width: calc(100% - 220px) !important;
 }
 
 .app-title{
