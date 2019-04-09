@@ -6,17 +6,14 @@
       </li>
     </ul>
     <Add/>
-    <Footer/>
   </div>
 </template>
 
 <script>
-import Footer from '@/components/common/Footer'
 import Add from '@/components/account/Add'
 export default {
   name: 'Accounts',
   components: {
-    Footer,
     Add,
   },
   methods: {
@@ -25,5 +22,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

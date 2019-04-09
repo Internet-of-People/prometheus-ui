@@ -13,16 +13,13 @@
           </li>
         </ol>
     </div>
-    <Footer/>
   </div>
 </template>
 
 <script>
-import Footer from '@/components/common/Footer'
 export default {
   name: 'ClaimsPage',
   components: {
-    Footer,
   },
   data: function() {
     return {
