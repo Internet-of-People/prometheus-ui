@@ -3,6 +3,9 @@ node_modules
 /dist
 src/assets/css/.sass-cache
 
+# This file is generated from app.scss, see README
+src/assets/css/stylesheets/app.css
+
 # local env files
 .env.local
 .env.*.local
