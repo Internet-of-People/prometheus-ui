@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="container">
-        <h1>Claims</h1>
+        <div class="page-title">Claims</div>
         <input v-model="search" placeholder="Search in claims summary" type="text"/>
         <ul>
           <li v-bind:key="type.length" v-for="type in types"><a v-on:click="remove_type_filter(type)">{{ type }}</a></li>
