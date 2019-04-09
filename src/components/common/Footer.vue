@@ -4,12 +4,12 @@
       <div class='float-left cursor-default desktop-footer-essentials'>
         <span class=''>Prometheus</span>
         <span class='copyright'>&copy;&nbsp; {{new Date().getFullYear()}} Internet of People</span>
-     </div>
-    <div class='float-right cursor-default desktop-footer-essentials'>
+      </div>
+      <div class='float-right cursor-default desktop-footer-essentials'>
         <span class=''>
-            <a href="https://github.com/Internet-of-People/" target="_blank">GitHub</a>
+          <a href="https://github.com/Internet-of-People/" target="_blank">GitHub</a>
         </span>
-     </div>
+      </div>
     </div>
   </div>
 </template>

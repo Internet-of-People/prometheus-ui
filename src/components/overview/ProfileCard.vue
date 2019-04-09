@@ -1,13 +1,13 @@
 <template>
-    <div class="card">
-        <ProfileType :icon="cardDetails.icon"/>
-        <div class="container">
-            <div><b>{{cardDetails.name}}</b></div> 
-            <br/>
-            <div class="key-count"><i class="fas fa-key"/> count: {{cardDetails.keyCount}}</div>
-            <div>{{cardDetails.desc}}</div> 
-        </div>
+  <div class="card">
+    <ProfileType :icon="cardDetails.icon"/>
+    <div class="container">
+      <div><b>{{cardDetails.name}}</b></div>
+      <br/>
+      <div class="key-count"><i class="fas fa-key"/> count: {{cardDetails.keyCount}}</div>
+      <div>{{cardDetails.desc}}</div>
     </div>
+  </div>
 </template>
 
 <script>
