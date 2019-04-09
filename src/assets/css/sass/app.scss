@@ -155,13 +155,6 @@ button, i{
   @extend .cursor-pointer
 }
 
-.header-inner-wrapper {
-  height: 40px;
-  z-index: 94;
-  background-color: $brand-inverse;
-  box-shadow: 0 0 10px 0 $brand-divider;
-}
-
 .page-title {
   color: $brand-main-color;
   font-weight: 501;
