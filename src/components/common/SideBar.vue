@@ -2,13 +2,13 @@
   <div>
     <nav class="hovered">
       <ul>
-        <div class="app-title">
+        <a class="app-title" href="/">
           <img src="../../assets/images/logo.svg"/>
           <div>
             {{this.$store.state.appname}}
           </div>
-        </div>
-        <li class=""><i class="fa fa-users"/><a href="#">Profile Overview</a></li>
+        </a>
+        <li class=""><i class="fa fa-users"/><a href="/">Profile Overview</a></li>
         <li class=""><i class="fa fa-user"/><a href="">Profile</a></li>
         <li class=""><i class="fa fa-address-book"/><a href="">Address Book</a></li>
         <li class=""><i class="fa fa-list"/><a href="#/claims">Claims Overview</a></li>
