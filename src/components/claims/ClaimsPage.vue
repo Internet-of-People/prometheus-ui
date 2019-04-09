@@ -52,7 +52,11 @@ export default {
 
       let search_filtered
       if (this.search != '') {
-        search_filtered = claims.filter(item => item.summary.toLowerCase().includes(this.search.toLowerCase()))
+        search_filtered = claims.filter(item => {
+          if (item.summary.toLowerCase().includes(this.search.toLowerCase())) return true
+          if (item.type.toLowerCase().includes(this.search.toLowerCase())) return true
+          return false
+        })
       } else {
         search_filtered = claims
       }
