@@ -155,6 +155,10 @@ button, i{
   @extend .cursor-pointer
 }
 
+.page {
+  margin-left: 11px;
+}
+
 .page-title {
   color: $brand-main-color;
   font-weight: 501;
