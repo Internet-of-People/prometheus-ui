@@ -2,7 +2,7 @@
   <div>
     <div class="page">
         <div class="page-title">Claims</div>
-        <input v-model="search" placeholder="Search in claims summary" type="text"/>
+        <input v-model="search" placeholder="Search in claims" type="text"/>
         <ul>
           <li v-bind:key="type.length" v-for="type in types"><a v-on:click="remove_type_filter(type)">{{ type }}</a></li>
         </ul>
