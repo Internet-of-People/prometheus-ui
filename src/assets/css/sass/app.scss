@@ -334,14 +334,35 @@ nav ul li {
   }
 }
 
-.card {
+.shadowy {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
-  width: 200px;
   border-radius: 5px;
-  margin: 0px 16px 12px;
   &:hover{
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+}
+
+.card {
+  @extend .shadowy;
+  width: 200px;
+  margin: 0px 16px 12px;
+}
+
+.claim {
+  @extend .shadowy;
+  padding: 10px;
+  margin: 0px 0px 10px 0px;
+}
+
+.claim-filter {
+  background: $brand-highlight;
+  border-radius: 12px;
+  padding: 4px;
+  margin-left: 9px;
+  font-size: 16px;
+  i {
+    margin-left: 5px;
   }
 }
 

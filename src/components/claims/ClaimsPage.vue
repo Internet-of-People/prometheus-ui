@@ -3,15 +3,14 @@
     <div>
         <div class="page-title">Claims</div>
         <input v-model="search" placeholder="Search in claims" type="text"/>
-        <ul>
-          <li v-bind:key="type.length" v-for="type in types"><a v-on:click="remove_type_filter(type)">{{ type }}</a></li>
-        </ul>
+        <span class="claim-filter" v-if="type">
+          {{ type }}
+          <a v-on:click="remove_type_filter()"><i class="fa fa-minus-circle"/></a>
+        </span>
         <hr>
-        <ol>
-          <li v-bind:key="item.id" v-for="item in filtered_list">
-            <a v-on:click="add_type_filter(item.type)">{{ item.type }}</a> - {{ item.summary }}
-          </li>
-        </ol>
+        <div class="claim" v-bind:key="item.id" v-for="item in filtered_list">
+          <a v-on:click="add_type_filter(item.type)">{{ item.type }}</a> - {{ item.summary }}
+        </div>
     </div>
   </div>
 </template>
@@ -24,20 +23,15 @@ export default {
   data: function() {
     return {
       search: '',
-      types: [],
+      type: null,
     }
   },
   methods: {
     add_type_filter: function(type) {
-      if (this.types.includes(type)) {
-        return
-      }
-      this.types.push(type)
+      this.type = type
     },
-    remove_type_filter: function(type) {
-      if (this.types.includes(type)) {
-        this.types = this.types.filter(t => t != type)
-      }
+    remove_type_filter: function() {
+      this.type = null
     },
   },
   computed: {
@@ -56,8 +50,8 @@ export default {
       }
 
       let type_filtered
-      if (this.types.length > 0) {
-        type_filtered = search_filtered.filter(item => this.types.includes(item.type))
+      if (this.type) {
+        type_filtered = search_filtered.filter(item => this.type == item.type)
       } else {
         type_filtered = search_filtered
       }
