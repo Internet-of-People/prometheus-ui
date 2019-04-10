@@ -126,6 +126,7 @@ a{
 .display-inline-flex{
   display: inline-flex !important;
   display: -ms-inline-flexbox;
+  flex-wrap: wrap;
 }
 
 .cursor-pointer{
