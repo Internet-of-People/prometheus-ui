@@ -295,11 +295,17 @@ nav ul li {
 
 .profile{
   width: 320px;
-  display: inline-block;
+  display: inline-grid;
   /* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); */
   margin: 0 20px;
   border: 1px solid $brand-info;
 }
+
+.profile-influencer{
+  @extend .profile;
+  width: 800px;
+}
+
 
 .profile-header{
   border-bottom: 1px solid $brand-info;

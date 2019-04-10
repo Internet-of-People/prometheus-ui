@@ -14,14 +14,14 @@
       <div class='profile-actions profile-devices'>
         <div class='large-fontsize heading'>Devices Registered: {{profile.devices.length}}</div>
         <div class='app-block' v-for="(device,key) in profile.devices" :key="key">
-          {{device.name}}: {{device.desc}}
-          <div class='float-right'><i class='apps' :class="device.icon"></i> </div>
+          {{device.name}}
+          <div class='float-right'><i class='apps'  :title="device.desc" :class="device.icon"></i> </div>
         </div>
       </div>
       <div class='profile-actions profile-applications'>
         <div class='large-fontsize heading'>Applications</div>
         <div class='app-block' v-for="(app,key) in profile.applications.apps" :key="key">
-          <i class='apps' :class="app.icon"></i>
+          <i class='apps' :title="app.name" :class="app.icon"></i>
         </div>
       </div>
       <div class='profile-actions'>
@@ -38,6 +38,36 @@
         </div>
       </div>
     </div>
+    <div class='profile-influencer'>
+      <div class='profile-header'>
+        <div class='float-left'>
+            <div class='large-fontsize'>{{influencer.profile.name}}</div>
+            <div class='micro-fontsize'>Contact No: {{influencer.profile.contactNo}}</div>
+            <div class='micro-fontsize'>{{influencer.profile.address}}</div>
+        </div>
+        <div class='float-right'>
+          <i :class="influencer.profile.icon"></i>
+        </div>
+      </div>
+      <div class='profile-actions profile-devices'>
+        <div class='large-fontsize heading'>Devices Registered: {{influencer.devices.length}}</div>
+        <div class='app-block' v-for="(device,key) in influencer.devices" :key="key">
+          {{device.name}}: {{device.desc}}
+          <div class='float-right'><i class='apps' :class="device.icon"></i> </div>
+        </div>
+      </div>
+      <div class='profile-actions profile-applications'>
+        <div class='large-fontsize heading'>Applications</div>
+        <div class='app-block' v-for="(app,key) in influencer.applications.apps" :key="key">
+          <i class='apps' :title="app.name" :class="app.icon"></i>
+        </div>
+      </div>
+      <div class='profile-actions profile-applications'>
+        <div class='large-fontsize heading'>Views on Live Streams</div>
+        <highcharts id="container1" :options="chartOptions"></highcharts>
+      </div>
+    </div>
+    
   </div>
 </template>
 
@@ -114,28 +144,202 @@ var profiles = [
     }
     ]
   }
-  // ,
-  //   {"profile" : {
-  //     "type": "device",
-  //     "name": "Ipad",
-  //     "icon": "fa fa-tablet-alt",
-  //     "desc": "Personal device",
-  //     "address": "223, 2nd Street, Maine",
-  //     "keyCount": 3,
-  //     "contactNo": "02 739 28 382"
-  //   },
-  // "action" : {
-  //   "lastLogin":"Today 09:54:37 CEST",
-  //   "lastProfile":"Silon Musk",
-  //   "lastProfilePhoto": "fas fa-user-astronaut"
-  //   }
-  // }
   ]
+var chartOptions = {
+  chart: {
+      type: 'spline',
+      animation: {
+          duration: 10
+      },
+      marginRight: 10,
+      events: {
+          load: function () {
+
+              // set up the updating of the chart each second
+              var series1 = this.series[0];
+              var series2 = this.series[1];
+              var series3 = this.series[2];
+
+              setInterval(function () {
+                  var x = (new Date()).getTime(), // current time
+                      y1 = Math.random() * 600000,
+                      y2 = Math.random() * 500000,
+                      y3 = Math.random() * 550000;
+                  series1.addPoint([x, y1], true, true);
+                  series2.addPoint([x, y2], true, true);
+                  series3.addPoint([x, y3], true, true);
+              }, 5000);
+          }
+      }
+  },
+
+  time: {
+      useUTC: false
+  },
+
+  title: {
+      text: ''
+  },
+  xAxis: {
+      type: 'datetime',
+      tickPixelInterval: 150
+  },
+  yAxis: {
+      title: {
+          text: 'Views'
+      },
+      plotLines: [{
+          value: 0,
+          width: 1,
+          color: '#808080'
+      }]
+  },
+  tooltip: {
+      headerFormat: '<b>{series.name}</b><br/>',
+      pointFormat: '{point.x:%Y-%m-%d %H:%M:%S}<br/>{point.y:.0f}'
+  },
+
+  legend: {
+    enabled: false
+  },
+  exporting: {
+    enabled: false
+  },
+  credits: {
+    enabled: false
+  },
+
+  series: [{
+    name: 'Instagram',
+    data: (function () {
+        // generate an array of random data
+        var data = [],
+            time = (new Date()).getTime(),
+            i;
+
+        for (i = -19; i <= 0; i += 1) {
+            data.push({
+                x: time + i * 5000,
+                y: Math.random()* 500000
+            });
+        }
+        return data;
+    }()),
+    color: '#D85760',
+    marker: {
+      symbol: 'circle',
+      radius: 1
+    }
+  },
+  {
+    name: 'YouTube',
+    data: (function () {
+        // generate an array of random data
+        var data = [],
+            time = (new Date()).getTime(),
+            i;
+
+        for (i = -19; i <= 0; i += 1) {
+            data.push({
+                x: time + i * 5000,
+                y: Math.random()* 500000
+            });
+        }
+        return data;
+    }()),
+    color: '#ABD054',
+    marker: {
+      symbol: 'circle',
+      radius: 1
+    }
+  },
+  {
+    name: 'Periscope',
+    data: (function () {
+        // generate an array of random data
+        var data = [],
+            time = (new Date()).getTime(),
+            i;
+
+        for (i = -19; i <= 0; i += 1) {
+            data.push({
+                x: time + i * 5000,
+                y: Math.random()* 500000
+            });
+        }
+        return data;
+    }()),
+    color: '#ff9900',
+    marker: {
+      symbol: 'circle',
+      radius: 1
+    }
+  }]
+}
+
+var influencerProfile = {
+  "profile" : {
+      "type": "profile",
+      "name": "Olivia Fanning",
+      "icon": "fab fa-instagram",
+      "desc": "Personal device",
+      "address": "Body positive instagram model",
+      "keyCount": 3,
+      "contactNo": "02 739 28 382"
+    },
+  "action" : {
+    "lastLogin":"Today 09:54:37 CEST",
+    "lastProfile":"Silon Musk",
+    "lastProfilePhoto": "fas fa-user-astronaut"
+    },
+  "devices" : [
+    {
+      "type": "device",
+      "name": "iPhone",
+      "icon": "fab fa-apple",
+      "desc": "Main phone"
+    },
+    {
+    "type": "device",
+    "name": "Macbook",
+    "icon": "fas fa-laptop-code",
+    "desc": "Editing Videos"
+    },
+    {
+    "type": "device",
+    "name": "Polariod",
+    "icon": "fas fa-camera-retro",
+    "desc": "For collages"
+    }],
+  "applications" : {
+    "apps":[
+      {
+        name:"Phone",
+        icon:"fab fa-snapchat-ghost"
+      },
+      {
+        name:"Instagram",
+        icon:"fab fa-instagram"
+      },
+      {
+        name:"Viber",
+        icon:"fab fa-viber"
+      },
+      {
+        name:"Whatsapp",
+        icon:"fab fa-periscope"
+      }
+      ]
+    }
+  }
+
 export default {
   name: 'Profile',
   data() {
     return {
-      profiles: profiles
+      profiles: profiles,
+      chartOptions: chartOptions,
+      influencer: influencerProfile,
     }
   },
 }

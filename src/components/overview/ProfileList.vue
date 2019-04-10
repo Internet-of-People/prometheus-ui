@@ -8,13 +8,13 @@
         </div>
       </div>
     </div>
-    <ProfileCharts/>
+    <!-- <ProfileCharts/> -->
   </div>
 </template>
 
 <script>
 import ProfileCard from '@/components/overview/ProfileCard'
-import ProfileCharts from '@/components/overview/ProfileCharts'
+// import ProfileCharts from '@/components/overview/ProfileCharts'
 
 var keyVaults= [
   {"Devices": [
@@ -164,7 +164,7 @@ export default {
   name: 'Overview',
   components: {
     ProfileCard,
-    ProfileCharts,
+    // ProfileCharts,
   },
   data() {
     return {
