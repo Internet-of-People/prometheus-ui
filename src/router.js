@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Overview from './components/overview/ProfileList'
-import Accounts from './components/account/Accounts'
+import Profile from './components/overview/Profile'
 import Register from './components/register/Register'
 import ClaimsPage from './components/claims/ClaimsPage'
 
@@ -15,9 +15,9 @@ export default new Router({
       component: Overview
     },
     {
-      path: '/accounts',
-      name: 'accounts',
-      component: Accounts
+      path: '/profile',
+      name: 'profile',
+      component: Profile
     },
     {
       path: '/register',

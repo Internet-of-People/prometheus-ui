@@ -78,6 +78,7 @@ body{
   font-size: 13px;
   font-family: "Segoe UI", "SF UI text", sans-serif !important;
   margin: 0px;
+  color: $brand-text;
 }
 
 .micro-fontsize {
@@ -95,7 +96,7 @@ body{
 }
 
 .large-fontsize {
-  font-size: 14px;
+  font-size: 15px;
   line-height: 16px;
 }
 
@@ -255,14 +256,16 @@ nav ul li {
 }
 
 .shift-main-content {
-  margin-left: 220px !important;
-  width: calc(100% - 220px) !important;
+  margin-left: 210px !important;
+  width: calc(100% - 210px) !important;
+  padding: 20px;
+  height: -webkit-fill-available;
 }
 
 .app-title{
   @extend .display-inline-flex;
   padding: 12px 40px;
-  background-color: $brand-inverse;
+  background-color: $brand-bg;
   img {
     width: 44px;
     height: 44px;
@@ -287,4 +290,61 @@ nav ul li {
 
 .footer-wrapper {
   height: $footer-height;
+}
+
+.profile{
+  width: 320px;
+  display: inline-block;
+  /* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); */
+  margin: 0 20px;
+  border: 1px solid $brand-info;
+}
+
+.profile-header{
+  border-bottom: 1px solid $brand-info;
+  display: block;
+  height: 120px;
+  padding: 20px; 
+  .float-right i {
+    font-size: 64px;
+    color: $brand-info;
+  }
+}
+
+.profile-actions{
+  padding: 20px 20px 0;
+}
+
+.profile-devices{
+  @extend .profile-actions;
+  .app-block{
+    @extend .col-12;
+    padding: 12px;
+    .apps{
+      padding: 0px;
+      font-size: 16px;
+    }
+  }
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 200px;
+  border-radius: 5px;
+  margin: 0px 16px 12px;
+  &:hover{
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+}
+
+.profile-card-title {
+  padding: 12px 0 4px;
+  color: $brand-secondary;
+}
+
+.apps{
+  padding: 8px;
+  font-size: 24px;
+  color: $brand-secondary;
 }
