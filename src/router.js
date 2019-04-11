@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Overview from './components/overview/ProfileList'
 import Profile from './components/overview/Profile'
+import ProfileStudent from './components/overview/ProfileStudent'
 import Register from './components/register/Register'
 import ClaimsPage from './components/claims/ClaimsPage'
 
@@ -18,6 +19,11 @@ export default new Router({
       path: '/profile',
       name: 'profile',
       component: Profile
+    },    
+    {
+      path: '/profilestudent',
+      name: 'profilestudent',
+      component: ProfileStudent
     },
     {
       path: '/register',

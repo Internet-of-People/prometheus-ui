@@ -50,16 +50,23 @@ var keyVaults= [
   {"Profile": [
     {
       "type": "profile",
+      "name": "Studious Sameul",
+      "icon": "fas fa-user-graduate",
+      "desc": "Graduate student",
+      "keyCount": 2
+    },
+    {
+      "type": "profile",
       "name": "Oliver Fanning",
       "icon": "fab fa-instagram",
-      "desc": "Personal device",
+      "desc": "Influencer",
       "keyCount": 4
     },
     {
       "type": "profile",
       "name": "Larry Houdini",
       "icon": "fas fa-hat-wizard",
-      "desc": "Personal device",
+      "desc": "Magician",
       "keyCount": 4
     },
     {
@@ -73,8 +80,8 @@ var keyVaults= [
       "type": "profile",
       "name": "Tutor Ontheside",
       "icon": "fas fa-chalkboard-teacher",
-      "desc": "Personal device",
-      "keyCount": 4
+      "desc": "Freelance tutor available for hire",
+      "keyCount": 1
     },
     {
       "type": "profile",
@@ -97,7 +104,14 @@ var keyVaults= [
         "type": "group",
         "name": "Gardening Club",
         "icon": "fas fa-seedling",
-        "desc": "Personal device",
+        "desc": "HomeOwner encouraging planting",
+        "keyCount": 4
+      },
+      {
+        "type": "group",
+        "name": "University of Nayarit",
+        "icon": "fas fa-university",
+        "desc": "Mexican University",
         "keyCount": 4
       },
       {
