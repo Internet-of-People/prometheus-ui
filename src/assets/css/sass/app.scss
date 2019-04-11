@@ -133,6 +133,10 @@ a{
   cursor: pointer;
 }
 
+.cursor-default{
+  cursor: default;
+}
+
 .primary-btn {
   @extend .cursor-pointer !optional;
   color: $brand-info;
@@ -265,7 +269,8 @@ nav ul li {
 
 .app-title{
   @extend .display-inline-flex;
-  padding: 12px 40px;
+  padding: 12px 36px;
+  width: 210px;
   background-color: $brand-bg;
   img {
     width: 44px;
@@ -353,6 +358,7 @@ nav ul li {
   @extend .shadowy;
   padding: 10px;
   margin: 0px 0px 10px 0px;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1)
 }
 
 .claim-filter {
