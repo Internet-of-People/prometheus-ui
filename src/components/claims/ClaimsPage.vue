@@ -3,10 +3,10 @@
     <div>
         <div class="page-title">Claims</div>
         <input v-model="search" class='search-box' placeholder="Search in claims" type="text"/>
-        <span class="claim-filter" v-if="type">
+        <div class="claim-filter" v-if="type">
           {{ type }}
           <a v-on:click="remove_type_filter()"><i class="fa fa-minus-circle"/></a>
-        </span>
+        </div>
         <!-- <hr> -->
         <div class="claim" v-bind:key="item.id" v-for="item in filtered_list">
           <a v-on:click="add_type_filter(item.type)">{{ item.type }}</a> - {{ item.summary }}
@@ -71,7 +71,7 @@ export default {
 .search-box{
   width: 100%;
   padding: 12px 16px;
-  margin: 0 0 20px 0px;
+  margin: 0 0 16px 0px;
   outline: none;
 }
 .all-details{
