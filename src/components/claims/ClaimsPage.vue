@@ -1,29 +1,47 @@
 <template>
   <div>
+
     <div class="page-title">Claims</div>
+
     <input v-model="search" class='search-box' placeholder="Search in claims" type="text"/>
+
     <div class="claim-filter" v-if="type">
+      <i :class="'fa fa-' + icon_name(type)" />
       {{ type }}
       <a v-on:click="remove_type_filter()"><i class="fa fa-minus-circle"/></a>
     </div>
-    <!-- <hr> -->
+
     <div class="claim" v-bind:key="item.id" v-for="item in filtered_list">
-      <a v-on:click="add_type_filter(item.type)">{{ item.type }}</a> - {{ item.summary }}
-      <br/>
-      <div class="all-details" v-for="(val,index) in fetchKey(item)" :key="index">{{item[val] + " "}}</div>
+      <div class="icon"><i :class="'fa fa-' + icon_name(item.type)" /></div>
+      <div>
+        <a v-on:click="add_type_filter(item.type)">{{ item.type }}</a> - <strong>{{ item.summary }}</strong>
+        <br/>
+        Claimed by <i class="fa fa-user"/> {{item.claimer}}
+        <!-- <div class="all-details" v-for="(val,index) in fetchKey(item)" :key="index">{{item[val] + " "}}</div> -->
+      </div>
+      <span class="date">{{item.date}}</span>
     </div>
+
   </div>
 </template>
 
 <script>
 /*eslint no-unused-vars: "off"*/
+
+var icons = {
+  age: 'calendar',
+  nationality: 'flag',
+  property: 'sticky-note',
+  like: 'heart',
+};
+
 export default {
   name: 'ClaimsPage',
   components: {
   },
   watch: {
-    '$route' (to, _from) {
-      this.type = this.$route.params.filter
+    '$route' (to, from) {
+      this.type = to.params.filter
     }
   },
   data: function() {
@@ -43,7 +61,10 @@ export default {
     },
     fetchKey: function (obj) {
      return Object.keys(obj)
-    }
+    },
+    icon_name: function(type) {
+      return icons[type]
+    },
   },
   computed: {
     filtered_list() {

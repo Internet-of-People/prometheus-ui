@@ -301,7 +301,6 @@ nav ul li {
   width: 840px;
 }
 
-
 .profile-header{
   border-bottom: 1px solid $brand-info;
   display: block;
@@ -348,9 +347,16 @@ nav ul li {
   @extend .shadowy;
   padding: 10px;
   margin: 0px 0px 10px 0px;
-  // box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
-  &:hover{
-    box-shadow: 0 1px 16px 0 rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: row;
+  .icon {
+    font-size: 25px;
+    margin-right: 10px;
+  }
+  .date {
+    margin-right: 24px;
+    align-self: flex-end;
+    flex-grow: 0;
   }
 }
 
