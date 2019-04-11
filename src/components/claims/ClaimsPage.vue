@@ -25,7 +25,7 @@ export default {
   data: function() {
     return {
       search: '',
-      type: null,
+      type: this.$route.params.filter,
     }
   },
   methods: {

@@ -29,5 +29,10 @@ export default new Router({
       name: 'claims',
       component: ClaimsPage
     },
+    {
+      path: '/claims/:filter',
+      name: 'claims',
+      component: ClaimsPage
+    },
   ]
 })
