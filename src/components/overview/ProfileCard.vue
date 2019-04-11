@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div @click="redirectToProfile(cardDetails.name)" class="card">
     <ProfileType :icon="cardDetails.icon"/>
     <div class="container">
       <div><b>{{cardDetails.name}}</b></div>
@@ -25,6 +25,14 @@ export default {
   props: ['cardDetails'],
   components: {
     ProfileType
+  },
+  methods: {
+    redirectToProfile: function (cardname){
+      if (cardname === 'Dealer Lady')
+        this.$router.push('/profile')
+      else if (cardname === 'Studious Sameul')
+        this.$router.push('/profilestudent')
+    }
   }
 }
 </script>

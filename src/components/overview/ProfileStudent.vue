@@ -63,10 +63,10 @@
         </div>
       </div>
       <div class='profile-actions profile-applications'>
-        <div class='large-fontsize cursor-pointer heading'>Claims</div>
+        <div @click="redirectToClaim()" class='large-fontsize cursor-pointer heading'>Claims</div>
         <div class="header-claims" v-for="(val,index) in fetchKey(student.claims[0])" :key="index">{{val}}</div>
         <div class="claim-student" v-for="(claim,index_i) in student.claims" :key="index_i">
-          <div class="all-details" v-for="(val,index) in fetchKey(claim)" :key="index">{{" "+claim[val] + "  "}}</div>
+          <div class="all-details" v-for="(val,index_j) in fetchKey(claim)" :key="index_j">{{" "+claim[val] + "  "}}</div>
         </div>
       </div>
       <div class='profile-actions profile-applications'>
@@ -288,6 +288,9 @@ export default {
   methods: {
     fetchKey: function (obj) {
      return Object.keys(obj)
+    },
+    redirectToClaim: function (){
+      this.$router.push('claims/Educational')
     }
   }
 }

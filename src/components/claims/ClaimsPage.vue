@@ -6,7 +6,7 @@
     <input v-model="search" class='search-box' placeholder="Search in claims" type="text"/>
 
     <div class="claim-filter" v-if="type">
-      <i :class="'fa fa-' + icon_name(type)" />
+      <i :class="icon_name(type)" />
       {{ type }}
       <a v-on:click="remove_type_filter()"><i class="fa fa-minus-circle"/></a>
     </div>
@@ -33,6 +33,7 @@ var icons = {
   nationality: 'flag',
   property: 'sticky-note',
   like: 'heart',
+  Educational: 'graduation-cap',
 };
 
 export default {
@@ -63,7 +64,7 @@ export default {
      return Object.keys(obj)
     },
     icon_name: function(type) {
-      return icons[type]
+      return 'fa fa-' + icons[type]
     },
   },
   computed: {

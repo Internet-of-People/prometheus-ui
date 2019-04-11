@@ -23,7 +23,9 @@ const store =  new Vuex.Store({
       {id: 8, type: "property", summary: "I can fly.", claimer: "Joe", date: "25 May 2018", able_to: "fly"},
       {id: 9, type: "property", summary: "I can break my arms.", claimer: "Me", date: "25 May 2018", able_to: "break_arms"},
       {id: 10, type: "like", summary: "I like dogs.", claimer: "Bob", date: "25 May 2018", likee: "dog"},
-    ],
+      {id: 11, type: "Educational", summary: "Graduate", claimer: "Nauyarit University", date: "25 May 2018", passingYear: "2018", claim: "graduate"},
+      {id: 12, type: "Educational", summary: "4.0 GPA",claimer: "Nauyarit University", date: "12 Jan 2018", passingYear: "2018", claim: "percentage"}
+     ],
   },
   mutations: {
     'SAVE_ACCOUNT': function (state, param) {
