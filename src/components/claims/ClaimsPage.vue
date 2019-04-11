@@ -1,18 +1,16 @@
 <template>
   <div>
-    <div>
-        <div class="page-title">Claims</div>
-        <input v-model="search" class='search-box' placeholder="Search in claims" type="text"/>
-        <div class="claim-filter" v-if="type">
-          {{ type }}
-          <a v-on:click="remove_type_filter()"><i class="fa fa-minus-circle"/></a>
-        </div>
-        <!-- <hr> -->
-        <div class="claim" v-bind:key="item.id" v-for="item in filtered_list">
-          <a v-on:click="add_type_filter(item.type)">{{ item.type }}</a> - {{ item.summary }}
-          <br/>
-          <div class="all-details" v-for="(val,index) in fetchKey(item)" :key="index">{{item[val] + " "}}</div>
-        </div>
+    <div class="page-title">Claims</div>
+    <input v-model="search" class='search-box' placeholder="Search in claims" type="text"/>
+    <div class="claim-filter" v-if="type">
+      {{ type }}
+      <a v-on:click="remove_type_filter()"><i class="fa fa-minus-circle"/></a>
+    </div>
+    <!-- <hr> -->
+    <div class="claim" v-bind:key="item.id" v-for="item in filtered_list">
+      <a v-on:click="add_type_filter(item.type)">{{ item.type }}</a> - {{ item.summary }}
+      <br/>
+      <div class="all-details" v-for="(val,index) in fetchKey(item)" :key="index">{{item[val] + " "}}</div>
     </div>
   </div>
 </template>
