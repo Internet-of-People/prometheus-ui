@@ -1,0 +1,442 @@
+/*12 column grid*/
+/* line 2, ../sass/app.scss */
+.col-1 {
+  width: 8.33%;
+}
+
+/* line 3, ../sass/app.scss */
+.col-2 {
+  width: 16.66%;
+}
+
+/* line 4, ../sass/app.scss */
+.col-3 {
+  width: 25%;
+}
+
+/* line 5, ../sass/app.scss */
+.col-4 {
+  width: 33.33%;
+}
+
+/* line 6, ../sass/app.scss */
+.col-5 {
+  width: 41.66%;
+}
+
+/* line 7, ../sass/app.scss */
+.col-6 {
+  width: 50%;
+}
+
+/* line 8, ../sass/app.scss */
+.col-7 {
+  width: 58.33%;
+}
+
+/* line 9, ../sass/app.scss */
+.col-8 {
+  width: 66.66%;
+}
+
+/* line 10, ../sass/app.scss */
+.col-9 {
+  width: 75%;
+}
+
+/* line 11, ../sass/app.scss */
+.col-10 {
+  width: 83.33%;
+}
+
+/* line 12, ../sass/app.scss */
+.col-11 {
+  width: 91.66%;
+}
+
+/* line 13, ../sass/app.scss */
+.col-12, .profile-devices .app-block {
+  width: 100%;
+}
+
+/* line 14, ../sass/app.scss */
+.col-20-percent {
+  width: 20%;
+}
+
+/* line 15, ../sass/app.scss */
+.col-40-percent {
+  width: 40%;
+}
+
+/* line 16, ../sass/app.scss */
+.col-60-percent {
+  width: 60%;
+}
+
+/* line 17, ../sass/app.scss */
+.col-80-percent {
+  width: 80%;
+}
+
+/* line 18, ../sass/app.scss */
+.width-inherit {
+  width: inherit;
+}
+
+/*Variables*/
+/* Color Palette */
+/* line 76, ../sass/app.scss */
+body {
+  height: 100%;
+  font-size: 13px;
+  font-family: "Segoe UI", "SF UI text", sans-serif !important;
+  margin: 0px;
+  color: #212121;
+}
+
+/* line 84, ../sass/app.scss */
+.micro-fontsize {
+  font-size: 11px !important;
+  line-height: 16px;
+}
+
+/* line 88, ../sass/app.scss */
+.small-fontsize {
+  font-size: 12px;
+  line-height: 16px;
+}
+
+/* line 93, ../sass/app.scss */
+.regular-fontsize {
+  font-size: 13px;
+  line-height: 16px;
+}
+
+/* line 98, ../sass/app.scss */
+.large-fontsize {
+  font-size: 15px;
+  line-height: 16px;
+}
+
+/* line 103, ../sass/app.scss */
+.sans-serif-bold {
+  font-weight: bold;
+}
+
+/* line 107, ../sass/app.scss */
+.sans-serif-header {
+  font-weight: 400;
+}
+
+/* line 111, ../sass/app.scss */
+.float-left {
+  float: left;
+}
+
+/* line 115, ../sass/app.scss */
+.float-right {
+  float: right;
+}
+
+/* line 119, ../sass/app.scss */
+a {
+  cursor: pointer;
+  text-decoration: none;
+  color: #0067C5;
+  outline: none;
+}
+
+/* line 126, ../sass/app.scss */
+.display-inline-flex, .app-title {
+  display: inline-flex !important;
+  display: -ms-inline-flexbox;
+  flex-wrap: wrap;
+}
+
+/* line 132, ../sass/app.scss */
+.cursor-pointer, .primary-btn, .secondary-btn, button, i {
+  cursor: pointer;
+}
+
+/* line 136, ../sass/app.scss */
+.cursor-default {
+  cursor: default;
+}
+
+/* line 140, ../sass/app.scss */
+.primary-btn {
+  color: #40975D;
+  padding: 12px;
+}
+/* line 144, ../sass/app.scss */
+.primary-btn i {
+  font-size: 24px;
+  padding: 0 4px;
+}
+
+/* line 150, ../sass/app.scss */
+.secondary-btn {
+  color: #FFFFFF;
+  padding: 12px 24px;
+}
+/* line 154, ../sass/app.scss */
+.secondary-btn i {
+  padding: 0 4px;
+}
+
+/* line 164, ../sass/app.scss */
+.page-title {
+  color: #D85760;
+  font-weight: 501;
+  font-size: 16px;
+  margin-top: 10px;
+  margin-bottom: 17px;
+}
+
+/* line 172, ../sass/app.scss */
+* {
+  box-sizing: border-box;
+}
+
+/* line 176, ../sass/app.scss */
+body {
+  margin: 0;
+}
+
+/* line 180, ../sass/app.scss */
+nav {
+  background: #378A81;
+  float: left;
+  height: 100vh;
+  left: 0;
+  margin-right: 0;
+  overflow: auto;
+  padding: 0;
+  transition: width .3s ease;
+  position: fixed;
+  top: 0;
+  width: 210px;
+  z-index: 1;
+}
+/* line 193, ../sass/app.scss */
+nav ul {
+  margin: 0;
+  padding: 0;
+}
+/* line 196, ../sass/app.scss */
+nav ul li {
+  display: inline-flex;
+  list-style: none;
+}
+/* line 199, ../sass/app.scss */
+nav ul li + li {
+  border-top: 1px solid rgba(237, 237, 237, 0.05);
+}
+/* line 202, ../sass/app.scss */
+nav ul li a {
+  color: #FFFFFF;
+  display: block;
+  font-size: 13px;
+  height: 63px;
+  opacity: 1;
+  padding: 22px 0 22px 8px;
+  position: relative;
+  text-decoration: none;
+  white-space: nowrap;
+}
+/* line 212, ../sass/app.scss */
+nav ul li a:hover {
+  opacity: 1;
+}
+/* line 216, ../sass/app.scss */
+nav ul li i {
+  color: #FFFFFF;
+  display: block;
+  font-size: 13px;
+  opacity: 1;
+  padding: 22px 0 22px 48px;
+  position: relative;
+  text-decoration: none;
+  white-space: nowrap;
+}
+/* line 225, ../sass/app.scss */
+nav ul li i:hover {
+  opacity: 1;
+}
+
+/* line 234, ../sass/app.scss */
+nav ul li a:before {
+  content: "";
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  top: 24%;
+  right: auto;
+  bottom: auto;
+  left: 12px;
+}
+
+/* line 246, ../sass/app.scss */
+#mainContent {
+  position: relative;
+  width: 100%;
+  transition: margin-left 0.5s ease;
+  padding-bottom: 32px;
+}
+
+/* line 253, ../sass/app.scss */
+.shift-main-content {
+  margin-left: 210px !important;
+  width: calc(100% - 210px) !important;
+  padding: 20px;
+  height: -webkit-fill-available;
+}
+
+/* line 260, ../sass/app.scss */
+.app-title {
+  padding: 12px 36px;
+  width: 210px;
+  background-color: #FAFAFA;
+}
+/* line 265, ../sass/app.scss */
+.app-title img {
+  width: 44px;
+  height: 44px;
+}
+/* line 269, ../sass/app.scss */
+.app-title div {
+  color: #999999;
+  padding: 16px 8px;
+  font-weight: 400;
+}
+
+/* line 276, ../sass/app.scss */
+.keyvault-title {
+  padding: 32px 32px 8px;
+  font-size: 24px;
+  font-weight: 100;
+}
+
+/* line 282, ../sass/app.scss */
+.key-count {
+  font-size: 11px;
+  color: #727272;
+}
+
+/* line 287, ../sass/app.scss */
+.footer-wrapper {
+  height: 32px;
+}
+
+/* line 291, ../sass/app.scss */
+.profile, .profile-influencer {
+  width: 320px;
+  display: inline-grid;
+  /* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); */
+  margin: 0 20px;
+  border: 1px solid #40975D;
+}
+
+/* line 299, ../sass/app.scss */
+.profile-influencer {
+  width: 840px;
+}
+
+/* line 304, ../sass/app.scss */
+.profile-header {
+  border-bottom: 1px solid #40975D;
+  display: block;
+  height: 120px;
+  padding: 20px;
+}
+/* line 309, ../sass/app.scss */
+.profile-header .float-right i {
+  font-size: 64px;
+  color: #40975D;
+}
+
+/* line 315, ../sass/app.scss */
+.profile-actions, .profile-devices {
+  padding: 20px 20px 0;
+}
+
+/* line 321, ../sass/app.scss */
+.profile-devices .app-block {
+  padding: 12px;
+}
+/* line 324, ../sass/app.scss */
+.profile-devices .app-block .apps {
+  padding: 0px;
+  font-size: 16px;
+}
+
+/* line 331, ../sass/app.scss */
+.shadowy, .card, .claim {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  border-radius: 5px;
+}
+/* line 335, ../sass/app.scss */
+.shadowy:hover, .card:hover, .claim:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* line 340, ../sass/app.scss */
+.card {
+  width: 200px;
+  margin: 0px 16px 12px;
+}
+
+/* line 346, ../sass/app.scss */
+.claim {
+  padding: 10px;
+  margin: 0px 0px 10px 0px;
+  display: flex;
+  flex-direction: row;
+}
+/* line 352, ../sass/app.scss */
+.claim .icon {
+  font-size: 25px;
+  margin-right: 10px;
+}
+/* line 356, ../sass/app.scss */
+.claim .date {
+  margin-right: 24px;
+  align-self: flex-end;
+  flex-grow: 0;
+}
+
+/* line 363, ../sass/app.scss */
+.claim-filter {
+  background: #F0F0F0;
+  border-radius: 12px;
+  padding: 4px;
+  margin: 0 8px 16px;
+  font-size: 16px;
+  width: fit-content;
+}
+/* line 370, ../sass/app.scss */
+.claim-filter i {
+  margin-left: 4px;
+}
+
+/* line 375, ../sass/app.scss */
+.profile-card-title {
+  padding: 12px 0 4px;
+  color: #378A81;
+}
+
+/* line 380, ../sass/app.scss */
+.apps {
+  padding: 8px;
+  font-size: 24px;
+  color: #378A81;
+}
+
+/* line 387, ../sass/app.scss */
+.claim .icon i {
+  color: #378A81;
+  font-size: 18px;
+  padding: 2px;
+}
