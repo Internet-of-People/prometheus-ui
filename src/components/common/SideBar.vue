@@ -9,7 +9,7 @@
           </div>
         </a>
         <li class=""><i class="fa fa-users"/><a href="#/">Profile Overview</a></li>
-        <li class=""><i class="fa fa-user"/><a href="#/profile">Profile</a></li>
+        <li class=""><i class="fa fa-user"/><a href="#/profile/student">Profile</a></li>
         <li class=""><i class="fa fa-address-book"/><a href="#/">Address Book</a></li>
         <li class=""><i class="fa fa-list"/><a href="#/claims">Claims Overview</a></li>
         <li class=""><i class="fa fa-comment"/><a href="#/">Chat</a></li>

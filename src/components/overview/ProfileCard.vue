@@ -29,9 +29,11 @@ export default {
   methods: {
     redirectToProfile: function (cardname){
       if (cardname === 'Dealer Lady')
-        this.$router.push('/profile')
+        this.$router.push('/profile/influencer')
       else if (cardname === 'Studious Sameul')
-        this.$router.push('/profilestudent')
+        this.$router.push('/profile/student')
+      else 
+        this.$router.push('/profile/'+cardname)
     }
   }
 }

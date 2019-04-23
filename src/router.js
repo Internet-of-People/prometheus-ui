@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Overview from './components/overview/ProfileList'
-import Profile from './components/overview/Profile'
+import ProfileInfluencer from './components/overview/ProfileInfluencer'
 import ProfileStudent from './components/overview/ProfileStudent'
+import Profile from './components/overview/Profile'
 import Register from './components/register/Register'
 import ClaimsPage from './components/claims/ClaimsPage'
 
@@ -16,14 +17,19 @@ export default new Router({
       component: Overview
     },
     {
-      path: '/profile',
-      name: 'profile',
-      component: Profile
-    },    
-    {
-      path: '/profilestudent',
+      path: '/profile/student',
       name: 'profilestudent',
       component: ProfileStudent
+    },    
+    {
+      path: '/profile/influencer',
+      name: 'profileinfluencer',
+      component: ProfileInfluencer
+    },
+    {
+      path: '/profile/:profile_id',
+      name: 'profile',
+      component: Profile
     },
     {
       path: '/register',

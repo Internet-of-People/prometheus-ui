@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class='profile' v-for="(profile, index_loop) in profiles" :key="index_loop">
+    <div class='profile' v-for="(profile, index) in profiles" :key="index">
       <div class='profile-header'>
         <div class='float-left'>
             <div class='large-fontsize'>{{profile.profile.name}}</div>
@@ -41,36 +41,29 @@
     <div class='profile-influencer'>
       <div class='profile-header'>
         <div class='float-left'>
-            <div class='large-fontsize'>{{student.profile.name}}</div>
-            <div class='micro-fontsize'>Contact No: {{student.profile.contactNo}}</div>
-            <div class='micro-fontsize'>{{student.profile.address}}</div>
+            <div class='large-fontsize'>{{influencer.profile.name}}</div>
+            <div class='micro-fontsize'>Contact No: {{influencer.profile.contactNo}}</div>
+            <div class='micro-fontsize'>{{influencer.profile.address}}</div>
         </div>
         <div class='float-right'>
-          <i :class="student.profile.icon"></i>
+          <i :class="influencer.profile.icon"></i>
         </div>
       </div>
       <div class='profile-actions profile-devices'>
-        <div class='large-fontsize heading'>Devices Registered: {{student.devices.length}}</div>
-        <div class='app-block' v-for="(device,key) in student.devices" :key="key">
+        <div class='large-fontsize heading'>Devices Registered: {{influencer.devices.length}}</div>
+        <div class='app-block' v-for="(device,key) in influencer.devices" :key="key">
           {{device.name}}: {{device.desc}}
           <div class='float-right'><i class='apps' :class="device.icon"></i> </div>
         </div>
       </div>
       <div class='profile-actions profile-applications'>
         <div class='large-fontsize heading'>Applications</div>
-        <div class='app-block' v-for="(app,key) in student.applications.apps" :key="key">
+        <div class='app-block' v-for="(app,key) in influencer.applications.apps" :key="key">
           <i class='apps' :title="app.name" :class="app.icon"></i>
         </div>
       </div>
       <div class='profile-actions profile-applications'>
-        <div @click="redirectToClaim()" class='large-fontsize cursor-pointer heading'>Claims</div>
-        <div class="header-claims" v-for="(val,index) in fetchKey(student.claims[0])" :key="index">{{val}}</div>
-        <div class="claim-student" v-for="(claim,index_i) in student.claims" :key="index_i">
-          <div class="all-details" v-for="(val,index_j) in fetchKey(claim)" :key="index_j">{{" "+claim[val] + "  "}}</div>
-        </div>
-      </div>
-      <div class='profile-actions profile-applications'>
-        <div class='large-fontsize heading'>Performance per Semester by Class Average</div>
+        <div class='large-fontsize heading'>Views on Live Streams</div>
         <highcharts id="container1" :options="chartOptions"></highcharts>
       </div>
     </div>
@@ -82,9 +75,9 @@
 var profiles = [
   {"profile" : {
       "type": "profile",
-      "name": "Tutor Ontheside",
-      "icon": "fas fa-chalkboard-teacher",
-      "desc": "Freelance tutor available for hire",
+      "category": "Person",
+      "name": "Dealer Lady",
+      "icon": "fas fa-bong",
       "address": "223, 2nd Street, Maine",
       "keyCount": 4,
       "contactNo": "02 739 28 382"
@@ -153,72 +146,145 @@ var profiles = [
   }
   ]
 var chartOptions = {
-    chart: {
-        type: 'areaspline',
-        threshold: null
-    },
-    title: {
-        text: ''
-    },
-    legend: {
-      enabled: false
-    },
-    exporting: {
-      enabled: false
-    },
-    xAxis: {
-        categories: [
-            'SEM I',
-            'SEM II',
-            'SEM III',
-            'SEM IV',
-            'SEM V',
-            'SEM VI',
-            'SEM VII',
-            'SEM VIII',
-        ],
-    },
-    yAxis: {
-        title: {
-            text: 'Net Percentage'
-        },
-        threshold: null
-    },
-    tooltip: {
-        shared: true,
-        valueSuffix: ' units'
-    },
-    credits: {
-        enabled: false
-    },
-    plotOptions: {
-        areaspline: {
-            threshold: null,
-            fillOpacity: 0.5
-        }
-    },
-    series: [{
-        name: 'Sam\'s Average',
-        data: [81, 82, 91, 75, 73, 60, 82, 80],
-        color: '#ABD054',
-      marker: {
-        symbol: 'circle',
-        radius: 1
+  chart: {
+      type: 'spline',
+      animation: {
+          duration: 10
+      },
+      marginRight: 10,
+      events: {
+          load: function () {
+
+              // set up the updating of the chart each second
+              var series1 = this.series[0];
+              var series2 = this.series[1];
+              var series3 = this.series[2];
+
+              setInterval(function () {
+                  var x = (new Date()).getTime(), // current time
+                      y1 = Math.random() * 600000,
+                      y2 = Math.random() * 500000,
+                      y3 = Math.random() * 550000;
+                  series1.addPoint([x, y1], true, true);
+                  series2.addPoint([x, y2], true, true);
+                  series3.addPoint([x, y3], true, true);
+              }, 5000);
+          }
       }
-    }, {
-        name: 'Class Average',
-        data: [71, 93, 94, 73, 83, 75, 84, 90]
-    }]
+  },
+
+  time: {
+      useUTC: false
+  },
+
+  title: {
+      text: ''
+  },
+  xAxis: {
+      type: 'datetime',
+      tickPixelInterval: 150
+  },
+  yAxis: {
+      title: {
+          text: 'Views'
+      },
+      plotLines: [{
+          value: 0,
+          width: 1,
+          color: '#808080'
+      }]
+  },
+  tooltip: {
+      headerFormat: '<b>{series.name}</b><br/>',
+      pointFormat: '{point.x:%Y-%m-%d %H:%M:%S}<br/>{point.y:.0f}'
+  },
+
+  legend: {
+    enabled: false
+  },
+  exporting: {
+    enabled: false
+  },
+  credits: {
+    enabled: false
+  },
+
+  series: [{
+    name: 'Instagram',
+    data: (function () {
+        // generate an array of random data
+        var data = [],
+            time = (new Date()).getTime(),
+            i;
+
+        for (i = -19; i <= 0; i += 1) {
+            data.push({
+                x: time + i * 5000,
+                y: Math.random()* 500000
+            });
+        }
+        return data;
+    }()),
+    color: '#D85760',
+    marker: {
+      symbol: 'circle',
+      radius: 1
+    }
+  },
+  {
+    name: 'YouTube',
+    data: (function () {
+        // generate an array of random data
+        var data = [],
+            time = (new Date()).getTime(),
+            i;
+
+        for (i = -19; i <= 0; i += 1) {
+            data.push({
+                x: time + i * 5000,
+                y: Math.random()* 500000
+            });
+        }
+        return data;
+    }()),
+    color: '#ABD054',
+    marker: {
+      symbol: 'circle',
+      radius: 1
+    }
+  },
+  {
+    name: 'Periscope',
+    data: (function () {
+        // generate an array of random data
+        var data = [],
+            time = (new Date()).getTime(),
+            i;
+
+        for (i = -19; i <= 0; i += 1) {
+            data.push({
+                x: time + i * 5000,
+                y: Math.random()* 500000
+            });
+        }
+        return data;
+    }()),
+    color: '#ff9900',
+    marker: {
+      symbol: 'circle',
+      radius: 1
+    }
+  }]
 }
 
-var studentProfile = {
+var influencerProfile = {
   "profile" : {
       "type": "profile",
-      "name": "Studious Sameul",
-      "icon": "fas fa-user-graduate",
-      "desc": "Graduate student",
-      "keyCount": 2,
-      "address": "Computer Science Major with a Cryptography minor",
+      "name": "Olivia Fanning",
+      "icon": "fab fa-instagram",
+      "desc": "Personal device",
+      "address": "Body positive instagram model",
+      "keyCount": 3,
       "contactNo": "02 739 28 382"
     },
   "action" : {
@@ -229,30 +295,21 @@ var studentProfile = {
   "devices" : [
     {
       "type": "device",
-      "name": "Desktop",
-      "icon": "fas fa-laptop-code",
-      "desc": "Main development machine"
+      "name": "iPhone",
+      "icon": "fab fa-apple",
+      "desc": "Main phone"
+    },
+    {
+    "type": "device",
+    "name": "Macbook",
+    "icon": "fas fa-laptop-code",
+    "desc": "Editing Videos"
     },
     {
     "type": "device",
     "name": "Polariod",
     "icon": "fas fa-camera-retro",
     "desc": "For collages"
-    }],
-    "claims" : [
-    {
-      type: "Educational", 
-      summary: "Graduate", 
-      claimer: "Nauyarit University", date: "25 May 2018", 
-      passingYear: "2018", 
-      claim: "graduate"
-    },
-    {
-      type: "Educational", 
-      summary: "4.0 GPA", 
-      claimer: "Nauyarit University", date: "12 Jan 2018", 
-      passingYear: "2018", 
-      claim: "percentage"
     }],
   "applications" : {
     "apps":[
@@ -277,22 +334,14 @@ var studentProfile = {
   }
 
 export default {
-  name: 'ProfileStudent',
+  name: 'ProfileInfluencer',
   data() {
     return {
       profiles: profiles,
       chartOptions: chartOptions,
-      student: studentProfile,
+      influencer: influencerProfile,
     }
   },
-  methods: {
-    fetchKey: function (obj) {
-     return Object.keys(obj)
-    },
-    redirectToClaim: function (){
-      this.$router.push('claims/Educational')
-    }
-  }
 }
 </script>
 
@@ -318,19 +367,4 @@ export default {
   display: inline-block;
 }
 
-.claim-student{
-  display: inline-flex;
-}
-
-.all-details{
-  /* margin-left: 12px; */
-  width: 120px;
-}
-
-.header-claims{
-  display: inline-flex;
-  width: 120px;
-  font-weight: 100;
-  padding: 0 0 12px 0;
-}
 </style>
