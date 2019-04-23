@@ -40,11 +40,12 @@ export default {
   name: 'ClaimsPage',
   components: {
   },
-  watch: {
-    '$route' (to, from) {
-      this.type = to.params.filter
-    }
-  },
+  // // not required here; $route is already defined in main file
+  // watch: {
+  //   '$route' (to, from) {
+  //     this.type = to.params.filter
+  //   }
+  // },
   data: function() {
     return {
       search: '',

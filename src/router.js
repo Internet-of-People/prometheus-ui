@@ -37,7 +37,7 @@ export default new Router({
     },
     {
       path: '/claims/:filter',
-      name: 'claims',
+      name: 'claimsfiltered', // cant name filtered list the same; gives duplicate errors
       component: ClaimsPage
     },
   ]
