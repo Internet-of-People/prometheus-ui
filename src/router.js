@@ -6,6 +6,7 @@ import ProfileStudent from './components/overview/ProfileStudent'
 import Profile from './components/overview/Profile'
 import Register from './components/register/Register'
 import ClaimsPage from './components/claims/ClaimsPage'
+import ProfileRegister from './components/overview/ProfileCreate/ProfileRegister'
 
 Vue.use(Router)
 
@@ -25,6 +26,11 @@ export default new Router({
       path: '/profile/influencer',
       name: 'profileinfluencer',
       component: ProfileInfluencer
+    },
+    {
+      path: '/profile/new',
+      name: 'createprofile',
+      component: ProfileRegister
     },
     {
       path: '/profile/:profile_id',
