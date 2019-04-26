@@ -1,47 +1,53 @@
 <template>
-  <div>
+  <div class=''>
       <div class='keyvault-title'>Register Profile</div>
-      <div>Select Avatar</div>
-      <div class='avatar' @click="toggleSelector()">
-        <i :class="avatar"/>
-      </div>
-      <div class='modal-dialog' v-bind:class="{ hide: hideSelector }">
-        <div class='modal-content'>
-          <div class='modal-body'>
-              <ul class='icon-picker-list'>
-                <li v-for='(row, index) in icons' :key='index' @click="avatar=row.icon">
-                  <a>
-                    <i :class="row.icon"/>
-                  </a>
-                </li>
-              </ul>
+      <div class='form-content'>
+        <div>
+          <div class='avatar' @click="toggleSelector()">
+            <i :class="avatar"/>
+          </div>
+          <div class='modal-dialog' v-bind:class="{ hide: hideSelector }">
+            <div class='modal-content'>
+              <div class='modal-body'>
+                  <ul class='icon-picker-list'>
+                    <li v-for='(row, index) in icons' :key='index' @click="avatar=row.icon">
+                      <a>
+                        <i :class="row.icon"/>
+                      </a>
+                    </li>
+                  </ul>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-      <div>Name</div>
-      <input type="text" placeholder="Enter Name" v-model="name" required>
-      <div>
-        <div>Select Profile Type</div>
-        <div class='dropdown' @click="toggleOption()">{{type}}</div>
-        <div class='dropdown absolute-dropdown' v-for="profileType in profileTypes" :key="profileType" @click="type=profileType" v-bind:class="{ hide: hideOptions }">
-          {{profileType}}
+        <div class='form-block'>
+          <div class='form-label'>NAME</div>
+          <input type="text" class='value-component' placeholder="Enter Name" v-model="name" required>
+        </div> 
+        <div class='form-block'>
+          <div class='form-label'>TYPE</div>
+          <div>
+            <div class='dropdown' @click="toggleOption()">{{type}}</div>
+            <div class='dropdown absolute-dropdown' v-for="profileType in profileTypes" :key="profileType" @click="type=profileType" v-bind:class="{ hide: hideOptions }">
+              {{profileType}}
+            </div>
+          </div>
+        </div>
+        <div class='form-block'>
+          <div class='form-label' @click="toggleInput()">KEY GENERATOR <i class="fas fa-plus-circle"></i></div>
+          <div class='value-component' v-bind:class="{ hide: hideAddKey }">
+            {{keys[Math.floor((Math.random()*2) + 1)]}}
+          </div>
+        </div>
+        <div class='form-block'>
+          <div class='secondary-btn' @click="saveProfile()"><i class="fas fa-save"></i> Save</div>
         </div>
       </div>
-      <div @click="toggleInput()">Register Key<i class="fas fa-plus-circle"></i></div>
-      <div v-bind:class="{ hide: hideAddKey }">
-        <input type="text" v-model="newkey" placeholder="Key" required>
-        <i @click="keys=newkey" class="fas fa-check"></i>
-      </div>
-      <div v-for="key in keys" :key="key">
-        <i class="fas fa-key"></i>{{key}}
-      </div>
-      <div @click="saveProfile()">Save</div>
-  </div>
+    </div> 
 </template>
 
 <script>
-var icons = [{ icon: 'fa fa-music' }, { icon: 'fa fa-heart' }, { icon: 'fa fa-star' }, { icon: 'fa fa-user' }, { icon: 'fa fa-film' }, { icon: 'fa fa-th-large' }, { icon: 'fa fa-th' }, { icon: 'fa fa-th-list' }, { icon: 'fa fa-check' }, { icon: 'fa fa-times' }, { icon: 'fa fa-search-plus' }, { icon: 'fa fa-search-minus' }, { icon: 'fa fa-power-off' }, { icon: 'fa fa-signal' }, { icon: 'fa fa-cog' }, { icon: 'fa fa-trash-o' }, { icon: 'fa fa-home' },  { icon: 'fa fa-volume-down' }, { icon: 'fa fa-volume-up' }, { icon: 'fa fa-qrcode' }, { icon: 'fa fa-barcode' }, { icon: 'fa fa-tag' }, { icon: 'fa fa-tags' }, { icon: 'fa fa-book' }, { icon: 'fa fa-bookmark' }, { icon: 'fa fa-print' }, { icon: 'fa fa-camera' }, { icon: 'fa fa-font' }, { icon: 'fa fa-bold' }, { icon: 'fa fa-italic' }, { icon: 'fa fa-text-height' }, { icon: 'fa fa-text-width' }, { icon: 'fa fa-align-left' }, { icon: 'fa fa-align-center' }, { icon: 'fa fa-align-right' }, { icon: 'fa fa-align-justify' }, { icon: 'fa fa-list' }, { icon: 'fa fa-outdent' }, { icon: 'fa fa-indent' }, { icon: 'fa fa-video-camera' }, { icon: 'fa fa-picture-o' }, { icon: 'fa fa-pencil' }, { icon: 'fa fa-map-marker' }, { icon: 'fa fa-adjust' }, { icon: 'fa fa-tint' }, { icon: 'fa fa-pencil-square-o' }, { icon: 'fa fa-share-square-o' }, { icon: 'fa fa-check-square-o' }, { icon: 'fa fa-arrows' }, { icon: 'fa fa-step-backward' }, { icon: 'fa fa-fast-backward' }, { icon: 'fa fa-backward' }, { icon: 'fa fa-play' }, { icon: 'fa fa-pause' }, { icon: 'fa fa-stop' }, { icon: 'fa fa-forward' }, { icon: 'fa fa-fast-forward' }, { icon: 'fa fa-step-forward' }, { icon: 'fa fa-eject' }, { icon: 'fa fa-chevron-left' }, { icon: 'fa fa-chevron-right' }]
-
+var icons = [{ icon: 'fa fa-music' }, { icon: 'fa fa-heart' }, { icon: 'fas fa-user-nurse' }, { icon: 'fas fa-hiking' }, { icon: 'fas fa-user-ninja' }, { icon: 'fa fa-th-list' }, { icon: 'fa fa-signal' }, { icon: 'fa fa-home' },  { icon: 'fas fa-chalkboard-teacher' }, { icon: 'fas fa-user-astronaut' }, { icon: 'fab fa-galactic-senate' }, { icon: 'fa fa-barcode' }, { icon: 'fas fa-child' }, { icon: 'fa fa-tags' }, { icon: 'fa fa-book' }, { icon: 'fa fa-bookmark' }, { icon: 'fas fa-user-md' }, { icon: 'fa fa-camera' }, { icon: 'fas fa-skiing-nordic' }, { icon: 'fas fa-swimmer' }, { icon: 'fas fa-user-secret' }, { icon: 'fas fa-user-injured' }, { icon: 'fas fa-running' }, { icon: 'fas fa-blind' }, { icon: 'fas fa-person-booth' }, { icon: 'fas fa-skating' }]
 var currentIcon = 'fa fa-user'
 
 var profileTypes = ['profile', 'device', 'group', 'wallet']
@@ -56,9 +62,8 @@ export default {
       profileTypes: profileTypes,
       currentType: 'profile',
       hideOptions: true,
-      registeredKeys: ['adal;sdk;aslkda;sldka;sldk;','alskdjlaskjdlaksjdlas'],
+      registeredKeys: ['IezbeWGSY2dqcUBqT8K7R14xr','IezkXs7Xd8SDWLaGKUAjEf53W'],
       hideAddKey: true,
-      newkey: '',
       name: ''
     }
   },
@@ -88,9 +93,7 @@ export default {
         return this.registeredKeys
       },
       // setter
-      set: function (newValue) {
-        this.registeredKeys.push(newValue)
-        this.newkey = ''
+      set: function () {
         this.toggleInput()
       }
     }
@@ -104,17 +107,17 @@ export default {
     },
     toggleInput () {
       this.hideAddKey = !this.hideAddKey
-      this.newkey = ''
     },
     saveProfile () {
       var param = {
         "name": this.name,
         "type": this.type,
         "icon": this.avatar,
-        "desc": "Personal device",
+        "desc": "Occupation",
         "keyCount": this.registeredKeys.length
       }
       this.$store.dispatch('saveKeyVault', param)
+      this.$router.push('profile/student')
     }
   }
 }
@@ -176,6 +179,18 @@ export default {
 	margin-top: 5px;
 }
 
+.icon-picker-list .fas {
+	font-size: 24px;
+	margin-bottom: 10px;
+	margin-top: 5px;
+}
+
+.icon-picker-list .fab {
+	font-size: 24px;
+	margin-bottom: 10px;
+	margin-top: 5px;
+}
+
 .icon-picker-list .name-class {
 	display: block;
 	text-align: center;
@@ -197,13 +212,36 @@ export default {
 }
 
 .dropdown{
-  box-shadow: 0px 0 1px 2px #f2f2f2;
-  width: 200px;
+  border: 1px solid #f2f2f2;
+  width: 280px;
   padding: 8px 12px;
   cursor: pointer;
 }
 
+.value-component{
+  width: 280px;
+  padding: 8px 12px;
+  cursor: pointer;
+  outline: none;
+  border: 1px solid #f2f2f2;
+}
+
+.form-label{
+  width: 140px;
+  padding: 8px 0px;
+}
+
 .absolute-dropdown{
   position: relative;
+}
+
+.form-content{
+  padding: 20px;
+}
+
+.form-block{
+  display: inline-flex;
+  width: 100%;
+  padding: 12px 20px;
 }
 </style>

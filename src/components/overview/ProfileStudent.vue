@@ -1,5 +1,41 @@
 <template>
   <div>
+    <div class='profile-influencer'>
+      <div class='profile-header'>
+        <div class='float-left'>
+            <div class='large-fontsize'>{{student.profile.name}}</div>
+            <div class='micro-fontsize'>Contact No: {{student.profile.contactNo}}</div>
+            <div class='micro-fontsize'>{{student.profile.address}}</div>
+        </div>
+        <div class='float-right'>
+          <i :class="student.profile.icon"></i>
+        </div>
+      </div>
+      <div class='profile-actions profile-devices'>
+        <div class='large-fontsize heading'>Devices Registered: {{student.devices.length}}</div>
+        <div class='app-block' v-for="(device,key) in student.devices" :key="key">
+          {{device.name}}: {{device.desc}}
+          <div class='float-right'><i class='apps' :class="device.icon"></i> </div>
+        </div>
+      </div>
+      <div class='profile-actions profile-applications'>
+        <div class='large-fontsize heading'>Applications</div>
+        <div class='app-block' v-for="(app,key) in student.applications.apps" :key="key">
+          <i class='apps' :title="app.name" :class="app.icon"></i>
+        </div>
+      </div>
+      <div class='profile-actions profile-applications'>
+        <div @click="redirectToClaim()" class='large-fontsize cursor-pointer heading'>Claims</div>
+        <div class="header-claims" v-for="(val,index) in fetchKey(student.claims[0])" :key="index">{{val}}</div>
+        <div class="claim-student" v-for="(claim,index_i) in student.claims" :key="index_i">
+          <div class="all-details" v-for="(val,index_j) in fetchKey(claim)" :key="index_j">{{" "+claim[val] + "  "}}</div>
+        </div>
+      </div>
+      <div class='profile-actions profile-applications'>
+        <div class='large-fontsize heading'>Performance per Semester by Class Average</div>
+        <highcharts id="container1" :options="chartOptions"></highcharts>
+      </div>
+    </div>
     <div class='profile' v-for="(profile, index_loop) in profiles" :key="index_loop">
       <div class='profile-header'>
         <div class='float-left'>
@@ -38,43 +74,19 @@
         </div>
       </div>
     </div>
-    <div class='profile-influencer'>
+    <div class='profile' v-for="(profile, index_added) in addedProfiles" :key="index_added">
       <div class='profile-header'>
         <div class='float-left'>
-            <div class='large-fontsize'>{{student.profile.name}}</div>
-            <div class='micro-fontsize'>Contact No: {{student.profile.contactNo}}</div>
-            <div class='micro-fontsize'>{{student.profile.address}}</div>
+            <div class='large-fontsize'>{{profile.name}}</div>
+            <div class='micro-fontsize'>Type: {{profile.type}}</div>
+            <div class='micro-fontsize'>Desc: {{profile.desc}}</div>
         </div>
         <div class='float-right'>
-          <i :class="student.profile.icon"></i>
+          <i :class="profile.icon" :title="profile.icon" ></i>
         </div>
-      </div>
-      <div class='profile-actions profile-devices'>
-        <div class='large-fontsize heading'>Devices Registered: {{student.devices.length}}</div>
-        <div class='app-block' v-for="(device,key) in student.devices" :key="key">
-          {{device.name}}: {{device.desc}}
-          <div class='float-right'><i class='apps' :class="device.icon"></i> </div>
-        </div>
-      </div>
-      <div class='profile-actions profile-applications'>
-        <div class='large-fontsize heading'>Applications</div>
-        <div class='app-block' v-for="(app,key) in student.applications.apps" :key="key">
-          <i class='apps' :title="app.name" :class="app.icon"></i>
-        </div>
-      </div>
-      <div class='profile-actions profile-applications'>
-        <div @click="redirectToClaim()" class='large-fontsize cursor-pointer heading'>Claims</div>
-        <div class="header-claims" v-for="(val,index) in fetchKey(student.claims[0])" :key="index">{{val}}</div>
-        <div class="claim-student" v-for="(claim,index_i) in student.claims" :key="index_i">
-          <div class="all-details" v-for="(val,index_j) in fetchKey(claim)" :key="index_j">{{" "+claim[val] + "  "}}</div>
-        </div>
-      </div>
-      <div class='profile-actions profile-applications'>
-        <div class='large-fontsize heading'>Performance per Semester by Class Average</div>
-        <highcharts id="container1" :options="chartOptions"></highcharts>
       </div>
     </div>
-    
+    <div class='profile add-new cursor-pointer' @click="redirectToNewProfile()" ><i class="fas fa-plus-circle"></i> Add New Profile</div>
   </div>
 </template>
 
@@ -283,6 +295,7 @@ export default {
       profiles: profiles,
       chartOptions: chartOptions,
       student: studentProfile,
+      addedProfiles: this.$store.state.addedProfiles
     }
   },
   methods: {
@@ -290,8 +303,11 @@ export default {
      return Object.keys(obj)
     },
     redirectToClaim: function (){
-      this.$router.push('claims/Educational')
-    }
+      this.$router.push('/claims/Educational')
+    },
+    redirectToNewProfile: function () {
+      this.$router.push('/profile/new')
+    },
   }
 }
 </script>
@@ -332,5 +348,18 @@ export default {
   width: 120px;
   font-weight: 100;
   padding: 0 0 12px 0;
+}
+
+.add-new{
+  display: inline-flex;
+  padding: 12px 20px;
+  background-color: #40975D;
+  color: white;
+  font-size: 20px;
+}
+
+.add-new i{
+  font-size: 24px;
+  padding-right: 12px;
 }
 </style>

@@ -178,7 +178,8 @@ const store =  new Vuex.Store({
           "keyCount": 4
         }]
       }
-    ]
+    ],
+    "addedProfiles": []
   },
   mutations: {
     'SAVE_KEYVAULT': function (state, param) {
@@ -194,6 +195,7 @@ const store =  new Vuex.Store({
           break
         }
       }
+      state.addedProfiles.push(param)
     }
   },
   actions: {
