@@ -253,6 +253,7 @@ nav ul li {
   width: 100%;
   transition: margin-left 0.5s ease;
   padding-bottom: $footer-height;
+  overflow-y: scroll;
 }
 
 .shift-main-content {
@@ -297,7 +298,7 @@ nav ul li {
   width: 320px;
   display: inline-grid;
   /* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); */
-  margin: 0 20px;
+  margin: 20px;
   border: 1px solid $brand-info;
 }
 

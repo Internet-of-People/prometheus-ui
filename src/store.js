@@ -179,7 +179,16 @@ const store =  new Vuex.Store({
         }]
       }
     ],
-    "addedProfiles": []
+    "addedProfiles": [
+      {"type": "profile",
+      "name": "Swimmer",
+      "icon": "fas fa-swimmer",
+      "desc": "District-wide Swim Champ"},
+      {"type": "profile",
+      "name": "Gamer Galactica",
+      "icon": "fab fa-galactic-senate",
+      "desc": "Level 15 Player"}
+    ]
   },
   mutations: {
     'SAVE_KEYVAULT': function (state, param) {

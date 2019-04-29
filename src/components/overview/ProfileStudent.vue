@@ -1,92 +1,103 @@
 <template>
   <div>
-    <div class='profile-influencer'>
-      <div class='profile-header'>
-        <div class='float-left'>
-            <div class='large-fontsize'>{{student.profile.name}}</div>
-            <div class='micro-fontsize'>Contact No: {{student.profile.contactNo}}</div>
-            <div class='micro-fontsize'>{{student.profile.address}}</div>
+    <div>
+      <div class='holder cursor-pointer' @click="toggleProfileList()" ><i :class="activeProfile.icon"></i> &nbsp; Active: {{activeProfile.name}} &nbsp;  <div class='float-right'><i class="fas fa-chevron-down"></i></div></div>
+      <div class='dropdown' v-bind:class="{ hide: hideProfileList }" >
+        <div class='holder' v-for="profile in totalprofiles" :key="profile.name" @click="setActiveProfile(profile)">{{profile.name}}</div>
+      </div>
+      <div class='add-new cursor-pointer' @click="redirectToNewProfile()" ><i class="fas fa-plus-circle"></i> Add New Profile</div>
+    </div>
+    <div class='check-layout'>
+      <div class='profile-influencer'>
+        <div class='profile-header'>
+          <div class='float-left'>
+              <div class='large-fontsize'>{{student.profile.name}}</div>
+              <div class='micro-fontsize'>Contact No: {{student.profile.contactNo}}</div>
+              <div class='micro-fontsize'>{{student.profile.address}}</div>
+              <div v-bind:class="{ hide: ifActiveProfile(student.profile) }" class='active-block'>Active</div>
+          </div>
+          <div class='float-right'>
+            <i :class="student.profile.icon"></i>
+          </div>
         </div>
-        <div class='float-right'>
-          <i :class="student.profile.icon"></i>
+        <div class='profile-actions profile-devices'>
+          <div class='large-fontsize heading'>Devices Registered: {{student.devices.length}}</div>
+          <div class='app-block' v-for="(device,key) in student.devices" :key="key">
+            {{device.name}}: {{device.desc}}
+            <div class='float-right'><i class='apps' :class="device.icon"></i> </div>
+          </div>
+        </div>
+        <div class='profile-actions profile-applications'>
+          <div class='large-fontsize heading'>Applications</div>
+          <div class='app-block' v-for="(app,key) in student.applications.apps" :key="key">
+            <i class='apps' :title="app.name" :class="app.icon"></i>
+          </div>
+        </div>
+        <div class='profile-actions profile-applications'>
+          <div @click="redirectToClaim()" class='large-fontsize cursor-pointer heading'>Claims</div>
+          <div class="header-claims" v-for="(val,index) in fetchKey(student.claims[0])" :key="index">{{val}}</div>
+          <div class="claim-student" v-for="(claim,index_i) in student.claims" :key="index_i">
+            <div class="all-details" v-for="(val,index_j) in fetchKey(claim)" :key="index_j">{{" "+claim[val] + "  "}}</div>
+          </div>
+        </div>
+        <div class='profile-actions profile-applications'>
+          <div class='large-fontsize heading'>Performance per Semester by Class Average</div>
+          <highcharts id="container1" :options="chartOptions"></highcharts>
         </div>
       </div>
-      <div class='profile-actions profile-devices'>
-        <div class='large-fontsize heading'>Devices Registered: {{student.devices.length}}</div>
-        <div class='app-block' v-for="(device,key) in student.devices" :key="key">
-          {{device.name}}: {{device.desc}}
-          <div class='float-right'><i class='apps' :class="device.icon"></i> </div>
+      <div class='profile' v-for="(profile, index_loop) in profiles" :key="index_loop">
+        <div class='profile-header'>
+          <div class='float-left'>
+              <div class='large-fontsize'>{{profile.profile.name}}</div>
+              <div class='micro-fontsize'>Contact No: {{profile.profile.contactNo}}</div>
+              <div class='micro-fontsize'>P.O Box: {{profile.profile.address}}</div>
+              <div v-bind:class="{ hide: ifActiveProfile(profile.profile) }" class='active-block'>Active</div>
+          </div>
+          <div class='float-right'>
+            <i :class="profile.profile.icon" :title="profile.profile.icon" ></i>
+          </div>
+        </div>
+        <div class='profile-actions profile-devices'>
+          <div class='large-fontsize heading'>Devices Registered: {{profile.devices.length}}</div>
+          <div class='app-block' v-for="(device,key) in profile.devices" :key="key">
+            {{device.name}}
+            <div class='float-right'><i class='apps'  :title="device.desc" :class="device.icon"></i> </div>
+          </div>
+        </div>
+        <div class='profile-actions profile-applications'>
+          <div class='large-fontsize heading'>Applications</div>
+          <div class='app-block' v-for="(app,key) in profile.applications.apps" :key="key">
+            <i class='apps' :title="app.name" :class="app.icon"></i>
+          </div>
+        </div>
+        <div class='profile-actions'>
+          <div class='large-fontsize heading'>Interactions</div>
+          <div class='card float-left'>
+              <div class='profile-card-title large-fontsize'>Last Login <i class="fas fa-sign-in-alt"></i></div>
+              <div> {{profile.action.lastLogin}}</div>
+              <div class='cursor-pointer more-details micro-fontsize'>More <i class="fas fa-angle-double-down"></i></div>
+          </div>
+          <div class='card float-left'>
+              <div class='profile-card-title large-fontsize'>Recent Contacts <i class="fas fa-address-book"></i></div>
+              <div> {{profile.action.lastProfile}} <i :class="profile.action.lastProfilePhoto"></i></div>
+              <div class='cursor-pointer more-details micro-fontsize'>More <i class="fas fa-angle-double-down"></i></div>
+          </div>
         </div>
       </div>
-      <div class='profile-actions profile-applications'>
-        <div class='large-fontsize heading'>Applications</div>
-        <div class='app-block' v-for="(app,key) in student.applications.apps" :key="key">
-          <i class='apps' :title="app.name" :class="app.icon"></i>
+      <div class='profile' v-for="(profile, index_added) in addedProfiles" :key="index_added">
+        <div class='profile-header'>
+          <div class='float-left'>
+              <div class='large-fontsize'>{{profile.name}}</div>
+              <div class='micro-fontsize'>Type: {{profile.type}}</div>
+              <div class='micro-fontsize'>Desc: {{profile.desc}}</div>
+              <div v-bind:class="{ hide: ifActiveProfile(profile) }" class='active-block'>Active</div>
+          </div>
+          <div class='float-right'>
+            <i :class="profile.icon" :title="profile.icon" ></i>
+          </div>
         </div>
-      </div>
-      <div class='profile-actions profile-applications'>
-        <div @click="redirectToClaim()" class='large-fontsize cursor-pointer heading'>Claims</div>
-        <div class="header-claims" v-for="(val,index) in fetchKey(student.claims[0])" :key="index">{{val}}</div>
-        <div class="claim-student" v-for="(claim,index_i) in student.claims" :key="index_i">
-          <div class="all-details" v-for="(val,index_j) in fetchKey(claim)" :key="index_j">{{" "+claim[val] + "  "}}</div>
-        </div>
-      </div>
-      <div class='profile-actions profile-applications'>
-        <div class='large-fontsize heading'>Performance per Semester by Class Average</div>
-        <highcharts id="container1" :options="chartOptions"></highcharts>
       </div>
     </div>
-    <div class='profile' v-for="(profile, index_loop) in profiles" :key="index_loop">
-      <div class='profile-header'>
-        <div class='float-left'>
-            <div class='large-fontsize'>{{profile.profile.name}}</div>
-            <div class='micro-fontsize'>Contact No: {{profile.profile.contactNo}}</div>
-            <div class='micro-fontsize'>P.O Box: {{profile.profile.address}}</div>
-        </div>
-        <div class='float-right'>
-          <i :class="profile.profile.icon" :title="profile.profile.icon" ></i>
-        </div>
-      </div>
-      <div class='profile-actions profile-devices'>
-        <div class='large-fontsize heading'>Devices Registered: {{profile.devices.length}}</div>
-        <div class='app-block' v-for="(device,key) in profile.devices" :key="key">
-          {{device.name}}
-          <div class='float-right'><i class='apps'  :title="device.desc" :class="device.icon"></i> </div>
-        </div>
-      </div>
-      <div class='profile-actions profile-applications'>
-        <div class='large-fontsize heading'>Applications</div>
-        <div class='app-block' v-for="(app,key) in profile.applications.apps" :key="key">
-          <i class='apps' :title="app.name" :class="app.icon"></i>
-        </div>
-      </div>
-      <div class='profile-actions'>
-        <div class='large-fontsize heading'>Interactions</div>
-        <div class='card float-left'>
-            <div class='profile-card-title large-fontsize'>Last Login <i class="fas fa-sign-in-alt"></i></div>
-            <div> {{profile.action.lastLogin}}</div>
-            <div class='cursor-pointer more-details micro-fontsize'>More <i class="fas fa-angle-double-down"></i></div>
-        </div>
-        <div class='card float-left'>
-            <div class='profile-card-title large-fontsize'>Recent Contacts <i class="fas fa-address-book"></i></div>
-            <div> {{profile.action.lastProfile}} <i :class="profile.action.lastProfilePhoto"></i></div>
-            <div class='cursor-pointer more-details micro-fontsize'>More <i class="fas fa-angle-double-down"></i></div>
-        </div>
-      </div>
-    </div>
-    <div class='profile' v-for="(profile, index_added) in addedProfiles" :key="index_added">
-      <div class='profile-header'>
-        <div class='float-left'>
-            <div class='large-fontsize'>{{profile.name}}</div>
-            <div class='micro-fontsize'>Type: {{profile.type}}</div>
-            <div class='micro-fontsize'>Desc: {{profile.desc}}</div>
-        </div>
-        <div class='float-right'>
-          <i :class="profile.icon" :title="profile.icon" ></i>
-        </div>
-      </div>
-    </div>
-    <div class='profile add-new cursor-pointer' @click="redirectToNewProfile()" ><i class="fas fa-plus-circle"></i> Add New Profile</div>
   </div>
 </template>
 
@@ -136,18 +147,6 @@ var profiles = [
       "name": "Tablet",
       "icon": "fa fa-tablet-alt",
       "desc": "Train entertainment"
-    },
-    {
-    "type": "device",
-    "name": "Macbook",
-    "icon": "fas fa-laptop-code",
-    "desc": "Personal work"
-    },
-    {
-    "type": "device",
-    "name": "Smart Blenders",
-    "icon": "fas fa-blender-phone",
-    "desc": "Making Smoothees"
     },
     {
     "type": "device",
@@ -288,6 +287,13 @@ var studentProfile = {
     }
   }
 
+var activeProfile = {
+  "type": "profile",
+  "name": "Studious Sameul",
+  "icon": "fas fa-user-graduate",
+  "desc": "Graduate student",
+}
+
 export default {
   name: 'ProfileStudent',
   data() {
@@ -295,7 +301,26 @@ export default {
       profiles: profiles,
       chartOptions: chartOptions,
       student: studentProfile,
-      addedProfiles: this.$store.state.addedProfiles
+      addedProfiles: this.$store.state.addedProfiles,
+      activeProfile: activeProfile,
+      hideProfileList: true
+    }
+  },
+  computed: {
+    totalprofiles() {
+      let profiles = [
+      {"type": "profile",
+      "name": "Studious Sameul",
+      "icon": "fas fa-user-graduate",
+      "desc": "Graduate student"},
+      {"type": "profile",
+      "name": "Tutor Ontheside",
+      "icon": "fas fa-chalkboard-teacher",
+      "desc": "Freelance tutor available for hire"}]
+      for (let profile in this.addedProfiles) {
+        profiles.push(this.addedProfiles[profile])
+      }
+      return profiles
     }
   },
   methods: {
@@ -308,6 +333,16 @@ export default {
     redirectToNewProfile: function () {
       this.$router.push('/profile/new')
     },
+    toggleProfileList: function () {
+      this.hideProfileList = !this.hideProfileList
+    },
+    setActiveProfile: function (profile) {
+      this.activeProfile = profile
+      this.toggleProfileList()
+    },
+    ifActiveProfile: function (profile) {
+      return this.activeProfile.name !== profile.name
+    }
   }
 }
 </script>
@@ -352,14 +387,47 @@ export default {
 
 .add-new{
   display: inline-flex;
-  padding: 12px 20px;
+  padding: 8px 12px;
   background-color: #40975D;
   color: white;
-  font-size: 20px;
+  font-size: 12px;
+  margin: 0 0 20px 20px;
 }
 
 .add-new i{
-  font-size: 24px;
+  font-size: 14px;
   padding-right: 12px;
 }
+
+.holder{
+  display: inline-block;
+  padding: 8px 12px;
+  background-color: #40975D;
+  color: white;
+  font-size: 12px;
+  margin: 0 0 0px 20px;
+  width: 250px;
+}
+
+.dropdown{
+  position: relative;
+  display: grid;
+  position: absolute;
+  top: 53px;
+  width: 250px;
+}
+
+.active-block{
+  color: white;
+  background-color: #40975D;
+  width: 72px;
+  padding: 4px 18px;
+  border-radius: 2px;
+  margin: 12px 0px;
+}
+
+.check-layout{
+  display: inline;
+}
+
 </style>

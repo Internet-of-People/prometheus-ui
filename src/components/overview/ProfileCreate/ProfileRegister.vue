@@ -35,7 +35,7 @@
         </div>
         <div class='form-block'>
           <div class='form-label' @click="toggleInput()">KEY GENERATOR <i class="fas fa-plus-circle"></i></div>
-          <div class='value-component' v-bind:class="{ hide: hideAddKey }">
+          <div class='value-component'>
             {{keys[Math.floor((Math.random()*2) + 1)]}}
           </div>
         </div>
@@ -117,7 +117,7 @@ export default {
         "keyCount": this.registeredKeys.length
       }
       this.$store.dispatch('saveKeyVault', param)
-      this.$router.push('profile/student')
+      this.$router.push('/profile/student')
     }
   }
 }
