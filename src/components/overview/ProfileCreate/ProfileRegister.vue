@@ -27,16 +27,16 @@
         <div class='form-block'>
           <div class='form-label'>TYPE</div>
           <div>
-            <div class='dropdown' @click="toggleOption()">{{type}}</div>
+            <div class='dropdown' @click="toggleOption()">{{type}} <i class="float-right fas fa-chevron-down"></i></div>
             <div class='dropdown absolute-dropdown' v-for="profileType in profileTypes" :key="profileType" @click="type=profileType" v-bind:class="{ hide: hideOptions }">
-              {{profileType}}
+              {{profileType}} 
             </div>
           </div>
         </div>
         <div class='form-block'>
-          <div class='form-label' @click="toggleInput()">KEY GENERATOR <i class="fas fa-plus-circle"></i></div>
+          <div class='form-label'>KEY GENERATOR </div>
           <div class='value-component'>
-            {{keys[Math.floor((Math.random()*2) + 1)]}}
+            {{keys[Math.floor((Math.random()*1) + 1)]}}
           </div>
         </div>
         <div class='form-block'>
@@ -94,7 +94,7 @@ export default {
       },
       // setter
       set: function () {
-        this.toggleInput()
+        // this.toggleInput()
       }
     }
   },
@@ -104,9 +104,6 @@ export default {
     },
     toggleOption () {
       this.hideOptions = !this.hideOptions
-    },
-    toggleInput () {
-      this.hideAddKey = !this.hideAddKey
     },
     saveProfile () {
       var param = {

@@ -288,7 +288,6 @@ nav ul li a:before {
   position: relative;
   width: 100%;
   transition: margin-left 0.5s ease;
-  padding-bottom: 32px;
   overflow-y: scroll;
 }
 

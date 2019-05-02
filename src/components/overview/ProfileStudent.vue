@@ -20,13 +20,13 @@
             <i :class="student.profile.icon"></i>
           </div>
         </div>
-        <div class='profile-actions profile-devices'>
+        <!-- <div class='profile-actions profile-devices'>
           <div class='large-fontsize heading'>Devices Registered: {{student.devices.length}}</div>
           <div class='app-block' v-for="(device,key) in student.devices" :key="key">
             {{device.name}}: {{device.desc}}
             <div class='float-right'><i class='apps' :class="device.icon"></i> </div>
           </div>
-        </div>
+        </div> -->
         <div class='profile-actions profile-applications'>
           <div class='large-fontsize heading'>Applications</div>
           <div class='app-block' v-for="(app,key) in student.applications.apps" :key="key">
@@ -391,7 +391,7 @@ export default {
   background-color: #40975D;
   color: white;
   font-size: 12px;
-  margin: 0 0 20px 20px;
+  margin: 0 0 0px 20px;
 }
 
 .add-new i{
