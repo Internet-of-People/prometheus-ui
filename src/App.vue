@@ -2,6 +2,7 @@
   <div id="app">
     <SideBar/>
     <div id="mainContent" class="shift-main-content">
+      <BreadCrumb/>
       <router-view/>
     </div>
     <Footer/>
@@ -11,11 +12,14 @@
 <script>
 import Footer from '@/components/common/Footer'
 import SideBar from '@/components/common/SideBar'
+import BreadCrumb from '@/components/common/BreadCrumb'
+
 export default {
   name: 'app',
   components: {
     Footer,
-    SideBar
+    SideBar,
+    BreadCrumb
   }
 }
 </script>

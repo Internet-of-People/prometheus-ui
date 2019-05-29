@@ -236,6 +236,7 @@ nav {
 }
 
 nav ul li {
+  @extend .col-12;
   a:before {
     content: "";
     width: 35px;
@@ -394,5 +395,34 @@ nav ul li {
     color: $brand-secondary; 
     font-size: 18px;
     padding: 2px;
+  }
+}
+
+.breadcrumb {
+  @extend .micro-fontsize;
+  ul {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  ul > li {
+    display: flex;
+    float: left;
+    width: auto;
+    color: $brand-action;
+    cursor: default;
+    align-items: center;
+  }
+  ul > li:not(:last-child)::after {
+    content: " > ";
+    white-space: pre;
+    float: right;
+    color: $brand-action;
+    cursor: default;
+  }
+  .linked {
+    cursor: pointer;
+    color: $brand-link;
   }
 }

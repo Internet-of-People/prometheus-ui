@@ -55,11 +55,11 @@ export default {
   methods: {
     add_type_filter: function(type) {
       this.type = type
-      this.$router.push('/claims/' + type)
+      this.$router.push('/claims?' + type)
     },
     remove_type_filter: function() {
       this.type = null
-      this.$router.push('/claims/')
+      this.$router.push('/claims')
     },
     fetchKey: function (obj) {
      return Object.keys(obj)
