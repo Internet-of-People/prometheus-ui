@@ -1,13 +1,13 @@
 <template>
   <div>
-      New Claims
+      VALIDATE VAULT
   </div>
 </template>
 
 <script>
 export default {
-  name: 'ClaimsNew',
-  methods: {
+  name: 'ValidateVault',
+  components: {
   }
 }
 </script>

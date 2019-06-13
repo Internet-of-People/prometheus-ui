@@ -20,7 +20,7 @@
 }
 
 /* line 6, ../sass/app.scss */
-.col-5 {
+.col-5, .intro-content .intro-action-block .intro-action-block-elem {
   width: 41.66%;
 }
 
@@ -55,7 +55,7 @@
 }
 
 /* line 13, ../sass/app.scss */
-.col-12, nav ul li, .profile-devices .app-block {
+.col-12, nav ul li {
   width: 100%;
 }
 
@@ -153,14 +153,14 @@ a {
 }
 
 /* line 130, ../sass/app.scss */
-.display-inline-flex, .app-title {
+.display-inline-flex, .app-title, .intro-content .intro-action-block {
   display: inline-flex !important;
   display: -ms-inline-flexbox;
   flex-wrap: wrap;
 }
 
 /* line 136, ../sass/app.scss */
-.cursor-pointer, .primary-btn, .secondary-btn, button, i {
+.cursor-pointer, button {
   cursor: pointer;
 }
 
@@ -169,29 +169,63 @@ a {
   cursor: default;
 }
 
-/* line 144, ../sass/app.scss */
-.primary-btn {
-  color: #40975D;
-  padding: 12px;
-}
-/* line 148, ../sass/app.scss */
-.primary-btn i {
-  font-size: 24px;
-  padding: 0 4px;
+/** common elem **/
+/* line 145, ../sass/app.scss */
+.adjust-btn-frame, button {
+  width: 160px;
+  margin: auto;
 }
 
-/* line 154, ../sass/app.scss */
-.secondary-btn {
+/* line 149, ../sass/app.scss */
+button {
+  min-width: 90px;
+  padding: 8px 16px;
+  background-color: #378A81;
   color: #FFFFFF;
-  background-color: #40975D;
-  padding: 12px 24px;
+  outline: none;
+  border: none;
+  height: 46px;
+  border-radius: 0px;
+  font-weight: bold;
 }
-/* line 159, ../sass/app.scss */
-.secondary-btn i {
-  padding: 0 4px;
+
+/* line 162, ../sass/app.scss */
+.inv-btn {
+  background-color: #FFFFFF;
+  color: #378A81;
 }
 
 /* line 169, ../sass/app.scss */
+.breadcrumb ul {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+/* line 175, ../sass/app.scss */
+.breadcrumb ul > li {
+  display: flex;
+  float: left;
+  width: auto;
+  color: #727272;
+  cursor: default;
+  align-items: center;
+}
+/* line 183, ../sass/app.scss */
+.breadcrumb ul > li:not(:last-child)::after {
+  content: " > ";
+  white-space: pre;
+  float: right;
+  color: #727272;
+  cursor: default;
+}
+/* line 190, ../sass/app.scss */
+.breadcrumb .linked {
+  cursor: pointer;
+  color: #0067C5;
+}
+
+/* line 196, ../sass/app.scss */
 .page-title {
   color: #D85760;
   font-weight: 501;
@@ -200,17 +234,17 @@ a {
   margin-bottom: 17px;
 }
 
-/* line 177, ../sass/app.scss */
+/* line 204, ../sass/app.scss */
 * {
   box-sizing: border-box;
 }
 
-/* line 181, ../sass/app.scss */
+/* line 208, ../sass/app.scss */
 body {
   margin: 0;
 }
 
-/* line 185, ../sass/app.scss */
+/* line 212, ../sass/app.scss */
 nav {
   background: #378A81;
   float: left;
@@ -225,21 +259,21 @@ nav {
   width: 210px;
   z-index: 1;
 }
-/* line 198, ../sass/app.scss */
+/* line 225, ../sass/app.scss */
 nav ul {
   margin: 0;
   padding: 0;
 }
-/* line 201, ../sass/app.scss */
+/* line 228, ../sass/app.scss */
 nav ul li {
   display: inline-flex;
   list-style: none;
 }
-/* line 204, ../sass/app.scss */
+/* line 231, ../sass/app.scss */
 nav ul li + li {
   border-top: 1px solid rgba(237, 237, 237, 0.05);
 }
-/* line 207, ../sass/app.scss */
+/* line 234, ../sass/app.scss */
 nav ul li a {
   color: #FFFFFF;
   display: block;
@@ -251,11 +285,11 @@ nav ul li a {
   text-decoration: none;
   white-space: nowrap;
 }
-/* line 217, ../sass/app.scss */
+/* line 244, ../sass/app.scss */
 nav ul li a:hover {
   opacity: 1;
 }
-/* line 221, ../sass/app.scss */
+/* line 248, ../sass/app.scss */
 nav ul li i {
   color: #FFFFFF;
   display: block;
@@ -266,12 +300,12 @@ nav ul li i {
   text-decoration: none;
   white-space: nowrap;
 }
-/* line 230, ../sass/app.scss */
+/* line 257, ../sass/app.scss */
 nav ul li i:hover {
   opacity: 1;
 }
 
-/* line 240, ../sass/app.scss */
+/* line 267, ../sass/app.scss */
 nav ul li a:before {
   content: "";
   width: 35px;
@@ -283,7 +317,7 @@ nav ul li a:before {
   left: 12px;
 }
 
-/* line 252, ../sass/app.scss */
+/* line 279, ../sass/app.scss */
 #mainContent {
   position: relative;
   width: 100%;
@@ -291,7 +325,7 @@ nav ul li a:before {
   overflow-y: scroll;
 }
 
-/* line 260, ../sass/app.scss */
+/* line 287, ../sass/app.scss */
 .shift-main-content {
   margin-left: 210px !important;
   width: calc(100% - 210px) !important;
@@ -299,179 +333,100 @@ nav ul li a:before {
   height: -webkit-fill-available;
 }
 
-/* line 267, ../sass/app.scss */
+/* line 294, ../sass/app.scss */
 .app-title {
   padding: 12px 36px;
   width: 210px;
   background-color: #FAFAFA;
 }
-/* line 272, ../sass/app.scss */
+/* line 299, ../sass/app.scss */
 .app-title img {
   width: 44px;
   height: 44px;
 }
-/* line 276, ../sass/app.scss */
+/* line 303, ../sass/app.scss */
 .app-title div {
   color: #999999;
   padding: 16px 8px;
   font-weight: 400;
 }
 
-/* line 283, ../sass/app.scss */
+/* line 310, ../sass/app.scss */
 .keyvault-title {
   padding: 32px 32px 8px;
   font-size: 24px;
   font-weight: 100;
 }
 
-/* line 289, ../sass/app.scss */
+/* line 316, ../sass/app.scss */
 .key-count {
   font-size: 11px;
   color: #727272;
 }
 
-/* line 294, ../sass/app.scss */
-.footer-wrapper {
-  height: 32px;
-}
-
-/* line 298, ../sass/app.scss */
-.profile, .profile-influencer {
-  width: 320px;
-  display: inline-grid;
-  /* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); */
-  margin: 20px;
-  border: 1px solid #40975D;
-}
-
-/* line 306, ../sass/app.scss */
-.profile-influencer {
-  width: 840px;
-}
-
-/* line 311, ../sass/app.scss */
-.profile-header {
-  border-bottom: 1px solid #40975D;
-  display: block;
-  height: 120px;
-  padding: 20px;
-}
-/* line 316, ../sass/app.scss */
-.profile-header .float-right i {
-  font-size: 64px;
-  color: #40975D;
-}
-
+/**footer component*/
 /* line 322, ../sass/app.scss */
-.profile-actions, .profile-devices {
-  padding: 20px 20px 0;
+.footer-wrapper {
+  height: 38px;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  color: #727272;
+  display: inline-block;
+  z-index: 100;
+  background-color: #FFFFFF;
 }
 
-/* line 328, ../sass/app.scss */
-.profile-devices .app-block {
-  padding: 12px;
-}
-/* line 331, ../sass/app.scss */
-.profile-devices .app-block .apps {
-  padding: 0px;
-  font-size: 16px;
+/* line 333, ../sass/app.scss */
+.desktop-footer-essentials {
+  padding: 8px 16px;
 }
 
-/* line 338, ../sass/app.scss */
-.shadowy, .card, .claim {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  transition: 0.3s;
-}
-/* line 342, ../sass/app.scss */
-.shadowy:hover, .card:hover, .claim:hover {
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+/* line 337, ../sass/app.scss */
+.copyright {
+  border-left: 1px solid #FAFAFA;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
+/**footer component*/
+/** introduction page **/
+/* line 345, ../sass/app.scss */
+.intro-page {
+  text-align: center;
+}
 /* line 347, ../sass/app.scss */
-.card {
+.intro-page img {
+  height: 200px;
   width: 200px;
-  margin: 0px 16px 12px;
+}
+/* line 351, ../sass/app.scss */
+.intro-page h1 {
+  font-weight: 300;
+  color: #378A81;
 }
 
-/* line 353, ../sass/app.scss */
-.claim {
-  box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.2);
-  padding: 10px;
-  margin: 0px 0px 10px 0px;
-  display: flex;
-  flex-direction: row;
+/* line 357, ../sass/app.scss */
+.intro-content {
+  margin: 0 20%;
+  text-align: justify;
+  line-height: 20px;
 }
-/* line 360, ../sass/app.scss */
-.claim .icon {
-  font-size: 25px;
-  margin-right: 10px;
+/* line 361, ../sass/app.scss */
+.intro-content .intro-desc {
+  margin: 16px 0;
 }
 /* line 364, ../sass/app.scss */
-.claim .date {
-  margin-right: 24px;
-  align-self: flex-end;
-  flex-grow: 0;
+.intro-content .intro-action-block {
+  justify-content: space-between;
 }
-
-/* line 371, ../sass/app.scss */
-.claim-filter {
-  background: #F0F0F0;
-  padding: 8px 6px;
-  margin: 0 0 12px 0;
-  font-size: 16px;
-  width: fit-content;
+/* line 367, ../sass/app.scss */
+.intro-content .intro-action-block .intro-action-block-elem {
+  border: 1px dashed;
+  margin: 16px 0;
+  padding: 16px 24px;
 }
-/* line 377, ../sass/app.scss */
-.claim-filter i {
-  margin-left: 4px;
-}
-
-/* line 382, ../sass/app.scss */
-.profile-card-title {
-  padding: 12px 0 4px;
-  color: #378A81;
-}
-
-/* line 387, ../sass/app.scss */
-.apps {
-  padding: 8px;
-  font-size: 24px;
-  color: #378A81;
-}
-
-/* line 394, ../sass/app.scss */
-.claim .icon i {
-  color: #378A81;
-  font-size: 18px;
-  padding: 2px;
-}
-
-/* line 403, ../sass/app.scss */
-.breadcrumb ul {
-  display: flex;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-/* line 409, ../sass/app.scss */
-.breadcrumb ul > li {
-  display: flex;
-  float: left;
-  width: auto;
-  color: #727272;
-  cursor: default;
-  align-items: center;
-}
-/* line 417, ../sass/app.scss */
-.breadcrumb ul > li:not(:last-child)::after {
-  content: " > ";
-  white-space: pre;
-  float: right;
-  color: #727272;
-  cursor: default;
-}
-/* line 424, ../sass/app.scss */
-.breadcrumb .linked {
-  cursor: pointer;
-  color: #0067C5;
+/* line 372, ../sass/app.scss */
+.intro-content .intro-action-block .intro-action-block-elem .intro-action-block-elem-desc {
+  height: 100px;
 }

@@ -71,7 +71,7 @@ $button-save:           #0365C0;
 $brand-main-color:      #D85760;
 $brand-sub-color:       #999999;
 
-$footer-height:         32px;
+$footer-height:         38px;
 
 body{
   height: 100%;
@@ -141,29 +141,56 @@ a{
   cursor: default;
 }
 
-.primary-btn {
-  @extend .cursor-pointer !optional;
-  color: $brand-info;
-  padding: 12px;
-  i {
-    font-size: 24px;
-    padding: 0 4px;
-  }
+/** common elem **/
+.adjust-btn-frame{
+  width: 160px;
+  margin: auto;
 }
-
-.secondary-btn {
-  @extend .cursor-pointer !optional;
+button{
+  @extend .cursor-pointer, .adjust-btn-frame;
+  min-width: 90px;
+  padding: 8px 16px;
+  background-color: $brand-secondary;
   color: $brand-inverse;
-  background-color: $brand-info;
-  padding: 12px 24px;
-  i {
-    padding: 0 4px;
-  }
+  outline: none;
+  border: none;
+  height: 46px;
+  border-radius: 0px;
+  font-weight: bold;
 }
 
+.inv-btn{
+  background-color: $brand-inverse;
+  color: $brand-secondary;
+}
 
-button, i{
-  @extend .cursor-pointer
+.breadcrumb {
+  @extend .micro-fontsize;
+  ul {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  ul > li {
+    display: flex;
+    float: left;
+    width: auto;
+    color: $brand-action;
+    cursor: default;
+    align-items: center;
+  }
+  ul > li:not(:last-child)::after {
+    content: " > ";
+    white-space: pre;
+    float: right;
+    color: $brand-action;
+    cursor: default;
+  }
+  .linked {
+    cursor: pointer;
+    color: $brand-link;
+  }
 }
 
 .page-title {
@@ -291,138 +318,60 @@ nav ul li {
   color: $brand-action;
 }
 
+/**footer component*/
 .footer-wrapper {
   height: $footer-height;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  color: $brand-action;
+  display: inline-block;
+  z-index: 100;
+  background-color: $brand-inverse;
 }
 
-.profile{
-  width: 320px;
-  display: inline-grid;
-  /* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); */
-  margin: 20px;
-  border: 1px solid $brand-info;
+.desktop-footer-essentials{
+  padding: 8px 16px;
 }
 
-.profile-influencer{
-  @extend .profile;
-  width: 840px;
+.copyright {
+  border-left: 1px solid $brand-bg;
+  padding-left: 5px;
+  padding-right: 5px;
 }
+/**footer component*/
 
-.profile-header{
-  border-bottom: 1px solid $brand-info;
-  display: block;
-  height: 120px;
-  padding: 20px; 
-  .float-right i {
-    font-size: 64px;
-    color: $brand-info;
+/** introduction page **/
+.intro-page {
+  text-align: center;
+  img {
+    height: 200px;
+    width: 200px;
+  }
+  h1 {
+    font-weight: 300;
+    color: $brand-secondary;
   }
 }
 
-.profile-actions{
-  padding: 20px 20px 0;
-}
-
-.profile-devices{
-  @extend .profile-actions;
-  .app-block{
-    @extend .col-12;
-    padding: 12px;
-    .apps{
-      padding: 0px;
-      font-size: 16px;
+.intro-content {
+  margin: 0 20%;
+  text-align: justify;
+  line-height: 20px;
+  .intro-desc{
+    margin: 16px 0;
+  }
+  .intro-action-block{
+    @extend .display-inline-flex;
+    justify-content: space-between;
+    .intro-action-block-elem{
+      @extend .col-5;
+      border: 1px dashed;
+      margin: 16px 0;
+      padding: 16px 24px;
+      .intro-action-block-elem-desc{
+        height: 100px;
+      }
     }
-  }
-}
-
-.shadowy {
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
-  // border-radius: 5px;
-  &:hover{
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-  }
-}
-
-.card {
-  @extend .shadowy;
-  width: 200px;
-  margin: 0px 16px 12px;
-}
-
-.claim {
-  @extend .shadowy;
-  box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.2);
-  padding: 10px;
-  margin: 0px 0px 10px 0px;
-  display: flex;
-  flex-direction: row;
-  .icon {
-    font-size: 25px;
-    margin-right: 10px;
-  }
-  .date {
-    margin-right: 24px;
-    align-self: flex-end;
-    flex-grow: 0;
-  }
-}
-
-.claim-filter {
-  background: $brand-highlight;
-  padding: 8px 6px;
-  margin: 0 0 12px 0;
-  font-size: 16px;
-  width: fit-content;
-  i {
-    margin-left: 4px;
-  }
-}
-
-.profile-card-title {
-  padding: 12px 0 4px;
-  color: $brand-secondary;
-}
-
-.apps{
-  padding: 8px;
-  font-size: 24px;
-  color: $brand-secondary;
-}
-
-.claim .icon{
-  i{
-    color: $brand-secondary; 
-    font-size: 18px;
-    padding: 2px;
-  }
-}
-
-.breadcrumb {
-  @extend .micro-fontsize;
-  ul {
-    display: flex;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-  }
-  ul > li {
-    display: flex;
-    float: left;
-    width: auto;
-    color: $brand-action;
-    cursor: default;
-    align-items: center;
-  }
-  ul > li:not(:last-child)::after {
-    content: " > ";
-    white-space: pre;
-    float: right;
-    color: $brand-action;
-    cursor: default;
-  }
-  .linked {
-    cursor: pointer;
-    color: $brand-link;
   }
 }
