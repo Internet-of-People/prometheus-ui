@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import router from './router'
 
 Vue.use(Vuex)
 
@@ -8,8 +9,22 @@ const store =  new Vuex.Store({
     "appname": "Prometheus",
   },
   mutations: {
+    'CREATE_VAULT': function () {
+      router.push('/createnewvault')
+    },
+    'RESTORE_VAULT': function () {
+      router.push('/validatevault')
+    }
+    
   },
   actions: {
+    // TODO: add api handling here
+    createVault() {
+      store.commit('CREATE_VAULT')
+    },
+    restoreVault() {
+      store.commit('RESTORE_VAULT')
+    }
   }
 })
 

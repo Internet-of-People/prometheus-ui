@@ -11,13 +11,13 @@
           <div class="intro-action-block-elem-desc">
             Choose this option if you have no seeds to restore. It will generate a new vault with a randomly generated seed.
           </div>
-          <Button name="CREATE NEW VAULT" />
+          <Button name="CREATE NEW VAULT" :onClick="createVault" />
         </div>
         <div class="float-right intro-action-block-elem">
           <div class="intro-action-block-elem-desc">
             If you have an already generated seed and wan to restore your vault, this is what you need.
           </div>
-          <Button name="RESTORE VAULT" type="inv-btn"/>
+          <Button name="RESTORE VAULT" type="inv-btn" :onClick="restoreVault" />
         </div>
       </div>
     </div>
@@ -32,8 +32,12 @@ export default {
     Button,
   },
   methods: {
-    // TODO: create onClick for this
+    // TODO: fix repition here
     createVault() {
+      this.$store.dispatch('createVault')
+    },
+    restoreVault() {
+      this.$store.dispatch('restoreVault')
     }
   }
 }
