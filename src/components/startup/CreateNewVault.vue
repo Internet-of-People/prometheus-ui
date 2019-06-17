@@ -1,6 +1,5 @@
 <template>
   <div>
-      CREATE NEW VAULT
   </div>
 </template>
 

@@ -12,26 +12,26 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Intro',
+      name: 'intro',
       component: Introduction
     },
     {
       path: '/createnewvault',
-      name: 'CreateNewVault',
+      name: 'createNewVault',
       component: CreateNewVault,
       meta: {
         breadcrumb: [
-          { name: 'GENERATING MNEMONIC' }
+          { name: 'CREATE NEW VAULT' }
         ]
       }
     },
     {
       path: '/validatevault',
-      name: 'ValidateVault',
+      name: 'validateVault',
       component: ValidateVault,
       meta: {
         breadcrumb: [
-          { name: 'GENERATING MNEMONIC', link: 'createnewvault' },
+          { name: 'CREATE NEW VAULT', link: 'createnewvault' },
           { name: 'VALIDATING' }
         ]
       }

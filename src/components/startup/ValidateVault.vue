@@ -1,6 +1,5 @@
 <template>
   <div>
-      VALIDATE VAULT
   </div>
 </template>
 

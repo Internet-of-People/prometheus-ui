@@ -166,6 +166,10 @@ button{
 
 .breadcrumb {
   @extend .micro-fontsize;
+  div{
+    font-size: 18px;
+    font-weight: 100;
+  }
   ul {
     display: flex;
     list-style-type: none;
@@ -210,7 +214,7 @@ body {
 }
 
 nav {
-  background: $brand-secondary;
+  background: $brand-inverse;
   float: left;
   height: 100vh;
   left: 0;
@@ -220,7 +224,7 @@ nav {
   transition: width .3s ease;
   position: fixed;
   top: 0;
-  width: 210px;
+  width: 25%;
   z-index: 1;
   ul {
     margin: 0;
@@ -280,22 +284,22 @@ nav ul li {
   position: relative;
   width: 100%;
   transition: margin-left 0.5s ease;
-  // padding-bottom: $footer-height;
   overflow-y: scroll;
 }
 
-.shift-main-content {
-  margin-left: 210px !important;
-  width: calc(100% - 210px) !important;
+.shiftMainContent {
+  @extend .float-right;
+  width: 75% !important;
   padding: 20px;
   height: -webkit-fill-available;
+  background-color: $brand-highlight;
 }
 
 .app-title{
   @extend .display-inline-flex;
   padding: 12px 36px;
   width: 210px;
-  background-color: $brand-bg;
+  // background-color: $brand-bg;
   img {
     width: 44px;
     height: 44px;
