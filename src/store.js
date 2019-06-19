@@ -6,7 +6,7 @@ Vue.use(Vuex)
 
 const store =  new Vuex.Store({
   state: {
-    "appname": "Prometheus",
+    "appname": "PROMETHEUS",
   },
   mutations: {
     'CREATE_VAULT': function () {
@@ -14,6 +14,9 @@ const store =  new Vuex.Store({
     },
     'RESTORE_VAULT': function () {
       router.push('/validatevault')
+    },
+    'RESET_VAULT': function () {
+      router.push('/')
     }
     
   },
@@ -24,6 +27,9 @@ const store =  new Vuex.Store({
     },
     restoreVault() {
       store.commit('RESTORE_VAULT')
+    },
+    resetPage(){
+      store.commit('RESET_VAULT')
     }
   }
 })

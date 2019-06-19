@@ -3,8 +3,7 @@ import Router from 'vue-router'
 import Introduction from '@/components/startup/Introduction'
 import CreateNewVault from '@/components/startup/CreateNewVault'
 import ValidateVault from '@/components/startup/ValidateVault'
-// import ClaimsPage from '@/components/claims/ClaimsPage'
-// import ClaimsNew from '@/components/claims/ClaimsNew'
+import VaultCreation from '@/components/contents/VaultCreation'
 
 Vue.use(Router)
 
@@ -21,7 +20,9 @@ export default new Router({
       component: CreateNewVault,
       meta: {
         breadcrumb: [
-          { name: 'CREATE NEW VAULT' }
+          { name: 'GENERATING MNEUMONIC'},
+          { name: 'VALIDATING', link: 'validateVault' },
+          { name: 'FINISH', link: 'vaultcreated' },
         ]
       }
     },
@@ -31,36 +32,23 @@ export default new Router({
       component: ValidateVault,
       meta: {
         breadcrumb: [
-          { name: 'CREATE NEW VAULT', link: 'createnewvault' },
-          { name: 'VALIDATING' }
+          { name: 'GENERATING MNEUMONIC', link: 'createnewvault' },
+          { name: 'VALIDATING' },
+          { name: 'FINISH', link: 'vaultcreated' },
         ]
       }
     },
-    // {
-    //   path: '/claims',
-    //   name: 'Claims',
-    //   component: ClaimsPage,
-    //   meta: {
-    //     breadcrumb: [
-    //       { name: 'Claims' }
-    //     ]
-    //   }
-    // },
-    // {
-    //   path: '/claims?:filter',
-    //   name: 'claimsfiltered',
-    //   component: ClaimsPage
-    // },
-    // {
-    //   path: '/claimsnew',
-    //   name: 'NewClaims',
-    //   component: ClaimsNew,
-    //   meta: {
-    //     breadcrumb: [
-    //       { name: 'Claims', link: 'claims' },
-    //       { name: 'New Claims' }
-    //     ]
-    //   }
-    // }
+    {
+      path: '/vaultcreated',
+      name: 'vaultcreated',
+      component: VaultCreation,
+      meta: {
+        breadcrumb: [
+          { name: 'GENERATING MNEUMONIC', link: 'createnewvault' },
+          { name: 'VALIDATING', link: 'validateVault' },
+          { name: 'FINISH' },
+        ]
+      }
+    },
   ]
 })

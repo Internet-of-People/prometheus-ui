@@ -165,15 +165,19 @@ button{
 }
 
 .breadcrumb {
-  @extend .micro-fontsize;
+  @extend .micro-fontsize, .col-12;
+  background-color: $brand-inverse;
+  height: 80px;
+  padding: 20px;
   div{
     font-size: 18px;
     font-weight: 100;
   }
   ul {
+    @extend .small-fontsize;
     display: flex;
     list-style-type: none;
-    margin: 0;
+    margin: 10px 0px;
     padding: 0;
   }
   ul > li {
@@ -193,7 +197,7 @@ button{
   }
   .linked {
     cursor: pointer;
-    color: $brand-link;
+    color: $brand-secondary;
   }
 }
 
@@ -226,6 +230,7 @@ nav {
   top: 0;
   width: 25%;
   z-index: 1;
+  border-right: 0.5px dashed $brand-secondary;
   ul {
     margin: 0;
     padding: 0;
@@ -290,7 +295,7 @@ nav ul li {
 .shiftMainContent {
   @extend .float-right;
   width: 75% !important;
-  padding: 20px;
+  // padding: 20px;
   height: -webkit-fill-available;
   background-color: $brand-highlight;
 }
@@ -298,15 +303,16 @@ nav ul li {
 .app-title{
   @extend .display-inline-flex;
   padding: 12px 36px;
-  width: 210px;
+  width: 100%;
   // background-color: $brand-bg;
   img {
     width: 44px;
     height: 44px;
   }
   div {
-    color: $brand-sub-color;
-    padding: 16px 8px;
+    color: $brand-secondary;
+    padding: 14px 8px;
+    font-size: 16px;
     font-weight: 400;
   }
 }
@@ -320,6 +326,39 @@ nav ul li {
 .key-count{
   font-size: 11px;
   color: $brand-action;
+}
+
+.float-content{
+  @extend .col-12;
+  background-color: $brand-inverse;
+  margin: 20px;
+  height: 320px;
+  padding: 20px;
+  .info-txt{
+    font-weight: bold;
+    color: $brand-alert;
+    padding: 10px 0;
+  }
+  .words-txt{
+    color: $brand-inverse;
+    background-color: $brand-text;
+    width: 96px;
+    padding: 8px 12px;
+    margin: 12px 8px 0 0;
+    display: inline-block;
+    input{
+      outline: none;
+      border: none;
+      color: $brand-inverse;
+      background-color: $brand-text;
+      width: 48px;
+    }
+  }
+  .btn-block{
+    @extend .col-12, .display-inline-flex;
+    height: 40px;
+    margin: 40px 0 0 0;
+  }
 }
 
 /**footer component*/

@@ -2,7 +2,7 @@
   <div>
     <div class="footer-wrapper col-12">
       <div class='float-left cursor-default desktop-footer-essentials'>
-        <span class=''>Prometheus</span>
+        <span class=''>PROMETHEUS</span>
         <span class='copyright'>&copy;&nbsp; {{new Date().getFullYear()}} Internet of People</span>
       </div>
       <div class='float-right cursor-default desktop-footer-essentials'>
