@@ -18,8 +18,7 @@ export default {
   },
   data: function () {
     return {
-      // TODO: replace with store val of words
-      words: ["ac", "cac", "mac"]
+      words: this.$store.words 
     }
   },
   methods: {

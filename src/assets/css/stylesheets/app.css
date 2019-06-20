@@ -55,7 +55,7 @@
 }
 
 /* line 13, ../sass/app.scss */
-.col-12, .breadcrumb, nav ul li, .float-content, .float-content .btn-block {
+.col-12, .breadcrumb, nav ul li, .float-content, .float-id-content, .float-content .btn-block, .float-id-content .btn-block {
   width: 100%;
 }
 
@@ -153,7 +153,7 @@ a {
 }
 
 /* line 130, ../sass/app.scss */
-.display-inline-flex, .app-title, .float-content .btn-block, .intro-content .intro-action-block {
+.display-inline-flex, .app-title, .float-content .btn-block, .float-id-content .btn-block, .intro-content .intro-action-block {
   display: inline-flex !important;
   display: -ms-inline-flexbox;
   flex-wrap: wrap;
@@ -233,7 +233,7 @@ button {
 /* line 198, ../sass/app.scss */
 .breadcrumb .linked {
   cursor: pointer;
-  color: #378A81;
+  color: #0067C5;
 }
 
 /* line 204, ../sass/app.scss */
@@ -267,7 +267,7 @@ nav {
   transition: width .3s ease;
   position: fixed;
   top: 0;
-  width: 25%;
+  width: 18%;
   z-index: 1;
   border-right: 0.5px dashed #378A81;
 }
@@ -339,7 +339,7 @@ nav ul li a:before {
 
 /* line 295, ../sass/app.scss */
 .shiftMainContent {
-  width: 75% !important;
+  width: 82% !important;
   height: -webkit-fill-available;
   background-color: #F0F0F0;
 }
@@ -376,29 +376,29 @@ nav ul li a:before {
 }
 
 /* line 331, ../sass/app.scss */
-.float-content {
+.float-content, .float-id-content {
   background-color: #FFFFFF;
   margin: 20px;
   height: 320px;
   padding: 20px;
 }
 /* line 337, ../sass/app.scss */
-.float-content .info-txt {
+.float-content .info-txt, .float-id-content .info-txt {
   font-weight: bold;
   color: #FF8C00;
   padding: 10px 0;
 }
 /* line 342, ../sass/app.scss */
-.float-content .words-txt {
+.float-content .words-txt, .float-id-content .words-txt {
   color: #FFFFFF;
   background-color: #212121;
-  width: 96px;
+  width: 108px;
   padding: 8px 12px;
   margin: 12px 8px 0 0;
   display: inline-block;
 }
 /* line 349, ../sass/app.scss */
-.float-content .words-txt input {
+.float-content .words-txt input, .float-id-content .words-txt input {
   outline: none;
   border: none;
   color: #FFFFFF;
@@ -406,13 +406,40 @@ nav ul li a:before {
   width: 48px;
 }
 /* line 357, ../sass/app.scss */
-.float-content .btn-block {
+.float-content .btn-block, .float-id-content .btn-block {
   height: 40px;
   margin: 40px 0 0 0;
 }
 
+/* line 364, ../sass/app.scss */
+.float-id-content {
+  background-color: #0067C5;
+  color: #FFFFFF;
+  height: 200px;
+}
+/* line 369, ../sass/app.scss */
+.float-id-content .info-txt {
+  color: #FFFFFF;
+  font-size: 15px;
+}
+/* line 373, ../sass/app.scss */
+.float-id-content .btn-id {
+  background-color: #FFFFFF;
+  color: #0067C5;
+  width: 160px;
+  padding: 8px;
+  text-align: center;
+  margin: 20px 0;
+}
+/* line 381, ../sass/app.scss */
+.float-id-content .info-desc {
+  width: 600px;
+  line-height: 16px;
+  font-size: 14px;
+}
+
 /**footer component*/
-/* line 365, ../sass/app.scss */
+/* line 389, ../sass/app.scss */
 .footer-wrapper {
   height: 38px;
   position: fixed;
@@ -424,12 +451,12 @@ nav ul li a:before {
   background-color: #FFFFFF;
 }
 
-/* line 376, ../sass/app.scss */
+/* line 400, ../sass/app.scss */
 .desktop-footer-essentials {
   padding: 8px 16px;
 }
 
-/* line 380, ../sass/app.scss */
+/* line 404, ../sass/app.scss */
 .copyright {
   border-left: 1px solid #FAFAFA;
   padding-left: 5px;
@@ -438,42 +465,42 @@ nav ul li a:before {
 
 /**footer component*/
 /** introduction page **/
-/* line 388, ../sass/app.scss */
+/* line 412, ../sass/app.scss */
 .intro-page {
   text-align: center;
 }
-/* line 390, ../sass/app.scss */
+/* line 414, ../sass/app.scss */
 .intro-page img {
   height: 200px;
   width: 200px;
 }
-/* line 394, ../sass/app.scss */
+/* line 418, ../sass/app.scss */
 .intro-page h1 {
   font-weight: 300;
   color: #378A81;
 }
 
-/* line 400, ../sass/app.scss */
+/* line 424, ../sass/app.scss */
 .intro-content {
   margin: 0 20%;
   text-align: justify;
   line-height: 20px;
 }
-/* line 404, ../sass/app.scss */
+/* line 428, ../sass/app.scss */
 .intro-content .intro-desc {
   margin: 16px 0;
 }
-/* line 407, ../sass/app.scss */
+/* line 431, ../sass/app.scss */
 .intro-content .intro-action-block {
   justify-content: space-between;
 }
-/* line 410, ../sass/app.scss */
+/* line 434, ../sass/app.scss */
 .intro-content .intro-action-block .intro-action-block-elem {
   border: 1px dashed;
   margin: 16px 0;
   padding: 16px 24px;
 }
-/* line 415, ../sass/app.scss */
+/* line 439, ../sass/app.scss */
 .intro-content .intro-action-block .intro-action-block-elem .intro-action-block-elem-desc {
   height: 100px;
 }
