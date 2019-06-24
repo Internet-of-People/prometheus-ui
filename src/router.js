@@ -1,37 +1,54 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import ClaimsPage from '@/components/claims/ClaimsPage'
-import ClaimsNew from '@/components/claims/ClaimsNew'
+import Introduction from '@/components/startup/Introduction'
+import CreateNewVault from '@/components/startup/CreateNewVault'
+import ValidateVault from '@/components/startup/ValidateVault'
+import VaultCreation from '@/components/contents/VaultCreation'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/claims',
-      name: 'Claims',
-      component: ClaimsPage,
+      path: '/',
+      name: 'intro',
+      component: Introduction
+    },
+    {
+      path: '/createnewvault',
+      name: 'createNewVault',
+      component: CreateNewVault,
       meta: {
         breadcrumb: [
-          { name: 'Claims' }
+          { name: 'GENERATING MNEUMONIC'},
+          { name: 'VALIDATING', link: 'validateVault' },
+          { name: 'FINISH', link: 'vaultcreated' },
         ]
       }
     },
     {
-      path: '/claims?:filter',
-      name: 'claimsfiltered',
-      component: ClaimsPage
-    },
-    {
-      path: '/claimsnew',
-      name: 'NewClaims',
-      component: ClaimsNew,
+      path: '/validatevault',
+      name: 'validateVault',
+      component: ValidateVault,
       meta: {
         breadcrumb: [
-          { name: 'Claims', link: 'claims' },
-          { name: 'New Claims' }
+          { name: 'GENERATING MNEUMONIC', link: 'createnewvault' },
+          { name: 'VALIDATING' },
+          { name: 'FINISH', link: 'vaultcreated' },
         ]
       }
-    }
+    },
+    {
+      path: '/vaultcreated',
+      name: 'vaultcreated',
+      component: VaultCreation,
+      meta: {
+        breadcrumb: [
+          { name: 'GENERATING MNEUMONIC', link: 'createnewvault' },
+          { name: 'VALIDATING', link: 'validateVault' },
+          { name: 'FINISH' },
+        ]
+      }
+    },
   ]
 })

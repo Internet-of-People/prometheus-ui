@@ -1,14 +1,11 @@
 <template>
-  <div>
-      New Claims
+  <div class="float-content">
   </div>
 </template>
 
 <script>
 export default {
-  name: 'ClaimsNew',
-  methods: {
-  }
+  name: 'VaultCreation',
 }
 </script>
 

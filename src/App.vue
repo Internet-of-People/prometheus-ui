@@ -1,7 +1,8 @@
 <template>
   <div id="app">
-    <SideBar/>
-    <div id="mainContent" class="shift-main-content">
+    <!-- only intro page is missing the sidebar -->
+    <SideBar v-if="sideBarDisplay"/>
+    <div id="mainContent" v-bind:class="{shiftMainContent: sideBarDisplay}">
       <BreadCrumb/>
       <router-view/>
     </div>
@@ -20,6 +21,11 @@ export default {
     Footer,
     SideBar,
     BreadCrumb
+  },
+  computed: {
+    sideBarDisplay: function () {
+      return this.$route.name !== "intro"
+    }
   }
 }
 </script>

@@ -8,11 +8,11 @@
             {{this.$store.state.appname}}
           </div>
         </a>
-        <li class=""><i class="fa fa-user"/><a href="#/profile/student">Vault</a></li>
+        <!-- <li class=""><i class="fa fa-user"/><a href="#/profile/student">Vault</a></li>
         <li class=""><i class="fa fa-address-book"/><a href="#/">ID</a></li>
         <li class=""><i class="fa fa-list"/><a href="#/claims">Claims</a></li>
         <li class=""><i class="fa fa-comment"/><a href="#/">Wallet</a></li>
-        <li class=""><i class="fa fa-cogs"/><a href="#/">Contacts</a></li>
+        <li class=""><i class="fa fa-cogs"/><a href="#/">Contacts</a></li> -->
       </ul>
     </nav>
   </div>

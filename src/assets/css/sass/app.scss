@@ -71,7 +71,7 @@ $button-save:           #0365C0;
 $brand-main-color:      #D85760;
 $brand-sub-color:       #999999;
 
-$footer-height:         32px;
+$footer-height:         38px;
 
 body{
   height: 100%;
@@ -141,29 +141,64 @@ a{
   cursor: default;
 }
 
-.primary-btn {
-  @extend .cursor-pointer !optional;
-  color: $brand-info;
-  padding: 12px;
-  i {
-    font-size: 24px;
-    padding: 0 4px;
-  }
+/** common elem **/
+.adjust-btn-frame{
+  width: 160px;
+  margin: auto;
 }
-
-.secondary-btn {
-  @extend .cursor-pointer !optional;
+button{
+  @extend .cursor-pointer, .adjust-btn-frame;
+  min-width: 90px;
+  padding: 8px 16px;
+  background-color: $brand-secondary;
   color: $brand-inverse;
-  background-color: $brand-info;
-  padding: 12px 24px;
-  i {
-    padding: 0 4px;
-  }
+  outline: none;
+  border: none;
+  height: 46px;
+  border-radius: 0px;
+  font-weight: bold;
 }
 
+.inv-btn{
+  background-color: $brand-inverse;
+  color: $brand-secondary;
+}
 
-button, i{
-  @extend .cursor-pointer
+.breadcrumb {
+  @extend .micro-fontsize, .col-12;
+  background-color: $brand-inverse;
+  height: 80px;
+  padding: 20px;
+  div{
+    font-size: 18px;
+    font-weight: 100;
+  }
+  ul {
+    @extend .small-fontsize;
+    display: flex;
+    list-style-type: none;
+    margin: 10px 0px;
+    padding: 0;
+  }
+  ul > li {
+    display: flex;
+    float: left;
+    width: auto;
+    color: $brand-action;
+    cursor: default;
+    align-items: center;
+  }
+  ul > li:not(:last-child)::after {
+    content: " > ";
+    white-space: pre;
+    float: right;
+    color: $brand-action;
+    cursor: default;
+  }
+  .linked {
+    cursor: pointer;
+    color: $brand-secondary;
+  }
 }
 
 .page-title {
@@ -183,7 +218,7 @@ body {
 }
 
 nav {
-  background: $brand-secondary;
+  background: $brand-inverse;
   float: left;
   height: 100vh;
   left: 0;
@@ -193,8 +228,9 @@ nav {
   transition: width .3s ease;
   position: fixed;
   top: 0;
-  width: 210px;
+  width: 25%;
   z-index: 1;
+  border-right: 0.5px dashed $brand-secondary;
   ul {
     margin: 0;
     padding: 0;
@@ -253,29 +289,30 @@ nav ul li {
   position: relative;
   width: 100%;
   transition: margin-left 0.5s ease;
-  // padding-bottom: $footer-height;
   overflow-y: scroll;
 }
 
-.shift-main-content {
-  margin-left: 210px !important;
-  width: calc(100% - 210px) !important;
-  padding: 20px;
+.shiftMainContent {
+  @extend .float-right;
+  width: 75% !important;
+  // padding: 20px;
   height: -webkit-fill-available;
+  background-color: $brand-highlight;
 }
 
 .app-title{
   @extend .display-inline-flex;
   padding: 12px 36px;
-  width: 210px;
-  background-color: $brand-bg;
+  width: 100%;
+  // background-color: $brand-bg;
   img {
     width: 44px;
     height: 44px;
   }
   div {
-    color: $brand-sub-color;
-    padding: 16px 8px;
+    color: $brand-secondary;
+    padding: 14px 8px;
+    font-size: 16px;
     font-weight: 400;
   }
 }
@@ -291,138 +328,93 @@ nav ul li {
   color: $brand-action;
 }
 
-.footer-wrapper {
-  height: $footer-height;
-}
-
-.profile{
-  width: 320px;
-  display: inline-grid;
-  /* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); */
+.float-content{
+  @extend .col-12;
+  background-color: $brand-inverse;
   margin: 20px;
-  border: 1px solid $brand-info;
-}
-
-.profile-influencer{
-  @extend .profile;
-  width: 840px;
-}
-
-.profile-header{
-  border-bottom: 1px solid $brand-info;
-  display: block;
-  height: 120px;
-  padding: 20px; 
-  .float-right i {
-    font-size: 64px;
-    color: $brand-info;
+  height: 320px;
+  padding: 20px;
+  .info-txt{
+    font-weight: bold;
+    color: $brand-alert;
+    padding: 10px 0;
   }
-}
-
-.profile-actions{
-  padding: 20px 20px 0;
-}
-
-.profile-devices{
-  @extend .profile-actions;
-  .app-block{
-    @extend .col-12;
-    padding: 12px;
-    .apps{
-      padding: 0px;
-      font-size: 16px;
+  .words-txt{
+    color: $brand-inverse;
+    background-color: $brand-text;
+    width: 96px;
+    padding: 8px 12px;
+    margin: 12px 8px 0 0;
+    display: inline-block;
+    input{
+      outline: none;
+      border: none;
+      color: $brand-inverse;
+      background-color: $brand-text;
+      width: 48px;
     }
   }
-}
-
-.shadowy {
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
-  // border-radius: 5px;
-  &:hover{
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  .btn-block{
+    @extend .col-12, .display-inline-flex;
+    height: 40px;
+    margin: 40px 0 0 0;
   }
 }
 
-.card {
-  @extend .shadowy;
-  width: 200px;
-  margin: 0px 16px 12px;
+/**footer component*/
+.footer-wrapper {
+  height: $footer-height;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  color: $brand-action;
+  display: inline-block;
+  z-index: 100;
+  background-color: $brand-inverse;
 }
 
-.claim {
-  @extend .shadowy;
-  box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.2);
-  padding: 10px;
-  margin: 0px 0px 10px 0px;
-  display: flex;
-  flex-direction: row;
-  .icon {
-    font-size: 25px;
-    margin-right: 10px;
+.desktop-footer-essentials{
+  padding: 8px 16px;
+}
+
+.copyright {
+  border-left: 1px solid $brand-bg;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+/**footer component*/
+
+/** introduction page **/
+.intro-page {
+  text-align: center;
+  img {
+    height: 200px;
+    width: 200px;
   }
-  .date {
-    margin-right: 24px;
-    align-self: flex-end;
-    flex-grow: 0;
-  }
-}
-
-.claim-filter {
-  background: $brand-highlight;
-  padding: 8px 6px;
-  margin: 0 0 12px 0;
-  font-size: 16px;
-  width: fit-content;
-  i {
-    margin-left: 4px;
-  }
-}
-
-.profile-card-title {
-  padding: 12px 0 4px;
-  color: $brand-secondary;
-}
-
-.apps{
-  padding: 8px;
-  font-size: 24px;
-  color: $brand-secondary;
-}
-
-.claim .icon{
-  i{
-    color: $brand-secondary; 
-    font-size: 18px;
-    padding: 2px;
+  h1 {
+    font-weight: 300;
+    color: $brand-secondary;
   }
 }
 
-.breadcrumb {
-  @extend .micro-fontsize;
-  ul {
-    display: flex;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+.intro-content {
+  margin: 0 20%;
+  text-align: justify;
+  line-height: 20px;
+  .intro-desc{
+    margin: 16px 0;
   }
-  ul > li {
-    display: flex;
-    float: left;
-    width: auto;
-    color: $brand-action;
-    cursor: default;
-    align-items: center;
-  }
-  ul > li:not(:last-child)::after {
-    content: " > ";
-    white-space: pre;
-    float: right;
-    color: $brand-action;
-    cursor: default;
-  }
-  .linked {
-    cursor: pointer;
-    color: $brand-link;
+  .intro-action-block{
+    @extend .display-inline-flex;
+    justify-content: space-between;
+    .intro-action-block-elem{
+      @extend .col-5;
+      border: 1px dashed;
+      margin: 16px 0;
+      padding: 16px 24px;
+      .intro-action-block-elem-desc{
+        height: 100px;
+      }
+    }
   }
 }
