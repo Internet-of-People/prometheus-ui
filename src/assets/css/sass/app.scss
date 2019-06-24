@@ -167,6 +167,7 @@ button{
 .breadcrumb {
   @extend .micro-fontsize, .col-12;
   background-color: $brand-inverse;
+  border-bottom: 0.5px dashed $brand-text;
   height: 80px;
   padding: 20px;
   div{
@@ -197,7 +198,7 @@ button{
   }
   .linked {
     cursor: pointer;
-    color: $brand-secondary;
+    color: $brand-link;
   }
 }
 
@@ -228,7 +229,7 @@ nav {
   transition: width .3s ease;
   position: fixed;
   top: 0;
-  width: 25%;
+  width: 18%;
   z-index: 1;
   border-right: 0.5px dashed $brand-secondary;
   ul {
@@ -294,7 +295,7 @@ nav ul li {
 
 .shiftMainContent {
   @extend .float-right;
-  width: 75% !important;
+  width: 82% !important;
   // padding: 20px;
   height: -webkit-fill-available;
   background-color: $brand-highlight;
@@ -334,6 +335,7 @@ nav ul li {
   margin: 20px;
   height: 320px;
   padding: 20px;
+  border: 0.5px dashed $brand-text;
   .info-txt{
     font-weight: bold;
     color: $brand-alert;
@@ -342,7 +344,7 @@ nav ul li {
   .words-txt{
     color: $brand-inverse;
     background-color: $brand-text;
-    width: 96px;
+    width: 108px;
     padding: 8px 12px;
     margin: 12px 8px 0 0;
     display: inline-block;
@@ -361,6 +363,30 @@ nav ul li {
   }
 }
 
+.float-id-content{
+  @extend .float-content;
+  background-color: $brand-link;
+  color: $brand-inverse;
+  height: 200px;
+  .info-txt{
+    color: $brand-inverse;
+    font-size: 15px;
+  }
+  .btn-id{
+    background-color: $brand-inverse;
+    color: $brand-link;
+    width: 160px;
+    padding: 8px;
+    text-align: center;
+    margin: 20px 0;
+  }
+  .info-desc{
+    width: 600px;
+    line-height: 16px;
+    font-size: 14px;
+  }
+}
+
 /**footer component*/
 .footer-wrapper {
   height: $footer-height;
@@ -376,6 +402,7 @@ nav ul li {
 .desktop-footer-essentials{
   padding: 8px 16px;
 }
+/**footer component*/
 
 .copyright {
   border-left: 1px solid $brand-bg;

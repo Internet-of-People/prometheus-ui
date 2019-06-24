@@ -55,7 +55,7 @@
 }
 
 /* line 13, ../sass/app.scss */
-.col-12, .breadcrumb, nav ul li, .float-content, .float-content .btn-block {
+.col-12, .breadcrumb, nav ul li, .float-content, .float-id-content, .float-content .btn-block, .float-id-content .btn-block {
   width: 100%;
 }
 
@@ -153,7 +153,7 @@ a {
 }
 
 /* line 130, ../sass/app.scss */
-.display-inline-flex, .app-title, .float-content .btn-block, .intro-content .intro-action-block {
+.display-inline-flex, .app-title, .float-content .btn-block, .float-id-content .btn-block, .intro-content .intro-action-block {
   display: inline-flex !important;
   display: -ms-inline-flexbox;
   flex-wrap: wrap;
@@ -198,22 +198,23 @@ button {
 /* line 167, ../sass/app.scss */
 .breadcrumb {
   background-color: #FFFFFF;
+  border-bottom: 0.5px dashed #212121;
   height: 80px;
   padding: 20px;
 }
-/* line 172, ../sass/app.scss */
+/* line 173, ../sass/app.scss */
 .breadcrumb div {
   font-size: 18px;
   font-weight: 100;
 }
-/* line 176, ../sass/app.scss */
+/* line 177, ../sass/app.scss */
 .breadcrumb ul {
   display: flex;
   list-style-type: none;
   margin: 10px 0px;
   padding: 0;
 }
-/* line 183, ../sass/app.scss */
+/* line 184, ../sass/app.scss */
 .breadcrumb ul > li {
   display: flex;
   float: left;
@@ -222,7 +223,7 @@ button {
   cursor: default;
   align-items: center;
 }
-/* line 191, ../sass/app.scss */
+/* line 192, ../sass/app.scss */
 .breadcrumb ul > li:not(:last-child)::after {
   content: " > ";
   white-space: pre;
@@ -230,13 +231,13 @@ button {
   color: #727272;
   cursor: default;
 }
-/* line 198, ../sass/app.scss */
+/* line 199, ../sass/app.scss */
 .breadcrumb .linked {
   cursor: pointer;
-  color: #378A81;
+  color: #0067C5;
 }
 
-/* line 204, ../sass/app.scss */
+/* line 205, ../sass/app.scss */
 .page-title {
   color: #D85760;
   font-weight: 501;
@@ -245,17 +246,17 @@ button {
   margin-bottom: 17px;
 }
 
-/* line 212, ../sass/app.scss */
+/* line 213, ../sass/app.scss */
 * {
   box-sizing: border-box;
 }
 
-/* line 216, ../sass/app.scss */
+/* line 217, ../sass/app.scss */
 body {
   margin: 0;
 }
 
-/* line 220, ../sass/app.scss */
+/* line 221, ../sass/app.scss */
 nav {
   background: #FFFFFF;
   float: left;
@@ -267,25 +268,25 @@ nav {
   transition: width .3s ease;
   position: fixed;
   top: 0;
-  width: 25%;
+  width: 18%;
   z-index: 1;
   border-right: 0.5px dashed #378A81;
 }
-/* line 234, ../sass/app.scss */
+/* line 235, ../sass/app.scss */
 nav ul {
   margin: 0;
   padding: 0;
 }
-/* line 237, ../sass/app.scss */
+/* line 238, ../sass/app.scss */
 nav ul li {
   display: inline-flex;
   list-style: none;
 }
-/* line 240, ../sass/app.scss */
+/* line 241, ../sass/app.scss */
 nav ul li + li {
   border-top: 1px solid rgba(237, 237, 237, 0.05);
 }
-/* line 243, ../sass/app.scss */
+/* line 244, ../sass/app.scss */
 nav ul li a {
   color: #FFFFFF;
   display: block;
@@ -297,11 +298,11 @@ nav ul li a {
   text-decoration: none;
   white-space: nowrap;
 }
-/* line 253, ../sass/app.scss */
+/* line 254, ../sass/app.scss */
 nav ul li a:hover {
   opacity: 1;
 }
-/* line 257, ../sass/app.scss */
+/* line 258, ../sass/app.scss */
 nav ul li i {
   color: #FFFFFF;
   display: block;
@@ -312,12 +313,12 @@ nav ul li i {
   text-decoration: none;
   white-space: nowrap;
 }
-/* line 266, ../sass/app.scss */
+/* line 267, ../sass/app.scss */
 nav ul li i:hover {
   opacity: 1;
 }
 
-/* line 276, ../sass/app.scss */
+/* line 277, ../sass/app.scss */
 nav ul li a:before {
   content: "";
   width: 35px;
@@ -329,7 +330,7 @@ nav ul li a:before {
   left: 12px;
 }
 
-/* line 288, ../sass/app.scss */
+/* line 289, ../sass/app.scss */
 #mainContent {
   position: relative;
   width: 100%;
@@ -337,24 +338,24 @@ nav ul li a:before {
   overflow-y: scroll;
 }
 
-/* line 295, ../sass/app.scss */
+/* line 296, ../sass/app.scss */
 .shiftMainContent {
-  width: 75% !important;
+  width: 82% !important;
   height: -webkit-fill-available;
   background-color: #F0F0F0;
 }
 
-/* line 303, ../sass/app.scss */
+/* line 304, ../sass/app.scss */
 .app-title {
   padding: 12px 36px;
   width: 100%;
 }
-/* line 308, ../sass/app.scss */
+/* line 309, ../sass/app.scss */
 .app-title img {
   width: 44px;
   height: 44px;
 }
-/* line 312, ../sass/app.scss */
+/* line 313, ../sass/app.scss */
 .app-title div {
   color: #378A81;
   padding: 14px 8px;
@@ -362,57 +363,85 @@ nav ul li a:before {
   font-weight: 400;
 }
 
-/* line 320, ../sass/app.scss */
+/* line 321, ../sass/app.scss */
 .keyvault-title {
   padding: 32px 32px 8px;
   font-size: 24px;
   font-weight: 100;
 }
 
-/* line 326, ../sass/app.scss */
+/* line 327, ../sass/app.scss */
 .key-count {
   font-size: 11px;
   color: #727272;
 }
 
-/* line 331, ../sass/app.scss */
-.float-content {
+/* line 332, ../sass/app.scss */
+.float-content, .float-id-content {
   background-color: #FFFFFF;
   margin: 20px;
   height: 320px;
   padding: 20px;
+  border: 0.5px dashed #212121;
 }
-/* line 337, ../sass/app.scss */
-.float-content .info-txt {
+/* line 339, ../sass/app.scss */
+.float-content .info-txt, .float-id-content .info-txt {
   font-weight: bold;
   color: #FF8C00;
   padding: 10px 0;
 }
-/* line 342, ../sass/app.scss */
-.float-content .words-txt {
+/* line 344, ../sass/app.scss */
+.float-content .words-txt, .float-id-content .words-txt {
   color: #FFFFFF;
   background-color: #212121;
-  width: 96px;
+  width: 108px;
   padding: 8px 12px;
   margin: 12px 8px 0 0;
   display: inline-block;
 }
-/* line 349, ../sass/app.scss */
-.float-content .words-txt input {
+/* line 351, ../sass/app.scss */
+.float-content .words-txt input, .float-id-content .words-txt input {
   outline: none;
   border: none;
   color: #FFFFFF;
   background-color: #212121;
   width: 48px;
 }
-/* line 357, ../sass/app.scss */
-.float-content .btn-block {
+/* line 359, ../sass/app.scss */
+.float-content .btn-block, .float-id-content .btn-block {
   height: 40px;
   margin: 40px 0 0 0;
 }
 
+/* line 366, ../sass/app.scss */
+.float-id-content {
+  background-color: #0067C5;
+  color: #FFFFFF;
+  height: 200px;
+}
+/* line 371, ../sass/app.scss */
+.float-id-content .info-txt {
+  color: #FFFFFF;
+  font-size: 15px;
+}
+/* line 375, ../sass/app.scss */
+.float-id-content .btn-id {
+  background-color: #FFFFFF;
+  color: #0067C5;
+  width: 160px;
+  padding: 8px;
+  text-align: center;
+  margin: 20px 0;
+}
+/* line 383, ../sass/app.scss */
+.float-id-content .info-desc {
+  width: 600px;
+  line-height: 16px;
+  font-size: 14px;
+}
+
 /**footer component*/
-/* line 365, ../sass/app.scss */
+/* line 391, ../sass/app.scss */
 .footer-wrapper {
   height: 38px;
   position: fixed;
@@ -424,12 +453,13 @@ nav ul li a:before {
   background-color: #FFFFFF;
 }
 
-/* line 376, ../sass/app.scss */
+/* line 402, ../sass/app.scss */
 .desktop-footer-essentials {
   padding: 8px 16px;
 }
 
-/* line 380, ../sass/app.scss */
+/**footer component*/
+/* line 407, ../sass/app.scss */
 .copyright {
   border-left: 1px solid #FAFAFA;
   padding-left: 5px;
@@ -438,42 +468,42 @@ nav ul li a:before {
 
 /**footer component*/
 /** introduction page **/
-/* line 388, ../sass/app.scss */
+/* line 415, ../sass/app.scss */
 .intro-page {
   text-align: center;
 }
-/* line 390, ../sass/app.scss */
+/* line 417, ../sass/app.scss */
 .intro-page img {
   height: 200px;
   width: 200px;
 }
-/* line 394, ../sass/app.scss */
+/* line 421, ../sass/app.scss */
 .intro-page h1 {
   font-weight: 300;
   color: #378A81;
 }
 
-/* line 400, ../sass/app.scss */
+/* line 427, ../sass/app.scss */
 .intro-content {
   margin: 0 20%;
   text-align: justify;
   line-height: 20px;
 }
-/* line 404, ../sass/app.scss */
+/* line 431, ../sass/app.scss */
 .intro-content .intro-desc {
   margin: 16px 0;
 }
-/* line 407, ../sass/app.scss */
+/* line 434, ../sass/app.scss */
 .intro-content .intro-action-block {
   justify-content: space-between;
 }
-/* line 410, ../sass/app.scss */
+/* line 437, ../sass/app.scss */
 .intro-content .intro-action-block .intro-action-block-elem {
   border: 1px dashed;
   margin: 16px 0;
   padding: 16px 24px;
 }
-/* line 415, ../sass/app.scss */
+/* line 442, ../sass/app.scss */
 .intro-content .intro-action-block .intro-action-block-elem .intro-action-block-elem-desc {
   height: 100px;
 }

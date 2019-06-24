@@ -3,7 +3,7 @@
     <!-- only intro page is missing the sidebar -->
     <SideBar v-if="sideBarDisplay"/>
     <div id="mainContent" v-bind:class="{shiftMainContent: sideBarDisplay}">
-      <BreadCrumb/>
+      <BreadCrumb v-if="sideBarDisplay"/>
       <router-view/>
     </div>
     <Footer/>

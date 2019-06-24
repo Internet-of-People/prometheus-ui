@@ -1,12 +1,12 @@
 <template>
   <div class="breadcrumb">
-    <div>{{fetchPageTitle()}}</div>
+    <div>{{pageTitle}}</div>
     <ul>
       <li
         v-for="(breadcrumb, idx) in breadcrumbList"
         :key="idx"
         @click="routeTo(idx)"
-        :class="{'linked': !!breadcrumb.link}">
+        :class="{'linked': !breadcrumb.link}">
         {{idx+1 + '. ' + breadcrumb.name + ' ' }}
       </li>
     </ul>
@@ -18,7 +18,8 @@ export default {
   name: 'BreadCrumb',
   data () {
     return {
-      breadcrumbList: []
+      breadcrumbList: [],
+      pageTitle: "CREATE NEW VAULT"
     }
   },
   mounted () { this.updateList() },
