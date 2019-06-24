@@ -2,7 +2,7 @@
   <div>
     <div class="footer-wrapper col-12">
       <div class='float-left cursor-default desktop-footer-essentials'>
-        <span class=''>PROMETHEUS</span>
+        <span class=''>{{ appName }}</span>
         <span class='copyright'>&copy;&nbsp; {{new Date().getFullYear()}} Internet of People</span>
       </div>
       <div class='float-right cursor-default desktop-footer-essentials'>
@@ -16,8 +16,11 @@
 
 <script>
 export default {
-  name: 'Footer'
-}
+  name: 'Footer',
+  props: {
+    appName: String
+  }
+};
 </script>
 
 <style scoped>

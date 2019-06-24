@@ -1,62 +1,45 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import router from './router'
-import axios from 'axios'
-import VueAxios from 'vue-axios'
-import VueToast from 'vue-toast-notification';
-import 'vue-toast-notification/dist/index.css';
+import Vue from 'vue';
+import Vuex from 'vuex';
+import api from './api';
 
-Vue.use(Vuex, VueAxios, axios, VueToast)
-
-let apiEndpoint = "http://127.0.0.1:8080"
+Vue.use(Vuex);
 
 const store =  new Vuex.Store({
   state: {
-    appname: "PROMETHEUS",
+    appName: "PROMETHEUS",
     words: []
   },
+  getters: {
+    appName: state => state.appName,
+    words: state => state.words
+  },
   actions: {
-    createNewVault() {
-      axios.get(apiEndpoint+'/vault/generate_phrase')
-      .then(response => {
-        store.commit('CREATE_NEW_VAULT', response)
-      }).catch((error) => {
-        store.commit('API_FAIL', error)
-      })
+    generateVault() {
+        api.generateVault().then((response) => {
+            store.commit('GENERATE_VAULT', response.data.split(' '));
+        });
     },
     restoreVault() {
-      store.commit('RESTORE_VAULT')
+      store.commit('RESTORE_VAULT');
     },
-    resetPage(){
-      store.commit('RESET_VAULT')
+    cancelVaultCreation(){
+      store.commit('CANCEL_VAULT_CREATION');
     },
-    createVault(state, phrase) {
-      axios.get(apiEndpoint+`/vault/validate_phrase/${phrase}`)
-      .then(() => {
-        store.commit('CREATE_VAULT')
-      }).catch((error) => {
-        store.commit('API_FAIL', error)
-      })
+    async validatePhrase() {
+    //async validatePhrase(state, phrase) {
+        //api.validatePhrase().then((response) => {
+
+        //});
     }
-    
   },
   mutations: {
-    'CREATE_NEW_VAULT': function (state, response) {
-      store.words = response.data.split(' ')
-      router.push('/createnewvault')
+    'GENERATE_VAULT': (state, words) => {
+      state.words = words;
     },
-    'RESTORE_VAULT': function () {
-      router.push('/validatevault')
-    },
-    'RESET_VAULT': function () {
-      router.push('/')
-    },
-    'CREATE_VAULT': function () {
-      router.push('/vaultcreated')
-    },
-    'API_FAIL': function () {
+    'CANCEL_VAULT_CREATION': (state) => {
+      state.words = [];
     }
   }
-})
+});
 
-export default store
+export default store;

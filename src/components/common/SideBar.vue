@@ -2,12 +2,12 @@
   <div>
     <nav class="hovered">
       <ul>
-        <a class="app-title" href="/">
+        <router-link class="app-title"  to="/">
           <img src="../../assets/images/logo.svg"/>
           <div>
-            {{this.$store.state.appname}}
+            {{ appName }}
           </div>
-        </a>
+        </router-link>
         <!-- <li class=""><i class="fa fa-user"/><a href="#/profile/student">Vault</a></li>
         <li class=""><i class="fa fa-address-book"/><a href="#/">ID</a></li>
         <li class=""><i class="fa fa-list"/><a href="#/claims">Claims</a></li>
@@ -20,11 +20,12 @@
 
 <script>
 export default {
-  name: 'SideBar'
+  name: 'SideBar',
+  props: {
+    appName: String
+  }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 
 <style scoped>
 </style>

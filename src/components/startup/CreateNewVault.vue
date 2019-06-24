@@ -3,30 +3,32 @@
     <div class="info-txt">Please note down all the following phrases in correct order.</div>
     <div v-for="(word,index) in words" :key="index" class="words-txt">{{index+1}}. {{word}}</div>
     <div class="btn-block">
-      <Button name="BACK" type="inv-btn" :onClick="goBack" />
-      <Button name="WROTE WORDS DOWN" :onClick="restoreVault" />
+      <Button type="inv-btn" :onClick="goBack">BACK</Button>
+      <Button :onClick="restoreVault">WROTE WORDS DOWN</Button>
     </div>
   </div>
 </template>
 
 <script>
-import Button from '@/components/common/Button'
+import { mapGetters } from 'vuex';
+import router from '@/router';
+import Button from '@/components/common/Button';
+
 export default {
   name: 'CreateNewVault',
   components: {
     Button
   },
-  data: function () {
-    return {
-      words: this.$store.words 
-    }
+  computed: {
+    ...mapGetters(['words'])
   },
   methods: {
     goBack(){
-      this.$store.dispatch('resetPage')
+      this.$store.dispatch('cancelVaultCreation');
+      router.push('/');
     },
     restoreVault() {
-      this.$store.dispatch('restoreVault')
+      router.push('/validatevault');
     }
   }
 }
