@@ -15,7 +15,7 @@
         </div>
         <div class="float-right intro-action-block-elem">
           <div class="intro-action-block-elem-desc">
-            If you have an already generated seed and wan to restore your vault, this is what you need.
+            If you have an already generated seed and want to restore your vault, this is what you need.
           </div>
           <Button name="RESTORE VAULT" type="inv-btn" :onClick="restoreVault" />
         </div>

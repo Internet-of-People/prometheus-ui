@@ -167,6 +167,7 @@ button{
 .breadcrumb {
   @extend .micro-fontsize, .col-12;
   background-color: $brand-inverse;
+  border-bottom: 0.5px dashed $brand-text;
   height: 80px;
   padding: 20px;
   div{
@@ -334,6 +335,7 @@ nav ul li {
   margin: 20px;
   height: 320px;
   padding: 20px;
+  border: 0.5px dashed $brand-text;
   .info-txt{
     font-weight: bold;
     color: $brand-alert;

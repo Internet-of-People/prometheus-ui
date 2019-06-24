@@ -26,6 +26,7 @@ export default {
       let phrase = '';
       for (let index = 0; index < inputs.length; ++index)
           phrase += ' ' + inputs[index].value
+      phrase = phrase.trim()
       this.$store.dispatch('createVault', phrase)
     }
   }
