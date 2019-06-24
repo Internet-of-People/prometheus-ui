@@ -35,12 +35,6 @@ yarn run serve
 yarn run build
 ```
 
-### Run your tests
-
-```bash
-yarn run test
-```
-
 ### Lint and fix files
 
 ```bash
