@@ -1,18 +1,18 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Introduction from '@/components/startup/Introduction'
-import CreateNewVault from '@/components/startup/CreateNewVault'
-import ValidateVault from '@/components/startup/ValidateVault'
-import VaultCreation from '@/components/contents/VaultCreation'
+import Vue from 'vue';
+import Router from 'vue-router';
+import Introduction from '@/components/startup/Introduction';
+import CreateNewVault from '@/components/startup/CreateNewVault';
+import ValidateVault from '@/components/startup/ValidateVault';
+import VaultCreation from '@/components/contents/VaultCreation';
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   routes: [
     {
       path: '/',
       name: 'intro',
-      component: Introduction
+      component: Introduction,
     },
     {
       path: '/createnewvault',
@@ -20,9 +20,9 @@ export default new Router({
       component: CreateNewVault,
       meta: {
         breadcrumb: [
-          { name: 'GENERATING MNEUMONIC'},
-          { name: 'VALIDATING', link: 'validateVault' },
-          { name: 'FINISH', link: 'vaultcreated' },
+          {name: 'GENERATING MNEUMONIC'},
+          {name: 'VALIDATING', link: 'validateVault'},
+          {name: 'FINISH', link: 'vaultcreated'},
         ]
       }
     },
@@ -32,9 +32,9 @@ export default new Router({
       component: ValidateVault,
       meta: {
         breadcrumb: [
-          { name: 'GENERATING MNEUMONIC', link: 'createnewvault' },
-          { name: 'VALIDATING' },
-          { name: 'FINISH', link: 'vaultcreated' },
+          {name: 'GENERATING MNEUMONIC', link: 'createnewvault'},
+          {name: 'VALIDATING'},
+          {name: 'FINISH', link: 'vaultcreated'},
         ]
       }
     },
@@ -44,11 +44,11 @@ export default new Router({
       component: VaultCreation,
       meta: {
         breadcrumb: [
-          { name: 'GENERATING MNEUMONIC', link: 'createnewvault' },
-          { name: 'VALIDATING', link: 'validateVault' },
-          { name: 'FINISH' },
+          {name: 'GENERATING MNEUMONIC', link: 'createnewvault'},
+          {name: 'VALIDATING', link: 'validateVault'},
+          {name: 'FINISH'},
         ]
       }
-    },
+    }
   ]
-})
+});

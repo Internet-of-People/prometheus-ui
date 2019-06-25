@@ -1,35 +1,44 @@
 <template>
   <div id="app">
-    <!-- only intro page is missing the sidebar -->
-    <SideBar v-if="sideBarDisplay"/>
-    <div id="mainContent" v-bind:class="{shiftMainContent: sideBarDisplay}">
-      <BreadCrumb v-if="sideBarDisplay"/>
-      <router-view/>
+    <SideBar
+      v-if="showSideBar"
+      :app-name="appName"
+    />
+    <div
+      id="mainContent"
+      :class="{shiftMainContent: showSideBar}"
+    >
+      <BreadCrumb v-if="showSideBar" />
+      <router-view :app-name="appName" />
     </div>
-    <Footer/>
+    <Footer :app-name="appName" />
   </div>
 </template>
 
 <script>
-import Footer from '@/components/common/Footer'
-import SideBar from '@/components/common/SideBar'
-import BreadCrumb from '@/components/common/BreadCrumb'
+import Footer from '@/components/common/Footer';
+import SideBar from '@/components/common/SideBar';
+import BreadCrumb from '@/components/common/BreadCrumb';
+import { mapGetters } from 'vuex';
 
 export default {
-  name: 'app',
+  name: 'App',
   components: {
-    Footer,
+    Footer, 
     SideBar,
-    BreadCrumb
+    BreadCrumb,
   },
   computed: {
-    sideBarDisplay: function () {
-      return this.$route.name !== "intro"
+    ...mapGetters([
+      'appName'
+    ]),
+    showSideBar: function () {
+      return this.$route.name !== 'intro';
     }
   }
-}
+};
 </script>
 
 <style>
-@import './assets/css/stylesheets/app.css'
+@import './assets/css/stylesheets/app.css';
 </style>

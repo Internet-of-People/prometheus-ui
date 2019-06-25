@@ -1,6 +1,11 @@
 <template>
-  <div class='adjust-btn-frame'>
-    <button :class="type" @click='onClick()'>{{name}}</button>
+  <div class="adjust-btn-frame">
+    <button
+      :class="type"
+      @click="onClick()"
+    >
+      <slot />
+    </button>
   </div>
 </template>
 
@@ -12,11 +17,16 @@
 export default {
   name: 'Button',
   props: {
-    name: String,
-    onClick: Function,
-    type: String
+    onClick: {
+      type: Function,
+      default: ()=>{}
+    },
+    type: {
+      type: String,
+      default: ''
+    }
   }
-}
+};
 </script>
 
 <style scoped>

@@ -1,13 +1,14 @@
 <template>
   <div class="breadcrumb">
-    <div>{{pageTitle}}</div>
+    <div>{{ pageTitle }}</div>
     <ul>
       <li
         v-for="(breadcrumb, idx) in breadcrumbList"
         :key="idx"
+        :class="{'linked': !breadcrumb.link}"
         @click="routeTo(idx)"
-        :class="{'linked': !breadcrumb.link}">
-        {{idx+1 + '. ' + breadcrumb.name + ' ' }}
+      >
+        {{ idx+1 + '. ' + breadcrumb.name + ' ' }}
       </li>
     </ul>
   </div>
@@ -20,22 +21,22 @@ export default {
     return {
       breadcrumbList: [],
       pageTitle: "CREATE NEW VAULT"
-    }
+    };
   },
-  mounted () { this.updateList() },
-  watch: { '$route' () { this.updateList() } },
+  watch: { '$route' () { this.updateList(); } },
+  mounted () { this.updateList(); },
   methods: {
     routeTo (pRouteTo) {
-      if (this.breadcrumbList[pRouteTo].link) this.$router.push(this.breadcrumbList[pRouteTo].link)
+      if (this.breadcrumbList[pRouteTo].link) this.$router.push(this.breadcrumbList[pRouteTo].link);
     },
-    updateList () { this.breadcrumbList = this.$route.meta.breadcrumb },
+    updateList () { this.breadcrumbList = this.$route.meta.breadcrumb; },
     fetchPageTitle () {
       if (this.breadcrumbList.length){
-        return this.breadcrumbList[this.breadcrumbList.length - 1]['name']
+        return this.breadcrumbList[this.breadcrumbList.length - 1]['name'];
       } 
     }
   }
-}
+};
 </script>
 
 <style scoped>
