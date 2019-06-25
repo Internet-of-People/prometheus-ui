@@ -49,3 +49,5 @@ yarn run lint
 
 * Tried to update eslint to the latest version, but it caused: `Error: Failed to load plugin 'vue' declared in 'package.json': Cannot find module 'eslint/lib/util/traverser'
 Referenced from: package.json`
+* Error handling if something happens in the store or during API calls
+* Loading logic maybe

@@ -15,23 +15,26 @@ import router from '@/router';
 import Button from '@/components/common/Button';
 
 export default {
-  name: 'CreateNewVault',
+    name: 'CreateNewVault',
   components: {
     Button
   },
   computed: {
     ...mapGetters(['words'])
   },
-  methods: {
-    goBack(){
-      this.$store.dispatch('cancelVaultCreation');
-      router.push('/');
+    beforeCreate () {
+        this.$store.dispatch('generatePhraseAsync');
     },
-    restoreVault() {
-      router.push('/validatevault');
+    methods: {
+        goBack () {
+            this.$store.dispatch('cancelVaultCreation');
+            router.push('/');
+        },
+        restoreVault () {
+            router.push('/validatevault');
+        }
     }
-  }
-}
+};
 </script>
 
 <style scoped>

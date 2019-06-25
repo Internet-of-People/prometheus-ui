@@ -29,23 +29,22 @@ import Button from '@/components/common/Button';
 import router from '@/router';
 
 export default {
-  name: 'Introduction',
+    name: 'Introduction',
   props: {
     appName: String,
   },
-  components: {
-    Button,
-  },
-  methods: {
-    async createNewVault() {
-      await this.$store.dispatch('generateVault');
-      router.push('/createnewvault');
+    components: {
+        Button
     },
-    async restoreVault() {
-      router.push('/validatevault');
+    methods: {
+        async createNewVault () {
+            router.push('/createnewvault');
+        },
+        async restoreVault () {
+            router.push('/validatevault');
+        }
     }
-  }
-}
+};
 </script>
 
 <style scoped>
