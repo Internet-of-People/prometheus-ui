@@ -1,11 +1,17 @@
 <template>
   <div id="app">
-    <SideBar :appName="appName" v-if="showSideBar" />
-    <div id="mainContent" :class="{shiftMainContent: showSideBar}">
+    <SideBar
+      v-if="showSideBar"
+      :app-name="appName"
+    />
+    <div
+      id="mainContent"
+      :class="{shiftMainContent: showSideBar}"
+    >
       <BreadCrumb v-if="showSideBar" />
-      <router-view :appName="appName" />
+      <router-view :app-name="appName" />
     </div>
-    <Footer :appName="appName" />
+    <Footer :app-name="appName" />
   </div>
 </template>
 
@@ -16,9 +22,9 @@ import BreadCrumb from '@/components/common/BreadCrumb';
 import { mapGetters } from 'vuex';
 
 export default {
-  name: 'app',
+  name: 'App',
   components: {
-    Footer,
+    Footer, 
     SideBar,
     BreadCrumb,
   },

@@ -1,10 +1,25 @@
 <template>
   <div class="float-content">
-    <div class="info-txt">Please note down all the following phrases in correct order.</div>
-    <div v-for="(word,index) in words" :key="index" class="words-txt">{{index+1}}. {{word}}</div>
+    <div class="info-txt">
+      Please note down all the following phrases in correct order.
+    </div>
+    <div
+      v-for="(word,index) in words"
+      :key="index"
+      class="words-txt"
+    >
+      {{ index+1 }}. {{ word }}
+    </div>
     <div class="btn-block">
-      <Button type="inv-btn" :onClick="goBack">BACK</Button>
-      <Button :onClick="restoreVault">WROTE WORDS DOWN</Button>
+      <Button
+        type="inv-btn"
+        :on-click="goBack"
+      >
+        BACK
+      </Button>
+      <Button :on-click="restoreVault">
+        WROTE WORDS DOWN
+      </Button>
     </div>
   </div>
 </template>

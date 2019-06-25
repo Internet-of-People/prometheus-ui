@@ -2,8 +2,11 @@
   <div>
     <nav class="hovered">
       <ul>
-        <router-link class="app-title"  to="/">
-          <img src="../../assets/images/logo.svg"/>
+        <router-link
+          class="app-title"
+          to="/"
+        >
+          <img src="../../assets/images/logo.svg">
           <div>
             {{ appName }}
           </div>
@@ -22,7 +25,10 @@
 export default {
   name: 'SideBar',
   props: {
-    appName: String
+    appName: {
+      type: String,
+      default: ''
+    }
   }
 };
 </script>

@@ -31,10 +31,12 @@
       "node": true
     },
     "extends": [
-      "plugin:vue/essential",
+      "plugin:vue/recommended",
       "eslint:recommended"
     ],
-    "rules": {},
+    "rules": {
+      "semi": 2
+    },
     "parserOptions": {
       "parser": "babel-eslint"
     }
