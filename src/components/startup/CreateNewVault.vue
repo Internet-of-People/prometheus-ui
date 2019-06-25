@@ -16,12 +16,12 @@ import Button from '@/components/common/Button';
 
 export default {
     name: 'CreateNewVault',
-  components: {
-    Button
-  },
-  computed: {
-    ...mapGetters(['words'])
-  },
+    components: {
+      Button
+    },
+    computed: {
+      ...mapGetters(['words'])
+    },
     beforeCreate () {
         this.$store.dispatch('generatePhraseAsync');
     },

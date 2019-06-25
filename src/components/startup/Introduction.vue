@@ -30,9 +30,9 @@ import router from '@/router';
 
 export default {
     name: 'Introduction',
-  props: {
-    appName: String,
-  },
+    props: {
+      appName: String,
+    },
     components: {
         Button
     },

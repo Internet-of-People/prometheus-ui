@@ -15,7 +15,7 @@ export default {
     onClick: Function,
     type: String
   }
-}
+};
 </script>
 
 <style scoped>

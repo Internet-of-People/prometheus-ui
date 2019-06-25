@@ -16,32 +16,32 @@ import router from '@/router';
 import Button from '@/components/common/Button';
 
 export default {
-    name: 'ValidateVault',
+  name: 'ValidateVault',
   data() {
-    return {
-      words:[]
-    };
+  return {
+    words:[]
+  };
 
-    },
-    components: {
-        Button
-    },
-    created () {
-        for (let i = 0; i < 24; i++) {
-            this.words.push('');
-        }
-    },
-    methods: {
-        goBack () {
-            this.$store.dispatch('cancelVaultCreation');
-            router.push('/');
-        },
-        createVault () {
-            const phrase = this.words.map((word) => word.trim());
-            api.validatePhrase(phrase);
-            // TODO: if the phrase is valid, we have to call the initVault api, then redirect to the IDs page.
-        }
+  },
+  components: {
+    Button
+  },
+  created () {
+    for (let i = 0; i < 24; i++) {
+        this.words.push('');
     }
+  },
+  methods: {
+    goBack () {
+      this.$store.dispatch('cancelVaultCreation');
+      router.push('/');
+    },
+    createVault () {
+      const phrase = this.words.map((word) => word.trim());
+      api.validatePhrase(phrase);
+      // TODO: if the phrase is valid, we have to call the initVault api, then redirect to the IDs page.
+    }
+  }
 };
 </script>
 

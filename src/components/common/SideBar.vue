@@ -24,7 +24,7 @@ export default {
   props: {
     appName: String
   }
-}
+};
 </script>
 
 <style scoped>
