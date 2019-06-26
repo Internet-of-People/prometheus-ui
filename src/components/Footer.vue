@@ -1,20 +1,15 @@
 <template>
-  <div>
-    <div class="footer-wrapper col-12">
-      <div class="float-left cursor-default desktop-footer-essentials">
-        <span class="">{{ appName }}</span>
-        <span class="copyright">&copy;&nbsp; {{ new Date().getFullYear() }} Internet of People</span>
-      </div>
-      <div class="float-right cursor-default desktop-footer-essentials">
-        <span class="">
-          <a
-            href="https://github.com/Internet-of-People/"
-            target="_blank"
-          >GitHub</a>
-        </span>
-      </div>
-    </div>
-  </div>
+  <b-container id="footer" fluid>
+    <b-row>
+      <b-col class="mb-2">
+        {{ appName }} &copy;&nbsp; {{ new Date().getFullYear() }} Internet of People -
+        <a
+          href="https://github.com/Internet-of-People/"
+          target="_blank"
+        >GitHub</a>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <script>
@@ -30,4 +25,9 @@ export default {
 </script>
 
 <style scoped>
+#footer{
+  position: fixed;
+  bottom:0;
+  background-color: #ffffff;
+}
 </style>

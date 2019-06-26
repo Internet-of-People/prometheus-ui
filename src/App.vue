@@ -19,8 +19,6 @@ import SideBar from '@/components/SideBar';
 import BreadCrumb from '@/components/BreadCrumb';
 import { mapGetters } from 'vuex';
 
-//import './assets/css/stylesheets/app.scss';
-
 export default {
   name: 'App',
   components: {
@@ -39,5 +37,8 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+@import 'assets/style/app.scss';
+@import '~bootstrap/scss/bootstrap.scss';
+@import '~bootstrap-vue/src/index.scss';
 </style>
