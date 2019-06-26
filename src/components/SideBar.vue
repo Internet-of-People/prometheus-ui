@@ -6,7 +6,7 @@
           class="app-title"
           to="/"
         >
-          <img src="../../assets/images/logo.svg">
+          <img src="@/assets/images/logo.svg">
           <div>
             {{ appName }}
           </div>

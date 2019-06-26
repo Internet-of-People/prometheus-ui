@@ -1,13 +1,15 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Introduction from '@/components/startup/Introduction';
-import CreateNewVault from '@/components/startup/CreateNewVault';
-import ValidateVault from '@/components/startup/ValidateVault';
-import VaultCreation from '@/components/contents/VaultCreation';
+import Introduction from '@/views/Introduction';
+import CreateNewVault from '@/views/CreateNewVault';
+import ValidateVault from '@/views/ValidateVault';
+import VaultCreation from '@/views/VaultCreation';
 
 Vue.use(Router);
 
 export default new Router({
+  mode: 'history',
+  base: process.env.BASE_URL,
   routes: [
     {
       path: '/',
@@ -42,6 +44,7 @@ export default new Router({
       path: '/vaultcreated',
       name: 'vaultcreated',
       component: VaultCreation,
+      //component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
       meta: {
         breadcrumb: [
           {name: 'GENERATING MNEUMONIC', link: 'createnewvault'},
@@ -49,6 +52,6 @@ export default new Router({
           {name: 'FINISH'},
         ]
       }
-    }
-  ]
+    },
+  ],
 });

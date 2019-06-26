@@ -28,7 +28,7 @@
 <script>
 import api from '@/api';
 import router from '@/router';
-import Button from '@/components/common/Button';
+import Button from '@/components/Button';
 
 export default {
   name: 'ValidateVault',

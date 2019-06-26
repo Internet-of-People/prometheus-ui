@@ -27,7 +27,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import router from '@/router';
-import Button from '@/components/common/Button';
+import Button from '@/components/Button';
 
 export default {
     name: 'CreateNewVault',

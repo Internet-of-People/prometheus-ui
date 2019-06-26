@@ -1,25 +1,25 @@
 <template>
-  <div id="app">
-    <SideBar
-      v-if="showSideBar"
-      :app-name="appName"
-    />
-    <div
-      id="mainContent"
-      :class="{shiftMainContent: showSideBar}"
-    >
-      <BreadCrumb v-if="showSideBar" />
-      <router-view :app-name="appName" />
-    </div>
-    <Footer :app-name="appName" />
-  </div>
+  <b-container fluid>
+    <b-row>
+      <b-col cols="2" v-if="showSideBar">sidebar</b-col>
+      <b-col v-bind:cols="showSideBar?10:12">
+        <BreadCrumb v-if="showSideBar" />
+        <router-view :app-name="appName" />
+      </b-col>
+    </b-row>
+    <b-row align-v="end">
+      <b-col><Footer :app-name="appName" /></b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <script>
-import Footer from '@/components/common/Footer';
-import SideBar from '@/components/common/SideBar';
-import BreadCrumb from '@/components/common/BreadCrumb';
+import Footer from '@/components/Footer';
+import SideBar from '@/components/SideBar';
+import BreadCrumb from '@/components/BreadCrumb';
 import { mapGetters } from 'vuex';
+
+//import './assets/css/stylesheets/app.scss';
 
 export default {
   name: 'App',
@@ -40,5 +40,4 @@ export default {
 </script>
 
 <style>
-@import './assets/css/stylesheets/app.css';
 </style>
