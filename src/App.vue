@@ -1,7 +1,7 @@
 <template>
   <b-container fluid>
     <b-row>
-      <b-col cols="2" v-if="showSideBar">sidebar</b-col>
+      <b-col cols="2" v-if="showSideBar" class="p-0 pt-2"><SideBar :app-name="appName" /></b-col>
       <b-col v-bind:cols="showSideBar?10:12">
         <BreadCrumb v-if="showSideBar" />
         <router-view :app-name="appName" />
@@ -16,14 +16,14 @@
 <script>
 import { mapGetters } from 'vuex';
 import Footer from '@/components/Footer.vue';
-// import SideBar from '@/components/SideBar.vue';
+import SideBar from '@/components/SideBar.vue';
 import BreadCrumb from '@/components/BreadCrumb.vue';
 
 export default {
   name: 'App',
   components: {
     Footer,
-    // SideBar,
+    SideBar,
     BreadCrumb,
   },
   computed: {

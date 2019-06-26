@@ -1,3 +1,11 @@
 $enable-responsive-font-sizes: true;
 
 $primary: #378A81;
+
+.content {
+    background-color: #F0F0F0;
+
+    .inner-content {
+        background-color: #ffffff;
+    }
+}

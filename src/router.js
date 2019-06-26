@@ -22,9 +22,9 @@ export default new Router({
       component: CreateNewVault,
       meta: {
         breadcrumb: [
-          { name: 'GENERATING MNEUMONIC' },
-          { name: 'VALIDATING', link: 'validateVault' },
-          { name: 'FINISH', link: 'vaultcreated' },
+          { text: 'GENERATING MNEUMONIC' },
+          { text: 'VALIDATING', to: 'validateVault' },
+          { text: 'FINISH', to: 'vaultcreated' },
         ],
       },
     },
@@ -34,9 +34,9 @@ export default new Router({
       component: ValidateVault,
       meta: {
         breadcrumb: [
-          { name: 'GENERATING MNEUMONIC', link: 'createnewvault' },
-          { name: 'VALIDATING' },
-          { name: 'FINISH', link: 'vaultcreated' },
+          { text: 'GENERATING MNEUMONIC', to: 'createnewvault' },
+          { text: 'VALIDATING' },
+          { text: 'FINISH', to: 'vaultcreated' },
         ],
       },
     },
@@ -47,9 +47,9 @@ export default new Router({
       // component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
       meta: {
         breadcrumb: [
-          { name: 'GENERATING MNEUMONIC', link: 'createnewvault' },
-          { name: 'VALIDATING', link: 'validateVault' },
-          { name: 'FINISH' },
+          { text: 'GENERATING MNEUMONIC', to: 'createnewvault' },
+          { text: 'VALIDATING', to: 'validateVault' },
+          { text: 'FINISH' },
         ],
       },
     },
