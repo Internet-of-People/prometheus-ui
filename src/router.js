@@ -1,9 +1,9 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Introduction from '@/views/Introduction';
-import CreateNewVault from '@/views/CreateNewVault';
-import ValidateVault from '@/views/ValidateVault';
-import VaultCreation from '@/views/VaultCreation';
+import Introduction from '@/views/Introduction.vue';
+import CreateNewVault from '@/views/CreateNewVault.vue';
+import ValidateVault from '@/views/ValidateVault.vue';
+import VaultCreation from '@/views/VaultCreation.vue';
 
 Vue.use(Router);
 
@@ -22,11 +22,11 @@ export default new Router({
       component: CreateNewVault,
       meta: {
         breadcrumb: [
-          {name: 'GENERATING MNEUMONIC'},
-          {name: 'VALIDATING', link: 'validateVault'},
-          {name: 'FINISH', link: 'vaultcreated'},
-        ]
-      }
+          { name: 'GENERATING MNEUMONIC' },
+          { name: 'VALIDATING', link: 'validateVault' },
+          { name: 'FINISH', link: 'vaultcreated' },
+        ],
+      },
     },
     {
       path: '/validatevault',
@@ -34,24 +34,24 @@ export default new Router({
       component: ValidateVault,
       meta: {
         breadcrumb: [
-          {name: 'GENERATING MNEUMONIC', link: 'createnewvault'},
-          {name: 'VALIDATING'},
-          {name: 'FINISH', link: 'vaultcreated'},
-        ]
-      }
+          { name: 'GENERATING MNEUMONIC', link: 'createnewvault' },
+          { name: 'VALIDATING' },
+          { name: 'FINISH', link: 'vaultcreated' },
+        ],
+      },
     },
     {
       path: '/vaultcreated',
       name: 'vaultcreated',
       component: VaultCreation,
-      //component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
+      // component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
       meta: {
         breadcrumb: [
-          {name: 'GENERATING MNEUMONIC', link: 'createnewvault'},
-          {name: 'VALIDATING', link: 'validateVault'},
-          {name: 'FINISH'},
-        ]
-      }
+          { name: 'GENERATING MNEUMONIC', link: 'createnewvault' },
+          { name: 'VALIDATING', link: 'validateVault' },
+          { name: 'FINISH' },
+        ],
+      },
     },
   ],
 });

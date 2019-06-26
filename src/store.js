@@ -7,27 +7,27 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     appName: 'PROMETHEUS',
-    words: []
+    words: [],
   },
   getters: {
-    appName: (state) => state.appName,
-    words: (state) => state.words
+    appName: state => state.appName,
+    words: state => state.words,
   },
   actions: {
-    async generatePhraseAsync (context) {
+    async generatePhraseAsync(context) {
       const response = await api.generateVault();
       context.commit('GENERATE_PHRASE', response.data);
     },
-    cancelVaultCreation (context) {
+    cancelVaultCreation(context) {
       context.commit('CANCEL_VAULT_CREATION');
-    }
+    },
   },
   mutations: {
-    'GENERATE_PHRASE': (state, words) => {
+    GENERATE_PHRASE: (state, words) => {
       state.words = words;
     },
-    'CANCEL_VAULT_CREATION': (state) => {
+    CANCEL_VAULT_CREATION: (state) => {
       state.words = [];
-    }
-  }
+    },
+  },
 });

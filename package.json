@@ -14,6 +14,7 @@
     "bootstrap": "4.3.1",
     "bootstrap-vue": "2.0.0-rc.24",
     "core-js": "2.6.9",
+    "lint-staged": "^8.2.1",
     "vue": "2.6.10",
     "vue-axios": "2.1.4",
     "vue-router": "3.0.6",
@@ -44,7 +45,9 @@
       "plugin:vue/essential",
       "@vue/airbnb"
     ],
-    "rules": {},
+    "rules": {
+      "no-param-reassign": 0
+    },
     "parserOptions": {
       "parser": "babel-eslint"
     }
@@ -57,5 +60,14 @@
   "browserslist": [
     "> 1%",
     "last 2 versions"
-  ]
+  ],
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,vue}": [
+      "vue-cli-service lint",
+      "git add"
+    ]
+  }
 }

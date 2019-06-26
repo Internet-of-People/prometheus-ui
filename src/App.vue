@@ -14,26 +14,26 @@
 </template>
 
 <script>
-import Footer from '@/components/Footer';
-import SideBar from '@/components/SideBar';
-import BreadCrumb from '@/components/BreadCrumb';
 import { mapGetters } from 'vuex';
+import Footer from '@/components/Footer.vue';
+// import SideBar from '@/components/SideBar.vue';
+import BreadCrumb from '@/components/BreadCrumb.vue';
 
 export default {
   name: 'App',
   components: {
-    Footer, 
-    SideBar,
+    Footer,
+    // SideBar,
     BreadCrumb,
   },
   computed: {
     ...mapGetters([
-      'appName'
+      'appName',
     ]),
-    showSideBar: function () {
+    showSideBar() {
       return this.$route.name !== 'intro';
-    }
-  }
+    },
+  },
 };
 </script>
 

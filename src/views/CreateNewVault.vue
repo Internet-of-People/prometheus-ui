@@ -26,29 +26,28 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import router from '@/router';
-import Button from '@/components/Button';
+import Button from '@/components/Button.vue';
 
 export default {
-    name: 'CreateNewVault',
-    components: {
-      Button
+  name: 'CreateNewVault',
+  components: {
+    Button,
+  },
+  computed: {
+    ...mapGetters(['words']),
+  },
+  beforeCreate() {
+    this.$store.dispatch('generatePhraseAsync');
+  },
+  methods: {
+    goBack() {
+      this.$store.dispatch('cancelVaultCreation');
+      this.$router.push('/');
     },
-    computed: {
-      ...mapGetters(['words'])
+    restoreVault() {
+      this.$router.push('/validatevault');
     },
-    beforeCreate () {
-        this.$store.dispatch('generatePhraseAsync');
-    },
-    methods: {
-        goBack () {
-            this.$store.dispatch('cancelVaultCreation');
-            router.push('/');
-        },
-        restoreVault () {
-            router.push('/validatevault');
-        }
-    }
+  },
 };
 </script>
 

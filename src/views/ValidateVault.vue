@@ -3,7 +3,10 @@
     <div class="info-txt">
       Please enter all the phrases you have noted in the correct order.
     </div>
-    <div>Providing these words in the correct order ensures us that you noted all those phrases correctly.</div>
+    <div>
+      Providing these words in the correct order ensures us that you noted all
+      those phrases correctly.
+    </div>
     <div
       v-for="index in 24"
       :key="index"
@@ -27,36 +30,35 @@
 
 <script>
 import api from '@/api';
-import router from '@/router';
-import Button from '@/components/Button';
+import Button from '@/components/Button.vue';
 
 export default {
   name: 'ValidateVault',
   components: {
-    Button
+    Button,
   },
   data() {
-  return {
-    words:[]
-  };
-
+    return {
+      words: [],
+    };
   },
-  created () {
-    for (let i = 0; i < 24; i++) {
-        this.words.push('');
+  created() {
+    for (let i = 0; i < 24; i += 1) {
+      this.words.push('');
     }
   },
   methods: {
-    goBack () {
+    goBack() {
       this.$store.dispatch('cancelVaultCreation');
-      router.push('/');
+      this.$router.push('/');
     },
-    createVault () {
-      const phrase = this.words.map((word) => word.trim());
+    createVault() {
+      const phrase = this.words.map(word => word.trim());
       api.validatePhrase(phrase);
-      // TODO: if the phrase is valid, we have to call the initVault api, then redirect to the IDs page.
-    }
-  }
+      // TODO: if the phrase is valid, we have to call the initVault api,
+      // then redirect to the IDs page.
+    },
+  },
 };
 </script>
 

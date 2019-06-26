@@ -17,25 +17,27 @@
 <script>
 export default {
   name: 'BreadCrumb',
-  data () {
+  data() {
     return {
       breadcrumbList: [],
-      pageTitle: "CREATE NEW VAULT"
+      pageTitle: 'CREATE NEW VAULT',
     };
   },
-  watch: { '$route' () { this.updateList(); } },
-  mounted () { this.updateList(); },
+  watch: { $route() { this.updateList(); } },
+  mounted() { this.updateList(); },
   methods: {
-    routeTo (pRouteTo) {
+    routeTo(pRouteTo) {
       if (this.breadcrumbList[pRouteTo].link) this.$router.push(this.breadcrumbList[pRouteTo].link);
     },
-    updateList () { this.breadcrumbList = this.$route.meta.breadcrumb; },
-    fetchPageTitle () {
-      if (this.breadcrumbList.length){
-        return this.breadcrumbList[this.breadcrumbList.length - 1]['name'];
-      } 
-    }
-  }
+    updateList() { this.breadcrumbList = this.$route.meta.breadcrumb; },
+    fetchPageTitle() {
+      if (this.breadcrumbList.length) {
+        return this.breadcrumbList[this.breadcrumbList.length - 1].name;
+      }
+
+      return '';
+    },
+  },
 };
 </script>
 

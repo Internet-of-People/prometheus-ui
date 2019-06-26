@@ -19,13 +19,13 @@ export default {
   props: {
     onClick: {
       type: Function,
-      default: ()=>{}
+      default: () => {},
     },
     type: {
       type: String,
-      default: ''
-    }
-  }
+      default: '',
+    },
+  },
 };
 </script>
 
