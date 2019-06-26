@@ -1,8 +1,10 @@
 <template>
-  <b-container fluid>
-    <b-row>
-      <b-col cols="2" v-if="showSideBar" class="p-0 pt-2"><SideBar :app-name="appName" /></b-col>
-      <b-col v-bind:cols="showSideBar?10:12">
+  <b-container fluid class="vertical-fill">
+    <b-row class="vertical-fill">
+      <b-col cols="2" v-if="showSideBar" class="m-0 p-0 pt-2">
+        <SideBar :app-name="appName" />
+      </b-col>
+      <b-col v-bind:cols="showSideBar?10:12" class="p-0 m-0">
         <BreadCrumb v-if="showSideBar" />
         <router-view :app-name="appName" />
       </b-col>

@@ -1,6 +1,6 @@
 <template>
-  <b-container class="content">
-    <b-container class="inner-content">
+  <b-container class="content p-4 pr-0">
+    <b-container class="inner-content p-4 pr-0">
       <b-alert show variant="warning">
         Please note down all the following phrases in correct order.
       </b-alert>
