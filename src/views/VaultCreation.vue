@@ -9,15 +9,19 @@
       charting and Performance measurements.
       More on that later, let's begin with creating your initial ID.
     </div>
-    <div class="btn-id">
-      GO TO IDs
-    </div>
+    <b-button @click="createID" variant="primary">CREATE NEW ID</b-button>
   </div>
 </template>
 
 <script>
 export default {
   name: 'VaultCreation',
+  methods: {
+    createID() {
+      // TODO: add createID logic
+      // console.log('create new id');
+    },
+  },
 };
 </script>
 

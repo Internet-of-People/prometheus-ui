@@ -12,20 +12,23 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
+      path: '/introduction',
       name: 'intro',
       component: Introduction,
+      meta: { requiresAuth: false },
     },
     {
       path: '/createnewvault',
       name: 'createNewVault',
       component: CreateNewVault,
       meta: {
+        requiresAuth: false,
         breadcrumb: [
           { text: 'GENERATING MNEUMONIC' },
           { text: 'VALIDATING', to: 'validateVault' },
-          { text: 'FINISH', to: 'vaultcreated' },
+          { text: 'FINISH', to: '' },
         ],
+        title: 'CREATE NEW VAULT',
       },
     },
     {
@@ -33,24 +36,26 @@ export default new Router({
       name: 'validateVault',
       component: ValidateVault,
       meta: {
+        requiresAuth: false,
         breadcrumb: [
           { text: 'GENERATING MNEUMONIC', to: 'createnewvault' },
           { text: 'VALIDATING' },
-          { text: 'FINISH', to: 'vaultcreated' },
+          { text: 'FINISH', to: '' },
         ],
+        title: 'CREATE NEW VAULT',
       },
     },
     {
-      path: '/vaultcreated',
+      path: '/',
       name: 'vaultcreated',
       component: VaultCreation,
       // component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
       meta: {
+        requiresAuth: true,
         breadcrumb: [
-          { text: 'GENERATING MNEUMONIC', to: 'createnewvault' },
-          { text: 'VALIDATING', to: 'validateVault' },
-          { text: 'FINISH' },
+          { text: 'VAULT/IDs', to: 'vaultcreated' },
         ],
+        title: 'VAULT/ID',
       },
     },
   ],

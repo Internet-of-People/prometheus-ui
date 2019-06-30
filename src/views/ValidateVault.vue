@@ -29,7 +29,6 @@
 </template>
 
 <script>
-import api from '@/api';
 import Button from '@/components/Button.vue';
 
 export default {
@@ -50,13 +49,11 @@ export default {
   methods: {
     goBack() {
       this.$store.dispatch('cancelVaultCreation');
-      this.$router.push('/');
+      this.$router.push('/introduction');
     },
     createVault() {
       const phrase = this.words.map(word => word.trim());
-      api.validatePhrase(phrase);
-      // TODO: if the phrase is valid, we have to call the initVault api,
-      // then redirect to the IDs page.
+      this.$store.dispatch('validatePhraseAsync', phrase);
     },
   },
 };
