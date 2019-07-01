@@ -4,6 +4,7 @@ import Introduction from '@/views/Introduction.vue';
 import CreateNewVault from '@/views/CreateNewVault.vue';
 import ValidateVault from '@/views/ValidateVault.vue';
 import VaultCreation from '@/views/VaultCreation.vue';
+import DIDs from '@/views/DIDs.vue';
 
 Vue.use(Router);
 
@@ -12,7 +13,7 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/introduction',
+      path: '/',
       name: 'intro',
       component: Introduction,
       meta: { requiresAuth: false },
@@ -40,22 +41,34 @@ export default new Router({
         breadcrumb: [
           { text: '1. GENERATING MNEUMONIC', to: 'createnewvault' },
           { text: '2. VALIDATING' },
-          { text: '3. FINISH', to: '' },
+          { text: '3. FINISH' },
         ],
         title: 'CREATE NEW VAULT',
       },
     },
     {
-      path: '/',
+      path: '/vaultcreated',
       name: 'vaultcreated',
       component: VaultCreation,
       // component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
       meta: {
         requiresAuth: true,
         breadcrumb: [
-          { text: 'VAULT/IDs', to: 'vaultcreated' },
+          { text: '1. GENERATING MNEUMONIC' },
+          { text: '2. VALIDATING' },
+          { text: '3. FINISH' },
         ],
-        title: 'VAULT/ID',
+        title: 'CREATE NEW VAULT',
+      },
+    },
+    {
+      path: '/vault/dids',
+      name: 'dids',
+      component: DIDs,
+      meta: {
+        requiresAuth: true,
+        breadcrumb: [],
+        title: 'VAULT / DIDs',
       },
     },
   ],

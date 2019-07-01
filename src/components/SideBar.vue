@@ -1,17 +1,18 @@
 <template>
   <b-container>
     <router-link
-          class="app-title"
-          to="/"
-        >
-      <img src="@/assets/images/logo.svg">
-      {{ appName }}
+      class="app-title"
+      to="/"
+    >
+      <img src="@/assets/images/logo.svg"> {{ appName }}
     </router-link>
     <b-nav vertical class="mt-4" v-if="showNavItems">
-      <b-nav-item v-for="item in menuItems"
-        :key="item.name" :active="activeItem === item.name">
-        <router-link  :to="item.link">
-        {{item.name}}
+      <b-nav-item
+        v-for="item in menuItems"
+        :key="item.name"
+        :active="activeItem === item.name">
+        <router-link :to="item.link">
+          {{item.name}}
         </router-link>
       </b-nav-item>
     </b-nav>
@@ -28,16 +29,16 @@ export default {
     },
     activeItem: {
       type: String,
-      default: 'IDs',
+      default: 'DIDs',
     },
   },
   data() {
     return {
       menuItems: [
-        { name: 'IDs', link: '/' },
-        { name: 'CLAIMS', link: '/claims' },
-        { name: 'WALLETS', link: '/wallets' },
-        { name: 'DEVICES', link: '/devices' },
+        { name: 'DIDs', link: '/vault/dids' },
+        { name: 'CLAIMS', link: '/vault/claims' }, // TBD
+        { name: 'WALLETS', link: '/vault/wallets' }, // TBD
+        { name: 'DEVICES', link: '/vault/devices' }, // TBD
       ],
     };
   },
