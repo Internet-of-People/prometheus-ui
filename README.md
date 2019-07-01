@@ -1,49 +1,39 @@
 # Prometheus UI
 
-## Table of Contents
-
-1. [Project setup](#project-setup)
-    1. [Dev Stylesheets](#dev-stylesheets)
-    2. [Compiles and hot-reloads for development](#compiles-and-hot-reloads-for-development)
-    3. [Compiles and minifies for production](#compiles-and-minifies-for-production)
-    4. [Run your tests](#run-your-tests)
-    5. [Lint and fix files](#lint-and-fix-files)
-2. [Vuejs Guidelines](#vuejs-guidelines)
-
 ## Project setup
-
-```bash
+```
 yarn install
 ```
 
-### Dev Stylesheets
-
-```bash
-cd src/assets/css/
-compass watch --poll
-```
-
 ### Compiles and hot-reloads for development
-
-```bash
+```
 yarn run serve
 ```
 
 ### Compiles and minifies for production
-
-```bash
+```
 yarn run build
 ```
 
-### Lint and fix files
+### Run your tests
+```
+yarn run test
+```
 
-```bash
+### Lints and fixes files
+```
 yarn run lint
 ```
 
-## Vuejs Guidelines
+### Run your end-to-end tests
+```
+yarn run test:e2e
+```
 
-[Styling Guide](https://vuejs.org/v2/style-guide/)
+### Run your unit tests
+```
+yarn run test:unit
+```
 
 ## Notes
 

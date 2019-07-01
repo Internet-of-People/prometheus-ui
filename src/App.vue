@@ -1,44 +1,46 @@
 <template>
-  <div id="app">
-    <SideBar
-      v-if="showSideBar"
-      :app-name="appName"
-    />
-    <div
-      id="mainContent"
-      :class="{shiftMainContent: showSideBar}"
-    >
-      <BreadCrumb v-if="showSideBar" />
-      <router-view :app-name="appName" />
-    </div>
-    <Footer :app-name="appName" />
-  </div>
+  <b-container fluid class="vertical-fill">
+    <b-row class="vertical-fill">
+      <b-col cols="2" v-if="showSideBar" class="p-0 pt-2 m-0">
+        <SideBar :app-name="appName" />
+      </b-col>
+      <b-col v-bind:cols="showSideBar?10:12" class="m-0 p-0">
+        <BreadCrumb v-if="showSideBar" />
+        <router-view :app-name="appName" />
+      </b-col>
+    </b-row>
+    <b-row align-v="end">
+      <b-col><Footer :app-name="appName" /></b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <script>
-import Footer from '@/components/common/Footer';
-import SideBar from '@/components/common/SideBar';
-import BreadCrumb from '@/components/common/BreadCrumb';
 import { mapGetters } from 'vuex';
+import Footer from '@/components/Footer.vue';
+import SideBar from '@/components/SideBar.vue';
+import BreadCrumb from '@/components/BreadCrumb.vue';
 
 export default {
   name: 'App',
   components: {
-    Footer, 
+    Footer,
     SideBar,
     BreadCrumb,
   },
   computed: {
     ...mapGetters([
-      'appName'
+      'appName',
     ]),
-    showSideBar: function () {
+    showSideBar() {
       return this.$route.name !== 'intro';
-    }
-  }
+    },
+  },
 };
 </script>
 
-<style>
-@import './assets/css/stylesheets/app.css';
+<style lang="scss">
+@import 'assets/style/app.scss';
+@import '~bootstrap/scss/bootstrap.scss';
+@import '~bootstrap-vue/src/index.scss';
 </style>

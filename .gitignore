@@ -1,7 +1,9 @@
 .DS_Store
 node_modules
 /dist
-src/assets/css/.sass-cache/
+
+/tests/e2e/videos/
+/tests/e2e/screenshots/
 
 # local env files
 .env.local
@@ -19,6 +21,6 @@ yarn-error.log*
 *.ntvs*
 *.njsproj
 *.sln
-*.sw*
+*.sw?
 
 .ffexcludes
