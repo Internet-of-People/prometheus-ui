@@ -1,7 +1,7 @@
 <template>
-  <b-container>
-    <b-row><b-col>{{ pageTitle }}</b-col></b-row>
-    <b-breadcrumb :items="breadcrumb"></b-breadcrumb>
+  <b-container class="p-2 m-0" fluid>
+    <b-row no-gutters><b-col>{{ pageTitle }}</b-col></b-row>
+    <b-breadcrumb :items="breadcrumb" class="small"></b-breadcrumb>
   </b-container>
 </template>
 
@@ -30,5 +30,6 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import '@/assets/style/app.scss';
 </style>

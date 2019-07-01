@@ -1,39 +1,41 @@
 <template>
-  <b-container class="content p-4 pr-0">
-    <b-container class="inner-content p-4 pr-0">
-      <b-alert show variant="warning">
-        Please note down all the following phrases in correct order.
-      </b-alert>
-      <b-row class="d-flex justify-content-start">
-        <b-col>
-          <div v-if="loading" class="d-flex align-items-center">
-            <b-spinner variant="primary" class="mr-3" /> Loading...
-          </div>
+  <Content>
+    <b-alert show variant="warning">
+      Please note down all the following phrases in correct order.
+    </b-alert>
+    <b-row class="d-flex justify-content-start">
+      <b-col>
+        <div v-if="loading" class="d-flex align-items-center">
+          <b-spinner variant="primary" class="mr-3" /> Loading...
+        </div>
 
-          <template v-for="(word,index) in words">
-            <b-input-group
-              size="sm"
-              :prepend="(index+1)+''"
-              :key="index"
-              class="mr-2 mb-2"
-            >
-              <b-form-input trim readonly :value="word" />
-            </b-input-group>
-          </template>
-        </b-col>
-      </b-row>
-      <b-row class="clear" v-if="!loading">
-        <b-col>
-          <b-button @click="goBack" variant="light">BACK</b-button>
-          <b-button @click="restoreVault" variant="primary">WROTE WORDS DOWN</b-button>
-        </b-col>
-      </b-row>
-    </b-container>
-  </b-container>
+        <template v-for="(word,index) in words">
+          <b-input-group
+            size="sm"
+            :prepend="(index+1)+''"
+            :key="index"
+            class="mr-2 mb-2"
+          >
+            <b-form-input trim readonly :value="word" />
+          </b-input-group>
+        </template>
+      </b-col>
+    </b-row>
+    <b-row class="clear mt-4" v-if="!loading">
+      <b-col>
+        <b-button @click="goBack" variant="light" class="mr-4">BACK</b-button>
+        <b-button @click="restoreVault" variant="primary">
+          I WROTE WORDS DOWN
+          <fa icon="angle-right" />
+        </b-button>
+      </b-col>
+    </b-row>
+  </Content>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
+import Content from '@/components/Content.vue';
 
 export default {
   name: 'CreateNewVault',
@@ -41,6 +43,9 @@ export default {
     return {
       loading: true,
     };
+  },
+  components: {
+    Content,
   },
   computed: {
     ...mapGetters(['words']),
@@ -64,19 +69,5 @@ export default {
 
 <style scoped lang="scss">
 @import '@/assets/style/app.scss';
-
-.input-group {
-  width: 8rem;
-  display: inline-block;
-
-  .input-group-prepend {
-    display: inline-block;
-    width: 2rem;
-  }
-
-  input {
-    display: inline-block;
-    width: 6rem;
-  }
-}
+@import '@/assets/style/createvault.scss';
 </style>

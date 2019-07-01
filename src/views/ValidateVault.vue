@@ -1,46 +1,49 @@
 <template>
-  <div class="float-content">
-    <div class="info-txt">
-      Please enter all the phrases you have noted in the correct order.
-    </div>
-    <div>
-      Providing these words in the correct order ensures us that you noted all
-      those phrases correctly.
-    </div>
-    <div
-      v-for="index in 24"
-      :key="index"
-      class="words-txt"
-    >
-      {{ index }}. <input v-model="words[index-1]">
-    </div>
-    <div class="btn-block">
-      <Button
-        type="inv-btn"
-        :on-click="goBack"
-      >
-        BACK
-      </Button>
-      <Button :on-click="createVault">
-        CREATE VAULT
-      </Button>
-    </div>
-  </div>
+  <Content>
+    <b-alert show variant="warning">
+      <strong>Please enter all the phrases you have noted in the correct order.</strong><br>
+      Providing these words in the correct order ensures us that you noted
+      all those phrases correctly.
+    </b-alert>
+    <b-row class="d-flex justify-content-start">
+      <b-col>
+        <template v-for="(word,index) in words">
+          <b-input-group
+            size="sm"
+            :prepend="(index+1)+''"
+            :key="index"
+            class="mr-2 mb-2"
+          >
+            <b-form-input trim  v-model="words[index]" />
+          </b-input-group>
+        </template>
+      </b-col>
+    </b-row>
+    <b-row class="clear mt-4">
+      <b-col>
+        <b-button @click="goBack" variant="light" class="mr-4">BACK</b-button>
+        <b-button @click="createVault" variant="primary">
+          CREATE VAULT
+          <fa icon="angle-right" />
+        </b-button>
+      </b-col>
+    </b-row>
+  </Content>
 </template>
 
 <script>
 import api from '@/api';
-import Button from '@/components/Button.vue';
+import Content from '@/components/Content.vue';
 
 export default {
   name: 'ValidateVault',
-  components: {
-    Button,
-  },
   data() {
     return {
       words: [],
     };
+  },
+  components: {
+    Content,
   },
   created() {
     for (let i = 0; i < 24; i += 1) {
@@ -54,7 +57,9 @@ export default {
     },
     createVault() {
       const phrase = this.words.map(word => word.trim());
-      api.validatePhrase(phrase);
+      api.validatePhrase(phrase).then(() => {
+        this.$router.push('/vaultcreated');
+      });
       // TODO: if the phrase is valid, we have to call the initVault api,
       // then redirect to the IDs page.
     },
@@ -62,5 +67,6 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import '@/assets/style/createvault.scss';
 </style>
