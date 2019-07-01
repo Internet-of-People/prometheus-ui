@@ -25,9 +25,9 @@ export default new Router({
       meta: {
         requiresAuth: false,
         breadcrumb: [
-          { text: '1. GENERATING MNEUMONIC' },
-          { text: '2. VALIDATING', to: 'validateVault' },
-          { text: '3. FINISH', to: '' },
+          { text: '1. GENERATING MNEUMONIC', active: true },
+          { text: '2. VALIDATING' },
+          { text: '3. FINISH' },
         ],
         title: 'CREATE NEW VAULT',
       },
@@ -39,8 +39,8 @@ export default new Router({
       meta: {
         requiresAuth: false,
         breadcrumb: [
-          { text: '1. GENERATING MNEUMONIC', to: 'createnewvault' },
-          { text: '2. VALIDATING' },
+          { text: '1. GENERATING MNEUMONIC' },
+          { text: '2. VALIDATING', active: true },
           { text: '3. FINISH' },
         ],
         title: 'CREATE NEW VAULT',
@@ -56,7 +56,7 @@ export default new Router({
         breadcrumb: [
           { text: '1. GENERATING MNEUMONIC' },
           { text: '2. VALIDATING' },
-          { text: '3. FINISH' },
+          { text: '3. FINISH', active: true },
         ],
         title: 'CREATE NEW VAULT',
       },

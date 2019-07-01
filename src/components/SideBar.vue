@@ -1,7 +1,7 @@
 <template>
-  <b-container>
+  <b-container class="p-0">
     <router-link
-      class="app-title"
+      class="app-title pl-2"
       to="/"
     >
       <img src="@/assets/images/logo.svg"> {{ appName }}
@@ -10,7 +10,7 @@
       <b-nav-item
         v-for="item in menuItems"
         :key="item.name"
-        :active="activeItem === item.name">
+        :active="currentPage === item.link">
         <router-link :to="item.link">
           {{item.name}}
         </router-link>
@@ -27,9 +27,10 @@ export default {
       type: String,
       default: '',
     },
-    activeItem: {
-      type: String,
-      default: 'DIDs',
+  },
+  computed: {
+    showNavItems() {
+      return this.$route.meta.requiresAuth;
     },
   },
   data() {
@@ -40,12 +41,16 @@ export default {
         { name: 'WALLETS', link: '/vault/wallets' }, // TBD
         { name: 'DEVICES', link: '/vault/devices' }, // TBD
       ],
+      currentPage: '',
     };
   },
-  computed: {
-    showNavItems() {
-      return this.$route.meta.requiresAuth;
+  watch: {
+    $route() {
+      this.currentPage = window.location.pathname;
     },
+  },
+  beforeMount() {
+    this.currentPage = window.location.pathname;
   },
 };
 </script>
@@ -53,8 +58,5 @@ export default {
 <style scoped lang="scss">
 img {
   width: 3rem;
-}
-.active{
-  background-color: #e9ecef;
 }
 </style>

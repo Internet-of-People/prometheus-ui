@@ -16,15 +16,6 @@ export default {
       return this.$route.meta.title;
     },
   },
-  methods: {
-    fetchPageTitle() {
-      if (this.breadcrumbList.length) {
-        return this.breadcrumbList[this.breadcrumbList.length - 1].name;
-      }
-
-      return '';
-    },
-  },
 };
 </script>
 
