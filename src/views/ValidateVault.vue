@@ -32,7 +32,6 @@
 </template>
 
 <script>
-import api from '@/api';
 import Content from '@/components/Content.vue';
 
 export default {
@@ -53,11 +52,11 @@ export default {
   methods: {
     goBack() {
       this.$store.dispatch('cancelVaultCreation');
-      this.$router.push('/');
+      this.$router.push('/introduction');
     },
     createVault() {
       const phrase = this.words.map(word => word.trim());
-      api.validatePhrase(phrase).then(() => {
+      this.$store.dispatch('validatePhraseAsync', phrase).then(() => {
         this.$router.push('/vaultcreated');
       });
       // TODO: if the phrase is valid, we have to call the initVault api,

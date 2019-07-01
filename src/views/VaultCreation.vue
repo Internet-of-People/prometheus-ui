@@ -25,5 +25,11 @@ export default {
     Content,
   },
   name: 'VaultCreation',
+  methods: {
+    createID() {
+      // TODO: add createID logic
+      // console.log('create new id');
+    },
+  },
 };
 </script>

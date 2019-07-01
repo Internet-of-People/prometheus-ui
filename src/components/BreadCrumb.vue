@@ -1,6 +1,6 @@
 <template>
   <b-container class="p-2 m-0" fluid>
-    <b-row no-gutters><b-col>{{ pageTitle }}</b-col></b-row>
+    <b-row no-gutters><b-col>{{ title }}</b-col></b-row>
     <b-breadcrumb :items="breadcrumb" class="small"></b-breadcrumb>
   </b-container>
 </template>
@@ -12,11 +12,9 @@ export default {
     breadcrumb() {
       return this.$route.meta.breadcrumb;
     },
-  },
-  data() {
-    return {
-      pageTitle: 'CREATE NEW VAULT',
-    };
+    title() {
+      return this.$route.meta.title;
+    },
   },
   methods: {
     fetchPageTitle() {

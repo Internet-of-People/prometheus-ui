@@ -7,17 +7,15 @@
       <img src="@/assets/images/logo.svg">
       {{ appName }}
     </router-link>
-    <b-nav vertical class="mt-4">
-      <b-nav-item>asd</b-nav-item>
+    <b-nav vertical class="mt-4" v-if="showNavItems">
+      <b-nav-item v-for="item in menuItems"
+        :key="item.name" :active="activeItem === item.name">
+        <router-link  :to="item.link">
+        {{item.name}}
+        </router-link>
+      </b-nav-item>
     </b-nav>
   </b-container>
-  <!--<div>
-        <li class=""><i class="fa fa-user"/><a href="#/profile/student">Vault</a></li>
-        <li class=""><i class="fa fa-address-book"/><a href="#/">ID</a></li>
-        <li class=""><i class="fa fa-list"/><a href="#/claims">Claims</a></li>
-        <li class=""><i class="fa fa-comment"/><a href="#/">Wallet</a></li>
-        <li class=""><i class="fa fa-cogs"/><a href="#/">Contacts</a></li>
-  </div>-->
 </template>
 
 <script>
@@ -28,6 +26,25 @@ export default {
       type: String,
       default: '',
     },
+    activeItem: {
+      type: String,
+      default: 'IDs',
+    },
+  },
+  data() {
+    return {
+      menuItems: [
+        { name: 'IDs', link: '/' },
+        { name: 'CLAIMS', link: '/claims' },
+        { name: 'WALLETS', link: '/wallets' },
+        { name: 'DEVICES', link: '/devices' },
+      ],
+    };
+  },
+  computed: {
+    showNavItems() {
+      return this.$route.meta.requiresAuth;
+    },
   },
 };
 </script>
@@ -35,5 +52,8 @@ export default {
 <style scoped lang="scss">
 img {
   width: 3rem;
+}
+.active{
+  background-color: #e9ecef;
 }
 </style>
