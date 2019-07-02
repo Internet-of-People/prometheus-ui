@@ -8,6 +8,9 @@ import DIDs from '@/views/DIDs.vue';
 
 Vue.use(Router);
 
+const SIGNED_IN_HOME_URL = '/vault/dids';
+const GUEST_HOME_URL = '/';
+
 export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
@@ -30,6 +33,7 @@ export default new Router({
           { text: '3. FINISH' },
         ],
         title: 'CREATE NEW VAULT',
+        homeUrl: GUEST_HOME_URL,
       },
     },
     {
@@ -44,6 +48,7 @@ export default new Router({
           { text: '3. FINISH' },
         ],
         title: 'CREATE NEW VAULT',
+        homeUrl: GUEST_HOME_URL,
       },
     },
     {
@@ -59,6 +64,7 @@ export default new Router({
           { text: '3. FINISH', active: true },
         ],
         title: 'CREATE NEW VAULT',
+        homeUrl: GUEST_HOME_URL,
       },
     },
     {
@@ -69,6 +75,7 @@ export default new Router({
         requiresAuth: true,
         breadcrumb: [],
         title: 'VAULT / DIDs',
+        homeUrl: SIGNED_IN_HOME_URL,
       },
     },
   ],

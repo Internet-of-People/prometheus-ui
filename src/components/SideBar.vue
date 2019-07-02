@@ -2,7 +2,7 @@
   <b-container class="p-0">
     <router-link
       class="app-title pl-2"
-      to="/"
+      :to="homeUrl"
     >
       <img src="@/assets/images/logo.svg"> {{ appName }}
     </router-link>
@@ -42,15 +42,18 @@ export default {
         { name: 'DEVICES', link: '/vault/devices' }, // TBD
       ],
       currentPage: '',
+      homeUrl: '',
     };
   },
   watch: {
     $route() {
       this.currentPage = window.location.pathname;
+      this.homeUrl = this.$route.meta.homeUrl;
     },
   },
   beforeMount() {
     this.currentPage = window.location.pathname;
+    this.homeUrl = this.$route.meta.homeUrl;
   },
 };
 </script>

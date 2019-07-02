@@ -21,10 +21,17 @@
     </b-row>
     <b-row class="clear mt-4">
       <b-col>
+        <b-alert :show="showPhraseError" variant="danger">
+          The provided phrase was invalid.
+        </b-alert>
+        <b-alert :show="showVaultInitError" variant="danger">
+          Something went wrong during vault initialization.
+        </b-alert>
         <b-button @click="goBack" variant="light" class="mr-4">BACK</b-button>
-        <b-button @click="createVault" variant="primary">
+        <b-button @click="createVault" variant="primary" :disabled="loading">
           CREATE VAULT
-          <fa icon="angle-right" />
+          <b-spinner small v-if="loading" />
+          <fa icon="angle-right" v-if="!loading" />
         </b-button>
       </b-col>
     </b-row>
@@ -40,6 +47,9 @@ export default {
   data() {
     return {
       words: [],
+      showPhraseError: false,
+      showVaultInitError: false,
+      loading: false,
     };
   },
   components: {
@@ -55,13 +65,30 @@ export default {
       this.$store.dispatch('cancelVaultCreation');
       this.$router.push('/');
     },
-    createVault() {
+    async createVault() {
+      const reset = () => {
+        this.showPhraseError = false;
+        this.showVaultInitError = false;
+        this.loading = true;
+      };
+
+      reset();
       const phrase = this.words.map(word => word.trim());
-      api.validatePhrase(phrase).then(() => {
+      const response = await api.validatePhrase(phrase);
+
+      if (!response.data) {
+        this.showPhraseError = true;
+        this.loading = false;
+        return;
+      }
+
+      api.initVault().then(() => {
         this.$router.push('/vaultcreated');
+      }).catch((err) => {
+        this.showVaultInitError = true;
+        this.loading = false;
+        console.err(err);
       });
-      // TODO: if the phrase is valid, we have to call the initVault api,
-      // then redirect to the IDs page.
     },
   },
 };
