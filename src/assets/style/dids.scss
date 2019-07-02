@@ -3,7 +3,7 @@
     transition: 0.3s;
     width: 350px;
     padding: 16px;
-    margin: 16px;
+    margin: 16px 0;
     display: inline-block;
     img{
         width: 80px;
@@ -17,4 +17,18 @@
             font-size: 12px;
         }
     }
+}
+
+input{
+    outline: none;
+    border: none;
+    box-shadow: 2px 2px 10px 0px rgba(50, 50, 50, 0.32);
+    width: 80%;
+    height: 40px;
+    padding: 12px;
+    
+}
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #6c757d;
+    opacity: 1; /* Firefox */
 }
