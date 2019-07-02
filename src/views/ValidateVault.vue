@@ -82,12 +82,11 @@ export default {
         return;
       }
 
-      api.initVault().then(() => {
+      api.initVault(phrase).then(() => {
         this.$router.push('/vaultcreated');
-      }).catch((err) => {
+      }).catch(() => {
         this.showVaultInitError = true;
         this.loading = false;
-        console.err(err);
       });
     },
   },

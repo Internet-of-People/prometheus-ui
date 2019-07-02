@@ -5,6 +5,7 @@ import VueAxios from 'vue-axios';
 Vue.use(VueAxios, axios);
 
 axios.defaults.baseURL = 'http://127.0.0.1:8080';
+axios.defaults.crossDomain = true;
 
 export default {
   generateVault: async () => axios.post('/bip39'),
