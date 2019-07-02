@@ -33,6 +33,7 @@
           <b-spinner small v-if="loading" />
           <fa icon="angle-right" v-if="!loading" />
         </b-button>
+        <b-button variant="outline-primary" @click="demoFill" class="float-right">demo</b-button>
       </b-col>
     </b-row>
   </Content>
@@ -61,6 +62,12 @@ export default {
     }
   },
   methods: {
+    demoFill() {
+      this.words = [];
+      for (let i = 0; i < 24; i += 1) {
+        this.words[i] = this.$store.state.words[i];
+      }
+    },
     goBack() {
       this.$store.dispatch('cancelVaultCreation');
       this.$router.push('/');
