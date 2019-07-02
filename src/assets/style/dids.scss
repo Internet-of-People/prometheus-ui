@@ -1,0 +1,20 @@
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 350px;
+    padding: 16px;
+    margin: 16px;
+    display: inline-block;
+    img{
+        width: 80px;
+        height: 80px;
+    }
+    .inner-card-block{
+        display: block;
+        .card-info{
+            display: inline-block;
+            color: #6c757d;
+            font-size: 12px;
+        }
+    }
+}
