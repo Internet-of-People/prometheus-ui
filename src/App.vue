@@ -17,6 +17,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import api from '@/api';
 import Footer from '@/components/Footer.vue';
 import SideBar from '@/components/SideBar.vue';
 import BreadCrumb from '@/components/BreadCrumb.vue';
@@ -35,6 +36,14 @@ export default {
     showSideBar() {
       return this.$route.name !== 'intro';
     },
+  },
+  async beforeCreate() {
+    try {
+      await api.listDIDs();
+      this.$router.push('/vault/dids');
+    } catch (err) {
+      // do nothing, the user has a vault already created
+    }
   },
 };
 </script>
