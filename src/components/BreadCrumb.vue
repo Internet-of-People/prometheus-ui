@@ -21,7 +21,9 @@ export default {
       return this.$route.meta.breadcrumb;
     },
     title() {
-      return this.$route.meta.title;
+      let { title } = this.$route.meta;
+      title += this.$route.params.id ? this.$route.params.id : '';
+      return title;
     },
     btn() {
       return this.$route.meta.action;

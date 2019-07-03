@@ -7,7 +7,7 @@
         <Tooltip :msg="msg" btnValue="OK"/>
         <FilterBar v-model="search"/>
         <Card v-for="did in filterList"
-          :did="did" :showDID="showDID" :key="did.id" />
+          :did="did" :key="did.id" />
       </div>
     </Content>
 </template>
@@ -53,11 +53,6 @@ export default {
     }).catch((err) => {
       console.err(err);
     });
-  },
-  methods: {
-    showDID() {
-      // console.log(`view DID${this.search}`);
-    },
   },
 };
 </script>
