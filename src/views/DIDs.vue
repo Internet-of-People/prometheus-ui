@@ -4,6 +4,7 @@
         <b-spinner variant="primary" class="mr-3" /> Loading...
       </div>
       <div v-else>
+        <Tooltip :msg="msg"/>
         <FilterBar v-model="search"/>
         <Card v-for="did in filterList"
           :did="did" :showDID="showDID" :key="did.id" />
@@ -16,17 +17,21 @@ import { mapGetters } from 'vuex';
 import Content from '@/components/Content.vue';
 import Card from '@/components/Card.vue';
 import FilterBar from '@/components/FilterBar.vue';
+import Tooltip from '@/components/Tooltip.vue';
 
 export default {
   components: {
     Content,
     Card,
     FilterBar,
+    Tooltip,
   },
   data() {
     return {
       loading: true,
       search: '',
+      // TODO: add relevant message here
+      msg: 'some tooltip msg',
     };
   },
   computed: {
