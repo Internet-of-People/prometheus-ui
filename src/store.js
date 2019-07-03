@@ -27,6 +27,12 @@ export default new Vuex.Store({
       const response = await api.listDIDs();
       context.commit('LIST_DIDS', response.data);
     },
+    async createDID(context) {
+      const response = await api.createDID();
+      if (response.status === 201) {
+        context.dispatch('listDIDs');
+      }
+    },
   },
   mutations: {
     GENERATE_PHRASE: (state, words) => {

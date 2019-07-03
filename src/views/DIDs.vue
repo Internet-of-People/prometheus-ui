@@ -4,7 +4,7 @@
         <b-spinner variant="primary" class="mr-3" /> Loading...
       </div>
       <div v-else>
-        <Tooltip :msg="msg"/>
+        <Tooltip :msg="msg" btnValue="OK"/>
         <FilterBar v-model="search"/>
         <Card v-for="did in filterList"
           :did="did" :showDID="showDID" :key="did.id" />
