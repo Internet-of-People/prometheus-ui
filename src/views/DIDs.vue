@@ -33,7 +33,11 @@ export default {
     ...mapGetters(['dids']),
     filterList() {
       const filterVal = this.search.toLowerCase();
-      return this.dids.filter(did => Object.values(did).some(val => val.toLowerCase().includes(filterVal)));
+      // fat arrow operator (=>) not used to avoid max-len lint issue
+      return this.dids.filter((did) => {
+        const filterfields = (({ id, alias }) => ({ id, alias }))(did);
+        return Object.values(filterfields).some(val => val.toLowerCase().includes(filterVal));
+      });
     },
   },
   beforeCreate() {
