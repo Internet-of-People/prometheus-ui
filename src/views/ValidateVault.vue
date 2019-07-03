@@ -25,7 +25,8 @@
           The provided phrase was invalid.
         </b-alert>
         <b-alert :show="showVaultInitError" variant="danger">
-          Something went wrong during vault initialization.
+          <strong>Something went wrong during vault initialization.</strong><br>
+          Response from API: {{ apiError }}
         </b-alert>
         <b-button @click="goBack" variant="light" class="mr-4">BACK</b-button>
         <b-button @click="createVault" variant="primary" :disabled="loading">
@@ -51,6 +52,7 @@ export default {
       showPhraseError: false,
       showVaultInitError: false,
       loading: false,
+      apiError: '',
     };
   },
   components: {
@@ -77,6 +79,7 @@ export default {
         this.showPhraseError = false;
         this.showVaultInitError = false;
         this.loading = true;
+        this.apiError = '';
       };
 
       reset();
@@ -91,7 +94,8 @@ export default {
 
       api.initVault(phrase).then(() => {
         this.$router.push('/vaultcreated');
-      }).catch(() => {
+      }).catch((err) => {
+        this.apiError = err.response.data;
         this.showVaultInitError = true;
         this.loading = false;
       });
