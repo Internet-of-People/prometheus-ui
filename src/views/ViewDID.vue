@@ -1,18 +1,36 @@
 <template>
-    <Content>
-        <img :src="did.avatar" />
-        <div>{{idPrefix}}:{{did.id}}</div>
-        <input v-model="alias"/>
-        <b-button @click="saveDID"
-            variant="primary" to="">
-            SAVE
+  <Content>
+    <b-container fluid>
+      <b-row class="my-1">
+        <b-img center :src="did.avatar" alt="Center image"></b-img>
+      </b-row>
+      <b-row class="my-1">
+        <b-col sm="3"><label>ID:</label></b-col>
+        <b-col sm="9"><label>{{idPrefix}}:{{did.id}}</label></b-col>
+      </b-row>
+      <b-row class="my-1">
+        <b-col sm="3"><label>LABEL:</label></b-col>
+        <b-col sm="9">
+          <label v-if="editAlias">{{did.alias}}
+             <fa @click="editAlias = !editAlias" icon="pen" />
+          </label>
+          <b-form-input v-else :model="alias" :type="type">
+          </b-form-input>
+        </b-col>
+      </b-row>
+      <b-row class="my-1">
+        <b-button @click="saveDID" variant="primary" to="/vault/dids">
+                SAVE
         </b-button>
-    </Content>
+      </b-row>
+    </b-container>
+  </Content>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
 import Content from '@/components/Content.vue';
+import api from '@/api';
 
 export default {
   components: {
@@ -20,12 +38,13 @@ export default {
   },
   data() {
     return {
+      // TODO: add specific call for loading did details
       loading: true,
       idPrefix: 'did:mercury',
       // TODO: add relevant message here
-      msg: 'some tooltip msg',
       id: this.$route.params.id,
       alias: '',
+      editAlias: true,
     };
   },
   computed: {
@@ -36,9 +55,7 @@ export default {
   },
   methods: {
     async saveDID() {
-      this.$store.dispatch('renameDIDAlias', { did: this.did, alias: this.alias }).then(() => {
-        this.$router.push('/vault/dids');
-      });
+      api.renameDIDAlias(this.did, this.alias);
     },
   },
 };
