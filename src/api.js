@@ -9,7 +9,7 @@ axios.defaults.crossDomain = true;
 
 export default {
   generateVault: async () => axios.post('/bip39'),
-  validatePhrase: async phrase => axios.post('/bip39/validate_phrase', phrase),
+  validatePhrase: async phrase => axios.post('/bip39/validate-phrase', phrase),
   initVault: async phrase => axios.post('/vault', phrase),
   listDIDs: async () => axios.get('/vault/dids'),
   createDID: async () => axios.post('/vault/dids'),

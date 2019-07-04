@@ -4,17 +4,23 @@
     :sub-title="'ID:'+did.id"
     :img-src="did.avatar"
     img-alt="Avatar Image"
-    img-left class="mb-3">
-    <b-link href="#" class="card-link">Key</b-link>
-    <b-link href="#" class="card-link">Claims</b-link>
-    <b-button class="float-right" @click="showDID"
-        :to="'/vault/dids/' + did.alias" variant="primary">VIEW
-       <fa icon="angle-right" />
+    img-left
+    class="mb-3">
+    <small>1 Key</small><br>
+    <small>42 Claims</small>
+    <b-button
+      class="float-right"
+      size="sm"
+      @click="showDID"
+      :to="`/vault/dids/${did.alias}`"
+      variant="primary">
+      VIEW <fa icon="angle-right" />
     </b-button>
   </b-card>
 </template>
 
 <script>
+// TODO: more compact design for the card
 export default {
   name: 'Card',
   props: {
@@ -30,5 +36,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '@/assets/style/app.scss';
 @import '@/assets/style/dids.scss';
 </style>

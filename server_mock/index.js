@@ -23,7 +23,7 @@ app.post('/bip39', async (req, res) => {
   res.status(200).json(['Tony', 'Lisa', 'Michael', 'Ginger', 'Food', 'Tony', 'Lisa', 'Michael', 'Ginger', 'Food', 'Tony', 'Lisa', 'Michael', 'Ginger', 'Food', 'Tony', 'Lisa', 'Michael', 'Ginger', 'Food', 'Tony', 'Lisa', 'Michael', 'Ginger']);
 });
 
-app.post('/bip39/validate_phrase', async (req, res) => {
+app.post('/bip39/validate-phrase', async (req, res) => {
   await sleep(SLEEP_TIME);
   res.status(200).json(true);
 });

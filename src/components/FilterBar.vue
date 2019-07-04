@@ -1,9 +1,12 @@
 <template>
-    <div>
-        <input type="text" v-bind:value="value"
-            v-on:input="$emit('input', $event.target.value)"
-            placeholder="Type here to filter your IDs" />
-    </div>
+  <div>
+      <input
+        type="text"
+        :value="value"
+        v-on:input="$emit('input', $event.target.value)"
+        placeholder="Type here to filter your DIDs"
+      />
+  </div>
 </template>
 
 <script>

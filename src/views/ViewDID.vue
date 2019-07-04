@@ -1,29 +1,29 @@
 <template>
   <Content>
-    <b-container fluid>
-      <b-row class="my-1">
-        <b-img center :src="did.avatar" alt="Center image"></b-img>
-      </b-row>
-      <b-row class="my-1">
-        <b-col sm="3"><label>ID:</label></b-col>
-        <b-col sm="9"><label>{{idPrefix}}:{{did.id}}</label></b-col>
-      </b-row>
-      <b-row class="my-1">
-        <b-col sm="3"><label>LABEL:</label></b-col>
-        <b-col sm="9">
-          <label v-if="editAlias">{{did.alias}}
-             <fa @click="editAlias = !editAlias" icon="pen" />
-          </label>
-          <b-form-input v-else :model="alias" :type="type">
-          </b-form-input>
-        </b-col>
-      </b-row>
-      <b-row class="my-1">
+    <b-row>
+      <b-col cols="12"><b-img :src="did.avatar"></b-img></b-col>
+    </b-row>
+    <b-row class="mt-3">
+      <b-col cols="1"><label>ID:</label></b-col>
+      <b-col cols="11"><label>{{idPrefix}}:{{did.id}}</label></b-col>
+    </b-row>
+    <b-row>
+      <b-col cols="1"><label>LABEL:</label></b-col>
+      <b-col cols="11">
+        <label v-if="editAlias">{{did.alias}}
+            <fa @click="editAlias = !editAlias" icon="pen" />
+        </label>
+        <b-form-input v-else :model="alias">
+        </b-form-input>
+      </b-col>
+    </b-row>
+    <b-row class="mt-3">
+      <b-col>
         <b-button @click="saveDID" variant="primary" to="/vault/dids">
-                SAVE
+          SAVE
         </b-button>
-      </b-row>
-    </b-container>
+      </b-col>
+    </b-row>
   </Content>
 </template>
 

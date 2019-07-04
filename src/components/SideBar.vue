@@ -59,6 +59,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '@/assets/style/app.scss';
 img {
   width: 3rem;
 }

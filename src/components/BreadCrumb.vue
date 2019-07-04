@@ -30,6 +30,7 @@ export default {
     },
   },
   methods: {
+    // TODO: remove this...
     onClick() {
       api[this.btn.apiCall]().then(() => {
         api.listDIDs().then((response) => {

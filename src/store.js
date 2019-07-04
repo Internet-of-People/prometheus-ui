@@ -16,6 +16,7 @@ export default new Vuex.Store({
     dids: state => state.dids,
   },
   actions: {
+    // TODO: generic error handling for all API calls
     async generatePhraseAsync(context) {
       const response = await api.generateVault();
       context.commit('GENERATE_PHRASE', response.data);
@@ -23,7 +24,8 @@ export default new Vuex.Store({
     cancelVaultCreation(context) {
       context.commit('CANCEL_VAULT_CREATION');
     },
-    listDIDs(context, response) {
+    async listDIDs(context) {
+      const response = await api.listDIDs();
       context.commit('LIST_DIDS', response.data);
     },
   },

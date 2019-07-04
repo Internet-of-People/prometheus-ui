@@ -1,8 +1,8 @@
 <template>
     <b-alert :show="show" variant="info">
-        <p>{{msg}}</p>
-        <b-button variant="primary" to="" @click="dismissTooltip">
-            {{btnValue}}
+        <p><slot></slot></p>
+        <b-button variant="primary" @click="show=false">
+            {{ text }}
         </b-button>
     </b-alert>
 </template>
@@ -12,20 +12,15 @@ export default {
   name: 'Tooltip',
   props: {
     msg: String,
-    btnValue: {
+    text: {
       type: String,
-      default: 'OK',
+      default: 'DISMISS',
     },
   },
   data() {
     return {
       show: true,
     };
-  },
-  methods: {
-    dismissTooltip() {
-      this.show = false;
-    },
   },
 };
 </script>

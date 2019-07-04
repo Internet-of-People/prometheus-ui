@@ -84,21 +84,22 @@ export default {
 
       reset();
       const phrase = this.words.map(word => word.trim());
-      const response = await api.validatePhrase(phrase);
+      try {
+        const response = await api.validatePhrase(phrase);
 
-      if (!response.data) {
-        this.showPhraseError = true;
-        this.loading = false;
-        return;
-      }
+        if (!response.data) {
+          this.showPhraseError = true;
+          this.loading = false;
+          return;
+        }
 
-      api.initVault(phrase).then(() => {
+        await api.initVault(phrase);
         this.$router.push('/vaultcreated');
-      }).catch((err) => {
-        this.apiError = err.response.data;
+      } catch (err) {
+        this.apiError = `HTTP ${err.response.status} - ${err.response.data}`;
         this.showVaultInitError = true;
         this.loading = false;
-      });
+      }
     },
   },
 };
