@@ -1,5 +1,5 @@
 <template>
-    <b-alert v-show="show" show variant="info">
+    <b-alert :show="show" variant="info">
         <p>{{msg}}</p>
         <b-button variant="primary" to="" @click="dismissTooltip">
             {{btnValue}}

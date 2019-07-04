@@ -1,23 +1,16 @@
 <template>
-    <div class="card">
-        <div class="inner-card-block">
-            <img :src="did.avatar" />
-            <div class="float-right">
-            <h3>{{did.alias}}</h3>
-            <div class="card-info">ID:{{did.id}}</div>
-            </div>
-        </div>
-        <div class="inner-card-block">
-            <div class="card-info">
-                <div>Key</div>
-                <div>Claims</div>
-            </div>
-            <b-button class="float-right" @click="showDID" variant="primary">
-                VIEW
-                <fa icon="angle-right" />
-            </b-button>
-        </div>
-    </div>
+  <b-card
+    :title="did.alias"
+    :sub-title="'ID:'+did.id"
+    :img-src="did.avatar"
+    img-alt="Avatar Image"
+    img-left class="mb-3">
+    <b-link href="#" class="card-link">Key</b-link>
+    <b-link href="#" class="card-link">Claims</b-link>
+    <b-button class="float-right" @click="showDID" variant="primary">VIEW
+       <fa icon="angle-right" />
+    </b-button>
+  </b-card>
 </template>
 
 <script>

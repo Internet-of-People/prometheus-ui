@@ -18,6 +18,7 @@ import Content from '@/components/Content.vue';
 import Card from '@/components/Card.vue';
 import FilterBar from '@/components/FilterBar.vue';
 import Tooltip from '@/components/Tooltip.vue';
+import api from '@/api';
 
 export default {
   components: {
@@ -46,8 +47,11 @@ export default {
     },
   },
   beforeCreate() {
-    this.$store.dispatch('listDIDs').then(() => {
+    api.listDIDs().then((response) => {
+      this.$store.dispatch('listDIDs', response);
       this.loading = false;
+    }).catch((err) => {
+      console.err(err);
     });
   },
   methods: {

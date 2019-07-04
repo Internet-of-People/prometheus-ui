@@ -12,6 +12,8 @@
 </template>
 
 <script>
+import api from '@/api';
+
 export default {
   name: 'BreadCrumb',
   computed: {
@@ -27,7 +29,15 @@ export default {
   },
   methods: {
     onClick() {
-      this.$store.dispatch(this.btn.apiCall);
+      api[this.btn.apiCall]().then(() => {
+        api.listDIDs().then((response) => {
+          this.$store.dispatch('listDIDs', response);
+        }).catch((err) => {
+          console.err(err);
+        });
+      }).catch((err) => {
+        console.err(err);
+      });
     },
   },
 };

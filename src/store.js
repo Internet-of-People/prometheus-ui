@@ -23,15 +23,8 @@ export default new Vuex.Store({
     cancelVaultCreation(context) {
       context.commit('CANCEL_VAULT_CREATION');
     },
-    async listDIDs(context) {
-      const response = await api.listDIDs();
+    listDIDs(context, response) {
       context.commit('LIST_DIDS', response.data);
-    },
-    async createDID(context) {
-      const response = await api.createDID();
-      if (response.status === 201) {
-        context.dispatch('listDIDs');
-      }
     },
   },
   mutations: {
@@ -40,6 +33,7 @@ export default new Vuex.Store({
     },
     CANCEL_VAULT_CREATION: (state) => {
       state.words = [];
+      state.dids = [];
     },
     LIST_DIDS: (state, dids) => {
       state.dids = dids;
