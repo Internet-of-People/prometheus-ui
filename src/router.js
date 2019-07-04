@@ -76,6 +76,10 @@ export default new Router({
         breadcrumb: [],
         title: 'VAULT / DIDs',
         homeUrl: SIGNED_IN_HOME_URL,
+        // TODO: split as different component
+        action: {
+          name: 'CREATE NEW ID', apiCall: 'createDID',
+        },
       },
     },
   ],
