@@ -7,7 +7,8 @@
     img-left class="mb-3">
     <b-link href="#" class="card-link">Key</b-link>
     <b-link href="#" class="card-link">Claims</b-link>
-    <b-button class="float-right" @click="showDID" variant="primary">VIEW
+    <b-button class="float-right" @click="showDID"
+        :to="'/vault/dids/' + did.alias" variant="primary">VIEW
        <fa icon="angle-right" />
     </b-button>
   </b-card>

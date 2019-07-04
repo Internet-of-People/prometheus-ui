@@ -5,6 +5,7 @@ import CreateNewVault from '@/views/CreateNewVault.vue';
 import ValidateVault from '@/views/ValidateVault.vue';
 import VaultCreation from '@/views/VaultCreation.vue';
 import DIDs from '@/views/DIDs.vue';
+import ViewDID from '@/views/ViewDID.vue';
 
 Vue.use(Router);
 
@@ -80,6 +81,19 @@ export default new Router({
         action: {
           name: 'CREATE NEW ID', apiCall: 'createDID',
         },
+      },
+    },
+    {
+      path: '/vault/dids/:id',
+      name: 'did',
+      params: {
+        id: '',
+      },
+      component: ViewDID,
+      meta: {
+        requiresAuth: true,
+        title: 'VAULT / DIDs / ',
+        homeUrl: SIGNED_IN_HOME_URL,
       },
     },
   ],

@@ -4,7 +4,7 @@
       <b-col>{{ title }}</b-col>
       <b-button :ref="btn.id" v-if="btn" @click="onClick"
         class="float-right" variant="primary" to="">
-        {{btn.name}}
+        {{ btn.name }}
       </b-button>
     </b-row>
     <b-breadcrumb :items="breadcrumb" class="small"></b-breadcrumb>
@@ -21,7 +21,9 @@ export default {
       return this.$route.meta.breadcrumb;
     },
     title() {
-      return this.$route.meta.title;
+      let { title } = this.$route.meta;
+      title += this.$route.params.id ? this.$route.params.id : '';
+      return title;
     },
     btn() {
       return this.$route.meta.action;
