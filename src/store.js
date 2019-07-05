@@ -9,11 +9,13 @@ export default new Vuex.Store({
     appName: 'PROMETHEUS',
     words: [],
     dids: [],
+    activeDid: undefined,
   },
   getters: {
     appName: state => state.appName,
     words: state => state.words,
     dids: state => state.dids,
+    activeDid: state => state.activeDid,
   },
   actions: {
     // TODO: generic error handling for all API calls
@@ -24,9 +26,17 @@ export default new Vuex.Store({
     cancelVaultCreation(context) {
       context.commit('CANCEL_VAULT_CREATION');
     },
+    async getDID(context, did) {
+      const response = await api.getDID(did);
+      context.commit('GET_DID', response.data);
+    },
     async listDIDs(context) {
       const response = await api.listDIDs();
       context.commit('LIST_DIDS', response.data);
+    },
+    async renameDIDAlias(context, did, alias) {
+      await api.renameDIDAlias(this.activeDid.id, this.alias);
+      context.commit('RENAME_DID_ALIAS', did, alias);
     },
   },
   mutations: {
@@ -39,6 +49,18 @@ export default new Vuex.Store({
     },
     LIST_DIDS: (state, dids) => {
       state.dids = dids;
+    },
+    GET_DID: (state, did) => {
+      state.activeDid = did;
+    },
+    RENAME_DID_ALIAS: (state, didId, alias) => {
+      state.dids.map((did) => {
+        if (did.id === didId) {
+          did.alias = alias;
+        }
+        return did;
+      });
+      state.activeDid.alias = alias;
     },
   },
 });

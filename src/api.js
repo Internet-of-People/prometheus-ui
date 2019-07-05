@@ -12,6 +12,8 @@ export default {
   validatePhrase: async phrase => axios.post('/bip39/validate-phrase', phrase),
   initVault: async phrase => axios.post('/vault', phrase),
   listDIDs: async () => axios.get('/vault/dids'),
+  getDID: async didId => axios.get(`/vault/dids/${didId}`),
   createDID: async () => axios.post('/vault/dids'),
-  renameDIDAlias: async (did, alias) => axios.put(`/vault/dids/${did}/alias`, alias),
+  renameDIDAlias: async (didId, alias) => axios.put(`/vault/dids/${didId}/alias`, alias),
+  changeDIDAvatar: async (didId, avatar) => axios.put(`/vault/dids/${didId}/avatar`, avatar),
 };

@@ -12,6 +12,7 @@ Vue.use(Router);
 const SIGNED_IN_HOME_URL = '/vault/dids';
 const GUEST_HOME_URL = '/';
 
+// TODO: we don't need all properties here...
 export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,

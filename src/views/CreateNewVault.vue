@@ -5,10 +5,7 @@
     </b-alert>
     <b-row class="d-flex justify-content-start">
       <b-col>
-        <div v-if="loading" class="d-flex align-items-center">
-          <b-spinner variant="primary" class="mr-3" /> Loading...
-        </div>
-
+        <Loader :loading="loading" />
         <template v-for="(word,index) in words">
           <b-input-group
             size="sm"
@@ -36,6 +33,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import Content from '@/components/Content.vue';
+import Loader from '@/components/Loader.vue';
 
 export default {
   name: 'CreateNewVault',
@@ -46,6 +44,7 @@ export default {
   },
   components: {
     Content,
+    Loader,
   },
   computed: {
     ...mapGetters(['words']),

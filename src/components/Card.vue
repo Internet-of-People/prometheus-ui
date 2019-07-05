@@ -12,7 +12,7 @@
       class="float-right"
       size="sm"
       @click="showDID"
-      :to="`/vault/dids/${did.alias}`"
+      :to="`/vault/dids/${did.id}`"
       variant="primary">
       VIEW <fa icon="angle-right" />
     </b-button>

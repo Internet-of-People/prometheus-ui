@@ -1,9 +1,7 @@
 <template>
     <Content>
-      <div v-if="loading" class="d-flex align-items-center">
-        <b-spinner variant="primary" class="mr-3" /> Loading...
-      </div>
-      <div v-else>
+      <Loader :loading="loading" />
+      <div v-if="!loading">
         <template v-if="dids.length">
           <Tooltip v-if="dids.length">
             Here you can view your DIDs. Creating a new DID takes seconds. <br>
@@ -41,6 +39,7 @@ import Content from '@/components/Content.vue';
 import Card from '@/components/Card.vue';
 import FilterBar from '@/components/FilterBar.vue';
 import Tooltip from '@/components/Tooltip.vue';
+import Loader from '@/components/Loader.vue';
 import api from '@/api';
 
 export default {
@@ -49,6 +48,7 @@ export default {
     Card,
     FilterBar,
     Tooltip,
+    Loader,
   },
   data() {
     return {
