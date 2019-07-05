@@ -34,9 +34,13 @@ export default new Vuex.Store({
       const response = await api.listDIDs();
       context.commit('LIST_DIDS', response.data);
     },
-    async renameDIDAlias(context, did, alias) {
-      await api.renameDIDAlias(this.activeDid.id, this.alias);
-      context.commit('RENAME_DID_ALIAS', did, alias);
+    async renameDIDAlias(context, payload) {
+      await api.renameDIDAlias(payload.didId, JSON.stringify(payload.alias));
+      context.commit('RENAME_DID_ALIAS', payload);
+    },
+    async changeDIDAvatar(context, payload) {
+      await api.changeDIDAvatar(payload.didId, payload.avatar);
+      context.commit('CHANGE_DID_AVATAR', payload);
     },
   },
   mutations: {
@@ -53,14 +57,23 @@ export default new Vuex.Store({
     GET_DID: (state, did) => {
       state.activeDid = did;
     },
-    RENAME_DID_ALIAS: (state, didId, alias) => {
+    RENAME_DID_ALIAS: (state, payload) => {
       state.dids.map((did) => {
-        if (did.id === didId) {
-          did.alias = alias;
+        if (did.id === payload.didId) {
+          did.alias = payload.alias;
         }
         return did;
       });
-      state.activeDid.alias = alias;
+      state.activeDid.alias = payload.alias;
+    },
+    CHANGE_DID_AVATAR: (state, payload) => {
+      state.dids.map((did) => {
+        if (did.id === payload.didId) {
+          did.avatar = payload.avatar;
+        }
+        return did;
+      });
+      state.activeDid.avatar = payload.avatar;
     },
   },
 });

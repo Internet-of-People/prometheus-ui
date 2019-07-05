@@ -69,7 +69,10 @@ export default {
   methods: {
     renameAlias() {
       this.savingAlias = true;
-      this.$store.dispatch('renameDIDAlias', this.activeDid.id, this.alias).then(() => {
+      this.$store.dispatch('renameDIDAlias', {
+        didId: this.activeDid.id,
+        alias: this.alias,
+      }).then(() => {
         this.editingAlias = false;
         this.savingAlias = false;
       });

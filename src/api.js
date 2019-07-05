@@ -4,16 +4,21 @@ import VueAxios from 'vue-axios';
 
 Vue.use(VueAxios, axios);
 
-axios.defaults.baseURL = 'http://127.0.0.1:8080';
-axios.defaults.crossDomain = true;
+const api = axios.create({
+  baseURL: 'http://127.0.0.1:8080',
+  crossDomain: true,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
 
 export default {
-  generateVault: async () => axios.post('/bip39'),
-  validatePhrase: async phrase => axios.post('/bip39/validate-phrase', phrase),
-  initVault: async phrase => axios.post('/vault', phrase),
-  listDIDs: async () => axios.get('/vault/dids'),
-  getDID: async didId => axios.get(`/vault/dids/${didId}`),
-  createDID: async () => axios.post('/vault/dids'),
-  renameDIDAlias: async (didId, alias) => axios.put(`/vault/dids/${didId}/alias`, alias),
-  changeDIDAvatar: async (didId, avatar) => axios.put(`/vault/dids/${didId}/avatar`, avatar),
+  generateVault: async () => api.post('/bip39'),
+  validatePhrase: async phrase => api.post('/bip39/validate-phrase', phrase),
+  initVault: async phrase => api.post('/vault', phrase),
+  listDIDs: async () => api.get('/vault/dids'),
+  getDID: async didId => api.get(`/vault/dids/${didId}`),
+  createDID: async () => api.post('/vault/dids'),
+  renameDIDAlias: async (didId, alias) => api.put(`/vault/dids/${didId}/alias`, alias),
+  changeDIDAvatar: async (didId, avatar) => api.put(`/vault/dids/${didId}/avatar`, avatar),
 };
