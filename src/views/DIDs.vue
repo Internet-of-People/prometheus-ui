@@ -26,7 +26,12 @@
             </b-button>
           </b-alert>
         </template>
-        <b-alert show variant="warning" v-if="!filteredDids.length" class="mt-3">
+        <b-alert
+          show
+          variant="warning"
+          v-if="!filteredDids.length && this.searchTerm.length"
+          class="mt-3"
+        >
           No DIDs found with the term "{{ this.searchTerm }}"
         </b-alert>
       </div>
