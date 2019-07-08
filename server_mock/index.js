@@ -75,3 +75,8 @@ app.put('/vault/dids/:did/alias', async (req, res) => {
   await sleep(SLEEP_TIME);
   res.status(200).json('');
 });
+
+app.put('/vault/dids/:did/avatar', async (req, res) => {
+  await sleep(SLEEP_TIME);
+  res.status(200).json('');
+});
