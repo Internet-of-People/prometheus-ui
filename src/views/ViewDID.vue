@@ -3,23 +3,25 @@
     <Loader :loading="loading" />
     <template v-if="!loading">
       <b-row>
-        <b-col style="margin: 0 auto; display: block;" cols="12">
-          <b-img center :src="avatar"></b-img>
+        <b-col cols="12"><b-img :src="avatar"/></b-col>
+        <b-col>
           <b-button
           center
           size="sm"
           variant="outline-primary"
-          class="mt-3 center-align"
+          class="mt-3"
           @click="$refs.avatarSelector.click()"
-          :disabled="savingAlias">
+          :disabled="savingAvatar">
           CHANGE AVATAR
-            <input ref="avatarSelector"
-            type="file" :v-model="avatar"
-            style='display: none;'
-            accept=".png"
-            @change="changeAvatar" />
-            <b-spinner small v-if="savingAvatar" />
           </b-button>
+          <input
+          ref="avatarSelector"
+          type="file"
+          :v-model="avatar"
+          style='display: none;'
+          accept=".png"
+          @change="changeAvatar" />
+          <b-spinner small v-if="savingAvatar" />
         </b-col>
       </b-row>
       <b-row class="mt-3">
@@ -112,7 +114,7 @@ export default {
         }).then(() => {
           this.savingAvatar = false;
         });
-      };
+      }.bind(this);
     },
   },
 };
@@ -123,11 +125,5 @@ img{
     height: 80px;
     width: 80px;
     align-items: center;
-}
-
-/* not available in vue-bootstrap btn */
-.center-align{
-  display: block;
-  margin: 0 auto;
 }
 </style>
