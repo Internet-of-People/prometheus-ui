@@ -1,20 +1,22 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Introduction from '@/views/Introduction.vue';
-import CreateNewVault from '@/views/CreateNewVault.vue';
-import ValidateVault from '@/views/ValidateVault.vue';
-import VaultCreation from '@/views/VaultCreation.vue';
-import DIDs from '@/views/DIDs.vue';
-import ViewDID from '@/views/ViewDID.vue';
-import CreateClaim from '@/views/claim/CreateClaim.vue';
-import ListClaims from '@/views/claim/ListClaims.vue';
+import {
+  Introduction,
+  CreateNewVault,
+  ValidateVault,
+  VaultCreation,
+  DIDs,
+  ViewDID,
+  CreateClaim,
+  ListClaims,
+} from '@/views';
 
 Vue.use(Router);
 
 const SIGNED_IN_HOME_URL = '/vault/dids';
 const GUEST_HOME_URL = '/';
 
-// TODO: we don't need all properties here...
+// TODO: do we need all properties here?
 export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
@@ -117,6 +119,10 @@ export default new Router({
         requiresAuth: true,
         title: 'VAULT / CLAIMS',
         homeUrl: SIGNED_IN_HOME_URL,
+        // TODO: split as different component
+        topBarButton: {
+          name: 'CREATE NEW CLAIM', apiCall: 'createClaim',
+        },
       },
     },
   ],

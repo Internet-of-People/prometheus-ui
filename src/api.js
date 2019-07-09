@@ -21,4 +21,5 @@ export default {
   createDID: async () => api.post('/vault/dids'),
   renameDIDAlias: async (didId, alias) => api.put(`/vault/dids/${didId}/alias`, alias),
   changeDIDAvatar: async (didId, avatar) => api.put(`/vault/dids/${didId}/avatar`, avatar),
+  listClaims: async () => api.get('/claims'),
 };

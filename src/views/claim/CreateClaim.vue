@@ -72,7 +72,7 @@
 </template>
 
 <script>
-import Tooltip from '@/components/Tooltip.vue';
+import { Tooltip } from '@/components';
 
 export default {
   components: {

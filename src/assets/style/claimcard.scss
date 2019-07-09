@@ -1,0 +1,35 @@
+@import '@/assets/style/_variables.scss';
+
+.card {
+  border: 0.5px solid rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 40%;
+  margin: 1rem 1.25rem 1rem 0;
+  display: inline-block;
+  position: relative;
+
+  img{
+    width: 5rem;
+    height: 5rem;
+    margin-left: 1rem;
+    margin-top: 1rem;
+  }
+
+  .signatures {
+    .fa-check-circle, small.signed {
+      color: $primary;
+    }
+
+    .fa-circle-notch, small.pending {
+      /*TODO*/
+      color: orange;
+    }
+  }
+
+  /* TODO: align items in this accurately middle */
+  .view-button {
+    position: absolute;
+    top: 40%;
+    right: 1rem;
+  }
+}

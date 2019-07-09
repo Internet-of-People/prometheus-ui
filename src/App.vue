@@ -20,11 +20,13 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import Footer from '@/components/Footer.vue';
-import SideBar from '@/components/SideBar.vue';
-import TopBar from '@/components/TopBar.vue';
-import Loader from '@/components/Loader.vue';
-import Content from '@/components/Content.vue';
+import {
+  Content,
+  Loader,
+  Footer,
+  SideBar,
+  TopBar,
+} from '@/components';
 
 export default {
   name: 'App',
@@ -50,7 +52,11 @@ export default {
         this.$router.push('/vault/dids');
         return;
       }
-      this.$store.dispatch('listDIDs').then(() => {
+
+      Promise.all([
+        this.$store.dispatch('listDIDs'),
+        this.$store.dispatch('listClaims'),
+      ]).then(() => {
         this.$store.commit('APP_LOADING', false);
       });
     }).catch(() => {

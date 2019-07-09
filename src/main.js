@@ -2,13 +2,21 @@ import Vue from 'vue';
 import BootstrapVue from 'bootstrap-vue';
 import VeeValidate from 'vee-validate';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import {
+  faAngleRight,
+  faCheckCircle,
+  faCircleNotch,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import App from './App.vue';
 import router from './router';
 import store from './store';
 
-library.add(faAngleRight);
+library.add([
+  faAngleRight,
+  faCheckCircle,
+  faCircleNotch,
+]);
 Vue.component('fa', FontAwesomeIcon);
 
 Vue.use(BootstrapVue);

@@ -40,7 +40,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import Loader from '@/components/Loader.vue';
+import { Loader } from '@/components';
 
 export default {
   components: {

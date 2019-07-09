@@ -7,7 +7,7 @@
           avatar and alias, but both can easily be changed on the DID's page.
         </Tooltip>
         <FilterBar v-if="dids.length" v-model="searchTerm" />
-        <Card
+        <DidCard
           v-for="did in filteredDids"
           :did="did"
           :key="did.id"
@@ -37,14 +37,12 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import Card from '@/components/Card.vue';
-import FilterBar from '@/components/FilterBar.vue';
-import Tooltip from '@/components/Tooltip.vue';
+import { DidCard, FilterBar, Tooltip } from '@/components';
 import api from '@/api';
 
 export default {
   components: {
-    Card,
+    DidCard,
     FilterBar,
     Tooltip,
   },

@@ -10,6 +10,7 @@ export default new Vuex.Store({
     appLoading: true,
     words: [],
     dids: [],
+    claims: [],
     activeDid: undefined,
   },
   getters: {
@@ -17,6 +18,7 @@ export default new Vuex.Store({
     appLoading: state => state.appLoading,
     words: state => state.words,
     dids: state => state.dids,
+    claims: state => state.claims,
     activeDid: state => state.activeDid,
   },
   actions: {
@@ -46,6 +48,10 @@ export default new Vuex.Store({
     async changeDIDAvatar(context, payload) {
       await api.changeDIDAvatar(payload.didId, payload.avatar);
       context.commit('CHANGE_DID_AVATAR', payload);
+    },
+    async listClaims(context) {
+      const response = await api.listClaims();
+      context.commit('LIST_CLAIMS', response.data);
     },
   },
   mutations: {
@@ -82,6 +88,9 @@ export default new Vuex.Store({
         return did;
       });
       state.activeDid.avatar = payload.avatar;
+    },
+    LIST_CLAIMS: (state, claims) => {
+      state.claims = claims;
     },
   },
 });
