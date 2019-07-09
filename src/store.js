@@ -7,18 +7,23 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     appName: 'PROMETHEUS',
+    appLoading: true,
     words: [],
     dids: [],
     activeDid: undefined,
   },
   getters: {
     appName: state => state.appName,
+    appLoading: state => state.appLoading,
     words: state => state.words,
     dids: state => state.dids,
     activeDid: state => state.activeDid,
   },
   actions: {
     // TODO: generic error handling for all API calls
+    async authenticate() { // TODO: check it in a different way
+      await api.listDIDs();
+    },
     async generatePhraseAsync(context) {
       const response = await api.generateVault();
       context.commit('GENERATE_PHRASE', response.data);
@@ -44,6 +49,9 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    APP_LOADING: (state, loading) => {
+      state.appLoading = loading;
+    },
     GENERATE_PHRASE: (state, words) => {
       state.words = words;
     },

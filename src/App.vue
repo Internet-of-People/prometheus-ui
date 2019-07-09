@@ -5,8 +5,11 @@
         <SideBar :app-name="appName" />
       </b-col>
       <b-col v-bind:cols="showSideBar?10:12" class="m-0 p-0">
-        <BreadCrumb v-if="showSideBar" />
-        <router-view :app-name="appName" />
+        <TopBar v-if="showSideBar" />
+        <Content>
+          <Loader :loading="appLoading" />
+          <router-view v-if="!appLoading" :app-name="appName" />
+        </Content>
       </b-col>
     </b-row>
     <b-row align-v="end">
@@ -17,33 +20,45 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import api from '@/api';
 import Footer from '@/components/Footer.vue';
 import SideBar from '@/components/SideBar.vue';
-import BreadCrumb from '@/components/BreadCrumb.vue';
+import TopBar from '@/components/TopBar.vue';
+import Loader from '@/components/Loader.vue';
+import Content from '@/components/Content.vue';
 
 export default {
   name: 'App',
   components: {
     Footer,
     SideBar,
-    BreadCrumb,
+    TopBar,
+    Loader,
+    Content,
   },
   computed: {
     ...mapGetters([
       'appName',
+      'appLoading',
     ]),
     showSideBar() {
       return this.$route.name !== 'intro';
     },
   },
-  async beforeCreate() {
-    try {
-      await api.listDIDs();
-      this.$router.push('/vault/dids');
-    } catch (err) {
-      // do nothing, the user has a vault already created
-    }
+  beforeCreate() {
+    this.$store.dispatch('authenticate').then(() => {
+      if (!this.$route.meta.requiresAuth) {
+        this.$router.push('/vault/dids');
+        return;
+      }
+      this.$store.dispatch('listDIDs').then(() => {
+        this.$store.commit('APP_LOADING', false);
+      });
+    }).catch(() => {
+      this.$store.commit('APP_LOADING', false);
+      if (this.$route.meta.requiresAuth) {
+        this.$router.push('/');
+      }
+    });
   },
 };
 </script>

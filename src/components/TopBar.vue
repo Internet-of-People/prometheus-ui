@@ -2,9 +2,9 @@
   <b-container class="p-2 m-0" fluid>
     <b-row no-gutters>
       <b-col>{{ title }}</b-col>
-      <b-button :ref="btn.id" v-if="btn" @click="onClick"
-        class="float-right" variant="primary" to="">
-        {{ btn.name }}
+      <b-button v-if="topBarButton" @click="onClick"
+        class="float-right" variant="primary">
+        {{ topBarButton.name }}
       </b-button>
     </b-row>
     <b-breadcrumb :items="breadcrumb" class="small"></b-breadcrumb>
@@ -25,8 +25,8 @@ export default {
       title += this.$route.params.id ? this.$route.params.id : '';
       return title;
     },
-    btn() {
-      return this.$route.meta.action;
+    topBarButton() {
+      return this.$route.meta.topBarButton;
     },
   },
   methods: {

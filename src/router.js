@@ -6,6 +6,8 @@ import ValidateVault from '@/views/ValidateVault.vue';
 import VaultCreation from '@/views/VaultCreation.vue';
 import DIDs from '@/views/DIDs.vue';
 import ViewDID from '@/views/ViewDID.vue';
+import CreateClaim from '@/views/claim/CreateClaim.vue';
+import ListClaims from '@/views/claim/ListClaims.vue';
 
 Vue.use(Router);
 
@@ -79,7 +81,7 @@ export default new Router({
         title: 'VAULT / DIDs',
         homeUrl: SIGNED_IN_HOME_URL,
         // TODO: split as different component
-        action: {
+        topBarButton: {
           name: 'CREATE NEW ID', apiCall: 'createDID',
         },
       },
@@ -94,6 +96,26 @@ export default new Router({
       meta: {
         requiresAuth: true,
         title: 'VAULT / DIDs / ',
+        homeUrl: SIGNED_IN_HOME_URL,
+      },
+    },
+    {
+      path: '/vault/claims/create',
+      name: 'createclaim',
+      component: CreateClaim,
+      meta: {
+        requiresAuth: true,
+        title: 'VAULT / CLAIMS / CREATE NEW',
+        homeUrl: SIGNED_IN_HOME_URL,
+      },
+    },
+    {
+      path: '/vault/claims',
+      name: 'listclaims',
+      component: ListClaims,
+      meta: {
+        requiresAuth: true,
+        title: 'VAULT / CLAIMS',
         homeUrl: SIGNED_IN_HOME_URL,
       },
     },

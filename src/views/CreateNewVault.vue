@@ -1,5 +1,5 @@
 <template>
-  <Content>
+  <div>
     <b-alert show variant="warning">
       Please note down all the following phrases in correct order.
     </b-alert>
@@ -27,12 +27,11 @@
         </b-button>
       </b-col>
     </b-row>
-  </Content>
+  </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
-import Content from '@/components/Content.vue';
 import Loader from '@/components/Loader.vue';
 
 export default {
@@ -43,7 +42,6 @@ export default {
     };
   },
   components: {
-    Content,
     Loader,
   },
   computed: {
