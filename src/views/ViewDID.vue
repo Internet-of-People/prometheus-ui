@@ -3,25 +3,27 @@
     <Loader :loading="loading" />
     <template v-if="!loading">
       <b-row>
-        <b-col cols="12"><b-img :src="avatar"/></b-col>
+        <b-col cols="12"><b-img :src="activeDid.avatar"/></b-col>
         <b-col>
           <b-button
-          center
-          size="sm"
-          variant="outline-primary"
-          class="mt-3"
-          @click="$refs.avatarSelector.click()"
-          :disabled="savingAvatar">
-          CHANGE AVATAR
+            center
+            size="sm"
+            variant="outline-primary"
+            class="mt-3"
+            @click="$refs.avatarSelector.click()"
+            :disabled="savingAvatar"
+          >
+            CHANGE AVATAR (MAX 64Kb)
+            <b-spinner small v-if="savingAvatar" />
           </b-button>
           <input
-          ref="avatarSelector"
-          type="file"
-          :v-model="avatar"
-          style='display: none;'
-          accept=".png"
-          @change="changeAvatar" />
-          <b-spinner small v-if="savingAvatar" />
+            ref="avatarSelector"
+            type="file"
+            :v-model="avatar"
+            class="d-none"
+            accept=".png"
+            @change="changeAvatar" />
+
         </b-col>
       </b-row>
       <b-row class="mt-3">
@@ -51,6 +53,12 @@
             SAVE
             <b-spinner small v-if="savingAlias" />
           </b-button>
+        </b-col>
+      </b-row>
+      <b-row class="clear mt-4">
+        <b-col>
+          <hr>
+          <b-button to="/vault/dids" variant="light" class="mr-4">BACK TO DIDS</b-button>
         </b-col>
       </b-row>
     </template>
@@ -106,7 +114,7 @@ export default {
       const file = event.currentTarget.files[0];
       const reader = new FileReader();
       reader.readAsDataURL(file);
-      reader.onload = function onAvatarLoad(e) {
+      reader.onload = (e) => {
         this.savingAvatar = true;
         this.$store.dispatch('changeDIDAvatar', {
           didId: this.activeDid.id,
@@ -114,7 +122,7 @@ export default {
         }).then(() => {
           this.savingAvatar = false;
         });
-      }.bind(this);
+      };
     },
   },
 };
