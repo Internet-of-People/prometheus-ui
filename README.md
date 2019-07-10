@@ -41,3 +41,4 @@ yarn run test:unit
 Referenced from: package.json`
 * Error handling if something happens in the store or during API calls
 * Loading logic maybe
+* Client side auto image resizing to 64k max
