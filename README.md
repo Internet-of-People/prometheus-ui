@@ -63,6 +63,3 @@ Referenced from: package.json`
 
 **Claim Creation**
 * Validate claim schema dynamic components too
-
-**Single Claim View**
-* **IMPORTANT** At least have a TODO page for it

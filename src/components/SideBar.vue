@@ -12,6 +12,7 @@
         :key="item.name"
         :active="currentPage.indexOf(item.link)!==-1"
         :to="item.link"
+        :disabled="item.disabled"
       >
         {{item.name}}
       </b-nav-item>
@@ -38,8 +39,8 @@ export default {
       menuItems: [
         { name: 'DIDs', link: '/vault/dids' },
         { name: 'CLAIMS', link: '/vault/claims' }, // TBD
-        { name: 'WALLETS', link: '/vault/wallets' }, // TBD
-        { name: 'DEVICES', link: '/vault/devices' }, // TBD
+        { name: 'WALLETS (soon!)', link: '/vault/wallets', disabled: true }, // TBD
+        { name: 'DEVICES (soon!)', link: '/vault/devices', disabled: true }, // TBD
       ],
       currentPage: '',
       homeUrl: '',
