@@ -2,18 +2,13 @@
   <b-container class="p-2 m-0" fluid>
     <b-row no-gutters>
       <b-col>{{ title }}</b-col>
-      <b-button v-if="topBarButton" @click="onClick"
-        class="float-right" variant="primary">
-        {{ topBarButton.name }}
-      </b-button>
+      <component v-if="topBarButton" v-bind:is="topBarButton"></component>
     </b-row>
     <b-breadcrumb :items="breadcrumb" class="small"></b-breadcrumb>
   </b-container>
 </template>
 
 <script>
-import api from '@/api';
-
 export default {
   name: 'BreadCrumb',
   computed: {
@@ -29,23 +24,10 @@ export default {
       return this.$route.meta.topBarButton;
     },
   },
-  methods: {
-    // TODO: remove this...
-    onClick() {
-      api[this.btn.apiCall]().then(() => {
-        api.listDIDs().then((response) => {
-          this.$store.dispatch('listDIDs', response);
-        }).catch((err) => {
-          console.err(err);
-        });
-      }).catch((err) => {
-        console.err(err);
-      });
-    },
-  },
 };
 </script>
 
 <style scoped lang="scss">
+/* TODO: if I remove it from here, the css will break */
 @import '@/assets/style/app.scss';
 </style>

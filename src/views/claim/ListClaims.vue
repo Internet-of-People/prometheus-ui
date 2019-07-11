@@ -1,6 +1,8 @@
 <template>
   <div>
-    <Tooltip>TODO</Tooltip>
+    <b-alert show variant="warning">
+      NOTE: this data comes from a mock API.
+    </b-alert>
     <FilterBar v-if="claims.length" v-model="searchTerm" />
     <ClaimCard
       v-for="claim in filteredClaims"
@@ -12,13 +14,12 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { ClaimCard, FilterBar, Tooltip } from '@/components';
+import { ClaimCard, FilterBar } from '@/components';
 
 export default {
   components: {
     ClaimCard,
     FilterBar,
-    Tooltip,
   },
   computed: {
     ...mapGetters(['claims']),
@@ -42,7 +43,3 @@ export default {
   },
 };
 </script>
-
-<style>
-
-</style>

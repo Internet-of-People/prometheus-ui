@@ -12,6 +12,7 @@ export default new Vuex.Store({
     dids: [],
     claims: [],
     activeDid: undefined,
+    claimSchemas: [],
   },
   getters: {
     appName: state => state.appName,
@@ -20,6 +21,7 @@ export default new Vuex.Store({
     dids: state => state.dids,
     claims: state => state.claims,
     activeDid: state => state.activeDid,
+    claimSchemas: state => state.claimSchemas,
   },
   actions: {
     // TODO: generic error handling for all API calls
@@ -41,6 +43,10 @@ export default new Vuex.Store({
       const response = await api.listDIDs();
       context.commit('LIST_DIDS', response.data);
     },
+    async createDID(context) {
+      await api.createDID();
+      context.dispatch('listDIDs');
+    },
     async renameDIDAlias(context, payload) {
       await api.renameDIDAlias(payload.didId, JSON.stringify(payload.alias));
       context.commit('RENAME_DID_ALIAS', payload);
@@ -52,6 +58,10 @@ export default new Vuex.Store({
     async listClaims(context) {
       const response = await api.listClaims();
       context.commit('LIST_CLAIMS', response.data);
+    },
+    async listClaimSchemas(context) {
+      const response = await api.listClaimSchemas();
+      context.commit('LIST_CLAIM_SCHEMAS', response.data);
     },
   },
   mutations: {
@@ -91,6 +101,9 @@ export default new Vuex.Store({
     },
     LIST_CLAIMS: (state, claims) => {
       state.claims = claims;
+    },
+    LIST_CLAIM_SCHEMAS: (state, claimSchemas) => {
+      state.claimSchemas = claimSchemas;
     },
   },
 });

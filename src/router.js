@@ -11,12 +11,16 @@ import {
   ListClaims,
 } from '@/views';
 
+import {
+  TopCreateNewClaimButton,
+  TopCreateNewDIDButton,
+} from '@/components';
+
 Vue.use(Router);
 
 const SIGNED_IN_HOME_URL = '/vault/dids';
 const GUEST_HOME_URL = '/';
 
-// TODO: do we need all properties here?
 export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
@@ -82,10 +86,7 @@ export default new Router({
         breadcrumb: [],
         title: 'VAULT / DIDs',
         homeUrl: SIGNED_IN_HOME_URL,
-        // TODO: split as different component
-        topBarButton: {
-          name: 'CREATE NEW ID', apiCall: 'createDID',
-        },
+        topBarButton: TopCreateNewDIDButton,
       },
     },
     {
@@ -119,10 +120,7 @@ export default new Router({
         requiresAuth: true,
         title: 'VAULT / CLAIMS',
         homeUrl: SIGNED_IN_HOME_URL,
-        // TODO: split as different component
-        topBarButton: {
-          name: 'CREATE NEW CLAIM', apiCall: 'createClaim',
-        },
+        topBarButton: TopCreateNewClaimButton,
       },
     },
   ],

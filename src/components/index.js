@@ -7,6 +7,11 @@ import Loader from '@/components/Loader.vue';
 import SideBar from '@/components/SideBar.vue';
 import Tooltip from '@/components/Tooltip.vue';
 import TopBar from '@/components/TopBar.vue';
+import TopCreateNewClaimButton from '@/components/TopCreateNewClaimButton.vue';
+import TopCreateNewDIDButton from '@/components/TopCreateNewDIDButton.vue';
+
+import NumberField from '@/components/claimschema/NumberField.vue';
+import StringField from '@/components/claimschema/StringField.vue';
 
 export {
   ClaimCard,
@@ -18,4 +23,8 @@ export {
   SideBar,
   Tooltip,
   TopBar,
+  TopCreateNewClaimButton,
+  TopCreateNewDIDButton,
+  NumberField,
+  StringField,
 };

@@ -38,7 +38,6 @@
 <script>
 import { mapGetters } from 'vuex';
 import { DidCard, FilterBar, Tooltip } from '@/components';
-import api from '@/api';
 
 export default {
   components: {
@@ -67,9 +66,7 @@ export default {
   },
   methods: {
     createNewDID() {
-      api.createDID().then(() => {
-        this.$store.dispatch('listDIDs');
-      });
+      this.$store.dispatch('createDID');
     },
   },
 };

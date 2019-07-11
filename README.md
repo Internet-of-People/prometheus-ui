@@ -41,3 +41,4 @@ yarn run test:unit
 Referenced from: package.json`
 * Error handling if something happens in the store or during API calls
 * Loading logic maybe
+* Validate claim schema dynamic components

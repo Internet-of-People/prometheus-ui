@@ -24,22 +24,38 @@
             />
           </b-form-group>
           <hr>
-          <b-form-group
-            label="Schema:"
-            label-for="schema"
-            description="The claim schema. In many cases, a widely used template already
-            exists for the claim you want to make. If you don't find anything applicable,
-            you can create your own schema or modify an existing one."
-          >
-            <b-form-select
-              id="schema"
-              name="schema"
-              :options="form.schemas ? form.schemas : []"
-              v-model="form.schemas"
-              v-validate="{ required: true }"
-              :state="validateState('schema')"
-            />
-          </b-form-group>
+          <b-card>
+            <b-form-group
+              label="Schema:"
+              label-for="schema"
+              description="The claim schema. In many cases, a widely used template already
+              exists for the claim you want to make. If you don't find anything applicable,
+              you can create your own schema or modify an existing one."
+            >
+              <b-form-select
+                id="schema"
+                name="schema"
+                v-model="schema"
+                :options="schemas ? schemas : []"
+                v-validate="{ required: true }"
+                :state="validateState('schema')"
+              >
+                <template slot="first">
+                  <option :value="null" disabled selected>-- Please select a schema --</option>
+                </template>
+              </b-form-select>
+            </b-form-group>
+            <template v-for="(properties, field) in schemaProperties">
+              <component
+                :key="field"
+                :is="getSchemaComponent(properties.type)"
+                v-bind="{data:{
+                  name: field,
+                  properties,
+                }}"
+              />
+            </template>
+          </b-card>
           <hr>
           <b-form-group
             label="Witnesses:"
@@ -72,14 +88,18 @@
 </template>
 
 <script>
-import { Tooltip } from '@/components';
+import { mapGetters } from 'vuex';
+import { NumberField, Tooltip, StringField } from '@/components';
 
 export default {
   components: {
     Tooltip,
+    NumberField,
+    StringField,
   },
   data() {
     return {
+      schema: null,
       form: {
         dids: null,
         schemas: null,
@@ -87,7 +107,33 @@ export default {
       },
     };
   },
+  computed: {
+    ...mapGetters(['claimSchemas']),
+    schemas() {
+      return this.claimSchemas.map(schema => ({ value: schema.id, text: schema.alias }));
+    },
+    schemaProperties() {
+      if (!this.schema) {
+        return undefined;
+      }
+      const [schema] = this.claimSchemas.filter(s => s.id === this.schema);
+      return schema.content.properties;
+    },
+  },
+  beforeCreate() {
+    this.$store.dispatch('listClaimSchemas');
+  },
   methods: {
+    getSchemaComponent(type) {
+      switch (type) {
+        case 'string':
+          return StringField;
+        case 'number':
+          return NumberField;
+        default:
+          throw Error(`Unknown schema property type: ${type}`);
+      }
+    },
     validateState(ref) {
       if (
         this.vFields[ref]
