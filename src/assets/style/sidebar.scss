@@ -1,0 +1,25 @@
+@import '@/assets/style/_variables.scss';
+
+img {
+  width: 3rem;
+}
+
+.nav-item {
+  .nav-link {
+    &.active {
+      background-color: $primary;
+      color:#ffffff;
+    }
+
+    &:hover {
+      background-color: $primary;
+      color:#ffffff;
+    }
+  }
+
+  a {
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}

@@ -10,10 +10,10 @@
       <b-nav-item
         v-for="item in menuItems"
         :key="item.name"
-        :active="currentPage.indexOf(item.link)!==-1">
-        <router-link :to="item.link">
-          {{item.name}}
-        </router-link>
+        :active="currentPage.indexOf(item.link)!==-1"
+        :to="item.link"
+      >
+        {{item.name}}
       </b-nav-item>
     </b-nav>
   </b-container>
@@ -46,6 +46,8 @@ export default {
     };
   },
   watch: {
+    // if the route hash is changed, we updates the logo's URL and
+    // the current page to be able to decide in the menu, where are we.
     $route() {
       this.currentPage = window.location.pathname;
       this.homeUrl = this.$route.meta.homeUrl;
@@ -59,8 +61,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '@/assets/style/app.scss';
-img {
-  width: 3rem;
-}
+@import '@/assets/style/sidebar.scss';
 </style>

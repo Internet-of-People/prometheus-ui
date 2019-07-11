@@ -30,30 +30,6 @@ img {
   margin: 0;
 }
 
-.nav-item {
-  .nav-link {
-    &.active {
-      background-color: $primary;
-      a {
-        color:#ffffff;
-      }
-    }
-
-    &:hover {
-      background-color: $primary;
-      a {
-        color:#ffffff;
-      }
-    }
-  }
-
-  a {
-    &:hover {
-      text-decoration: none;
-    }
-  }
-}
-    
 .breadcrumb {
   .breadcrumb-item {
     a {
