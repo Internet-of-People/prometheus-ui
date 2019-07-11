@@ -3,10 +3,6 @@
     :title="`${claim.alias} - ${claim.did.alias}`"
     :sub-title="`ID: ${claim.id}`"
   >
-    <small class="text-muted">
-      Properties:
-      {{ claim.properties }}
-    </small>
     <hr>
     <small class="text-muted">
       Witnesses:

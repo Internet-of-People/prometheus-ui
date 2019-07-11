@@ -59,6 +59,10 @@ export default new Vuex.Store({
       const response = await api.listClaims();
       context.commit('LIST_CLAIMS', response.data);
     },
+    async createClaim(context, payload) {
+      await api.createClaim(payload);
+      context.dispatch('listClaims');
+    },
     async listClaimSchemas(context) {
       const response = await api.listClaimSchemas();
       context.commit('LIST_CLAIM_SCHEMAS', response.data);

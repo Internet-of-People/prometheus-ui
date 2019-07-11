@@ -57,6 +57,7 @@ export default {
     },
     ],
   }),
+  createClaim: async () => Promise.resolve(),
   listClaimSchemas: async () => Promise.resolve({
     data: [
       {

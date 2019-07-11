@@ -1,6 +1,6 @@
 <template>
     <b-row>
-      <b-col cols="6">
+      <b-col cols="8">
         <Tooltip id="createclaim-tooltip">
           Claims are statements about yourself, ranging from simple things like
           "I have blue eyes!" to a full digital representation of your passport.
@@ -15,13 +15,17 @@
             description="The DID this claim should apply to."
           >
             <b-form-select
-              id="subjectDid"
-              name="subjectDid"
-              :options="form.dids ? form.dids : []"
-              v-model="form.dids"
+              id="did"
+              name="did"
+              :options="availableDids ? availableDids : []"
+              v-model="did"
               v-validate="{ required: true }"
-              :state="validateState('subjectDid')"
-            />
+              :state="validateState('did')"
+            >
+              <template slot="first">
+                <option :value="null" disabled selected>-- Please select a DID --</option>
+              </template>
+            </b-form-select>
           </b-form-group>
           <hr>
           <b-card>
@@ -36,7 +40,7 @@
                 id="schema"
                 name="schema"
                 v-model="schema"
-                :options="schemas ? schemas : []"
+                :options="availableSchemas ? availableSchemas : []"
                 v-validate="{ required: true }"
                 :state="validateState('schema')"
               >
@@ -78,9 +82,9 @@
           </b-form-group>
           <hr>
           <b-button to="/vault/claims" variant="light" class="mr-4">CANCEL</b-button>
-          <b-button @click="create" variant="primary">
+          <b-button @click="create" variant="primary" :disabled="saving">
             CREATE &amp; SEND
-            <fa icon="angle-right" />
+            <b-spinner small class="ml-1" v-if="saving" />
           </b-button>
         </b-form>
       </b-col>
@@ -100,7 +104,9 @@ export default {
   data() {
     return {
       schema: null,
-      form: {
+      did: null,
+      saving: false,
+      form: { // validation
         dids: null,
         schemas: null,
         witnesses: null,
@@ -108,9 +114,12 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['claimSchemas']),
-    schemas() {
+    ...mapGetters(['claimSchemas', 'dids']),
+    availableSchemas() {
       return this.claimSchemas.map(schema => ({ value: schema.id, text: schema.alias }));
+    },
+    availableDids() {
+      return this.dids.map(did => ({ value: did.id, text: did.alias }));
     },
     schemaProperties() {
       if (!this.schema) {
@@ -149,7 +158,11 @@ export default {
           return;
         }
 
-        console.log('OK!');
+        this.saving = true;
+        this.$store.dispatch('createClaim').then(() => {
+          this.saving = false;
+          this.$router.push('/vault/claims');
+        });
       });
     },
   },
