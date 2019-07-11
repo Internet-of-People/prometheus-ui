@@ -1,7 +1,7 @@
 <template>
     <b-row>
       <b-col cols="6">
-        <Tooltip>
+        <Tooltip id="createclaim-tooltip">
           Claims are statements about yourself, ranging from simple things like
           "I have blue eyes!" to a full digital representation of your passport.
           Claims are always associated with only one of your IDs, so your personas stay separate.

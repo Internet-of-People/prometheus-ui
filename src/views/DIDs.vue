@@ -1,7 +1,7 @@
 <template>
     <div>
       <template v-if="dids.length">
-        <Tooltip v-if="dids.length">
+        <Tooltip id="dids-tooltip" v-if="dids.length">
           Here you can view your DIDs. Creating a new DID takes seconds. <br>
           After a DID is created, it will by default have a deterministically created
           avatar and alias, but both can easily be changed on the DID's page.
