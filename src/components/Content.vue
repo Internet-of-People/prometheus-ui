@@ -5,3 +5,6 @@
     </b-container>
   </b-container>
 </template>
+<style>
+/* TODO: only content should scroll, not the whole site */
+</style>

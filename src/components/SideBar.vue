@@ -10,7 +10,7 @@
       <b-nav-item
         v-for="item in menuItems"
         :key="item.name"
-        :active="currentPage === item.link">
+        :active="currentPage.indexOf(item.link)!==-1">
         <router-link :to="item.link">
           {{item.name}}
         </router-link>

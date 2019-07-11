@@ -7,18 +7,27 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     appName: 'PROMETHEUS',
+    appLoading: true,
     words: [],
     dids: [],
+    claims: [],
     activeDid: undefined,
+    claimSchemas: [],
   },
   getters: {
     appName: state => state.appName,
+    appLoading: state => state.appLoading,
     words: state => state.words,
     dids: state => state.dids,
+    claims: state => state.claims,
     activeDid: state => state.activeDid,
+    claimSchemas: state => state.claimSchemas,
   },
   actions: {
     // TODO: generic error handling for all API calls
+    async authenticate() { // TODO: check it in a different way
+      await api.listDIDs();
+    },
     async generatePhraseAsync(context) {
       const response = await api.generateVault();
       context.commit('GENERATE_PHRASE', response.data);
@@ -34,6 +43,10 @@ export default new Vuex.Store({
       const response = await api.listDIDs();
       context.commit('LIST_DIDS', response.data);
     },
+    async createDID(context) {
+      await api.createDID();
+      context.dispatch('listDIDs');
+    },
     async renameDIDAlias(context, payload) {
       await api.renameDIDAlias(payload.didId, JSON.stringify(payload.alias));
       context.commit('RENAME_DID_ALIAS', payload);
@@ -42,8 +55,23 @@ export default new Vuex.Store({
       await api.changeDIDAvatar(payload.didId, JSON.stringify(payload.avatar));
       context.commit('CHANGE_DID_AVATAR', payload);
     },
+    async listClaims(context) {
+      const response = await api.listClaims();
+      context.commit('LIST_CLAIMS', response.data);
+    },
+    async createClaim(context, payload) {
+      await api.createClaim(payload);
+      context.dispatch('listClaims');
+    },
+    async listClaimSchemas(context) {
+      const response = await api.listClaimSchemas();
+      context.commit('LIST_CLAIM_SCHEMAS', response.data);
+    },
   },
   mutations: {
+    APP_LOADING: (state, loading) => {
+      state.appLoading = loading;
+    },
     GENERATE_PHRASE: (state, words) => {
       state.words = words;
     },
@@ -74,6 +102,12 @@ export default new Vuex.Store({
         return did;
       });
       state.activeDid.avatar = payload.avatar;
+    },
+    LIST_CLAIMS: (state, claims) => {
+      state.claims = claims;
+    },
+    LIST_CLAIM_SCHEMAS: (state, claimSchemas) => {
+      state.claimSchemas = claimSchemas;
     },
   },
 });

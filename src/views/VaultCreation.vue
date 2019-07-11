@@ -1,5 +1,5 @@
 <template>
-  <Content>
+  <div>
     <b-alert show variant="success">
       <h4 class="alert-heading">Your Vault has been created!</h4>
       <p>
@@ -9,8 +9,9 @@
     <b-alert show variant="info">
       <p>
         <strong>What is a DID?</strong><br>
-        DIDs are unique and deterministically created identities. DIDs can be used for separating
-        your identities and its claims.
+        DIDs are unique and deterministically created <strong>identifiers</strong>.
+        DIDs can be used for separating your <strong>different roles in life
+        (personas)</strong> and their claims.
       </p>
       <p>
         <strong>What is a claim?</strong><br>
@@ -32,16 +33,5 @@
       GO TO DIDs
       <fa icon="angle-right" />
     </b-button>
-  </Content>
+  </div>
 </template>
-
-<script>
-import Content from '@/components/Content.vue';
-
-export default {
-  components: {
-    Content,
-  },
-  name: 'VaultCreation',
-};
-</script>

@@ -11,7 +11,6 @@
     <b-button
       class="float-right"
       size="sm"
-      @click="showDID"
       :to="`/vault/dids/${did.id}`"
       variant="primary">
       VIEW <fa icon="angle-right" />
@@ -22,7 +21,7 @@
 <script>
 // TODO: more compact design for the card
 export default {
-  name: 'Card',
+  name: 'DidCard',
   props: {
     did: {
       alias: String,
@@ -30,12 +29,10 @@ export default {
       avatar: String,
       status: String,
     },
-    showDID: Function,
   },
 };
 </script>
 
 <style scoped lang="scss">
-@import '@/assets/style/app.scss';
-@import '@/assets/style/dids.scss';
+@import '@/assets/style/didcard.scss';
 </style>

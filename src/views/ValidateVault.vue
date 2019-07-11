@@ -1,5 +1,5 @@
 <template>
-  <Content>
+  <div>
     <b-alert show variant="warning">
       <strong>Please enter all the phrases you have noted in the correct order.</strong><br>
       Providing these words in the correct order ensures us that you noted
@@ -37,12 +37,11 @@
         <b-button variant="outline-primary" @click="demoFill" class="float-right">demo</b-button>
       </b-col>
     </b-row>
-  </Content>
+  </div>
 </template>
 
 <script>
 import api from '@/api';
-import Content from '@/components/Content.vue';
 
 export default {
   name: 'ValidateVault',
@@ -54,9 +53,6 @@ export default {
       loading: false,
       apiError: '',
     };
-  },
-  components: {
-    Content,
   },
   created() {
     for (let i = 0; i < 24; i += 1) {

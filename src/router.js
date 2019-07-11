@@ -1,18 +1,26 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Introduction from '@/views/Introduction.vue';
-import CreateNewVault from '@/views/CreateNewVault.vue';
-import ValidateVault from '@/views/ValidateVault.vue';
-import VaultCreation from '@/views/VaultCreation.vue';
-import DIDs from '@/views/DIDs.vue';
-import ViewDID from '@/views/ViewDID.vue';
+import {
+  Introduction,
+  CreateNewVault,
+  ValidateVault,
+  VaultCreation,
+  DIDs,
+  ViewDID,
+  CreateClaim,
+  ListClaims,
+} from '@/views';
+
+import {
+  TopCreateNewClaimButton,
+  TopCreateNewDIDButton,
+} from '@/components';
 
 Vue.use(Router);
 
 const SIGNED_IN_HOME_URL = '/vault/dids';
 const GUEST_HOME_URL = '/';
 
-// TODO: we don't need all properties here...
 export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
@@ -78,10 +86,7 @@ export default new Router({
         breadcrumb: [],
         title: 'VAULT / DIDs',
         homeUrl: SIGNED_IN_HOME_URL,
-        // TODO: split as different component
-        action: {
-          name: 'CREATE NEW ID', apiCall: 'createDID',
-        },
+        topBarButton: TopCreateNewDIDButton,
       },
     },
     {
@@ -95,6 +100,27 @@ export default new Router({
         requiresAuth: true,
         title: 'VAULT / DIDs / ',
         homeUrl: SIGNED_IN_HOME_URL,
+      },
+    },
+    {
+      path: '/vault/claims/create',
+      name: 'createclaim',
+      component: CreateClaim,
+      meta: {
+        requiresAuth: true,
+        title: 'VAULT / CLAIMS / CREATE NEW',
+        homeUrl: SIGNED_IN_HOME_URL,
+      },
+    },
+    {
+      path: '/vault/claims',
+      name: 'listclaims',
+      component: ListClaims,
+      meta: {
+        requiresAuth: true,
+        title: 'VAULT / CLAIMS',
+        homeUrl: SIGNED_IN_HOME_URL,
+        topBarButton: TopCreateNewClaimButton,
       },
     },
   ],

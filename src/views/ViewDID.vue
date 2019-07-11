@@ -1,5 +1,5 @@
 <template>
-  <Content>
+  <div>
     <Loader :loading="loading" />
     <template v-if="!loading">
       <b-row>
@@ -62,17 +62,15 @@
         </b-col>
       </b-row>
     </template>
-  </Content>
+  </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
-import Content from '@/components/Content.vue';
-import Loader from '@/components/Loader.vue';
+import { Loader } from '@/components';
 
 export default {
   components: {
-    Content,
     Loader,
   },
   data() {
