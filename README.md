@@ -45,7 +45,6 @@ Referenced from: package.json`
 * Top Create New ID button loader
 * Left Bar logo and breadcrumb/title must be aligned
 * Only the left content should scroll, topbar and leftbar not
-* **IMPORTANT** Wallets, devices does not lead to a real page
 * Remove app.scss from every component, it's only needed in the App.vue
 
 **Vault Creation**
@@ -53,7 +52,6 @@ Referenced from: package.json`
 
 **DID List View**
 * We need more compact cards
-* **IMPORTANT** Remove how much claim/key it has
 
 **Single DID View**
 * Client side auto image resizing to 64k max

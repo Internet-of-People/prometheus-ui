@@ -9,6 +9,7 @@ import {
   ViewDID,
   CreateClaim,
   ListClaims,
+  ViewClaim,
 } from '@/views';
 
 import {
@@ -121,6 +122,16 @@ export default new Router({
         title: 'VAULT / CLAIMS',
         homeUrl: SIGNED_IN_HOME_URL,
         topBarButton: TopCreateNewClaimButton,
+      },
+    },
+    {
+      path: '/vault/claims/:id',
+      name: 'viewclaim',
+      component: ViewClaim,
+      meta: {
+        requiresAuth: true,
+        title: 'VAULT / CLAIMS / ',
+        homeUrl: SIGNED_IN_HOME_URL,
       },
     },
   ],
