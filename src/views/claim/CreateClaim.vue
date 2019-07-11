@@ -143,6 +143,7 @@ export default {
           throw Error(`Unknown schema property type: ${type}`);
       }
     },
+    // TODO: this is duplicated at multiple places
     validateState(ref) {
       if (
         this.vFields[ref]

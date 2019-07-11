@@ -50,13 +50,11 @@ Referenced from: package.json`
 **Vault Creation**
 * Vault validation must be easier, we have to try out how others solve the issue
 
-**DID List View**
+**DID/Claim List View**
 * We need more compact cards
 
 **Single DID View**
 * Client side auto image resizing to 64k max
-* Validate alias field
-* A little bit more userfriendly design
 
 **Claim Creation**
 * Validate claim schema dynamic components too

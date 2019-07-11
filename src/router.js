@@ -5,7 +5,7 @@ import {
   CreateNewVault,
   ValidateVault,
   VaultCreation,
-  DIDs,
+  ListDIDs,
   ViewDID,
   CreateClaim,
   ListClaims,
@@ -81,7 +81,7 @@ export default new Router({
     {
       path: '/vault/dids',
       name: 'dids',
-      component: DIDs,
+      component: ListDIDs,
       meta: {
         requiresAuth: true,
         breadcrumb: [],
