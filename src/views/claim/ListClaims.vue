@@ -1,25 +1,29 @@
 <template>
   <div>
-    <b-alert show variant="warning">
-      NOTE: this data comes from a mock API.
-    </b-alert>
-    <FilterBar v-if="claims.length" v-model="searchTerm" />
-    <ClaimCard
-      v-for="claim in filteredClaims"
-      :claim="claim"
-      :key="claim.id"
-    />
+    <Loader :loading="loading" />
+    <template v-if="!loading">
+      <b-alert show variant="warning">
+        NOTE: this data comes from a mock API.
+      </b-alert>
+      <FilterBar v-if="claims.length" v-model="searchTerm" />
+      <ClaimCard
+        v-for="claim in filteredClaims"
+        :claim="claim"
+        :key="claim.id"
+      />
+    </template>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
-import { ClaimCard, FilterBar } from '@/components';
+import { ClaimCard, FilterBar, Loader } from '@/components';
 
 export default {
   components: {
     ClaimCard,
     FilterBar,
+    Loader,
   },
   computed: {
     ...mapGetters(['claims']),
@@ -36,8 +40,14 @@ export default {
       return this.claims;
     },
   },
+  beforeCreate() {
+    this.$store.dispatch('listClaims').then(() => {
+      this.loading = false;
+    });
+  },
   data() {
     return {
+      loading: false,
       searchTerm: '',
     };
   },

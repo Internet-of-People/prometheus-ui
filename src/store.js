@@ -7,7 +7,6 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     appName: 'PROMETHEUS',
-    appLoading: true,
     words: [],
     dids: [],
     claims: [],
@@ -16,7 +15,6 @@ export default new Vuex.Store({
   },
   getters: {
     appName: state => state.appName,
-    appLoading: state => state.appLoading,
     words: state => state.words,
     dids: state => state.dids,
     claims: state => state.claims,
@@ -69,9 +67,6 @@ export default new Vuex.Store({
     },
   },
   mutations: {
-    APP_LOADING: (state, loading) => {
-      state.appLoading = loading;
-    },
     GENERATE_PHRASE: (state, words) => {
       state.words = words;
     },

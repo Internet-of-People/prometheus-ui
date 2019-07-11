@@ -45,7 +45,6 @@ Referenced from: package.json`
 * Top Create New ID button loader
 * Left Bar logo and breadcrumb/title must be aligned
 * Only the left content should scroll, topbar and leftbar not
-* **IMPORTANT** When a vault is created, app initialization must be done (App.vue/beforeCreate)
 * **IMPORTANT** Wallets, devices does not lead to a real page
 * Remove app.scss from every component, it's only needed in the App.vue
 

@@ -7,8 +7,7 @@
       <b-col v-bind:cols="showSideBar?10:12" class="m-0 p-0">
         <TopBar v-if="showSideBar" />
         <Content>
-          <Loader :loading="appLoading" />
-          <router-view v-if="!appLoading" :app-name="appName" />
+          <router-view :app-name="appName" />
         </Content>
       </b-col>
     </b-row>
@@ -22,7 +21,6 @@
 import { mapGetters } from 'vuex';
 import {
   Content,
-  Loader,
   Footer,
   SideBar,
   TopBar,
@@ -34,14 +32,10 @@ export default {
     Footer,
     SideBar,
     TopBar,
-    Loader,
     Content,
   },
   computed: {
-    ...mapGetters([
-      'appName',
-      'appLoading',
-    ]),
+    ...mapGetters(['appName']),
     showSideBar() {
       return this.$route.name !== 'intro';
     },
@@ -53,14 +47,8 @@ export default {
         return;
       }
 
-      Promise.all([
-        this.$store.dispatch('listDIDs'),
-        this.$store.dispatch('listClaims'),
-      ]).then(() => {
-        this.$store.commit('APP_LOADING', false);
-      });
+      this.$store.dispatch('listDIDs');
     }).catch(() => {
-      this.$store.commit('APP_LOADING', false);
       if (this.$route.meta.requiresAuth) {
         this.$router.push('/');
       }
