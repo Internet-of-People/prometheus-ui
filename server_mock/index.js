@@ -62,7 +62,22 @@ app.post('/vault/dids', async (req, res) => {
   });
 });
 
+app.get('/vault/dids/:did', async (req, res) => {
+  await sleep(SLEEP_TIME);
+  res.status(200).json({
+    id: 'IezbeWGSY2dqcUBqT8K7R14xr',
+    alias: 'Trinity',
+    avatar: images.TRINITY,
+    state: 'TODO',
+  });
+});
+
 app.put('/vault/dids/:did/alias', async (req, res) => {
+  await sleep(SLEEP_TIME);
+  res.status(200).json('');
+});
+
+app.put('/vault/dids/:did/avatar', async (req, res) => {
   await sleep(SLEEP_TIME);
   res.status(200).json('');
 });

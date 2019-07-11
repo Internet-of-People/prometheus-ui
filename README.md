@@ -42,3 +42,4 @@ Referenced from: package.json`
 * Error handling if something happens in the store or during API calls
 * Loading logic maybe
 * Validate claim schema dynamic components
+* Client side auto image resizing to 64k max

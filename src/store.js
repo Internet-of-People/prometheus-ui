@@ -52,7 +52,7 @@ export default new Vuex.Store({
       context.commit('RENAME_DID_ALIAS', payload);
     },
     async changeDIDAvatar(context, payload) {
-      await api.changeDIDAvatar(payload.didId, payload.avatar);
+      await api.changeDIDAvatar(payload.didId, JSON.stringify(payload.avatar));
       context.commit('CHANGE_DID_AVATAR', payload);
     },
     async listClaims(context) {
