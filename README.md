@@ -35,11 +35,34 @@ yarn run test:e2e
 yarn run test:unit
 ```
 
-## Notes
+## TODOs
 
+**Common**
 * Tried to update eslint to the latest version, but it caused: `Error: Failed to load plugin 'vue' declared in 'package.json': Cannot find module 'eslint/lib/util/traverser'
 Referenced from: package.json`
-* Error handling if something happens in the store or during API calls
-* Loading logic maybe
-* Validate claim schema dynamic components
+* Global error handling if something happens in the store or during API calls or in javascript
+* Make the app responsive
+* Menu items have to be clickable not just the text
+* Top Create New ID button loader
+* Left Bar logo and breadcrumb/title must be aligned
+* Only the left content should scroll, topbar and leftbar not
+* **IMPORTANT** When a vault is created, app initialization must be done (App.vue/beforeCreate)
+* **IMPORTANT** Wallets, devices does not lead to a real page
+
+**Vault Creation**
+* Vault validation must be easier, we have to try out how others solve the issue
+
+**DID List View**
+* We need more compact cards
+* **IMPORTANT** Remove how much claim/key it has
+
+**Single DID View**
 * Client side auto image resizing to 64k max
+* Validate alias field
+* A little bit more userfriendly design
+
+**Claim Creation**
+* Validate claim schema dynamic components too
+
+**Single Claim View**
+* **IMPORTANT** At least have a TODO page for it
