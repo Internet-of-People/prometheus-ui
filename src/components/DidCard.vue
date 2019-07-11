@@ -6,10 +6,7 @@
     img-alt="Avatar Image"
     img-left
     class="mb-3">
-    <small>1 Key</small><br>
-    <small>42 Claims</small>
     <b-button
-      class="float-right"
       size="sm"
       :to="`/vault/dids/${did.id}`"
       variant="primary">
