@@ -61,10 +61,32 @@ export default {
   },
   methods: {
     demoFill() {
-      this.words = [];
-      for (let i = 0; i < 24; i += 1) {
-        this.words[i] = this.$store.state.words[i];
-      }
+      this.words = [
+        'include',
+        'pear',
+        'escape',
+        'sail',
+        'spy',
+        'orange',
+        'cute',
+        'despair',
+        'witness',
+        'trouble',
+        'sleep',
+        'torch',
+        'wire',
+        'burst',
+        'unable',
+        'brass',
+        'expose',
+        'fiction',
+        'drift',
+        'clock',
+        'duck',
+        'oxygen',
+        'aerobic',
+        'already',
+      ];
     },
     goBack() {
       this.$store.dispatch('cancelVaultCreation');

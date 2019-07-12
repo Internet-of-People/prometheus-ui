@@ -42,16 +42,11 @@ export default {
   },
   beforeCreate() {
     this.$store.dispatch('authenticate').then(() => {
-      if (!this.$route.meta.requiresAuth) {
+      this.$store.dispatch('listDIDs').then(() => {
         this.$router.push('/vault/dids');
-        return;
-      }
-
-      this.$store.dispatch('listDIDs');
+      });
     }).catch(() => {
-      if (this.$route.meta.requiresAuth) {
-        this.$router.push('/');
-      }
+      this.$router.push('/');
     });
   },
 };
