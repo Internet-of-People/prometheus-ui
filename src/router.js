@@ -5,6 +5,7 @@ import {
   CreateNewVault,
   ValidateVault,
   VaultCreation,
+  About,
   ListDIDs,
   ViewDID,
   CreateClaim,
@@ -131,6 +132,16 @@ export default new Router({
       meta: {
         requiresAuth: true,
         title: 'VAULT / CLAIMS / ',
+        homeUrl: SIGNED_IN_HOME_URL,
+      },
+    },
+    {
+      path: '/about',
+      name: 'about',
+      component: About,
+      meta: {
+        requiresAuth: true,
+        title: 'ABOUT',
         homeUrl: SIGNED_IN_HOME_URL,
       },
     },

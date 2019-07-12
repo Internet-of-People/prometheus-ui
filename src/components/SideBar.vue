@@ -44,6 +44,7 @@ export default {
         { name: 'CLAIMS', link: '/vault/claims' }, // TBD
         { name: 'WALLETS (soon!)', link: '/vault/wallets', disabled: true }, // TBD
         { name: 'DEVICES (soon!)', link: '/vault/devices', disabled: true }, // TBD
+        { name: 'ABOUT', link: '/about' }, // TBD
       ],
       currentPage: '',
       homeUrl: '',

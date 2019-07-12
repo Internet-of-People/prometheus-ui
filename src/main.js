@@ -7,6 +7,11 @@ import {
   faCheckCircle,
   faCircleNotch,
 } from '@fortawesome/free-solid-svg-icons';
+import {
+  faGithub,
+  faTelegram,
+  faDiscord,
+} from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import App from './App.vue';
 import router from './router';
@@ -16,6 +21,9 @@ library.add([
   faAngleRight,
   faCheckCircle,
   faCircleNotch,
+  faGithub,
+  faTelegram,
+  faDiscord,
 ]);
 Vue.component('fa', FontAwesomeIcon);
 

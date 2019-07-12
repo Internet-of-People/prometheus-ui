@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import api from './api';
+import { version } from '../package.json';
 
 Vue.use(Vuex);
 
@@ -12,9 +13,11 @@ export default new Vuex.Store({
     claims: [],
     activeDid: undefined,
     claimSchemas: [],
+    version,
   },
   getters: {
     appName: state => state.appName,
+    version: state => state.version,
     words: state => state.words,
     dids: state => state.dids,
     claims: state => state.claims,
