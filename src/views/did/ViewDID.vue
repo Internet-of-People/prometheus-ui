@@ -157,10 +157,6 @@ export default {
 };
 </script>
 
-<style>
-img{
-    height: 80px;
-    width: 80px;
-    align-items: center;
-}
+<style scoped lang="scss">
+@import './ViewDID.scss';
 </style>
