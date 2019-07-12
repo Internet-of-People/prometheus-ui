@@ -13,16 +13,16 @@ const api = axios.create({
 });
 
 export default {
-  generateVault: async () => api.post('/bip39'),
-  validatePhrase: async phrase => api.post('/bip39/validate-phrase', phrase),
-  initVault: async phrase => api.post('/vault', phrase),
-  listDIDs: async () => api.get('/vault/dids'),
-  getDID: async didId => api.get(`/vault/dids/${didId}`),
-  createDID: async () => api.post('/vault/dids'),
-  renameDIDAlias: async (didId, alias) => api.put(`/vault/dids/${didId}/alias`, alias),
-  changeDIDAvatar: async (didId, avatar) => api.put(`/vault/dids/${didId}/avatar`, avatar),
-  // listClaims: async () => api.get('/claims'), TODO
-  listClaims: async () => Promise.resolve({
+  generateVault: () => api.post('/bip39'),
+  validatePhrase: phrase => api.post('/bip39/validate-phrase', phrase),
+  initVault: phrase => api.post('/vault', phrase),
+  listDIDs: () => api.get('/vault/dids'),
+  getDID: didId => api.get(`/vault/dids/${didId}`),
+  createDID: () => api.post('/vault/dids'),
+  renameDIDAlias: (didId, alias) => api.put(`/vault/dids/${didId}/alias`, alias),
+  changeDIDAvatar: (didId, avatar) => api.put(`/vault/dids/${didId}/avatar`, avatar),
+  // listClaims: () => api.get('/claims'), TODO
+  listClaims: () => Promise.resolve({
     data: [{
       did: {
         id: 'IezbeWGSY2dqcUBqT8K7R14xr',
@@ -57,74 +57,6 @@ export default {
     },
     ],
   }),
-  createClaim: async () => Promise.resolve(),
-  listClaimSchemas: async () => Promise.resolve({
-    data: [
-      {
-        id: 'McL9746fWtE9EXV5',
-        alias: 'age-over',
-        content: {
-          type: 'object',
-          properties: {
-            age: {
-              type: 'number',
-              min: 0,
-              max: 255,
-              required: true,
-              description: 'Eg.: 42. Pick a number between 0 and 255',
-            },
-          },
-        },
-      },
-      {
-        id: 'McL9746fWtE9EXVb',
-        alias: 'email-address',
-        content: {
-          type: 'object',
-          properties: {
-            email: {
-              type: 'string',
-              /* eslint-disable no-useless-escape */
-              regex: '/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/',
-              required: true,
-              description: 'Eg.: john.doe@ecorp-usa.com',
-            },
-          },
-        },
-      },
-      {
-        id: 'McL9746fWtE9EXVa',
-        alias: 'fullname',
-        content: {
-          type: 'object',
-          properties: {
-            title: {
-              type: 'string',
-              maxLength: 50,
-              required: false,
-              description: 'eg.: Mr.',
-            },
-            firstName: {
-              type: 'string',
-              maxLength: 50,
-              required: true,
-              description: 'eg.: John',
-            },
-            middlename: {
-              type: 'string',
-              maxLength: 50,
-              required: false,
-              description: 'eg.: Canary',
-            },
-            lastname: {
-              type: 'string',
-              maxLength: 50,
-              required: true,
-              description: 'eg.: Doe',
-            },
-          },
-        },
-      },
-    ],
-  }),
+  createClaim: () => Promise.resolve(),
+  listClaimSchemas: () => api.get('/claim-schemas'),
 };
