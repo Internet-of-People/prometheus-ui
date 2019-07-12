@@ -61,13 +61,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '@/assets/style/app.scss';
-
-img {
-  width: 13rem;
-}
-
-h1 {
-  color: $primary;
-}
+@import './Introduction.scss';
 </style>

@@ -43,5 +43,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '@/assets/style/claimcard.scss';
+@import './ClaimCard.scss';
 </style>

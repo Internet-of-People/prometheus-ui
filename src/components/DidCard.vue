@@ -31,5 +31,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '@/assets/style/didcard.scss';
+@import './DidCard.scss';
 </style>

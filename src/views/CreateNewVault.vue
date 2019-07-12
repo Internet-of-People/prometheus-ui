@@ -11,7 +11,7 @@
             size="sm"
             :prepend="(index+1)+''"
             :key="index"
-            class="mr-2 mb-2"
+            class="mr-2 mb-2 vault-creation-inputs"
           >
             <b-form-input trim readonly :value="word" />
           </b-input-group>
@@ -63,8 +63,3 @@ export default {
   },
 };
 </script>
-
-<style scoped lang="scss">
-@import '@/assets/style/app.scss';
-@import '@/assets/style/createvault.scss';
-</style>

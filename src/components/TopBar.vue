@@ -28,6 +28,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-/* TODO: if I remove it from here, the css will break */
-@import '@/assets/style/app.scss';
+@import './TopBar.scss';
 </style>

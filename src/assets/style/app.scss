@@ -1,5 +1,3 @@
-@import '@/assets/style/_variables.scss';
-
 html, body {
   height: 100%;
 }
@@ -24,23 +22,17 @@ img {
   }
 }
 
-.breadcrumb {
-  background: none;
-  padding: 0;
-  margin: 0;
-}
+.vault-creation-inputs {
+  width: 8rem;
+  display: inline-block;
 
-.breadcrumb {
-  .breadcrumb-item {
-    a {
-      color: #6c757d;
-      &:hover {
-        text-decoration: none;
-      }
-    }
+  .input-group-prepend {
+    display: inline-block;
+    width: 2rem;
+  }
 
-    &.active {
-      color: $primary;
-    }
+  .form-control {
+    display: inline-block;
+    width: 6rem;
   }
 }

@@ -42,10 +42,8 @@ yarn run test:unit
 Referenced from: package.json`
 * Global error handling if something happens in the store or during API calls or in javascript
 * Make the app responsive
-* Top Create New ID button loader
 * Left Bar logo and breadcrumb/title must be aligned
 * Only the left content should scroll, topbar and leftbar not
-* Remove app.scss from every component, it's only needed in the App.vue
 
 **Vault Creation**
 * Vault validation must be easier, we have to try out how others solve the issue

@@ -27,9 +27,5 @@ export default {
 </script>
 
 <style scoped>
-#footer{
-  position: fixed;
-  bottom:0;
-  background-color: #ffffff;
-}
+@import './Footer.scss';
 </style>

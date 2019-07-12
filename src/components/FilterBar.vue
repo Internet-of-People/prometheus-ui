@@ -19,5 +19,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '@/assets/style/dids.scss';
+@import './FilterBar.scss';
 </style>

@@ -58,7 +58,8 @@ export default {
 </script>
 
 <style lang="scss">
-@import 'assets/style/app.scss';
+@import '@/assets/style/_variables.scss';
 @import '~bootstrap/scss/bootstrap.scss';
 @import '~bootstrap-vue/src/index.scss';
+@import '@/assets/style/app.scss';
 </style>
