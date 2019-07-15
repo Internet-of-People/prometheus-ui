@@ -47,8 +47,5 @@ Referenced from: package.json`
 **Vault Creation**
 * Vault validation must be easier, we have to try out how others solve the issue
 
-**DID/Claim List View**
-* We need more compact cards
-
 **Claim Creation**
 * Validate claim schema dynamic components too
