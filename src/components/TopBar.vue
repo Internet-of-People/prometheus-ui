@@ -3,7 +3,7 @@
     <b-row
       id="top-bar"
       no-gutters
-      :class="`align-items-center h-100${breadcrumb.length?' has-breadcrumb':''}`"
+      :class="`align-items-center h-100${breadcrumb && breadcrumb.length?' has-breadcrumb':''}`"
     >
       <b-col>{{ title }}</b-col>
       <component v-if="topBarButton" v-bind:is="topBarButton"></component>

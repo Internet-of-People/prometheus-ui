@@ -1,13 +1,27 @@
 .card {
-    border: 0.5px solid rgba(0,0,0,0.2);
-    transition: 0.3s;
-    width: 30%;
-    margin: 1rem 1.25rem 1rem 0;
-    display: inline-block;
-    img{
-        width: 5rem;
-        height: 5rem;
-        margin-left: 1rem;
-        margin-top: 1rem;
+  border: 0.5px solid rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 30%;
+  min-width: 16.5rem;
+  margin: 1rem 1.25rem 1rem 0;
+  display: inline-block;
+
+  img{
+    width: 5rem;
+    height: 5rem;
+    margin-left: 1rem;
+    margin-top: 1rem;
+    margin-right: 1rem;
+    float: left;
+  }
+
+  .card-body {
+    padding: 1rem;
+
+    .card-title, .card-subtitle {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
+  }
 }

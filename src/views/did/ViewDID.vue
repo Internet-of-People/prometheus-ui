@@ -17,7 +17,7 @@
                     @click="$refs.avatarSelector.click()"
                     :disabled="savingAvatar"
                   >
-                    CHANGE AVATAR (MAX 64Kb)
+                    CHANGE AVATAR
                     <b-spinner small v-if="savingAvatar" />
                   </b-button>
                   <input
@@ -35,7 +35,7 @@
               </b-row>
               <b-row>
                 <b-col cols="1"><label>ALIAS:</label></b-col>
-                <b-col cols="7">
+                <b-col cols="11">
                   <template v-if="!editingAlias">{{ activeDid.alias }}</template>
                   <b-form-input
                     name="alias"

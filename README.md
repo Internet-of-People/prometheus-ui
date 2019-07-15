@@ -50,8 +50,5 @@ Referenced from: package.json`
 **DID/Claim List View**
 * We need more compact cards
 
-**Single DID View**
-* Client side auto image resizing to 64k max
-
 **Claim Creation**
 * Validate claim schema dynamic components too

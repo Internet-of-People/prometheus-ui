@@ -9,7 +9,9 @@
     <b-button
       size="sm"
       :to="`/vault/dids/${did.id}`"
-      variant="primary">
+      variant="primary"
+      class="float-right mb-3"
+    >
       VIEW <fa icon="angle-right" />
     </b-button>
   </b-card>
