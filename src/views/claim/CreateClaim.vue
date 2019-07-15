@@ -49,13 +49,13 @@
                 </template>
               </b-form-select>
             </b-form-group>
-            <template v-for="(properties, field) in schemaProperties">
+            <template v-for="item in schemaPropertiesCollection">
               <component
-                :key="field"
-                :is="getSchemaComponent(properties.type)"
+                :key="item.key"
+                :is="getSchemaComponent(item.properties.type)"
                 v-bind="{data:{
-                  name: field,
-                  properties,
+                  name: item.key,
+                  properties: item.properties,
                 }}"
               />
             </template>
@@ -121,12 +121,29 @@ export default {
     availableDids() {
       return this.dids.map(did => ({ value: did.id, text: did.alias }));
     },
-    schemaProperties() {
+    schemaPropertiesCollection() {
       if (!this.schema) {
         return undefined;
       }
       const [schema] = this.claimSchemas.filter(s => s.id === this.schema);
-      return schema.content.properties;
+      const mappingFn = i => ({ key: i, properties: schema.content.properties[i] });
+      let schemaProperties = Object.keys(schema.content.properties).map(mappingFn);
+
+      schemaProperties = schemaProperties.sort((a, b) => {
+        if (
+          schema.ordering.indexOf(a.key) === -1
+          && schema.ordering.indexOf(b.key) === -1
+        ) {
+          return 0;
+        }
+
+        if (schema.ordering.indexOf(a.key) > schema.ordering.indexOf(b.key)) {
+          return 1;
+        }
+
+        return -1;
+      });
+      return schemaProperties;
     },
   },
   beforeCreate() {
