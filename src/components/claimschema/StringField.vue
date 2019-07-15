@@ -8,6 +8,8 @@
       :id="data.name"
       :name="data.name"
       size="sm"
+      v-model="value"
+      @input="handleInput"
     />
   </b-form-group>
 </template>
@@ -24,6 +26,16 @@ export default {
         type: Object,
         required: true,
       },
+    },
+  },
+  data() {
+    return {
+      value: null,
+    };
+  },
+  methods: {
+    handleInput() {
+      this.$emit('input', this.value);
     },
   },
 };

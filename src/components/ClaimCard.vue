@@ -1,12 +1,15 @@
 <template>
   <b-card
-    :title="`${claim.alias} - ${claim.did.alias}`"
+    :title="`${claim.schema_name} - ${claim.subject_alias}`"
     :sub-title="`ID: ${claim.id}`"
   >
     <hr>
     <small class="text-muted">
-      Witnesses:
-      {{ claim.witnesses.map(witness => witness.did.alias).join(', ') }}
+      Content: {{ claim.content }}
+    </small><br>
+    <small class="text-muted">
+      Witnesses: TODO
+      <!--{{ claim.witnesses.map(witness => witness.did.alias).join(', ') }}-->
     </small>
     <div class="float-right signatures">
       <!--<fa icon="check-circle" class="mr-2 mt-1" /> <small class=" signed">SIGNED</small>-->

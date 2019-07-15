@@ -62,7 +62,6 @@ export default {
     filteredDids() {
       if (this.searchTerm) {
         const filterVal = this.searchTerm.toLowerCase();
-        // fat arrow operator (=>) not used to avoid max-len lint issue
         return this.dids.filter((did) => {
           const filterfields = (({ id, alias }) => ({ id, alias }))(did);
           return Object.values(filterfields).some(val => val.toLowerCase().includes(filterVal));

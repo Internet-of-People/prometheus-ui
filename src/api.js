@@ -21,42 +21,7 @@ export default {
   createDID: () => api.post('/vault/dids'),
   renameDIDAlias: (didId, alias) => api.put(`/vault/dids/${didId}/alias`, alias),
   changeDIDAvatar: (didId, avatar) => api.put(`/vault/dids/${didId}/avatar`, avatar),
-  // listClaims: () => api.get('/claims'), TODO
-  listClaims: () => Promise.resolve({
-    data: [{
-      did: {
-        id: 'IezbeWGSY2dqcUBqT8K7R14xr',
-        alias: 'Trinity',
-      },
-      id: 'McL9746fWtE9EXV5',
-      alias: 'age-of',
-      properties: {
-        age: 42,
-      },
-      witnesses: [
-        { did: { id: 'eWGSY2dqcUBqT8K7', alias: 'someone 1' }, signed: true },
-        { did: { id: '746fWtE9EXV5q23d', alias: 'someone 2' }, signed: true },
-      ],
-    },
-    {
-      did: {
-        id: 'IezbeWGSY2dqcUBqT8K7R143r',
-        alias: 'Neo',
-      },
-      id: 'McL9746fWtE9EXV2',
-      alias: 'fullname',
-      properties: {
-        firstname: 'Thomas',
-        title: 'Mr.',
-        lastname: 'Anderson',
-      },
-      witnesses: [
-        { did: { id: 'eWGSY2dqcUBqT8K7', alias: 'someone 1' }, signed: false },
-        { did: { id: '746fWtE9EXV5q23d', alias: 'someone 2' }, signed: true },
-      ],
-    },
-    ],
-  }),
-  createClaim: () => Promise.resolve(),
+  listClaims: () => api.get('/vault/claims'),
+  createClaim: (didId, cpntent) => api.post(`/vault/dids/${didId}/claims`, cpntent),
   listClaimSchemas: () => api.get('/claim-schemas'),
 };

@@ -5,10 +5,12 @@
     :description="data.properties.description"
   >
     <b-form-input
-      id="data.name"
-      name="data.name"
+      :id="data.name"
+      :name="data.name"
       type="number"
       size="sm"
+      v-model="value"
+      @input="handleInput"
     />
   </b-form-group>
 </template>
@@ -25,6 +27,16 @@ export default {
         type: Object,
         required: true,
       },
+    },
+  },
+  data() {
+    return {
+      value: null,
+    };
+  },
+  methods: {
+    handleInput() {
+      this.$emit('input', parseInt(this.value, 10));
     },
   },
 };

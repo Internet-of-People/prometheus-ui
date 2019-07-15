@@ -57,6 +57,7 @@
                   name: item.key,
                   properties: item.properties,
                 }}"
+                v-model="claimContent[item.key]"
               />
             </template>
           </b-card>
@@ -106,10 +107,12 @@ export default {
       schema: null,
       did: null,
       saving: false,
+      claimContent: {},
       form: { // validation
         dids: null,
         schemas: null,
         witnesses: null,
+        content: null,
       },
     };
   },
@@ -176,8 +179,16 @@ export default {
           return;
         }
 
+        const data = {
+          schema: this.schema,
+          content: this.claimContent,
+        };
+
         this.saving = true;
-        this.$store.dispatch('createClaim').then(() => {
+        this.$store.dispatch('createClaim', {
+          didId: this.did,
+          data,
+        }).then(() => {
           this.saving = false;
           this.$router.push('/vault/claims');
         });

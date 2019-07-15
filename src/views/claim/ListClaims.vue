@@ -2,9 +2,6 @@
   <div>
     <Loader :loading="loading" />
     <template v-if="!loading">
-      <b-alert show variant="warning">
-        NOTE: this data comes from a mock API.
-      </b-alert>
       <FilterBar v-if="claims.length" v-model="searchTerm" />
       <ClaimCard
         v-for="claim in filteredClaims"
@@ -30,11 +27,24 @@ export default {
     filteredClaims() {
       if (this.searchTerm) {
         const filterVal = this.searchTerm.toLowerCase();
-        // TODO
-        // fat arrow operator (=>) not used to avoid max-len lint issue
         return this.claims.filter((claim) => {
-          const filterfields = (({ id, alias }) => ({ id, alias }))(claim);
-          return Object.values(filterfields).some(val => val.toLowerCase().includes(filterVal));
+          /* eslint-disable camelcase */
+          const filterfields = (({
+            schema_name,
+            subject_alias,
+          }) => ({ schema_name, subject_alias }))(claim);
+          const claimContains = Object
+            .values(filterfields)
+            .some(val => val.toLowerCase().includes(filterVal));
+
+          let contentContains = false;
+          Object.keys(claim.content).forEach((key) => {
+            if (Number.isNaN(claim.content[key]) && claim.content[key].includes(filterVal)) {
+              contentContains = true;
+            }
+          });
+
+          return claimContains || contentContains;
         });
       }
       return this.claims;
