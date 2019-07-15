@@ -1,5 +1,5 @@
 <template>
-  <b-container class="p-0">
+  <b-container id="sidebar" class="p-0">
     <div class="justify-content-md-center text-center">
       <router-link
         class="app-title pl-2"

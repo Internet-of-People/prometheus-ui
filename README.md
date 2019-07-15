@@ -42,7 +42,6 @@ yarn run test:unit
 Referenced from: package.json`
 * Global error handling if something happens in the store or during API calls or in javascript
 * Make the app responsive
-* Left Bar logo and breadcrumb/title must be aligned
 * Only the left content should scroll, topbar and leftbar not
 
 **Vault Creation**

@@ -1,5 +1,13 @@
 @import '@/assets/style/_variables.scss';
 
+#sidebar {
+  a {
+   &:hover {
+    text-decoration: none;
+   } 
+  }
+}
+
 img {
   width: 3rem;
 }

@@ -1,5 +1,11 @@
 @import '@/assets/style/_variables.scss';
 
+#top-bar {
+  &:not(.has-breadcrumb) {
+    min-height: 2.7rem;
+  }
+}
+
 .breadcrumb {
   background: none;
   padding: 0;
