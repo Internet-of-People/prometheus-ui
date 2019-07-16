@@ -2,77 +2,79 @@
   <div>
     <Loader :loading="loading" />
     <template v-if="!loading">
-      <b-form @submit.stop.prevent="onSubmit">
-        <b-row>
-          <b-col cols="8">
-            <b-card>
-              <b-row>
-                <b-col cols="8">
-                  <b-img :src="activeDid.avatar"/>
-                  <b-button
-                    center
-                    size="sm"
-                    variant="outline-primary"
-                    class="mt-3 ml-3"
-                    @click="$refs.avatarSelector.click()"
-                    :disabled="savingAvatar"
-                  >
-                    CHANGE AVATAR
-                    <b-spinner small v-if="savingAvatar" />
-                  </b-button>
-                  <input
-                    ref="avatarSelector"
-                    type="file"
-                    :v-model="avatar"
-                    class="d-none"
-                    accept=".png"
-                    @change="changeAvatar" />
-                </b-col>
-              </b-row>
-              <b-row class="mt-3">
-                <b-col cols="1"><label>ID:</label></b-col>
-                <b-col cols="7"><label>{{ activeDid.id }}</label></b-col>
-              </b-row>
-              <b-row>
-                <b-col cols="1"><label>ALIAS:</label></b-col>
-                <b-col cols="11">
-                  <template v-if="!editingAlias">{{ activeDid.alias }}</template>
-                  <b-form-input
-                    name="alias"
-                    v-if="editingAlias"
-                    v-model="alias"
-                    v-validate="{ required: true }"
-                    :state="validateState('alias')"
-                  />
-                  <b-button
-                    size="sm"
-                    variant="outline-primary"
-                    class="ml-3"
-                    v-if="!editingAlias"
-                    @click="editingAlias = true">
-                    EDIT
-                  </b-button>
-                  <b-button
-                    size="sm"
-                    variant="outline-primary"
-                    class="mt-3"
-                    v-if="editingAlias"
-                    @click="renameAlias"
-                    :disabled="savingAlias">
-                    SAVE
-                    <b-spinner small v-if="savingAlias" />
-                  </b-button>
-                </b-col>
-              </b-row>
-            </b-card>
+      <b-card>
+        <b-row align-v="center">
+          <b-col cols="2">
+            <span id="avatar">
+              <b-img id :src="activeDid.avatar" alt="avatar image"/>
+            </span>
+          </b-col>
+          <b-col cols="10">
+            <b-button
+              size="sm"
+              variant="outline-primary"
+              class="text-uppercase"
+              @click="$refs.avatarSelector.click()"
+              :disabled="savingAvatar"
+            >
+              Change avatar
+              <b-spinner small v-if="savingAvatar" />
+            </b-button>
+            <input
+              ref="avatarSelector"
+              type="file"
+              :v-model="avatar"
+              class="d-none"
+              accept=".png"
+              @change="changeAvatar" />
           </b-col>
         </b-row>
-        <b-row class="clear mt-4">
-          <b-col>
-            <b-button to="/vault/dids" variant="light" class="mr-4">BACK TO DIDS</b-button>
+        <b-row align-v="end" class="mt-3">
+          <b-col cols="2">
+            <label class="mb-0 text-uppercase">ID:</label>
+          </b-col>
+          <b-col cols="10">
+            <b-form-input id="did" readonly plaintext v-model="activeDid.id" />
           </b-col>
         </b-row>
-      </b-form>
+        <b-row align-v="end">
+          <b-col cols="2">
+            <label class="mb-0 text-uppercase">Alias:</label>
+          </b-col>
+          <b-col cols="10">
+            <b-input-group>
+              <b-form-input
+                name="alias"
+                :readonly="!editingAlias"
+                v-model="alias"
+                v-validate="{ required: true }"
+                :state="editingAlias ? validateState('alias') : null"
+              />
+              <b-input-group-append>
+                <b-button
+                  size="sm"
+                  variant="outline-primary"
+                  class="text-uppercase"
+                  v-if="editingAlias"
+                  @click="renameAlias"
+                  :disabled="savingAlias">
+                  Save
+                  <b-spinner small v-if="savingAlias" />
+                </b-button>
+                <b-button
+                  size="sm"
+                  variant="outline-primary"
+                  class="text-uppercase"
+                  v-else
+                  @click="editingAlias = true">
+                  Edit
+                </b-button>
+              </b-input-group-append>
+            </b-input-group>
+          </b-col>
+        </b-row>
+      </b-card>
+      <b-button to="/vault/dids" variant="light" class="mt-4 text-uppercase">Back to DIDs</b-button>
     </template>
   </div>
 </template>
