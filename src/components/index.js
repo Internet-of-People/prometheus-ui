@@ -1,4 +1,5 @@
 import ClaimCard from '@/components/ClaimCard.vue';
+import ClaimCard2 from '@/components/ClaimCard2.vue';
 import Content from '@/components/Content.vue';
 import DidCard from '@/components/DidCard.vue';
 import FilterBar from '@/components/FilterBar.vue';
@@ -16,6 +17,7 @@ import StringField from '@/components/claimschema/StringField.vue';
 
 export {
   ClaimCard,
+  ClaimCard2,
   Content,
   DidCard,
   FilterBar,

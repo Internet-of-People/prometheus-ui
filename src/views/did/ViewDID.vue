@@ -4,7 +4,7 @@
       <b-card class="mb-3">
         <b-row class="mx-0 mb-3" align-v="center">
           <b-col id="avatar" cols="2" class="px-0">
-            <b-img id :src="activeDid.avatar" alt="avatar image"/>
+            <b-img :src="activeDid.avatar" alt="avatar image"/>
           </b-col>
           <b-col cols="10">
             <b-button
@@ -88,22 +88,7 @@
           No claims defined for this DID yet.
         </b-alert>
         <b-card-group deck v-else>
-          <b-card v-for="claim in claims" :key="claim.id" class="mb-3"
-                  no-body footer-bg-variant="light">
-            <b-card-header>
-              <b-card-title>{{claim.schema_name}}</b-card-title>
-              <b-card-sub-title>{{claim.id}}</b-card-sub-title>
-            </b-card-header>
-            <b-card-body>
-              <b-card-text class="text-muted">{{JSON.stringify(claim.content)}}</b-card-text>
-              <!-- <b-card-text text-tag="pre">{{claim.content}}</b-card-text> -->
-            </b-card-body>
-            <b-card-footer class="text-right">
-              <b-button :to="`/vault/claims/${claim.id}`" variant="outline-primary">
-                Details
-              </b-button>
-            </b-card-footer>
-          </b-card>
+          <ClaimCard2 v-for="claim in claims" :key="claim.id" :claim="claim" class="mb-3" />
         </b-card-group>
       </Loader>
       <b-button to="/vault/dids" variant="light" class="text-uppercase">Back to DIDs</b-button>
@@ -113,11 +98,12 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { Loader } from '@/components';
+import { Loader, ClaimCard2 } from '@/components';
 
 export default {
   components: {
     Loader,
+    ClaimCard2,
   },
   data() {
     return {
@@ -135,16 +121,14 @@ export default {
     ...mapGetters(['activeDid']),
   },
   async beforeCreate() {
-    const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
-
     const did = this.$route.params.id;
+
     await this.$store.dispatch('getDID', did);
-    await sleep(1000);
     this.loading = false;
     this.alias = this.activeDid.alias;
     this.avatar = this.activeDid.avatar;
+
     await this.$store.dispatch('getDIDClaims', did);
-    await sleep(1000);
     this.loadingClaims = false;
     this.claims = this.activeDid.claims;
   },

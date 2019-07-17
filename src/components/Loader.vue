@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <div v-if="loading" class="d-flex align-items-center">
+  <div v-if="loading" class="d-flex align-items-center" key="loading-in-progress">
     <b-spinner variant="primary" class="mr-3" />{{text}}
   </div>
-  <slot v-else />
+  <div v-else key="loading-finished">
+    <slot />
   </div>
 </template>
 <script>
