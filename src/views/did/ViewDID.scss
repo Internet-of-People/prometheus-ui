@@ -1,9 +1,5 @@
-#avatar {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-}
 #avatar > img {
-    max-width: 150px;
-    max-height: 150px;
+    object-fit: contain;
+    height: 150px;
+    width: 100%;
 }

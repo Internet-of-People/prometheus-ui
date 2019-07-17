@@ -17,11 +17,16 @@ export default {
   name: 'BreadCrumb',
   computed: {
     breadcrumb() {
-      return this.$route.meta.breadcrumb;
+      let { breadcrumb } = this.$route.meta;
+      if (this.$route.params.id && breadcrumb) {
+        breadcrumb = breadcrumb.slice(0); // clones array
+        breadcrumb.push({ text: this.$route.params.id });
+      }
+      return breadcrumb;
     },
     title() {
-      let { title } = this.$route.meta;
-      title += this.$route.params.id ? this.$route.params.id : '';
+      const { title } = this.$route.meta;
+      // title += this.$route.params.id ? this.$route.params.id : '';
       return title;
     },
     topBarButton() {

@@ -40,7 +40,7 @@ export default new Router({
       meta: {
         requiresAuth: false,
         breadcrumb: [
-          { text: '1. GENERATING MNEUMONIC', active: true },
+          { text: '1. GENERATING MNEMONIC', active: true },
           { text: '2. VALIDATING' },
           { text: '3. FINISH' },
         ],
@@ -55,7 +55,7 @@ export default new Router({
       meta: {
         requiresAuth: false,
         breadcrumb: [
-          { text: '1. GENERATING MNEUMONIC' },
+          { text: '1. GENERATING MNEMONIC' },
           { text: '2. VALIDATING', active: true },
           { text: '3. FINISH' },
         ],
@@ -71,7 +71,7 @@ export default new Router({
       meta: {
         requiresAuth: true,
         breadcrumb: [
-          { text: '1. GENERATING MNEUMONIC' },
+          { text: '1. GENERATING MNEMONIC' },
           { text: '2. VALIDATING' },
           { text: '3. FINISH', active: true },
         ],
@@ -100,7 +100,10 @@ export default new Router({
       component: ViewDID,
       meta: {
         requiresAuth: true,
-        title: 'VAULT / DIDs / ',
+        breadcrumb: [
+          { text: 'DIDs', to: '/vault/dids', rel: 'parent' },
+        ],
+        title: 'DID DETAILS',
         homeUrl: SIGNED_IN_HOME_URL,
       },
     },
