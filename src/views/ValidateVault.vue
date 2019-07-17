@@ -90,7 +90,7 @@ export default {
     },
     goBack() {
       this.$store.dispatch('cancelVaultCreation');
-      this.$router.push('/');
+      this.$router.push({ name: 'intro' });
     },
     async createVault() {
       const reset = () => {
@@ -112,7 +112,7 @@ export default {
         }
 
         await api.initVault(phrase);
-        this.$router.push('/vaultcreated');
+        this.$router.push({ name: 'vaultCreated' });
       } catch (err) {
         this.apiError = `HTTP ${err.response.status} - ${err.response.data}`;
         this.showVaultInitError = true;

@@ -190,7 +190,7 @@ export default {
           data,
         }).then(() => {
           this.saving = false;
-          this.$router.push('/vault/claims');
+          this.$router.push({ name: 'dids' });
         });
       });
     },

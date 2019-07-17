@@ -25,6 +25,9 @@ const GUEST_HOME_URL = '/';
 
 export default new Router({
   mode: 'history',
+  scrollBehavior() {
+    return { x: 0, y: 0 };
+  },
   base: process.env.BASE_URL,
   routes: [
     {
@@ -65,7 +68,7 @@ export default new Router({
     },
     {
       path: '/vaultcreated',
-      name: 'vaultcreated',
+      name: 'vaultCreated',
       component: VaultCreation,
       // component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
       meta: {
@@ -123,7 +126,10 @@ export default new Router({
       component: ListClaims,
       meta: {
         requiresAuth: true,
-        title: 'VAULT / CLAIMS',
+        breadcrumb: [
+          { text: 'Claims', active: true },
+        ],
+        title: 'CLAIMS',
         homeUrl: SIGNED_IN_HOME_URL,
         topBarButton: TopCreateNewClaimButton,
       },
@@ -134,7 +140,10 @@ export default new Router({
       component: ViewClaim,
       meta: {
         requiresAuth: true,
-        title: 'VAULT / CLAIMS / ',
+        breadcrumb: [
+          { text: 'Claims', to: '/vault/claims', rel: 'parent' },
+        ],
+        title: 'Claim details',
         homeUrl: SIGNED_IN_HOME_URL,
       },
     },

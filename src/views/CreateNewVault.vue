@@ -55,10 +55,10 @@ export default {
   methods: {
     goBack() {
       this.$store.dispatch('cancelVaultCreation');
-      this.$router.push('/');
+      this.$router.push({ name: 'intro' });
     },
     restoreVault() {
-      this.$router.push('/validatevault');
+      this.$router.push({ name: 'validateVault' });
     },
   },
 };

@@ -40,6 +40,10 @@ export default new Vuex.Store({
       const response = await api.getDID(did);
       context.commit('GET_DID', response.data);
     },
+    async getDIDClaims(context, did) {
+      const response = await api.getDIDClaims(did);
+      context.commit('SET_DID_CLAIMS', { did, claims: response.data });
+    },
     async listDIDs(context) {
       const response = await api.listDIDs();
       context.commit('LIST_DIDS', response.data);
@@ -100,6 +104,10 @@ export default new Vuex.Store({
         return did;
       });
       state.activeDid.avatar = payload.avatar;
+    },
+    SET_DID_CLAIMS: (state, payload) => {
+      if (payload.did !== state.activeDid.id) return;
+      state.activeDid.claims = payload.claims;
     },
     LIST_CLAIMS: (state, claims) => {
       state.claims = claims;

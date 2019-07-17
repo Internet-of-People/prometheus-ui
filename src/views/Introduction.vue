@@ -51,10 +51,10 @@ export default {
   },
   methods: {
     async createNewVault() {
-      this.$router.push('/createnewvault');
+      this.$router.push({ name: 'createNewVault' });
     },
     async restoreVault() {
-      this.$router.push('/validatevault');
+      this.$router.push({ name: 'validateVault' });
     },
   },
 };

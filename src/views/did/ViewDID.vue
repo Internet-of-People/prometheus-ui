@@ -2,7 +2,7 @@
   <div>
     <Loader :loading="loading" />
     <template v-if="!loading">
-      <b-card>
+      <b-card class="mb-3">
         <b-row class="mx-0 mb-3" align-v="center">
           <b-col id="avatar" cols="2" class="px-0">
             <b-img id :src="activeDid.avatar" alt="avatar image"/>
@@ -49,12 +49,21 @@
             v-model="alias"
             v-validate="{ required: true }"
             @keyup.enter="renameAlias()"
+            @keyup.esc="cancelAlias()"
             :state="editingAlias ? validateState('alias') : null"
           />
           <b-input-group-append>
             <b-button
               size="sm"
-              ref="saveButton"
+              variant="outline-secondary"
+              class="text-uppercase"
+              v-if="editingAlias"
+              @click="cancelAlias"
+              :disabled="savingAlias">
+              Cancel
+            </b-button>
+            <b-button
+              size="sm"
               variant="outline-primary"
               class="text-uppercase"
               v-if="editingAlias"
@@ -74,7 +83,31 @@
           </b-input-group-append>
         </b-input-group>
       </b-card>
-      <b-button to="/vault/dids" variant="light" class="mt-4 text-uppercase">Back to DIDs</b-button>
+      <Loader :loading="loadingClaims" text="Loading claims..." />
+      <template v-if="!loadingClaims">
+        <b-alert show variant="info" v-if="!claims || !claims.length">
+          No claims defined for this DID yet.
+        </b-alert>
+        <b-card-group deck v-else>
+          <b-card v-for="claim in claims" :key="claim.id" class="mb-3"
+                  no-body footer-bg-variant="light">
+            <b-card-header>
+              <b-card-title>{{claim.schema_name}}</b-card-title>
+              <b-card-sub-title>{{claim.id}}</b-card-sub-title>
+            </b-card-header>
+            <b-card-body>
+              <b-card-text class="text-muted">{{JSON.stringify(claim.content)}}</b-card-text>
+              <!-- <b-card-text text-tag="pre">{{claim.content}}</b-card-text> -->
+            </b-card-body>
+            <b-card-footer class="text-right">
+              <b-button :to="`/vault/claims/${claim.id}`" variant="outline-primary">
+                Details
+              </b-button>
+            </b-card-footer>
+          </b-card>
+        </b-card-group>
+      </template>
+      <b-button to="/vault/dids" variant="light" class="text-uppercase">Back to DIDs</b-button>
     </template>
   </div>
 </template>
@@ -90,25 +123,31 @@ export default {
   data() {
     return {
       loading: true,
+      loadingClaims: true,
       editingAlias: false,
       savingAlias: false,
       alias: '',
       avatar: '',
       savingAvatar: false,
-      form: {
-
-      },
+      claims: [],
     };
   },
   computed: {
     ...mapGetters(['activeDid']),
   },
-  beforeCreate() {
-    this.$store.dispatch('getDID', this.$route.params.id).then(() => {
-      this.loading = false;
-      this.alias = this.activeDid.alias;
-      this.avatar = this.activeDid.avatar;
-    });
+  async beforeCreate() {
+    const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+    const did = this.$route.params.id;
+    await this.$store.dispatch('getDID', did);
+    await sleep(1000);
+    this.loading = false;
+    this.alias = this.activeDid.alias;
+    this.avatar = this.activeDid.avatar;
+    await this.$store.dispatch('getDIDClaims', did);
+    await sleep(1000);
+    this.loadingClaims = false;
+    this.claims = this.activeDid.claims;
   },
   methods: {
     // TODO: this is duplicated at multiple places
@@ -120,6 +159,10 @@ export default {
         return !this.vErrors.has(ref);
       }
       return null;
+    },
+    cancelAlias() {
+      this.alias = this.activeDid.alias;
+      this.editingAlias = false;
     },
     renameAlias() {
       this.$validator.validateAll().then((result) => {
