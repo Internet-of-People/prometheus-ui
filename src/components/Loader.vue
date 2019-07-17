@@ -1,6 +1,9 @@
 <template>
-  <div v-if="loading" class="d-flex align-items-center">
+  <div>
+    <div v-if="loading" class="d-flex align-items-center">
     <b-spinner variant="primary" class="mr-3" />{{text}}
+  </div>
+  <slot v-else />
   </div>
 </template>
 <script>

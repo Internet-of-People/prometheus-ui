@@ -1,15 +1,21 @@
 <template>
-  <div>
-    <Loader :loading="loading" />
-    <template v-if="!loading">
-      <FilterBar v-if="claims.length" v-model="searchTerm" />
-      <ClaimCard
-        v-for="claim in filteredClaims"
-        :claim="claim"
-        :key="claim.id"
-      />
-    </template>
-  </div>
+  <Loader :loading="loading">
+    <FilterBar v-if="claims.length" v-model="searchTerm" />
+    <b-alert v-else show variant="info">
+      You have no claims yet. Why not create one? ;)<br>
+      <b-button
+        to="/vault/claims/create"
+        variant="primary"
+        class="mt-3">
+        CREATE THE 1st CLAIM
+      </b-button>
+    </b-alert>
+    <ClaimCard
+      v-for="claim in filteredClaims"
+      :claim="claim"
+      :key="claim.id"
+    />
+  </Loader>
 </template>
 
 <script>

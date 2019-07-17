@@ -6,17 +6,18 @@
       all those phrases correctly.
     </b-alert>
     <b-row class="d-flex justify-content-start">
-      <b-col>
-        <template v-for="(word,index) in words">
+      <b-col cols="6" sm="4" md="3" lg="2" v-for="(word,index) in words" :key="index">
           <b-input-group
             size="sm"
-            :prepend="(index+1)+''"
-            :key="index"
-            class="mr-2 mb-2 vault-creation-inputs"
+            class="mb-2"
           >
-            <b-form-input trim  v-model="words[index]" />
+            <b-input-group-addon>
+              <b-input-group-text style="width:2rem;" class="justify-content-end">
+                {{index+1}}
+              </b-input-group-text>
+            </b-input-group-addon>
+            <b-form-input trim v-model="words[index]" />
           </b-input-group>
-        </template>
       </b-col>
     </b-row>
     <b-row class="clear mt-4">

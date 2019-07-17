@@ -1,24 +1,24 @@
 <template>
-  <div>
+  <Loader :loading="loading">
     <b-alert show variant="warning">
       Please note down all the following phrases in correct order.
     </b-alert>
     <b-row class="d-flex justify-content-start">
-      <b-col>
-        <Loader :loading="loading" />
-        <template v-for="(word,index) in words">
-          <b-input-group
-            size="sm"
-            :prepend="(index+1)+''"
-            :key="index"
-            class="mr-2 mb-2 vault-creation-inputs"
-          >
-            <b-form-input trim readonly :value="word" />
-          </b-input-group>
-        </template>
+      <b-col cols="6" sm="4" md="3" lg="2" v-for="(word,index) in words" :key="index">
+        <b-input-group
+          size="sm"
+          class="mb-2"
+        >
+          <b-input-group-addon>
+            <b-input-group-text style="width:2rem;" class="justify-content-end">
+              {{index+1}}
+            </b-input-group-text>
+          </b-input-group-addon>
+          <b-form-input trim readonly :value="word" />
+        </b-input-group>
       </b-col>
     </b-row>
-    <b-row class="clear mt-4" v-if="!loading">
+    <b-row class="clear mt-4">
       <b-col>
         <b-button @click="goBack" variant="light" class="mr-4">BACK</b-button>
         <b-button @click="restoreVault" variant="primary">
@@ -27,7 +27,7 @@
         </b-button>
       </b-col>
     </b-row>
-  </div>
+  </Loader>
 </template>
 
 <script>

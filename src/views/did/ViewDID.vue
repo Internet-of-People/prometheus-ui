@@ -1,7 +1,6 @@
 <template>
   <div>
-    <Loader :loading="loading" />
-    <template v-if="!loading">
+    <Loader :loading="loading">
       <b-card class="mb-3">
         <b-row class="mx-0 mb-3" align-v="center">
           <b-col id="avatar" cols="2" class="px-0">
@@ -35,7 +34,7 @@
               ID:
             </b-input-group-text>
           </b-input-group-prepend>
-          <b-form-input readonly v-model="activeDid.id" />
+          <b-form-input readonly plaintext v-model="activeDid.id" />
         </b-input-group>
         <b-input-group>
           <b-input-group-prepend class="col-2 px-0">
@@ -50,6 +49,7 @@
             v-validate="{ required: true }"
             @keyup.enter="renameAlias()"
             @keyup.esc="cancelAlias()"
+            @dblclick="editingAlias = true"
             :state="editingAlias ? validateState('alias') : null"
           />
           <b-input-group-append>
@@ -83,8 +83,7 @@
           </b-input-group-append>
         </b-input-group>
       </b-card>
-      <Loader :loading="loadingClaims" text="Loading claims..." />
-      <template v-if="!loadingClaims">
+      <Loader :loading="loadingClaims" text="Loading claims...">
         <b-alert show variant="info" v-if="!claims || !claims.length">
           No claims defined for this DID yet.
         </b-alert>
@@ -106,9 +105,9 @@
             </b-card-footer>
           </b-card>
         </b-card-group>
-      </template>
+      </Loader>
       <b-button to="/vault/dids" variant="light" class="text-uppercase">Back to DIDs</b-button>
-    </template>
+    </Loader>
   </div>
 </template>
 
