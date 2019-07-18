@@ -1,8 +1,9 @@
 <template>
   <div>
     <Loader :loading="loading">
-      <b-card class="mb-3">
-        <b-row class="mx-0 mb-3" align-v="center">
+      <h2 class="mb-3 text-primary">DID document</h2>
+      <b-card>
+        <b-row class="mx-0 mb-3" align-v="center" role="group">
           <b-col id="avatar" cols="2" class="px-0">
             <b-img :src="activeDid.avatar" alt="avatar image"/>
           </b-col>
@@ -83,12 +84,14 @@
           </b-input-group-append>
         </b-input-group>
       </b-card>
+      <h2 class="my-3 text-primary">Claims</h2>
       <Loader :loading="loadingClaims" text="Loading claims...">
         <b-alert show variant="info" v-if="!claims || !claims.length">
           No claims defined for this DID yet.
         </b-alert>
         <b-card-group deck v-else>
-          <ClaimCard2 v-for="claim in claims" :key="claim.id" :claim="claim" class="mb-3" />
+          <ClaimCard2 v-for="claim in claims" :key="claim.id"
+                      :claim="claim" class="mb-3" role="group" />
         </b-card-group>
       </Loader>
       <b-button to="/vault/dids" variant="light" class="text-uppercase">Back to DIDs</b-button>
