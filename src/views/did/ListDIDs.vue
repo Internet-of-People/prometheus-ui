@@ -20,7 +20,7 @@
             @click="createNewDID"
             variant="primary"
             class="mt-3">
-            CREATE THE 1st DID
+            CREATE YOUR FIRST DID
           </b-button>
         </b-alert>
       </template>

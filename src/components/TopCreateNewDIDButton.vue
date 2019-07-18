@@ -5,7 +5,7 @@
     variant="primary"
     :disabled="loading"
   >
-    CREATE NEW ID
+    CREATE NEW DID
     <b-spinner small v-if="loading" class="ml-1" />
   </b-button>
 </template>

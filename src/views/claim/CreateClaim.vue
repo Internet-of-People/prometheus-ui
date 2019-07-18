@@ -3,7 +3,7 @@
       <b-col cols="8">
         <Tooltip id="createclaim-tooltip">
           Claims are statements about yourself, ranging from simple things like
-          "I have blue eyes!" to a full digital representation of your passport.
+          "I have brown eyes!" to a full digital representation of your passport.
           Claims are always associated with only one of your IDs, so your personas stay separate.
           All your claims are private by default and securely stored on your device until you
           decide to share them with other people.
@@ -32,7 +32,7 @@
             <b-form-group
               label="Schema:"
               label-for="schema"
-              description="The claim schema. In many cases, a widely used template already
+              description="In many cases, a widely used template already
               exists for the claim you want to make. If you don't find anything applicable,
               you can create your own schema or modify an existing one."
             >

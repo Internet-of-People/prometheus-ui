@@ -7,7 +7,7 @@
         to="/vault/claims/create"
         variant="primary"
         class="mt-3">
-        CREATE THE 1st CLAIM
+        CREATE YOUR FIRST CLAIM
       </b-button>
     </b-alert>
     <ClaimCard
