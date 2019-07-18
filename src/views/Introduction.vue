@@ -18,23 +18,23 @@
       </b-col>
     </b-row>
     <b-row class="justify-content-md-center mt-4 text-center">
-      <b-col sm="6" lg="4">
-        <b-card>
-          <b-card-text class="text-muted">
-            Choose this option if you have no seeds to restore.
-            It will generate a new vault with a randomly generated seed.
-          </b-card-text>
-          <b-button @click="createNewVault" variant="primary">CREATE NEW VAULT</b-button>
-        </b-card>
-      </b-col>
-      <b-col sm="6" lg="4">
-        <b-card>
-          <b-card-text class="text-muted">
-            If you have an already generated seed and want to restore your vault,
-            this is what you need.
-          </b-card-text>
-          <b-button @click="restoreVault" variant="light">RESTORE VAULT</b-button>
-        </b-card>
+      <b-col sm="12" lg="8">
+        <b-card-group deck>
+          <b-card>
+            <b-card-text class="text-muted">
+              Choose this option if you have no seeds to restore.
+              It will generate a new vault with a randomly generated seed.
+            </b-card-text>
+            <b-button @click="createNewVault" variant="primary">CREATE NEW VAULT</b-button>
+          </b-card>
+          <b-card sm="6" lg="4">
+            <b-card-text class="text-muted">
+              If you have an already generated seed and want to restore your vault,
+              this is what you need.
+            </b-card-text>
+            <b-button @click="restoreVault" variant="light">RESTORE VAULT</b-button>
+          </b-card>
+        </b-card-group>
       </b-col>
     </b-row>
   </b-container>
