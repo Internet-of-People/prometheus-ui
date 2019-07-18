@@ -6,6 +6,8 @@ import {
   faAngleRight,
   faCheckCircle,
   faCircleNotch,
+  faUnlockAlt,
+  faUserLock,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faLaughWink,
@@ -28,6 +30,8 @@ library.add([
   faGithub, // <fa :icon="['fab', 'github']" />
   faLaughWink, // <fa :icon="['far', 'laugh-wink']" />
   faTelegram, // <fa :icon="['fab', 'telegram']" />
+  faUnlockAlt, // <fa icon="unlock-alt" />
+  faUserLock, // <fa icon="user-lock" />
 ]);
 Vue.component('fa', FontAwesomeIcon);
 

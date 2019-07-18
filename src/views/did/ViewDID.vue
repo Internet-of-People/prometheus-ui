@@ -3,11 +3,11 @@
     <Loader :loading="loading">
       <h2 class="mb-3 text-primary">DID document</h2>
       <b-card>
-        <b-row class="mx-0 mb-3" align-v="center" role="group">
+        <b-row id="avatar-row" class="mx-0 mb-3" align-v="center" role="group">
           <b-col id="avatar" cols="2" class="px-0">
             <b-img :src="activeDid.avatar" alt="avatar image"/>
           </b-col>
-          <b-col cols="10">
+          <b-col>
             <b-button
               size="sm"
               variant="outline-primary"
@@ -29,70 +29,86 @@
               @change="changeAvatar" />
           </b-col>
         </b-row>
-        <b-input-group>
-          <b-input-group-prepend class="col-2 px-0">
-            <b-input-group-text class="w-100 justify-content-end text-uppercase">
-              ID:
-            </b-input-group-text>
-          </b-input-group-prepend>
-          <b-form-input readonly plaintext v-model="activeDid.id" />
-        </b-input-group>
-        <b-input-group>
-          <b-input-group-prepend class="col-2 px-0">
-            <b-input-group-text class="w-100 justify-content-end text-uppercase">
-              Alias:
-            </b-input-group-text>
-          </b-input-group-prepend>
-          <b-form-input
-            name="alias"
-            :readonly="!editingAlias"
-            v-model="alias"
-            v-validate="{ required: true }"
-            @keyup.enter="renameAlias()"
-            @keyup.esc="cancelAlias()"
-            @dblclick="editingAlias = true"
-            :state="editingAlias ? validateState('alias') : null"
-          />
-          <b-input-group-append>
-            <b-button
-              size="sm"
-              variant="outline-secondary"
-              class="text-uppercase"
-              v-if="editingAlias"
-              @click="cancelAlias"
-              :disabled="savingAlias">
-              Cancel
-            </b-button>
-            <b-button
-              size="sm"
-              variant="outline-primary"
-              class="text-uppercase"
-              v-if="editingAlias"
-              @click="renameAlias"
-              :disabled="savingAlias">
-              Save
-              <b-spinner small v-if="savingAlias" />
-            </b-button>
-            <b-button
-              size="sm"
-              variant="outline-primary"
-              class="text-uppercase"
-              v-else
-              @click="editingAlias = true">
-              Edit
-            </b-button>
-          </b-input-group-append>
-        </b-input-group>
+        <b-tooltip target="avatar-row" placement="left">
+          <fa icon="user-lock" class="mr-2" /> Your avatars will not be shared with anyone
+        </b-tooltip>
+        <b-row id="id-row">
+          <b-input-group>
+            <b-input-group-prepend class="col-2 px-0">
+              <b-input-group-text class="w-100 justify-content-end text-uppercase">
+                ID:
+              </b-input-group-text>
+            </b-input-group-prepend>
+            <b-form-input readonly plaintext v-model="activeDid.id" />
+          </b-input-group>
+        </b-row>
+        <b-tooltip target="id-row" placement="left">
+          <fa icon="unlock-alt" class="mr-2" /> You might choose to share your IDs
+        </b-tooltip>
+        <b-row id="alias-row">
+          <b-input-group>
+            <b-input-group-prepend class="col-2 px-0">
+              <b-input-group-text class="w-100 justify-content-end text-uppercase">
+                Alias:
+              </b-input-group-text>
+            </b-input-group-prepend>
+            <b-form-input
+              name="alias"
+              :readonly="!editingAlias"
+              v-model="alias"
+              v-validate="{ required: true }"
+              @keyup.enter="renameAlias()"
+              @keyup.esc="cancelAlias()"
+              @dblclick="editingAlias = true"
+              :state="editingAlias ? validateState('alias') : null"
+            />
+            <b-input-group-append>
+              <b-button
+                size="sm"
+                variant="outline-secondary"
+                class="text-uppercase"
+                v-if="editingAlias"
+                @click="cancelAlias"
+                :disabled="savingAlias">
+                Cancel
+              </b-button>
+              <b-button
+                size="sm"
+                variant="outline-primary"
+                class="text-uppercase"
+                v-if="editingAlias"
+                @click="renameAlias"
+                :disabled="savingAlias">
+                Save
+                <b-spinner small v-if="savingAlias" />
+              </b-button>
+              <b-button
+                size="sm"
+                variant="outline-primary"
+                class="text-uppercase"
+                v-else
+                @click="editingAlias = true">
+                Edit
+              </b-button>
+            </b-input-group-append>
+          </b-input-group>
+        </b-row>
+        <b-tooltip target="alias-row" placement="left">
+          <fa icon="user-lock" class="mr-2" /> Your aliases will be kept private
+        </b-tooltip>
       </b-card>
       <h2 class="my-3 text-primary">Claims</h2>
       <Loader :loading="loadingClaims" text="Loading claims...">
         <b-alert show variant="info" v-if="!claims || !claims.length">
           No claims defined for this DID yet.
         </b-alert>
-        <b-card-group deck v-else>
+        <b-card-group deck v-else id="claims-panel">
           <ClaimCard2 v-for="claim in claims" :key="claim.id"
                       :claim="claim" class="mb-3" role="group" />
         </b-card-group>
+        <b-tooltip target="claims-panel" placement="left">
+          <fa icon="unlock-alt" class="mr-2" /> You will only share your claims with their witnesses
+        </b-tooltip>
       </Loader>
       <b-button to="/vault/dids" variant="light" class="text-uppercase">Back to DIDs</b-button>
     </Loader>
