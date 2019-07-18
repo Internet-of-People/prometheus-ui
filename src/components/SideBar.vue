@@ -1,12 +1,9 @@
 <template>
   <b-container id="sidebar" class="p-0">
-    <div class="justify-content-md-center text-center">
-      <router-link
-        class="app-title pl-2"
-        :to="homeUrl"
-      >
-        <b-img :src="require('@/assets/images/logo.svg')" fluid alt="Responsive image" />
-        <span class="d-sm-none d-lg-inline">{{ appName }}</span>
+    <div class="justify-content-center text-center">
+      <router-link :to="homeUrl">
+        <b-img :src="require('@/assets/images/logo.svg')" alt="Prometheus logo" />
+        <span class="d-none d-lg-inline">{{ appName }}</span>
       </router-link>
     </div>
     <b-nav vertical class="mt-4" v-if="showNavItems">
