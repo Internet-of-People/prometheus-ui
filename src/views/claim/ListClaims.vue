@@ -2,7 +2,7 @@
   <Loader :loading="loading">
     <FilterBar v-if="claims.length" v-model="searchTerm" />
     <b-alert v-else show variant="info">
-      You have no claims yet. Why not create one? ;)<br>
+      You have no claims yet. Why not create one? <fa :icon="['far', 'laugh-wink']" /><br>
       <b-button
         to="/vault/claims/create"
         variant="primary"
