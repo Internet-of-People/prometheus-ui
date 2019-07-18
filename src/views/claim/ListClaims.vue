@@ -10,11 +10,9 @@
         CREATE YOUR FIRST CLAIM
       </b-button>
     </b-alert>
-    <ClaimCard
-      v-for="claim in filteredClaims"
-      :claim="claim"
-      :key="claim.id"
-    />
+    <b-card-group deck>
+      <ClaimCard v-for="claim in filteredClaims" :claim="claim" :key="claim.id" />
+    </b-card-group>
   </Loader>
 </template>
 
