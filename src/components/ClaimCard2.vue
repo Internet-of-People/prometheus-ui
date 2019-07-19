@@ -1,5 +1,5 @@
 <template>
-  <b-card no-body class="mw-50">
+  <b-card no-body>
     <b-card-header>
       <b-card-title>{{claim.schema_name}}</b-card-title>
       <b-card-sub-title>{{claim.id}}</b-card-sub-title>

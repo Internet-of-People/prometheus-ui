@@ -97,14 +97,22 @@
           <fa icon="user-lock" class="mr-2" /> Your aliases will be kept private
         </b-tooltip>
       </b-card>
-      <h2 class="my-3 text-primary">Claims</h2>
+      <div class="d-flex justify-content-between align-items-center">
+        <h2 class="my-3 text-primary">Claims</h2>
+        <b-button
+          variant="primary"
+          :to="{ name:'createClaim', params:{ did: activeDid.id }}"
+        >
+          CREATE NEW CLAIM
+        </b-button>
+      </div>
       <Loader :loading="loadingClaims" text="Loading claims...">
         <b-alert show variant="info" v-if="!claims || !claims.length">
           No claims defined for this DID yet.
         </b-alert>
         <b-card-group deck v-else id="claims-panel">
           <ClaimCard2 v-for="claim in claims" :key="claim.id"
-                      :claim="claim" class="mb-3" role="group" />
+                      :claim="claim" class="mb-3 mw-50" role="group" />
         </b-card-group>
         <b-tooltip target="claims-panel" placement="left">
           <fa icon="unlock-alt" class="mr-2" /> You will only share your claims with their witnesses

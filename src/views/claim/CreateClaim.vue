@@ -1,7 +1,7 @@
 <template>
     <b-row>
       <b-col cols="8">
-        <Tooltip id="createclaim-tooltip">
+        <Tooltip id="create-claim-tooltip">
           Claims are statements about yourself, ranging from simple things like
           "I have brown eyes!" to a full digital representation of your passport.
           Claims are always associated with only one of your IDs, so your personas stay separate.
@@ -23,44 +23,46 @@
               :state="validateState('did')"
             >
               <template slot="first">
-                <option :value="null" disabled selected>-- Please select a DID --</option>
+                <option :value="undefined" disabled selected>-- Please select a DID --</option>
               </template>
             </b-form-select>
           </b-form-group>
           <hr>
-          <b-card>
-            <b-form-group
-              label="Schema:"
-              label-for="schema"
-              description="In many cases, a widely used template already
-              exists for the claim you want to make. If you don't find anything applicable,
-              you can create your own schema or modify an existing one."
-            >
-              <b-form-select
-                id="schema"
-                name="schema"
-                v-model="schema"
-                :options="availableSchemas ? availableSchemas : []"
-                v-validate="{ required: true }"
-                :state="validateState('schema')"
+          <Loader :loading="schemasLoading">
+            <b-card>
+              <b-form-group
+                label="Schema:"
+                label-for="schema"
+                description="In many cases, a widely used template already
+                exists for the claim you want to make. If you don't find anything applicable,
+                you can create your own schema or modify an existing one."
               >
-                <template slot="first">
-                  <option :value="null" disabled selected>-- Please select a schema --</option>
-                </template>
-              </b-form-select>
-            </b-form-group>
-            <template v-for="item in schemaPropertiesCollection">
-              <component
-                :key="item.key"
-                :is="getSchemaComponent(item.properties.type)"
-                v-bind="{data:{
-                  name: item.key,
-                  properties: item.properties,
-                }}"
-                v-model="claimContent[item.key]"
-              />
-            </template>
-          </b-card>
+                <b-form-select
+                  id="schema"
+                  name="schema"
+                  v-model="schema"
+                  :options="availableSchemas ? availableSchemas : []"
+                  v-validate="{ required: true }"
+                  :state="validateState('schema')"
+                >
+                  <template slot="first">
+                    <option :value="null" disabled selected>-- Please select a schema --</option>
+                  </template>
+                </b-form-select>
+              </b-form-group>
+              <template v-for="item in schemaPropertiesCollection">
+                <component
+                  :key="item.key"
+                  :is="getSchemaComponent(item.properties.type)"
+                  v-bind="{data:{
+                    name: item.key,
+                    properties: item.properties,
+                  }}"
+                  v-model="claimContent[item.key]"
+                />
+              </template>
+            </b-card>
+          </Loader>
           <hr>
           <b-form-group
             label="Witnesses:"
@@ -82,7 +84,7 @@
             </b-form-invalid-feedback>
           </b-form-group>
           <hr>
-          <b-button to="/vault/claims" variant="light" class="mr-4">CANCEL</b-button>
+          <b-button :to="{name: 'listClaims'}" variant="light" class="mr-4">CANCEL</b-button>
           <b-button @click="create" variant="primary" :disabled="saving">
             CREATE &amp; SEND
             <b-spinner small class="ml-1" v-if="saving" />
@@ -94,21 +96,27 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { NumberField, Tooltip, StringField } from '@/components';
+import {
+  Loader, NumberField, Tooltip, StringField,
+} from '@/components';
 
 export default {
   components: {
-    Tooltip,
+    Loader,
     NumberField,
     StringField,
+    Tooltip,
+  },
+  props: {
+    did: String,
   },
   data() {
     return {
+      schemasLoading: true,
       schema: null,
-      did: null,
       saving: false,
       claimContent: {},
-      form: { // validation
+      form: { // validation (only witnesses is used at the moment)
         dids: null,
         schemas: null,
         witnesses: null,
@@ -149,8 +157,12 @@ export default {
       return schemaProperties;
     },
   },
-  beforeCreate() {
-    this.$store.dispatch('listClaimSchemas');
+  async beforeCreate() {
+    const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+    await this.$store.dispatch('listClaimSchemas');
+    await sleep(1000);
+    this.schemasLoading = false;
   },
   methods: {
     getSchemaComponent(type) {
@@ -190,7 +202,7 @@ export default {
           data,
         }).then(() => {
           this.saving = false;
-          this.$router.push({ name: 'dids' });
+          this.$router.push({ name: 'listClaims' });
         });
       });
     },
