@@ -185,26 +185,21 @@ export default {
       }
       return null;
     },
-    create() {
-      this.$validator.validateAll().then((result) => {
-        if (!result) {
-          return;
-        }
-
-        const data = {
+    async create() {
+      if (!await this.$validator.validateAll()) {
+        return;
+      }
+      this.saving = true;
+      await this.$store.dispatch('createClaim', {
+        didId: this.did,
+        data: {
           schema: this.schema,
           content: this.claimContent,
-        };
-
-        this.saving = true;
-        this.$store.dispatch('createClaim', {
-          didId: this.did,
-          data,
-        }).then(() => {
-          this.saving = false;
-          this.$router.push({ name: 'listClaims' });
-        });
+        },
       });
+      this.saving = false;
+
+      this.$router.push({ name: 'did', params: { id: this.did } });
     },
   },
 };
