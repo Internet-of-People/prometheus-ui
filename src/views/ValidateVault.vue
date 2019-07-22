@@ -5,20 +5,7 @@
       Providing these words in the correct order ensures us that you noted
       all those phrases correctly.
     </b-alert>
-    <b-row class="d-flex justify-content-start">
-      <b-col>
-        <template v-for="(word,index) in words">
-          <b-input-group
-            size="sm"
-            :prepend="(index+1)+''"
-            :key="index"
-            class="mr-2 mb-2 vault-creation-inputs"
-          >
-            <b-form-input trim  v-model="words[index]" />
-          </b-input-group>
-        </template>
-      </b-col>
-    </b-row>
+    <MnemonicWords :words="words" />
     <b-row class="clear mt-4">
       <b-col>
         <b-alert :show="showPhraseError" variant="danger">
@@ -42,9 +29,13 @@
 
 <script>
 import api from '@/api';
+import { MnemonicWords } from '@/components';
 
 export default {
   name: 'ValidateVault',
+  components: {
+    MnemonicWords,
+  },
   data() {
     return {
       words: [],
@@ -89,8 +80,7 @@ export default {
       ];
     },
     goBack() {
-      this.$store.dispatch('cancelVaultCreation');
-      this.$router.push('/');
+      this.$router.push({ name: 'intro' });
     },
     async createVault() {
       const reset = () => {
@@ -112,7 +102,7 @@ export default {
         }
 
         await api.initVault(phrase);
-        this.$router.push('/vaultcreated');
+        this.$router.push({ name: 'vaultCreated' });
       } catch (err) {
         this.apiError = `HTTP ${err.response.status} - ${err.response.data}`;
         this.showVaultInitError = true;

@@ -1,24 +1,10 @@
 <template>
-  <div>
+  <Loader :loading="loading">
     <b-alert show variant="warning">
       Please note down all the following phrases in correct order.
     </b-alert>
-    <b-row class="d-flex justify-content-start">
-      <b-col>
-        <Loader :loading="loading" />
-        <template v-for="(word,index) in words">
-          <b-input-group
-            size="sm"
-            :prepend="(index+1)+''"
-            :key="index"
-            class="mr-2 mb-2 vault-creation-inputs"
-          >
-            <b-form-input trim readonly :value="word" />
-          </b-input-group>
-        </template>
-      </b-col>
-    </b-row>
-    <b-row class="clear mt-4" v-if="!loading">
+    <MnemonicWords :words="words" readonly />
+    <b-row class="clear mt-4">
       <b-col>
         <b-button @click="goBack" variant="light" class="mr-4">BACK</b-button>
         <b-button @click="restoreVault" variant="primary">
@@ -27,38 +13,36 @@
         </b-button>
       </b-col>
     </b-row>
-  </div>
+  </Loader>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import { Loader } from '@/components';
+import { Loader, MnemonicWords } from '@/components';
+import api from '@/api';
 
 export default {
   name: 'CreateNewVault',
   data() {
     return {
       loading: true,
+      words: [],
     };
   },
   components: {
     Loader,
+    MnemonicWords,
   },
-  computed: {
-    ...mapGetters(['words']),
-  },
-  beforeCreate() {
-    this.$store.dispatch('generatePhraseAsync').then(() => {
-      this.loading = false;
-    });
+  async beforeCreate() {
+    const { data: words } = await api.generateVault();
+    this.words = words;
+    this.loading = false;
   },
   methods: {
     goBack() {
-      this.$store.dispatch('cancelVaultCreation');
-      this.$router.push('/');
+      this.$router.push({ name: 'intro' });
     },
     restoreVault() {
-      this.$router.push('/validatevault');
+      this.$router.push({ name: 'validateVault' });
     },
   },
 };

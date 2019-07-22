@@ -43,10 +43,10 @@ export default {
   beforeCreate() {
     this.$store.dispatch('authenticate').then(() => {
       this.$store.dispatch('listDIDs').then(() => {
-        this.$router.push('/vault/dids');
+        this.$router.push({ name: 'listDIDs' });
       });
     }).catch(() => {
-      this.$router.push('/');
+      this.$router.push({ name: 'intro' });
     });
   },
 };

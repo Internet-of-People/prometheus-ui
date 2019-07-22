@@ -25,6 +25,9 @@ const GUEST_HOME_URL = '/';
 
 export default new Router({
   mode: 'history',
+  scrollBehavior() {
+    return { x: 0, y: 0 };
+  },
   base: process.env.BASE_URL,
   routes: [
     {
@@ -39,8 +42,8 @@ export default new Router({
       component: CreateNewVault,
       meta: {
         requiresAuth: false,
-        breadcrumb: [
-          { text: '1. GENERATING MNEUMONIC', active: true },
+        breadcrumb: () => [
+          { text: '1. GENERATING MNEMONIC', active: true },
           { text: '2. VALIDATING' },
           { text: '3. FINISH' },
         ],
@@ -54,8 +57,8 @@ export default new Router({
       component: ValidateVault,
       meta: {
         requiresAuth: false,
-        breadcrumb: [
-          { text: '1. GENERATING MNEUMONIC' },
+        breadcrumb: () => [
+          { text: '1. GENERATING MNEMONIC' },
           { text: '2. VALIDATING', active: true },
           { text: '3. FINISH' },
         ],
@@ -65,13 +68,12 @@ export default new Router({
     },
     {
       path: '/vaultcreated',
-      name: 'vaultcreated',
+      name: 'vaultCreated',
       component: VaultCreation,
-      // component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
       meta: {
         requiresAuth: true,
-        breadcrumb: [
-          { text: '1. GENERATING MNEUMONIC' },
+        breadcrumb: () => [
+          { text: '1. GENERATING MNEMONIC' },
           { text: '2. VALIDATING' },
           { text: '3. FINISH', active: true },
         ],
@@ -81,57 +83,66 @@ export default new Router({
     },
     {
       path: '/vault/dids',
-      name: 'dids',
+      name: 'listDIDs',
       component: ListDIDs,
       meta: {
         requiresAuth: true,
-        breadcrumb: [],
         title: 'VAULT / DIDs',
         homeUrl: SIGNED_IN_HOME_URL,
         topBarButton: TopCreateNewDIDButton,
       },
     },
     {
-      path: '/vault/dids/:id',
-      name: 'did',
-      params: {
-        id: '',
-      },
+      path: '/vault/dids/:did',
+      name: 'viewDID',
       component: ViewDID,
       meta: {
         requiresAuth: true,
-        title: 'VAULT / DIDs / ',
+        breadcrumb: route => [
+          { text: 'DIDs', to: '/vault/dids', rel: 'parent' },
+          { text: route.params.did },
+        ],
+        title: 'DID DETAILS',
         homeUrl: SIGNED_IN_HOME_URL,
       },
+      props: true,
     },
     {
-      path: '/vault/claims/create',
-      name: 'createclaim',
+      path: '/vault/claims/create/:did?',
+      name: 'createClaim',
       component: CreateClaim,
       meta: {
         requiresAuth: true,
         title: 'VAULT / CLAIMS / CREATE NEW',
         homeUrl: SIGNED_IN_HOME_URL,
       },
+      props: true,
     },
     {
       path: '/vault/claims',
-      name: 'listclaims',
+      name: 'listClaims',
       component: ListClaims,
       meta: {
         requiresAuth: true,
-        title: 'VAULT / CLAIMS',
+        breadcrumb: () => [
+          { text: 'Claims', active: true },
+        ],
+        title: 'CLAIMS',
         homeUrl: SIGNED_IN_HOME_URL,
         topBarButton: TopCreateNewClaimButton,
       },
     },
     {
       path: '/vault/claims/:id',
-      name: 'viewclaim',
+      name: 'viewClaim',
       component: ViewClaim,
       meta: {
         requiresAuth: true,
-        title: 'VAULT / CLAIMS / ',
+        breadcrumb: route => [
+          { text: 'Claims', to: '/vault/claims', rel: 'parent' },
+          { text: route.params.id },
+        ],
+        title: 'Claim details',
         homeUrl: SIGNED_IN_HOME_URL,
       },
     },

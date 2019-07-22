@@ -1,5 +1,16 @@
-img{
-    height: 80px;
-    width: 80px;
-    align-items: center;
+#avatar > img {
+    object-fit: contain;
+    height: 150px;
+    width: 100%;
+}
+.form-control-plaintext {
+    padding-left:0.75rem;
+    border:1px solid transparent;
+}
+.input-group-text {
+    border: 1px solid transparent;
+    background-color: white;
+}
+.card-deck .card {
+    min-width: 18rem;
 }

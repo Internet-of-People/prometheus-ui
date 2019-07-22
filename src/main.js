@@ -6,7 +6,12 @@ import {
   faAngleRight,
   faCheckCircle,
   faCircleNotch,
+  faUnlockAlt,
+  faUserLock,
 } from '@fortawesome/free-solid-svg-icons';
+import {
+  faLaughWink,
+} from '@fortawesome/free-regular-svg-icons';
 import {
   faGithub,
   faTelegram,
@@ -18,12 +23,15 @@ import router from './router';
 import store from './store';
 
 library.add([
-  faAngleRight,
-  faCheckCircle,
-  faCircleNotch,
-  faGithub,
-  faTelegram,
-  faDiscord,
+  faAngleRight, // <fa icon="angle-right" />
+  faCheckCircle, // <fa icon="check-circle"  />
+  faCircleNotch, // <fa icon="circle-notch" />
+  faDiscord, // <fa :icon="['fab', 'discord']" />
+  faGithub, // <fa :icon="['fab', 'github']" />
+  faLaughWink, // <fa :icon="['far', 'laugh-wink']" />
+  faTelegram, // <fa :icon="['fab', 'telegram']" />
+  faUnlockAlt, // <fa icon="unlock-alt" />
+  faUserLock, // <fa icon="user-lock" />
 ]);
 Vue.component('fa', FontAwesomeIcon);
 

@@ -2,7 +2,7 @@
   <b-button
     class="float-right"
     variant="primary"
-    to="/vault/claims/create"
+    :to="{name: 'createClaim'}"
   >
     CREATE NEW CLAIM
   </b-button>

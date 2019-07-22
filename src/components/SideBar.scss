@@ -20,8 +20,8 @@ img {
     }
 
     &:hover {
-      background-color: $primary;
-      color:#ffffff;
+      background-color: mix(white, $primary, 80%);
+      color: $primary;
     }
   }
 

@@ -1,19 +1,16 @@
 <template>
   <b-container id="sidebar" class="p-0">
-    <div class="justify-content-md-center text-center">
-      <router-link
-        class="app-title pl-2"
-        :to="homeUrl"
-      >
-        <b-img :src="require('@/assets/images/logo.svg')" fluid alt="Responsive image" />
-        <span class="d-sm-none d-lg-inline">{{ appName }}</span>
+    <div class="justify-content-center text-center">
+      <router-link :to="homeUrl">
+        <b-img :src="require('@/assets/images/logo.svg')" alt="Prometheus logo" />
+        <span class="d-none d-lg-inline">{{ appName }}</span>
       </router-link>
     </div>
     <b-nav vertical class="mt-4" v-if="showNavItems">
       <b-nav-item
         v-for="item in menuItems"
         :key="item.name"
-        :active="currentPage.indexOf(item.link)!==-1"
+        :active="currentPage === item.link.name"
         :to="item.link"
         :disabled="item.disabled"
       >
@@ -40,11 +37,11 @@ export default {
   data() {
     return {
       menuItems: [
-        { name: 'DIDs', link: '/vault/dids' },
-        { name: 'CLAIMS', link: '/vault/claims' }, // TBD
+        { name: 'DIDs', link: { name: 'listDIDs' } },
+        { name: 'CLAIMS', link: { name: 'listClaims' } },
         { name: 'WALLETS (soon!)', link: '/vault/wallets', disabled: true }, // TBD
         { name: 'DEVICES (soon!)', link: '/vault/devices', disabled: true }, // TBD
-        { name: 'ABOUT', link: '/about' }, // TBD
+        { name: 'ABOUT', link: { name: 'about' } },
       ],
       currentPage: '',
       homeUrl: '',
@@ -54,12 +51,12 @@ export default {
     // if the route hash is changed, we updates the logo's URL and
     // the current page to be able to decide in the menu, where are we.
     $route() {
-      this.currentPage = window.location.pathname;
+      this.currentPage = this.$route.name;
       this.homeUrl = this.$route.meta.homeUrl;
     },
   },
   beforeMount() {
-    this.currentPage = window.location.pathname;
+    this.currentPage = this.$route.name;
     this.homeUrl = this.$route.meta.homeUrl;
   },
 };

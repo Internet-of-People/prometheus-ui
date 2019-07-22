@@ -8,37 +8,22 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     appName: 'PROMETHEUS',
-    words: [],
     dids: [],
     claims: [],
-    activeDid: undefined,
     claimSchemas: [],
     version,
   },
   getters: {
     appName: state => state.appName,
     version: state => state.version,
-    words: state => state.words,
     dids: state => state.dids,
     claims: state => state.claims,
-    activeDid: state => state.activeDid,
     claimSchemas: state => state.claimSchemas,
   },
   actions: {
     // TODO: generic error handling for all API calls
     async authenticate() { // TODO: check it in a different way
       await api.listDIDs();
-    },
-    async generatePhraseAsync(context) {
-      const response = await api.generateVault();
-      context.commit('GENERATE_PHRASE', response.data);
-    },
-    cancelVaultCreation(context) {
-      context.commit('CANCEL_VAULT_CREATION');
-    },
-    async getDID(context, did) {
-      const response = await api.getDID(did);
-      context.commit('GET_DID', response.data);
     },
     async listDIDs(context) {
       const response = await api.listDIDs();
@@ -70,18 +55,8 @@ export default new Vuex.Store({
     },
   },
   mutations: {
-    GENERATE_PHRASE: (state, words) => {
-      state.words = words;
-    },
-    CANCEL_VAULT_CREATION: (state) => {
-      state.words = [];
-      state.dids = [];
-    },
     LIST_DIDS: (state, dids) => {
       state.dids = dids;
-    },
-    GET_DID: (state, did) => {
-      state.activeDid = did;
     },
     RENAME_DID_ALIAS: (state, payload) => {
       state.dids.map((did) => {
@@ -90,7 +65,6 @@ export default new Vuex.Store({
         }
         return did;
       });
-      state.activeDid.alias = payload.alias;
     },
     CHANGE_DID_AVATAR: (state, payload) => {
       state.dids.map((did) => {
@@ -99,7 +73,6 @@ export default new Vuex.Store({
         }
         return did;
       });
-      state.activeDid.avatar = payload.avatar;
     },
     LIST_CLAIMS: (state, claims) => {
       state.claims = claims;
