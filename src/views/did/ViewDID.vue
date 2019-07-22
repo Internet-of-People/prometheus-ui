@@ -87,7 +87,7 @@
                 variant="outline-primary"
                 class="text-uppercase"
                 v-else
-                @click="editAlias()">
+                @click="editAlias">
                 Edit
               </b-button>
             </b-input-group-append>
@@ -139,7 +139,6 @@ export default {
   },
   data() {
     return {
-      did: '',
       loading: true,
       loadingClaims: true,
       editingAlias: false,
@@ -151,19 +150,18 @@ export default {
       claims: [],
     };
   },
+  props: {
+    did: String,
+  },
   async created() {
-    const did = this.$route.params.id;
-    this.did = did;
-
-    const { data: didDetails } = await api.getDID(did);
-
-    this.loading = false;
+    const { data: didDetails } = await api.getDID(this.did);
     this.alias = didDetails.alias;
     this.avatar = didDetails.avatar;
+    this.loading = false;
 
-    const { data: claims } = await api.getDIDClaims(did);
-    this.loadingClaims = false;
+    const { data: claims } = await api.getDIDClaims(this.did);
     this.claims = claims;
+    this.loadingClaims = false;
   },
   methods: {
     // TODO: this is duplicated at multiple places
@@ -208,14 +206,14 @@ export default {
       const file = event.currentTarget.files[0];
       const reader = new FileReader();
       reader.readAsDataURL(file);
-      reader.onload = (e) => {
+      reader.onload = async (e) => {
         this.savingAvatar = true;
-        this.$store.dispatch('changeDIDAvatar', {
+        await this.$store.dispatch('changeDIDAvatar', {
           didId: this.did,
           avatar: e.target.result,
-        }).then(() => {
-          this.savingAvatar = false;
         });
+        this.avatar = e.target.result;
+        this.savingAvatar = false;
       };
     },
   },

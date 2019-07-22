@@ -8,7 +8,7 @@
     class="mb-3">
     <b-button
       size="sm"
-      :to="{name: 'viewDID', params: {id: did.id}}"
+      :to="{name: 'viewDID', params: {did: did.id}}"
       variant="primary"
       class="float-right mb-3"
     >

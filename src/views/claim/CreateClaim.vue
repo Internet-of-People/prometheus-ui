@@ -194,7 +194,7 @@ export default {
       });
       this.saving = false;
 
-      this.$router.push({ name: 'viewDID', params: { id: this.did } });
+      this.$router.push({ name: 'viewDID', params: { did: this.did } });
     },
   },
 };
