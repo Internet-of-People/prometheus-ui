@@ -84,7 +84,7 @@ export default new Router({
     },
     {
       path: '/vault/dids',
-      name: 'dids',
+      name: 'listDIDs',
       component: ListDIDs,
       meta: {
         requiresAuth: true,
@@ -96,7 +96,7 @@ export default new Router({
     },
     {
       path: '/vault/dids/:id',
-      name: 'did',
+      name: 'viewDID',
       params: {
         id: '',
       },

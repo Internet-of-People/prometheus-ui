@@ -37,11 +37,11 @@ export default {
   data() {
     return {
       menuItems: [
-        { name: 'DIDs', link: '/vault/dids' },
-        { name: 'CLAIMS', link: '/vault/claims' }, // TBD
+        { name: 'DIDs', link: { name: 'listDIDs' } },
+        { name: 'CLAIMS', link: { name: 'listClaims' } },
         { name: 'WALLETS (soon!)', link: '/vault/wallets', disabled: true }, // TBD
         { name: 'DEVICES (soon!)', link: '/vault/devices', disabled: true }, // TBD
-        { name: 'ABOUT', link: '/about' }, // TBD
+        { name: 'ABOUT', link: { name: 'about' } },
       ],
       currentPage: '',
       homeUrl: '',
