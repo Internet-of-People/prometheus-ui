@@ -28,41 +28,39 @@
             </b-form-select>
           </b-form-group>
           <hr>
-          <Loader :loading="schemasLoading">
-            <b-card>
-              <b-form-group
-                label="Schema:"
-                label-for="schema"
-                description="In many cases, a widely used template already
-                exists for the claim you want to make. If you don't find anything applicable,
-                you can create your own schema or modify an existing one."
+          <b-card>
+            <b-form-group
+              label="Schema:"
+              label-for="schema"
+              description="In many cases, a widely used template already
+              exists for the claim you want to make. If you don't find anything applicable,
+              you can create your own schema or modify an existing one."
+            >
+              <b-form-select
+                id="schema"
+                name="schema"
+                v-model="schema"
+                :options="availableSchemas ? availableSchemas : []"
+                v-validate="{ required: true }"
+                :state="validateState('schema')"
               >
-                <b-form-select
-                  id="schema"
-                  name="schema"
-                  v-model="schema"
-                  :options="availableSchemas ? availableSchemas : []"
-                  v-validate="{ required: true }"
-                  :state="validateState('schema')"
-                >
-                  <template slot="first">
-                    <option :value="null" disabled selected>-- Please select a schema --</option>
-                  </template>
-                </b-form-select>
-              </b-form-group>
-              <template v-for="item in schemaPropertiesCollection">
-                <component
-                  :key="item.key"
-                  :is="getSchemaComponent(item.properties.type)"
-                  v-bind="{data:{
-                    name: item.key,
-                    properties: item.properties,
-                  }}"
-                  v-model="claimContent[item.key]"
-                />
-              </template>
-            </b-card>
-          </Loader>
+                <template slot="first">
+                  <option :value="null" disabled selected>-- Please select a schema --</option>
+                </template>
+              </b-form-select>
+            </b-form-group>
+            <template v-for="item in schemaPropertiesCollection">
+              <component
+                :key="item.key"
+                :is="getSchemaComponent(item.properties.type)"
+                v-bind="{data:{
+                  name: item.key,
+                  properties: item.properties,
+                }}"
+                v-model="claimContent[item.key]"
+              />
+            </template>
+          </b-card>
           <hr>
           <b-form-group
             label="Witnesses:"
@@ -97,12 +95,11 @@
 <script>
 import { mapGetters } from 'vuex';
 import {
-  Loader, NumberField, Tooltip, StringField,
+  NumberField, Tooltip, StringField,
 } from '@/components';
 
 export default {
   components: {
-    Loader,
     NumberField,
     StringField,
     Tooltip,
@@ -112,7 +109,6 @@ export default {
   },
   data() {
     return {
-      schemasLoading: true,
       schema: null,
       saving: false,
       claimContent: {},
@@ -151,10 +147,6 @@ export default {
       });
       return schemaProperties;
     },
-  },
-  async beforeCreate() {
-    await this.$store.dispatch('listClaimSchemas');
-    this.schemasLoading = false;
   },
   methods: {
     getSchemaComponent(type) {

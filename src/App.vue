@@ -40,14 +40,16 @@ export default {
       return this.$route.name !== 'intro';
     },
   },
-  beforeCreate() {
-    this.$store.dispatch('authenticate').then(() => {
-      this.$store.dispatch('listDIDs').then(() => {
-        this.$router.push({ name: 'listDIDs' });
-      });
-    }).catch(() => {
+  async beforeCreate() {
+    try {
+      await this.$store.dispatch('authenticate');
+      await this.$store.dispatch('listDIDs');
+      await this.$store.dispatch('listClaimSchemas');
+
+      this.$router.push({ name: 'listDIDs' });
+    } catch (err) {
       this.$router.push({ name: 'intro' });
-    });
+    }
   },
 };
 </script>

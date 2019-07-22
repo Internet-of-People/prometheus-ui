@@ -125,7 +125,7 @@ export default new Router({
       meta: {
         requiresAuth: true,
         breadcrumb: () => [
-          { text: 'Claims', active: true },
+          { text: 'CLAIMS', active: true },
         ],
         title: 'CLAIMS',
         homeUrl: SIGNED_IN_HOME_URL,
@@ -139,10 +139,10 @@ export default new Router({
       meta: {
         requiresAuth: true,
         breadcrumb: route => [
-          { text: 'Claims', to: '/vault/claims', rel: 'parent' },
+          { text: 'CLAIMS', to: '/vault/claims', rel: 'parent' },
           { text: route.params.id },
         ],
-        title: 'Claim details',
+        title: 'CLAIM DETAILS',
         homeUrl: SIGNED_IN_HOME_URL,
       },
     },
