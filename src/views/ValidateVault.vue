@@ -5,21 +5,7 @@
       Providing these words in the correct order ensures us that you noted
       all those phrases correctly.
     </b-alert>
-    <b-row class="d-flex justify-content-start">
-      <b-col cols="6" sm="4" md="3" lg="2" v-for="(word,index) in words" :key="index">
-          <b-input-group
-            size="sm"
-            class="mb-2"
-          >
-            <b-input-group-addon>
-              <b-input-group-text style="width:2rem;" class="justify-content-end">
-                {{index+1}}
-              </b-input-group-text>
-            </b-input-group-addon>
-            <b-form-input trim v-model="words[index]" />
-          </b-input-group>
-      </b-col>
-    </b-row>
+    <MnemonicWords :words="words" />
     <b-row class="clear mt-4">
       <b-col>
         <b-alert :show="showPhraseError" variant="danger">
@@ -43,9 +29,13 @@
 
 <script>
 import api from '@/api';
+import { MnemonicWords } from '@/components';
 
 export default {
   name: 'ValidateVault',
+  components: {
+    MnemonicWords,
+  },
   data() {
     return {
       words: [],
@@ -90,7 +80,6 @@ export default {
       ];
     },
     goBack() {
-      this.$store.dispatch('cancelVaultCreation');
       this.$router.push({ name: 'intro' });
     },
     async createVault() {

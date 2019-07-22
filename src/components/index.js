@@ -5,6 +5,7 @@ import DidCard from '@/components/DidCard.vue';
 import FilterBar from '@/components/FilterBar.vue';
 import Footer from '@/components/Footer.vue';
 import Loader from '@/components/Loader.vue';
+import MnemonicWords from '@/components/MnemonicWords.vue';
 import NativeLink from '@/components/NativeLink.vue';
 import SideBar from '@/components/SideBar.vue';
 import Tooltip from '@/components/Tooltip.vue';
@@ -23,6 +24,7 @@ export {
   FilterBar,
   Footer,
   Loader,
+  MnemonicWords,
   NativeLink,
   SideBar,
   Tooltip,

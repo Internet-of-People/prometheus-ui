@@ -8,7 +8,6 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     appName: 'PROMETHEUS',
-    words: [],
     dids: [],
     claims: [],
     claimSchemas: [],
@@ -17,7 +16,6 @@ export default new Vuex.Store({
   getters: {
     appName: state => state.appName,
     version: state => state.version,
-    words: state => state.words,
     dids: state => state.dids,
     claims: state => state.claims,
     claimSchemas: state => state.claimSchemas,
@@ -26,13 +24,6 @@ export default new Vuex.Store({
     // TODO: generic error handling for all API calls
     async authenticate() { // TODO: check it in a different way
       await api.listDIDs();
-    },
-    async generatePhraseAsync(context) {
-      const response = await api.generateVault();
-      context.commit('GENERATE_PHRASE', response.data);
-    },
-    cancelVaultCreation(context) {
-      context.commit('CANCEL_VAULT_CREATION');
     },
     async listDIDs(context) {
       const response = await api.listDIDs();
@@ -64,13 +55,6 @@ export default new Vuex.Store({
     },
   },
   mutations: {
-    GENERATE_PHRASE: (state, words) => {
-      state.words = words;
-    },
-    CANCEL_VAULT_CREATION: (state) => {
-      state.words = [];
-      state.dids = [];
-    },
     LIST_DIDS: (state, dids) => {
       state.dids = dids;
     },
