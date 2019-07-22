@@ -102,6 +102,8 @@ export default {
         }
 
         await api.initVault(phrase);
+        await this.$store.dispatch('listDIDs');
+        await this.$store.dispatch('listClaimSchemas');
         this.$router.push({ name: 'vaultCreated' });
       } catch (err) {
         this.apiError = `HTTP ${err.response.status} - ${err.response.data}`;
