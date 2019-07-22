@@ -153,10 +153,7 @@ export default {
     },
   },
   async beforeCreate() {
-    const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
-
     await this.$store.dispatch('listClaimSchemas');
-    await sleep(1000);
     this.schemasLoading = false;
   },
   methods: {
