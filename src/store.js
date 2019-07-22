@@ -11,7 +11,6 @@ export default new Vuex.Store({
     words: [],
     dids: [],
     claims: [],
-    activeDid: undefined,
     claimSchemas: [],
     version,
   },
@@ -21,7 +20,6 @@ export default new Vuex.Store({
     words: state => state.words,
     dids: state => state.dids,
     claims: state => state.claims,
-    activeDid: state => state.activeDid,
     claimSchemas: state => state.claimSchemas,
   },
   actions: {
@@ -35,14 +33,6 @@ export default new Vuex.Store({
     },
     cancelVaultCreation(context) {
       context.commit('CANCEL_VAULT_CREATION');
-    },
-    async getDID(context, did) {
-      const response = await api.getDID(did);
-      context.commit('GET_DID', response.data);
-    },
-    async getDIDClaims(context, did) {
-      const response = await api.getDIDClaims(did);
-      context.commit('SET_DID_CLAIMS', { did, claims: response.data });
     },
     async listDIDs(context) {
       const response = await api.listDIDs();
@@ -84,9 +74,6 @@ export default new Vuex.Store({
     LIST_DIDS: (state, dids) => {
       state.dids = dids;
     },
-    GET_DID: (state, did) => {
-      state.activeDid = did;
-    },
     RENAME_DID_ALIAS: (state, payload) => {
       state.dids.map((did) => {
         if (did.id === payload.didId) {
@@ -94,7 +81,6 @@ export default new Vuex.Store({
         }
         return did;
       });
-      state.activeDid.alias = payload.alias;
     },
     CHANGE_DID_AVATAR: (state, payload) => {
       state.dids.map((did) => {
@@ -103,11 +89,6 @@ export default new Vuex.Store({
         }
         return did;
       });
-      state.activeDid.avatar = payload.avatar;
-    },
-    SET_DID_CLAIMS: (state, payload) => {
-      if (payload.did !== state.activeDid.id) return;
-      state.activeDid.claims = payload.claims;
     },
     LIST_CLAIMS: (state, claims) => {
       state.claims = claims;
