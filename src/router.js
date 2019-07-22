@@ -95,11 +95,8 @@ export default new Router({
       },
     },
     {
-      path: '/vault/dids/:id',
+      path: '/vault/dids/:did',
       name: 'viewDID',
-      params: {
-        id: '',
-      },
       component: ViewDID,
       meta: {
         requiresAuth: true,
@@ -109,6 +106,7 @@ export default new Router({
         title: 'DID DETAILS',
         homeUrl: SIGNED_IN_HOME_URL,
       },
+      props: true,
     },
     {
       path: '/vault/claims/create/:did?',

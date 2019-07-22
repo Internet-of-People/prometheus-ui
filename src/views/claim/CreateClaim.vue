@@ -74,7 +74,7 @@
             <b-form-input
               id="witnesses"
               name="witnesses"
-              v-model="form.witnesses"
+              v-model="witnesses"
               v-validate="{ required: true }"
               :state="validateState('witnesses')"
               aria-describedby="witnesses-live-feedback"
@@ -116,12 +116,7 @@ export default {
       schema: null,
       saving: false,
       claimContent: {},
-      form: { // validation (only witnesses is used at the moment)
-        dids: null,
-        schemas: null,
-        witnesses: null,
-        content: null,
-      },
+      witnesses: '',
     };
   },
   computed: {
@@ -158,10 +153,7 @@ export default {
     },
   },
   async beforeCreate() {
-    const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
-
     await this.$store.dispatch('listClaimSchemas');
-    await sleep(1000);
     this.schemasLoading = false;
   },
   methods: {
@@ -199,7 +191,7 @@ export default {
       });
       this.saving = false;
 
-      this.$router.push({ name: 'viewDID', params: { id: this.did } });
+      this.$router.push({ name: 'viewDID', params: { did: this.did } });
     },
   },
 };
