@@ -2,6 +2,11 @@
   "name": "prometheus-ui",
   "version": "0.1.0",
   "private": true,
+  "author": {
+    "url": "https://iop.global/",
+    "name": "Internet of People"
+  },
+  "license": "GPL-3.0-or-later",
   "scripts": {
     "serve": "vue-cli-service serve --port 3000",
     "build": "vue-cli-service build",
