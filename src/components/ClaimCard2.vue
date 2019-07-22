@@ -1,14 +1,19 @@
 <template>
   <b-card no-body>
     <b-card-header>
-      <b-card-title>{{claim.schema_name}}</b-card-title>
-      <b-card-sub-title>{{claim.id}}</b-card-sub-title>
+      <b-card-title>{{ claim.schema_name }}</b-card-title>
+      <b-card-sub-title>{{ claim.id }}</b-card-sub-title>
     </b-card-header>
     <b-card-body class="p-0">
-      <b-table :items="claim_table" :fields="['name','value']" class="m-0"
-               hover small show-empty empty-text="No properties" />
-      <!-- <b-card-text class="text-muted">{{JSON.stringify(claim.content)}}</b-card-text> -->
-      <!-- <b-card-text text-tag="pre">{{claim.content}}</b-card-text> -->
+      <b-table
+        :items="claimTable"
+        :fields="['name','value']"
+        class="m-0"
+        hover
+        small
+        show-empty
+        empty-text="No properties"
+      />
     </b-card-body>
     <b-card-footer class="text-right">
       <b-button :to="{ name: 'viewClaim', params: { id: claim.id } }" variant="primary" size="sm">
@@ -34,7 +39,7 @@ export default {
     },
   },
   computed: {
-    claim_table() {
+    claimTable() {
       return Object.entries((this.claim || {}).content || {})
         .map(([name, value]) => ({ name, value }));
     },

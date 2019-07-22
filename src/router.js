@@ -42,7 +42,7 @@ export default new Router({
       component: CreateNewVault,
       meta: {
         requiresAuth: false,
-        breadcrumb: [
+        breadcrumb: () => [
           { text: '1. GENERATING MNEMONIC', active: true },
           { text: '2. VALIDATING' },
           { text: '3. FINISH' },
@@ -57,7 +57,7 @@ export default new Router({
       component: ValidateVault,
       meta: {
         requiresAuth: false,
-        breadcrumb: [
+        breadcrumb: () => [
           { text: '1. GENERATING MNEMONIC' },
           { text: '2. VALIDATING', active: true },
           { text: '3. FINISH' },
@@ -70,10 +70,9 @@ export default new Router({
       path: '/vaultcreated',
       name: 'vaultCreated',
       component: VaultCreation,
-      // component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
       meta: {
         requiresAuth: true,
-        breadcrumb: [
+        breadcrumb: () => [
           { text: '1. GENERATING MNEMONIC' },
           { text: '2. VALIDATING' },
           { text: '3. FINISH', active: true },
@@ -88,7 +87,6 @@ export default new Router({
       component: ListDIDs,
       meta: {
         requiresAuth: true,
-        breadcrumb: [],
         title: 'VAULT / DIDs',
         homeUrl: SIGNED_IN_HOME_URL,
         topBarButton: TopCreateNewDIDButton,
@@ -100,8 +98,9 @@ export default new Router({
       component: ViewDID,
       meta: {
         requiresAuth: true,
-        breadcrumb: [
+        breadcrumb: route => [
           { text: 'DIDs', to: '/vault/dids', rel: 'parent' },
+          { text: route.params.did },
         ],
         title: 'DID DETAILS',
         homeUrl: SIGNED_IN_HOME_URL,
@@ -125,7 +124,7 @@ export default new Router({
       component: ListClaims,
       meta: {
         requiresAuth: true,
-        breadcrumb: [
+        breadcrumb: () => [
           { text: 'Claims', active: true },
         ],
         title: 'CLAIMS',
@@ -139,8 +138,9 @@ export default new Router({
       component: ViewClaim,
       meta: {
         requiresAuth: true,
-        breadcrumb: [
+        breadcrumb: route => [
           { text: 'Claims', to: '/vault/claims', rel: 'parent' },
+          { text: route.params.id },
         ],
         title: 'Claim details',
         homeUrl: SIGNED_IN_HOME_URL,

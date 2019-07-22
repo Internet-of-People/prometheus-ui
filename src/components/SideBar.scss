@@ -1,7 +1,4 @@
 @import '@/assets/style/_variables.scss';
-@import "../../node_modules/bootstrap/scss/functions";
-@import "../../node_modules/bootstrap/scss/variables";
-@import "../../node_modules/bootstrap/scss/mixins";
 
 #sidebar {
   a {
@@ -23,7 +20,7 @@ img {
     }
 
     &:hover {
-      background-color: theme-color-level(primary, -10);
+      background-color: mix(white, $primary, 80%);
       color: $primary;
     }
   }

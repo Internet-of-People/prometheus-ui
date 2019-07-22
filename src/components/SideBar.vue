@@ -10,7 +10,7 @@
       <b-nav-item
         v-for="item in menuItems"
         :key="item.name"
-        :active="currentPage.indexOf(item.link)!==-1"
+        :active="currentPage === item.link.name"
         :to="item.link"
         :disabled="item.disabled"
       >
@@ -51,12 +51,12 @@ export default {
     // if the route hash is changed, we updates the logo's URL and
     // the current page to be able to decide in the menu, where are we.
     $route() {
-      this.currentPage = window.location.pathname;
+      this.currentPage = this.$route.name;
       this.homeUrl = this.$route.meta.homeUrl;
     },
   },
   beforeMount() {
-    this.currentPage = window.location.pathname;
+    this.currentPage = this.$route.name;
     this.homeUrl = this.$route.meta.homeUrl;
   },
 };
