@@ -5,7 +5,7 @@
       <b-card>
         <b-row id="avatar-row" class="mx-0 mb-3" align-v="center" role="group">
           <b-col id="avatar" cols="2" class="px-0">
-            <b-img :src="activeDid.avatar" alt="avatar image"/>
+            <b-img :src="avatar" alt="avatar image"/>
           </b-col>
           <b-col>
             <b-button
@@ -39,7 +39,7 @@
                 ID:
               </b-input-group-text>
             </b-input-group-prepend>
-            <b-form-input readonly plaintext v-model="activeDid.id" />
+            <b-form-input readonly plaintext v-model="did" />
           </b-input-group>
         </b-row>
         <b-tooltip target="id-row" placement="left">
@@ -59,7 +59,7 @@
               v-validate="{ required: true }"
               @keyup.enter="renameAlias()"
               @keyup.esc="cancelAlias()"
-              @dblclick="editingAlias = true"
+              @dblclick="editAlias()"
               :state="editingAlias ? validateState('alias') : null"
             />
             <b-input-group-append>
@@ -87,7 +87,7 @@
                 variant="outline-primary"
                 class="text-uppercase"
                 v-else
-                @click="editingAlias = true">
+                @click="editAlias()">
                 Edit
               </b-button>
             </b-input-group-append>
@@ -97,18 +97,31 @@
           <fa icon="user-lock" class="mr-2" /> Your aliases will be kept private
         </b-tooltip>
       </b-card>
-      <h2 class="my-3 text-primary">Claims</h2>
+      <div class="d-flex justify-content-between align-items-center">
+        <h2 class="my-3 text-primary">Claims</h2>
+        <b-button
+          variant="primary"
+          :to="{ name:'createClaim', params:{ did }}"
+        >
+          CREATE NEW CLAIM
+        </b-button>
+      </div>
       <Loader :loading="loadingClaims" text="Loading claims...">
-        <b-alert show variant="info" v-if="!claims || !claims.length">
-          No claims defined for this DID yet.
-        </b-alert>
-        <b-card-group deck v-else id="claims-panel">
-          <ClaimCard2 v-for="claim in claims" :key="claim.id"
-                      :claim="claim" class="mb-3" role="group" />
-        </b-card-group>
-        <b-tooltip target="claims-panel" placement="left">
-          <fa icon="unlock-alt" class="mr-2" /> You will only share your claims with their witnesses
-        </b-tooltip>
+        <template v-if="!claims || !claims.length">
+          <b-alert show variant="info">
+            No claims defined for this DID yet.
+          </b-alert>
+        </template>
+        <template v-else>
+          <b-card-group deck id="claims-panel">
+            <ClaimCard2 v-for="claim in claims" :key="claim.id"
+                        :claim="claim" class="mb-3 mw-50" role="group" />
+          </b-card-group>
+          <b-tooltip target="claims-panel" placement="left">
+            <fa icon="unlock-alt" class="mr-2" />
+            You will only share your claims with their witnesses
+          </b-tooltip>
+        </template>
       </Loader>
       <b-button to="/vault/dids" variant="light" class="text-uppercase">Back to DIDs</b-button>
     </Loader>
@@ -116,7 +129,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import api from '@/api';
 import { Loader, ClaimCard2 } from '@/components';
 
 export default {
@@ -126,9 +139,11 @@ export default {
   },
   data() {
     return {
+      did: '',
       loading: true,
       loadingClaims: true,
       editingAlias: false,
+      aliasBeforeEdit: '',
       savingAlias: false,
       alias: '',
       avatar: '',
@@ -136,20 +151,19 @@ export default {
       claims: [],
     };
   },
-  computed: {
-    ...mapGetters(['activeDid']),
-  },
-  async beforeCreate() {
+  async created() {
     const did = this.$route.params.id;
+    this.did = did;
 
-    await this.$store.dispatch('getDID', did);
+    const { data: didDetails } = await api.getDID(did);
+
     this.loading = false;
-    this.alias = this.activeDid.alias;
-    this.avatar = this.activeDid.avatar;
+    this.alias = didDetails.alias;
+    this.avatar = didDetails.avatar;
 
-    await this.$store.dispatch('getDIDClaims', did);
+    const { data: claims } = await api.getDIDClaims(did);
     this.loadingClaims = false;
-    this.claims = this.activeDid.claims;
+    this.claims = claims;
   },
   methods: {
     // TODO: this is duplicated at multiple places
@@ -162,8 +176,12 @@ export default {
       }
       return null;
     },
+    editAlias() {
+      this.editingAlias = true;
+      this.aliasBeforeEdit = this.alias;
+    },
     cancelAlias() {
-      this.alias = this.activeDid.alias;
+      this.alias = this.aliasBeforeEdit;
       this.editingAlias = false;
     },
     renameAlias() {
@@ -174,9 +192,10 @@ export default {
 
         this.savingAlias = true;
         this.$store.dispatch('renameDIDAlias', {
-          didId: this.activeDid.id,
+          didId: this.did,
           alias: this.alias,
         }).then(() => {
+          this.aliasBeforeEdit = this.alias;
           this.editingAlias = false;
           this.savingAlias = false;
         });
@@ -192,7 +211,7 @@ export default {
       reader.onload = (e) => {
         this.savingAvatar = true;
         this.$store.dispatch('changeDIDAvatar', {
-          didId: this.activeDid.id,
+          didId: this.did,
           avatar: e.target.result,
         }).then(() => {
           this.savingAvatar = false;

@@ -15,11 +15,11 @@
       </template>
       <template v-else>
         <b-alert show variant="info" class="mt-3">
-          You have no DIDs. Why not create one? <fa :icon="['far', 'laugh-wink']" /><br>
+          You have no DIDs. Why not create one? <fa :icon="['far', 'laugh-wink']" />
           <b-button
             @click="createNewDID"
             variant="primary"
-            class="mt-3">
+            class="mt-3 d-block">
             CREATE YOUR FIRST DID
           </b-button>
         </b-alert>

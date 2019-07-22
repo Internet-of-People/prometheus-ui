@@ -1,5 +1,5 @@
 <template>
-  <b-card no-body class="mw-50">
+  <b-card no-body>
     <b-card-header>
       <b-card-title>{{claim.schema_name}}</b-card-title>
       <b-card-sub-title>{{claim.id}}</b-card-sub-title>
@@ -11,7 +11,7 @@
       <!-- <b-card-text text-tag="pre">{{claim.content}}</b-card-text> -->
     </b-card-body>
     <b-card-footer class="text-right">
-      <b-button :to="`/vault/claims/${claim.id}`" variant="primary" size="sm">
+      <b-button :to="{name: 'viewClaim', params: {id: claim.id}}" variant="primary" size="sm">
         VIEW <fa icon="angle-right" />
       </b-button>
     </b-card-footer>

@@ -8,7 +8,7 @@
     class="mb-3">
     <b-button
       size="sm"
-      :to="`/vault/dids/${did.id}`"
+      :to="{name: 'viewDID', params: {id: did.id}}"
       variant="primary"
       class="float-right mb-3"
     >

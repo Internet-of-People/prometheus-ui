@@ -84,7 +84,7 @@ export default new Router({
     },
     {
       path: '/vault/dids',
-      name: 'dids',
+      name: 'listDIDs',
       component: ListDIDs,
       meta: {
         requiresAuth: true,
@@ -96,7 +96,7 @@ export default new Router({
     },
     {
       path: '/vault/dids/:id',
-      name: 'did',
+      name: 'viewDID',
       params: {
         id: '',
       },
@@ -111,18 +111,19 @@ export default new Router({
       },
     },
     {
-      path: '/vault/claims/create',
-      name: 'createclaim',
+      path: '/vault/claims/create/:did?',
+      name: 'createClaim',
       component: CreateClaim,
       meta: {
         requiresAuth: true,
         title: 'VAULT / CLAIMS / CREATE NEW',
         homeUrl: SIGNED_IN_HOME_URL,
       },
+      props: true,
     },
     {
       path: '/vault/claims',
-      name: 'listclaims',
+      name: 'listClaims',
       component: ListClaims,
       meta: {
         requiresAuth: true,
@@ -136,7 +137,7 @@ export default new Router({
     },
     {
       path: '/vault/claims/:id',
-      name: 'viewclaim',
+      name: 'viewClaim',
       component: ViewClaim,
       meta: {
         requiresAuth: true,

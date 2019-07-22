@@ -18,7 +18,7 @@
 
     <b-button
       size="sm"
-      :to="`/vault/claims/${claim.id}`"
+      :to="{name: 'viewClaim', params: {id: claim.id}}"
       class="view-button ml-3"
       variant="primary">
       VIEW <fa icon="angle-right" />

@@ -43,7 +43,7 @@ export default {
   beforeCreate() {
     this.$store.dispatch('authenticate').then(() => {
       this.$store.dispatch('listDIDs').then(() => {
-        this.$router.push({ name: 'dids' });
+        this.$router.push({ name: 'listDIDs' });
       });
     }).catch(() => {
       this.$router.push({ name: 'intro' });
