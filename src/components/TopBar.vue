@@ -5,10 +5,14 @@
       no-gutters
       :class="`align-items-center h-100${breadcrumb && breadcrumb.length?' has-breadcrumb':''}`"
     >
-      <b-col>{{ title }}</b-col>
-      <component v-if="topBarButton" v-bind:is="topBarButton"></component>
+      <b-col>
+        {{ title }}
+        <b-breadcrumb :items="breadcrumb" class="small" />
+      </b-col>
+      <b-col>
+        <component v-if="topBarButton" v-bind:is="topBarButton"></component>
+      </b-col>
     </b-row>
-    <b-breadcrumb :items="breadcrumb" class="small"></b-breadcrumb>
   </b-container>
 </template>
 
