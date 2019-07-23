@@ -1,127 +1,144 @@
 <template>
-  <div>
-    <Loader :loading="loading">
-      <h2 class="mb-3 text-primary">DID document</h2>
-      <b-card>
-        <b-row id="avatar-row" class="mx-0 mb-3" align-v="center" role="group">
-          <b-col id="avatar" cols="2" class="px-0">
-            <b-img :src="avatar" alt="avatar image"/>
-          </b-col>
-          <b-col>
+  <b-row no-gutters>
+    <b-col cols="8">
+      <Loader :loading="loading">
+        <b-card>
+          <h3 class="mb-3 text-primary">DID Document</h3>
+          <hr>
+          <b-row>
+            <b-col cols="6">
+              <b-form-group
+                label="DID ID"
+                label-for="did"
+              >
+                <b-form-input
+                  id="did"
+                  name="did"
+                  v-model="did"
+                  disabled
+                  aria-describedby="id-desc"
+                />
+                <b-form-text id="id-desc">
+                  <fa icon="unlock-alt" />
+                  This is your DID's unique ID, that you might choose to share.
+                </b-form-text>
+              </b-form-group>
+              <b-form-group
+                label="Alias"
+                label-for="alias"
+              >
+                <b-input-group>
+                  <b-form-input
+                    id="alias"
+                    name="alias"
+                    v-model="alias"
+                    aria-describedby="alias-desc"
+                    :readonly="!editingAlias"
+                    v-validate="{ required: true }"
+                    @keyup.enter="renameAlias()"
+                    @keyup.esc="cancelAlias()"
+                    @dblclick="editAlias()"
+                    :state="editingAlias ? validateState('alias') : null"
+                  />
+                  <b-input-group-append>
+                    <b-button
+                      size="sm"
+                      variant="outline-secondary"
+                      class="text-uppercase"
+                      v-if="editingAlias"
+                      @click="cancelAlias"
+                      :disabled="savingAlias">
+                      Cancel
+                    </b-button>
+                    <b-button
+                      size="sm"
+                      variant="outline-primary"
+                      class="text-uppercase"
+                      v-if="editingAlias"
+                      @click="renameAlias"
+                      :disabled="savingAlias">
+                      Save
+                      <b-spinner small v-if="savingAlias" />
+                    </b-button>
+                    <b-button
+                      size="sm"
+                      variant="outline-primary"
+                      class="text-uppercase"
+                      v-else
+                      @click="editAlias">
+                      Edit
+                    </b-button>
+                  </b-input-group-append>
+                  <b-form-text id="alias-desc">
+                    <fa icon="user-lock" />
+                    This alias is an easier memorizable form of your DID.
+                    Your aliases will be kept private.
+                  </b-form-text>
+                </b-input-group>
+              </b-form-group>
+            </b-col>
+            <b-col cols="3">
+              <div>Your Avatar</div>
+              <div style="position:relative;">
+                <b-img :src="avatar" fluid-grow alt="avatar image" class="mt-2 d-block"/>
+
+                <b-button
+                  size="sm"
+                  variant="primary"
+                  class="text-uppercase mt-3 d-block"
+                  @click="$refs.avatarSelector.click()"
+                  :disabled="savingAvatar"
+                  style="position:absolute;bottom:0.5rem;left:0.5rem"
+                >
+                  Change
+                  <b-spinner small v-if="savingAvatar" />
+                </b-button>
+              </div>
+              <b-form-text>
+                <fa icon="user-lock" /> Your avatar will not be shared with anyone.
+              </b-form-text>
+              <!-- hidden file selector, because Bootstrap-vue -->
+              <!-- has no Browse button without filename -->
+              <input
+                ref="avatarSelector"
+                type="file"
+                :v-model="avatar"
+                class="d-none"
+                accept=".png"
+                @change="changeAvatar" />
+            </b-col>
+          </b-row>
+        </b-card>
+        <b-card class="mt-3">
+          <h3 class="text-primary">Claims</h3>
+          <hr>
+          <Loader :loading="loadingClaims" text="Loading claims...">
+            <template v-if="!claims || !claims.length">
+              <b-alert show variant="info">
+                No claims defined for this DID yet.
+              </b-alert>
+            </template>
+            <template v-else>
+              <ClaimList
+                :claims="claims"
+                :schemas="claimSchemas"
+              />
+            </template>
             <b-button
-              size="sm"
-              variant="outline-primary"
+              variant="primary"
               class="text-uppercase"
-              @click="$refs.avatarSelector.click()"
-              :disabled="savingAvatar"
+              :to="{ name:'createClaim', params:{ did }}"
             >
-              Change avatar
-              <b-spinner small v-if="savingAvatar" />
+              Create New Claim
             </b-button>
-            <!-- hidden file selector, because Bootstrap-vue -->
-            <!-- has no Browse button without filename -->
-            <input
-              ref="avatarSelector"
-              type="file"
-              :v-model="avatar"
-              class="d-none"
-              accept=".png"
-              @change="changeAvatar" />
-          </b-col>
-        </b-row>
-        <b-tooltip target="avatar-row" placement="left">
-          <fa icon="user-lock" class="mr-2" /> Your avatars will not be shared with anyone
-        </b-tooltip>
-        <b-row id="id-row">
-          <b-input-group>
-            <b-input-group-prepend class="col-2 px-0">
-              <b-input-group-text class="w-100 justify-content-end text-uppercase">
-                ID:
-              </b-input-group-text>
-            </b-input-group-prepend>
-            <b-form-input readonly plaintext v-model="did" />
-          </b-input-group>
-        </b-row>
-        <b-tooltip target="id-row" placement="left">
-          <fa icon="unlock-alt" class="mr-2" /> You might choose to share your IDs
-        </b-tooltip>
-        <b-row id="alias-row">
-          <b-input-group>
-            <b-input-group-prepend class="col-2 px-0">
-              <b-input-group-text class="w-100 justify-content-end text-uppercase">
-                Alias:
-              </b-input-group-text>
-            </b-input-group-prepend>
-            <b-form-input
-              name="alias"
-              :readonly="!editingAlias"
-              v-model="alias"
-              v-validate="{ required: true }"
-              @keyup.enter="renameAlias()"
-              @keyup.esc="cancelAlias()"
-              @dblclick="editAlias()"
-              :state="editingAlias ? validateState('alias') : null"
-            />
-            <b-input-group-append>
-              <b-button
-                size="sm"
-                variant="outline-secondary"
-                class="text-uppercase"
-                v-if="editingAlias"
-                @click="cancelAlias"
-                :disabled="savingAlias">
-                Cancel
-              </b-button>
-              <b-button
-                size="sm"
-                variant="outline-primary"
-                class="text-uppercase"
-                v-if="editingAlias"
-                @click="renameAlias"
-                :disabled="savingAlias">
-                Save
-                <b-spinner small v-if="savingAlias" />
-              </b-button>
-              <b-button
-                size="sm"
-                variant="outline-primary"
-                class="text-uppercase"
-                v-else
-                @click="editAlias">
-                Edit
-              </b-button>
-            </b-input-group-append>
-          </b-input-group>
-        </b-row>
-        <b-tooltip target="alias-row" placement="left">
-          <fa icon="user-lock" class="mr-2" /> Your aliases will be kept private
-        </b-tooltip>
-      </b-card>
-      <div class="d-flex justify-content-between align-items-center">
-        <h2 class="my-3 text-primary">Claims</h2>
-        <b-button
-          variant="primary"
-          :to="{ name:'createClaim', params:{ did }}"
-        >
-          CREATE NEW CLAIM
+          </Loader>
+        </b-card>
+        <b-button to="/vault/dids" variant="light" class="text-uppercase mt-4">
+          <fa icon="angle-left" /> Back to DIDs
         </b-button>
-      </div>
-      <Loader :loading="loadingClaims" text="Loading claims...">
-        <template v-if="!claims || !claims.length">
-          <b-alert show variant="info">
-            No claims defined for this DID yet.
-          </b-alert>
-        </template>
-        <template v-else>
-          <ClaimList
-            :claims="claims"
-            :schemas="claimSchemas"
-          />
-        </template>
       </Loader>
-      <b-button to="/vault/dids" variant="light" class="text-uppercase mt-4">Back to DIDs</b-button>
-    </Loader>
-  </div>
+    </b-col>
+  </b-row>
 </template>
 
 <script>

@@ -88,7 +88,6 @@ Referenced from: package.json`
 * Global error handling if something happens in the store or during API calls or in Javascript
 * Make the app fully responsive
 * Only the left content should scroll, topbar and leftbar should not
-* Use input descriptions instead of tooltips
 * Fix potential security vulnerabilities indicated by Github
 
 **Vault Creation**
