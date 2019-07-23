@@ -27,16 +27,18 @@
       <template slot="status">
         <div class="signatures">
           <!--<fa icon="check-circle" class="mr-2 mt-1" /> <small class=" signed">SIGNED</small>-->
-          <fa icon="circle-notch" class="mr-2 mt-1" /> <small class="pending">PENDING</small>
+          <fa icon="circle-notch" class="mr-2 mt-1" />
+          <small class="pending text-uppercase">Pending</small>
         </div>
       </template>
       <template slot="actions" slot-scope="data">
         <b-button
           size="sm"
           variant="outline-primary"
+          class="text-uppercase"
           v-b-modal="`'modal-${data.item.claim.id}'`"
         >
-          DETAILS
+          Details
         </b-button>
         <b-modal
           :id="`'modal-${data.item.claim.id}'`"

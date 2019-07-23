@@ -82,9 +82,15 @@
             </b-form-invalid-feedback>
           </b-form-group>
           <hr>
-          <b-button :to="{name: 'listClaims'}" variant="light" class="mr-4">CANCEL</b-button>
-          <b-button @click="create" variant="primary" :disabled="saving">
-            CREATE &amp; SEND
+          <b-button
+            :to="{name: 'listClaims'}"
+            variant="light"
+            class="mr-4 text-uppercase"
+          >
+            Cancel
+          </b-button>
+          <b-button @click="create" variant="primary" :disabled="saving" class="text-uppercase">
+            Create &amp; Send
             <b-spinner small class="ml-1" v-if="saving" />
           </b-button>
         </b-form>

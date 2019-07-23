@@ -117,10 +117,6 @@
             :claims="claims"
             :schemas="claimSchemas"
           />
-          <b-tooltip target="claims-panel" placement="left">
-            <fa icon="unlock-alt" class="mr-2" />
-            You will only share your claims with their witnesses
-          </b-tooltip>
         </template>
       </Loader>
       <b-button to="/vault/dids" variant="light" class="text-uppercase mt-4">Back to DIDs</b-button>

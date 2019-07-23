@@ -1,5 +1,5 @@
 <template>
-  <b-container class="p-2 m-0" fluid>
+  <b-container class="p-2 m-0 text-uppercase" fluid>
     <b-row
       id="top-bar"
       no-gutters

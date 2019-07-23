@@ -5,8 +5,9 @@
       <b-button
         to="/vault/claims/create"
         variant="primary"
-        class="mt-3">
-        CREATE YOUR FIRST CLAIM
+        class="mt-3 text-uppercase"
+      >
+        Create Your First Claim
       </b-button>
     </b-alert>
 
@@ -31,7 +32,6 @@ export default {
     ...mapGetters(['claims', 'claimSchemas']),
   },
   beforeCreate() {
-    // TODO: remove this from the state
     this.$store.dispatch('listClaims').then(() => {
       this.loading = false;
     });

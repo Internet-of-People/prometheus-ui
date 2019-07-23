@@ -1,7 +1,7 @@
 <template>
     <b-alert :show="show" variant="info">
         <p><slot></slot></p>
-        <b-button variant="primary" @click="hide">
+        <b-button variant="primary" @click="hide" class="text-uppercase">
             {{ text }}
         </b-button>
     </b-alert>
@@ -18,7 +18,7 @@ export default {
     msg: String,
     text: {
       type: String,
-      default: 'DISMISS',
+      default: 'Dismiss',
     },
   },
   data() {
