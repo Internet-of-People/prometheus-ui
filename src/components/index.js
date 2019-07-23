@@ -1,4 +1,3 @@
-import ClaimCard from '@/components/ClaimCard.vue';
 import ClaimList from '@/components/ClaimList.vue';
 import Content from '@/components/Content.vue';
 import DidCard from '@/components/DidCard.vue';
@@ -17,7 +16,6 @@ import NumberField from '@/components/claimschema/NumberField.vue';
 import StringField from '@/components/claimschema/StringField.vue';
 
 export {
-  ClaimCard,
   ClaimList,
   Content,
   DidCard,
