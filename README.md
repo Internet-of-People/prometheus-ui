@@ -3,6 +3,17 @@
 This repository contains the UI code of the Prometheus desktop application. The UI is implemented
 with [VueJS](https://vuejs.org/) and [Bootstrap VUE](https://bootstrap-vue.js.org/).
 
+## Table of Contents <!-- omit in toc -->
+
+- [Background](#Background)
+- [Install](#Install)
+  - [Prerequisites](#Prerequisites)
+  - [Development Environment](#Development-Environment)
+- [Maintainers](#Maintainers)
+- [Contributing](#Contributing)
+- [License](#License)
+- [TODOs](#TODOs)
+
 
 ## Background
 
@@ -20,7 +31,7 @@ $ yarn --version
 1.17.3
 ```
 
-### Development environment
+### Development Environment
 
 ```sh
 # install the dependencies
