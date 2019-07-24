@@ -1,6 +1,6 @@
 <template>
   <b-row no-gutters>
-    <b-col cols="8">
+    <b-col cols="12" lg="8">
       <Loader :loading="loading">
         <b-card>
           <h3 class="mb-3 text-primary">DID Document</h3>

@@ -53,10 +53,10 @@
               <component
                 :key="item.key"
                 :is="getSchemaComponent(item.properties.type)"
-                v-bind="{data:{
+                v-bind="{ data: {
                   name: item.key,
                   properties: item.properties,
-                }}"
+                } }"
                 v-model="claimContent[item.key]"
               />
             </template>
@@ -83,7 +83,7 @@
           </b-form-group>
           <hr>
           <b-button
-            :to="{name: 'listClaims'}"
+            :to="{ name: 'listClaims' }"
             variant="light"
             class="mr-4 text-uppercase"
           >
