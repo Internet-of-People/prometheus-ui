@@ -4,6 +4,7 @@ import VeeValidate from 'vee-validate';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
   faAngleRight,
+  faAngleLeft,
   faCheckCircle,
   faCircleNotch,
   faUnlockAlt,
@@ -23,6 +24,7 @@ import router from './router';
 import store from './store';
 
 library.add([
+  faAngleLeft, // <fa icon="angle-left" />
   faAngleRight, // <fa icon="angle-right" />
   faCheckCircle, // <fa icon="check-circle"  />
   faCircleNotch, // <fa icon="circle-notch" />

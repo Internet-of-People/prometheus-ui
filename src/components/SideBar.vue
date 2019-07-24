@@ -6,7 +6,7 @@
         <span class="d-none d-lg-inline">{{ appName }}</span>
       </router-link>
     </div>
-    <b-nav vertical class="mt-4" v-if="showNavItems">
+    <b-nav vertical class="mt-4 text-uppercase" v-if="showNavItems">
       <b-nav-item
         v-for="item in menuItems"
         :key="item.name"
@@ -38,10 +38,10 @@ export default {
     return {
       menuItems: [
         { name: 'DIDs', link: { name: 'listDIDs' } },
-        { name: 'CLAIMS', link: { name: 'listClaims' } },
-        { name: 'WALLETS (soon!)', link: '/vault/wallets', disabled: true }, // TBD
-        { name: 'DEVICES (soon!)', link: '/vault/devices', disabled: true }, // TBD
-        { name: 'ABOUT', link: { name: 'about' } },
+        { name: 'Claims', link: { name: 'listClaims' } },
+        { name: 'Wallets (soon!)', link: '/vault/wallets', disabled: true }, // TBD
+        { name: 'Devices (soon!)', link: '/vault/devices', disabled: true }, // TBD
+        { name: 'About', link: { name: 'about' } },
       ],
       currentPage: '',
       homeUrl: '',

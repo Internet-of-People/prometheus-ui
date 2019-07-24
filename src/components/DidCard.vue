@@ -10,9 +10,9 @@
       size="sm"
       :to="{ name: 'viewDID', params: { did: did.id } }"
       variant="primary"
-      class="float-right mb-3"
+      class="float-right mb-3 text-uppercase"
     >
-      VIEW <fa icon="angle-right" />
+      View <fa icon="angle-right" />
     </b-button>
   </b-card>
 </template>

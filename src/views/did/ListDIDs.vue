@@ -6,7 +6,7 @@
           After a DID is created, it will by default have a deterministically created
           avatar and alias, but both can easily be changed on the DID's page.
         </Tooltip>
-        <FilterBar v-if="dids.length" v-model="searchTerm" />
+        <FilterBar v-if="dids.length" v-model="searchTerm" text="Type here to filter your DIDs" />
         <DidCard
           v-for="did in filteredDids"
           :did="did"

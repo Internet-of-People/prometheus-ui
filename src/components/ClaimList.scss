@@ -1,0 +1,11 @@
+@import '@/assets/style/_variables.scss';
+
+.signatures {
+  .fa-check-circle, small.signed {
+    color: $primary;
+  }
+
+  .fa-circle-notch, small.pending {
+    color: orange;
+  }
+}

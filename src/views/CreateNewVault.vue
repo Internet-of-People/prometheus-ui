@@ -6,9 +6,9 @@
     <MnemonicWords :words="words" readonly />
     <b-row class="clear mt-4">
       <b-col>
-        <b-button @click="goBack" variant="light" class="mr-4">BACK</b-button>
-        <b-button @click="restoreVault" variant="primary">
-          I WROTE WORDS DOWN
+        <b-button @click="goBack" variant="light" class="mr-4 text-uppercase">Back</b-button>
+        <b-button @click="restoreVault" variant="primary" class="text-uppercase">
+          I Wrote Words Down
           <fa icon="angle-right" />
         </b-button>
       </b-col>
