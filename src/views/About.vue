@@ -5,7 +5,7 @@
     class="mb-0"
   >
     Copyright &copy;&nbsp; {{ new Date().getFullYear() }}
-    <NativeLink href="https://iop.global">Decentralized Society Foundation, PA</NativeLink>
+    <NativeLink href="https://iop.global/dsf">Decentralized Society Foundation, PA</NativeLink>
   </b-jumbotron>
 </template>
 <script>
