@@ -24,55 +24,53 @@
                 </b-form-text>
               </b-form-group>
               <b-form-group
-                label="Alias"
-                label-for="alias"
+                label="Label"
+                label-for="label"
               >
                 <b-input-group>
                   <b-form-input
-                    id="alias"
-                    name="alias"
-                    v-model="alias"
-                    aria-describedby="alias-desc"
-                    :readonly="!editingAlias"
-                    v-validate="{ required: true }"
-                    @keyup.enter="renameAlias()"
-                    @keyup.esc="cancelAlias()"
-                    @dblclick="editAlias()"
-                    :state="editingAlias ? validateState('alias') : null"
+                    id="label"
+                    name="label"
+                    v-model="label"
+                    aria-describedby="label-desc"
+                    :readonly="!editingLabel"
+                    @keyup.enter="renameLabel()"
+                    @keyup.esc="cancelLabel()"
+                    @dblclick="editLabel()"
                   />
                   <b-input-group-append>
                     <b-button
                       size="sm"
                       variant="outline-secondary"
                       class="text-uppercase"
-                      v-if="editingAlias"
-                      @click="cancelAlias"
-                      :disabled="savingAlias">
+                      v-if="editingLabel"
+                      @click="cancelLabel"
+                      :disabled="savingLabel">
                       Cancel
                     </b-button>
                     <b-button
                       size="sm"
                       variant="outline-primary"
                       class="text-uppercase"
-                      v-if="editingAlias"
-                      @click="renameAlias"
-                      :disabled="savingAlias">
+                      v-if="editingLabel"
+                      @click="renameLabel"
+                      :disabled="savingLabel">
                       Save
-                      <b-spinner small v-if="savingAlias" />
+                      <b-spinner small v-if="savingLabel" />
                     </b-button>
                     <b-button
                       size="sm"
                       variant="outline-primary"
                       class="text-uppercase"
                       v-else
-                      @click="editAlias">
+                      @click="editLabel">
                       Edit
                     </b-button>
                   </b-input-group-append>
-                  <b-form-text id="alias-desc">
+                  <b-form-text id="label-desc">
                     <fa icon="user-lock" />
-                    This alias is an easier memorizable form of your DID.
-                    Your aliases will be kept private.
+                    This label is an easier memorizable form of your DID.
+                    Your labels will be kept private.
                   </b-form-text>
                 </b-input-group>
               </b-form-group>
@@ -158,10 +156,10 @@ export default {
     return {
       loading: true,
       loadingClaims: true,
-      editingAlias: false,
-      aliasBeforeEdit: '',
-      savingAlias: false,
-      alias: '',
+      editingLabel: false,
+      labelBeforeEdit: '',
+      savingLabel: false,
+      label: '',
       avatar: '',
       savingAvatar: false,
       claims: [],
@@ -172,7 +170,7 @@ export default {
   },
   async created() {
     const { data: didDetails } = await api.getDID(this.did);
-    this.alias = didDetails.alias;
+    this.label = didDetails.label;
     this.avatar = didDetails.avatar;
     this.loading = false;
 
@@ -181,39 +179,23 @@ export default {
     this.loadingClaims = false;
   },
   methods: {
-    // TODO: this is duplicated at multiple places
-    validateState(ref) {
-      if (
-        this.vFields[ref]
-        && (this.vFields[ref].dirty || this.vFields[ref].validated)
-      ) {
-        return !this.vErrors.has(ref);
-      }
-      return null;
+    editLabel() {
+      this.editingLabel = true;
+      this.labelBeforeEdit = this.label;
     },
-    editAlias() {
-      this.editingAlias = true;
-      this.aliasBeforeEdit = this.alias;
+    cancelLabel() {
+      this.label = this.labelBeforeEdit;
+      this.editingLabel = false;
     },
-    cancelAlias() {
-      this.alias = this.aliasBeforeEdit;
-      this.editingAlias = false;
-    },
-    renameAlias() {
-      this.$validator.validateAll().then((result) => {
-        if (!result) {
-          return;
-        }
-
-        this.savingAlias = true;
-        this.$store.dispatch('renameDIDAlias', {
-          didId: this.did,
-          alias: this.alias,
-        }).then(() => {
-          this.aliasBeforeEdit = this.alias;
-          this.editingAlias = false;
-          this.savingAlias = false;
-        });
+    renameLabel() {
+      this.savingLabel = true;
+      this.$store.dispatch('renameDIDLabel', {
+        didId: this.did,
+        label: this.label,
+      }).then((label) => {
+        this.label = label;
+        this.editingLabel = false;
+        this.savingLabel = false;
       });
     },
     changeAvatar(event) {

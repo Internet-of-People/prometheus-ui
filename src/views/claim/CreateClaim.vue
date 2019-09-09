@@ -124,10 +124,10 @@ export default {
   computed: {
     ...mapGetters(['claimSchemas', 'dids']),
     availableSchemas() {
-      return this.claimSchemas.map(schema => ({ value: schema.id, text: schema.alias }));
+      return this.claimSchemas.map(schema => ({ value: schema.id, text: schema.label }));
     },
     availableDids() {
-      return this.dids.map(did => ({ value: did.id, text: did.alias }));
+      return this.dids.map(did => ({ value: did.id, text: did.label }));
     },
     schemaPropertiesCollection() {
       if (!this.schema) {

@@ -14,7 +14,7 @@
     <ClaimList
       :claims="claims"
       :schemas="claimSchemas"
-      showDidAlias
+      showDidLabel
     />
   </Loader>
 </template>

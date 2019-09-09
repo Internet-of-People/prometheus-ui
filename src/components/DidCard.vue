@@ -1,6 +1,6 @@
 <template>
   <b-card
-    :title="did.alias"
+    :title="did.label"
     :sub-title="'ID:'+did.id"
     :img-src="did.avatar"
     img-alt="Avatar Image"
@@ -23,7 +23,7 @@ export default {
   name: 'DidCard',
   props: {
     did: {
-      alias: String,
+      label: String,
       id: String,
       avatar: String,
       status: String,

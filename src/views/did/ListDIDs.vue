@@ -4,7 +4,7 @@
         <Tooltip id="dids-tooltip" v-if="dids.length">
           Here you can view your DIDs. Creating a new DID takes seconds. <br>
           After a DID is created, it will by default have a deterministically created
-          avatar and alias, but both can easily be changed on the DID's page.
+          avatar and label, but both can easily be changed on the DID's page.
         </Tooltip>
         <FilterBar v-if="dids.length" v-model="searchTerm" text="Type here to filter your DIDs" />
         <DidCard
@@ -60,7 +60,7 @@ export default {
       if (this.searchTerm) {
         const filterVal = this.searchTerm.toLowerCase();
         return this.dids.filter((did) => {
-          const filterfields = (({ id, alias }) => ({ id, alias }))(did);
+          const filterfields = (({ id, label }) => ({ id, label }))(did);
           return Object.values(filterfields).some(val => val.toLowerCase().includes(filterVal));
         });
       }
