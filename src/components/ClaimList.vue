@@ -70,7 +70,7 @@ export default {
       type: Array,
       required: true,
     },
-    showDidAlias: {
+    showDidLabel: {
       type: Boolean,
       default: false,
     },
@@ -91,8 +91,8 @@ export default {
             claim,
           };
 
-          if (this.showDidAlias) {
-            row.did = claim.subject_alias;
+          if (this.showDidLabel) {
+            row.did = claim.subject_label;
           }
 
           return row;
@@ -101,7 +101,7 @@ export default {
   },
   methods: {
     getTableFields() {
-      if (this.showDidAlias) {
+      if (this.showDidLabel) {
         return ['name', 'value', 'did', 'status', 'actions'];
       }
       return ['name', 'value', 'status', 'actions'];
@@ -134,8 +134,8 @@ export default {
       /* eslint-disable camelcase */
       const filterfields = (({
         schema_name,
-        subject_alias,
-      }) => ({ schema_name, subject_alias }))(claim);
+        subject_label,
+      }) => ({ schema_name, subject_label }))(claim);
       const claimContains = Object
         .values(filterfields)
         .some(val => val.toLowerCase().includes(filterVal));
