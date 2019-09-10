@@ -2,9 +2,8 @@
   <div>
       <input
         type="text"
-        :value="value"
         v-on:input="$emit('input', $event.target.value)"
-        placeholder="Type here to filter your DIDs"
+        :placeholder="text"
       />
   </div>
 </template>
@@ -13,7 +12,10 @@
 export default {
   name: 'FilterBar',
   props: {
-    value: String,
+    text: {
+      type: String,
+      required: true,
+    },
   },
 };
 </script>

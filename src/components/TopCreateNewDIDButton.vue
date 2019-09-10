@@ -1,11 +1,11 @@
 <template>
   <b-button
     @click="createDID"
-    class="float-right"
+    class="float-right text-uppercase"
     variant="primary"
     :disabled="loading"
   >
-    CREATE NEW DID
+    Create New DID
     <b-spinner small v-if="loading" class="ml-1" />
   </b-button>
 </template>

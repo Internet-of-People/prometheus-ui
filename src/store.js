@@ -33,9 +33,12 @@ export default new Vuex.Store({
       await api.createDID();
       context.dispatch('listDIDs');
     },
-    async renameDIDAlias(context, payload) {
-      await api.renameDIDAlias(payload.didId, JSON.stringify(payload.alias));
-      context.commit('RENAME_DID_ALIAS', payload);
+    async renameDIDLabel(context, payload) {
+      await api.renameDIDLabel(payload.didId, JSON.stringify(payload.label));
+      const updatedDid = await api.getDID(payload.didId);
+      payload.label = updatedDid.data.label;
+      context.commit('RENAME_DID_LABEL', payload);
+      return payload.label;
     },
     async changeDIDAvatar(context, payload) {
       await api.changeDIDAvatar(payload.didId, JSON.stringify(payload.avatar));
@@ -58,10 +61,10 @@ export default new Vuex.Store({
     LIST_DIDS: (state, dids) => {
       state.dids = dids;
     },
-    RENAME_DID_ALIAS: (state, payload) => {
+    RENAME_DID_LABEL: (state, payload) => {
       state.dids.map((did) => {
         if (did.id === payload.didId) {
-          did.alias = payload.alias;
+          did.label = payload.label;
         }
         return did;
       });

@@ -1,9 +1,9 @@
 <template>
   <b-button
-    class="float-right"
+    class="float-right text-uppercase"
     variant="primary"
     :to="{name: 'createClaim'}"
   >
-    CREATE NEW CLAIM
+    Create New Claim
   </b-button>
 </template>

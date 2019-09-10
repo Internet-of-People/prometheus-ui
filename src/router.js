@@ -43,11 +43,11 @@ export default new Router({
       meta: {
         requiresAuth: false,
         breadcrumb: () => [
-          { text: '1. GENERATING MNEMONIC', active: true },
-          { text: '2. VALIDATING' },
-          { text: '3. FINISH' },
+          { text: '1. Generating Mnemonic', active: true },
+          { text: '2. Validating' },
+          { text: '3. Finish' },
         ],
-        title: 'CREATE NEW VAULT',
+        title: 'Create New Vault',
         homeUrl: GUEST_HOME_URL,
       },
     },
@@ -58,11 +58,11 @@ export default new Router({
       meta: {
         requiresAuth: false,
         breadcrumb: () => [
-          { text: '1. GENERATING MNEMONIC' },
-          { text: '2. VALIDATING', active: true },
-          { text: '3. FINISH' },
+          { text: '1. Generating Mnemonic' },
+          { text: '2. Validating', active: true },
+          { text: '3. Finish' },
         ],
-        title: 'CREATE NEW VAULT',
+        title: 'Create New Vault',
         homeUrl: GUEST_HOME_URL,
       },
     },
@@ -73,11 +73,11 @@ export default new Router({
       meta: {
         requiresAuth: true,
         breadcrumb: () => [
-          { text: '1. GENERATING MNEMONIC' },
-          { text: '2. VALIDATING' },
-          { text: '3. FINISH', active: true },
+          { text: '1. Generating Mnemonic' },
+          { text: '2. Validating' },
+          { text: '3. Finish', active: true },
         ],
-        title: 'CREATE NEW VAULT',
+        title: 'Create New Vault',
         homeUrl: GUEST_HOME_URL,
       },
     },
@@ -87,7 +87,7 @@ export default new Router({
       component: ListDIDs,
       meta: {
         requiresAuth: true,
-        title: 'VAULT / DIDs',
+        title: 'Vault / DIDs',
         homeUrl: SIGNED_IN_HOME_URL,
         topBarButton: TopCreateNewDIDButton,
       },
@@ -102,7 +102,7 @@ export default new Router({
           { text: 'DIDs', to: '/vault/dids', rel: 'parent' },
           { text: route.params.did },
         ],
-        title: 'DID DETAILS',
+        title: 'DID Details',
         homeUrl: SIGNED_IN_HOME_URL,
       },
       props: true,
@@ -113,7 +113,7 @@ export default new Router({
       component: CreateClaim,
       meta: {
         requiresAuth: true,
-        title: 'VAULT / CLAIMS / CREATE NEW',
+        title: 'Vault / Claims / Create New',
         homeUrl: SIGNED_IN_HOME_URL,
       },
       props: true,
@@ -125,9 +125,9 @@ export default new Router({
       meta: {
         requiresAuth: true,
         breadcrumb: () => [
-          { text: 'CLAIMS', active: true },
+          { text: 'Claims', active: true },
         ],
-        title: 'CLAIMS',
+        title: 'Claims',
         homeUrl: SIGNED_IN_HOME_URL,
         topBarButton: TopCreateNewClaimButton,
       },
@@ -139,10 +139,10 @@ export default new Router({
       meta: {
         requiresAuth: true,
         breadcrumb: route => [
-          { text: 'CLAIMS', to: '/vault/claims', rel: 'parent' },
+          { text: 'Claims', to: '/vault/claims', rel: 'parent' },
           { text: route.params.id },
         ],
-        title: 'CLAIM DETAILS',
+        title: 'Claims Details',
         homeUrl: SIGNED_IN_HOME_URL,
       },
     },
@@ -152,7 +152,7 @@ export default new Router({
       component: About,
       meta: {
         requiresAuth: true,
-        title: 'ABOUT',
+        title: 'About',
         homeUrl: SIGNED_IN_HOME_URL,
       },
     },

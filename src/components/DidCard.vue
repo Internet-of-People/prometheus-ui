@@ -1,6 +1,6 @@
 <template>
   <b-card
-    :title="did.alias"
+    :title="did.label"
     :sub-title="'ID:'+did.id"
     :img-src="did.avatar"
     img-alt="Avatar Image"
@@ -10,9 +10,9 @@
       size="sm"
       :to="{ name: 'viewDID', params: { did: did.id } }"
       variant="primary"
-      class="float-right mb-3"
+      class="float-right mb-3 text-uppercase"
     >
-      VIEW <fa icon="angle-right" />
+      View <fa icon="angle-right" />
     </b-button>
   </b-card>
 </template>
@@ -23,7 +23,7 @@ export default {
   name: 'DidCard',
   props: {
     did: {
-      alias: String,
+      label: String,
       id: String,
       avatar: String,
       status: String,

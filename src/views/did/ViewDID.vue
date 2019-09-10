@@ -1,131 +1,142 @@
 <template>
-  <div>
-    <Loader :loading="loading">
-      <h2 class="mb-3 text-primary">DID document</h2>
-      <b-card>
-        <b-row id="avatar-row" class="mx-0 mb-3" align-v="center" role="group">
-          <b-col id="avatar" cols="2" class="px-0">
-            <b-img :src="avatar" alt="avatar image"/>
-          </b-col>
-          <b-col>
+  <b-row no-gutters>
+    <b-col cols="12" lg="8">
+      <Loader :loading="loading">
+        <b-card>
+          <h3 class="mb-3 text-primary">DID Document</h3>
+          <hr>
+          <b-row>
+            <b-col cols="6">
+              <b-form-group
+                label="DID ID"
+                label-for="did"
+              >
+                <b-form-input
+                  id="did"
+                  name="did"
+                  v-model="did"
+                  disabled
+                  aria-describedby="id-desc"
+                />
+                <b-form-text id="id-desc">
+                  <fa icon="unlock-alt" />
+                  This is your DID's unique ID, that you might choose to share.
+                </b-form-text>
+              </b-form-group>
+              <b-form-group
+                label="Label"
+                label-for="label"
+              >
+                <b-input-group>
+                  <b-form-input
+                    id="label"
+                    name="label"
+                    v-model="label"
+                    aria-describedby="label-desc"
+                    :readonly="!editingLabel"
+                    @keyup.enter="renameLabel()"
+                    @keyup.esc="cancelLabel()"
+                    @dblclick="editLabel()"
+                  />
+                  <b-input-group-append>
+                    <b-button
+                      size="sm"
+                      variant="outline-secondary"
+                      class="text-uppercase"
+                      v-if="editingLabel"
+                      @click="cancelLabel"
+                      :disabled="savingLabel">
+                      Cancel
+                    </b-button>
+                    <b-button
+                      size="sm"
+                      variant="outline-primary"
+                      class="text-uppercase"
+                      v-if="editingLabel"
+                      @click="renameLabel"
+                      :disabled="savingLabel">
+                      Save
+                      <b-spinner small v-if="savingLabel" />
+                    </b-button>
+                    <b-button
+                      size="sm"
+                      variant="outline-primary"
+                      class="text-uppercase"
+                      v-else
+                      @click="editLabel">
+                      Edit
+                    </b-button>
+                  </b-input-group-append>
+                  <b-form-text id="label-desc">
+                    <fa icon="user-lock" />
+                    This label is an easier memorizable form of your DID.
+                    Your labels will be kept private.
+                  </b-form-text>
+                </b-input-group>
+              </b-form-group>
+            </b-col>
+            <b-col cols="3">
+              <div>Your Avatar</div>
+              <div style="position:relative;">
+                <b-img :src="avatar" fluid-grow alt="avatar image" class="mt-2 d-block"/>
+
+                <b-button
+                  size="sm"
+                  variant="primary"
+                  class="text-uppercase mt-3 d-block"
+                  @click="$refs.avatarSelector.click()"
+                  :disabled="savingAvatar"
+                  style="position:absolute;bottom:0.5rem;left:0.5rem"
+                >
+                  Change
+                  <b-spinner small v-if="savingAvatar" />
+                </b-button>
+              </div>
+              <b-form-text>
+                <fa icon="user-lock" /> Your avatar will not be shared with anyone.
+              </b-form-text>
+              <!-- hidden file selector, because Bootstrap-vue -->
+              <!-- has no Browse button without filename -->
+              <input
+                ref="avatarSelector"
+                type="file"
+                :v-model="avatar"
+                class="d-none"
+                accept=".png"
+                @change="changeAvatar" />
+            </b-col>
+          </b-row>
+        </b-card>
+        <b-card class="mt-3">
+          <h3 class="text-primary">Claims</h3>
+          <hr>
+          <Loader :loading="loadingClaims" text="Loading claims...">
+            <template v-if="!claims || !claims.length">
+              <b-alert show variant="info">
+                No claims defined for this DID yet.
+              </b-alert>
+            </template>
+            <template v-else>
+              <ClaimList
+                :claims="claims"
+                :schemas="claimSchemas"
+              />
+            </template>
             <b-button
-              size="sm"
-              variant="outline-primary"
+              variant="primary"
               class="text-uppercase"
-              @click="$refs.avatarSelector.click()"
-              :disabled="savingAvatar"
+              :to="{ name:'createClaim', params:{ did }}"
             >
-              Change avatar
-              <b-spinner small v-if="savingAvatar" />
+              Create New Claim
             </b-button>
-            <!-- hidden file selector, because Bootstrap-vue -->
-            <!-- has no Browse button without filename -->
-            <input
-              ref="avatarSelector"
-              type="file"
-              :v-model="avatar"
-              class="d-none"
-              accept=".png"
-              @change="changeAvatar" />
-          </b-col>
-        </b-row>
-        <b-tooltip target="avatar-row" placement="left">
-          <fa icon="user-lock" class="mr-2" /> Your avatars will not be shared with anyone
-        </b-tooltip>
-        <b-row id="id-row">
-          <b-input-group>
-            <b-input-group-prepend class="col-2 px-0">
-              <b-input-group-text class="w-100 justify-content-end text-uppercase">
-                ID:
-              </b-input-group-text>
-            </b-input-group-prepend>
-            <b-form-input readonly plaintext v-model="did" />
-          </b-input-group>
-        </b-row>
-        <b-tooltip target="id-row" placement="left">
-          <fa icon="unlock-alt" class="mr-2" /> You might choose to share your IDs
-        </b-tooltip>
-        <b-row id="alias-row">
-          <b-input-group>
-            <b-input-group-prepend class="col-2 px-0">
-              <b-input-group-text class="w-100 justify-content-end text-uppercase">
-                Alias:
-              </b-input-group-text>
-            </b-input-group-prepend>
-            <b-form-input
-              name="alias"
-              :readonly="!editingAlias"
-              v-model="alias"
-              v-validate="{ required: true }"
-              @keyup.enter="renameAlias()"
-              @keyup.esc="cancelAlias()"
-              @dblclick="editAlias()"
-              :state="editingAlias ? validateState('alias') : null"
-            />
-            <b-input-group-append>
-              <b-button
-                size="sm"
-                variant="outline-secondary"
-                class="text-uppercase"
-                v-if="editingAlias"
-                @click="cancelAlias"
-                :disabled="savingAlias">
-                Cancel
-              </b-button>
-              <b-button
-                size="sm"
-                variant="outline-primary"
-                class="text-uppercase"
-                v-if="editingAlias"
-                @click="renameAlias"
-                :disabled="savingAlias">
-                Save
-                <b-spinner small v-if="savingAlias" />
-              </b-button>
-              <b-button
-                size="sm"
-                variant="outline-primary"
-                class="text-uppercase"
-                v-else
-                @click="editAlias">
-                Edit
-              </b-button>
-            </b-input-group-append>
-          </b-input-group>
-        </b-row>
-        <b-tooltip target="alias-row" placement="left">
-          <fa icon="user-lock" class="mr-2" /> Your aliases will be kept private
-        </b-tooltip>
-      </b-card>
-      <div class="d-flex justify-content-between align-items-center">
-        <h2 class="my-3 text-primary">Claims</h2>
-        <b-button
-          variant="primary"
-          :to="{ name:'createClaim', params:{ did }}"
-        >
-          CREATE NEW CLAIM
+          </Loader>
+        </b-card>
+        <b-button to="/vault/dids" variant="light" class="text-uppercase mt-4">
+          <fa icon="angle-left" /> Back to DIDs
         </b-button>
-      </div>
-      <Loader :loading="loadingClaims" text="Loading claims...">
-        <template v-if="!claims || !claims.length">
-          <b-alert show variant="info">
-            No claims defined for this DID yet.
-          </b-alert>
-        </template>
-        <template v-else>
-          <ClaimList
-            :claims="claims"
-            :schemas="claimSchemas"
-          />
-          <b-tooltip target="claims-panel" placement="left">
-            <fa icon="unlock-alt" class="mr-2" />
-            You will only share your claims with their witnesses
-          </b-tooltip>
-        </template>
       </Loader>
-      <b-button to="/vault/dids" variant="light" class="text-uppercase mt-4">Back to DIDs</b-button>
-    </Loader>
-  </div>
+    </b-col>
+  </b-row>
 </template>
 
 <script>
@@ -145,10 +156,10 @@ export default {
     return {
       loading: true,
       loadingClaims: true,
-      editingAlias: false,
-      aliasBeforeEdit: '',
-      savingAlias: false,
-      alias: '',
+      editingLabel: false,
+      labelBeforeEdit: '',
+      savingLabel: false,
+      label: '',
       avatar: '',
       savingAvatar: false,
       claims: [],
@@ -159,7 +170,7 @@ export default {
   },
   async created() {
     const { data: didDetails } = await api.getDID(this.did);
-    this.alias = didDetails.alias;
+    this.label = didDetails.label;
     this.avatar = didDetails.avatar;
     this.loading = false;
 
@@ -168,39 +179,23 @@ export default {
     this.loadingClaims = false;
   },
   methods: {
-    // TODO: this is duplicated at multiple places
-    validateState(ref) {
-      if (
-        this.vFields[ref]
-        && (this.vFields[ref].dirty || this.vFields[ref].validated)
-      ) {
-        return !this.vErrors.has(ref);
-      }
-      return null;
+    editLabel() {
+      this.editingLabel = true;
+      this.labelBeforeEdit = this.label;
     },
-    editAlias() {
-      this.editingAlias = true;
-      this.aliasBeforeEdit = this.alias;
+    cancelLabel() {
+      this.label = this.labelBeforeEdit;
+      this.editingLabel = false;
     },
-    cancelAlias() {
-      this.alias = this.aliasBeforeEdit;
-      this.editingAlias = false;
-    },
-    renameAlias() {
-      this.$validator.validateAll().then((result) => {
-        if (!result) {
-          return;
-        }
-
-        this.savingAlias = true;
-        this.$store.dispatch('renameDIDAlias', {
-          didId: this.did,
-          alias: this.alias,
-        }).then(() => {
-          this.aliasBeforeEdit = this.alias;
-          this.editingAlias = false;
-          this.savingAlias = false;
-        });
+    renameLabel() {
+      this.savingLabel = true;
+      this.$store.dispatch('renameDIDLabel', {
+        didId: this.did,
+        label: this.label,
+      }).then((label) => {
+        this.label = label;
+        this.editingLabel = false;
+        this.savingLabel = false;
       });
     },
     changeAvatar(event) {

@@ -53,10 +53,10 @@
               <component
                 :key="item.key"
                 :is="getSchemaComponent(item.properties.type)"
-                v-bind="{data:{
+                v-bind="{ data: {
                   name: item.key,
                   properties: item.properties,
-                }}"
+                } }"
                 v-model="claimContent[item.key]"
               />
             </template>
@@ -82,9 +82,15 @@
             </b-form-invalid-feedback>
           </b-form-group>
           <hr>
-          <b-button :to="{name: 'listClaims'}" variant="light" class="mr-4">CANCEL</b-button>
-          <b-button @click="create" variant="primary" :disabled="saving">
-            CREATE &amp; SEND
+          <b-button
+            :to="{ name: 'listClaims' }"
+            variant="light"
+            class="mr-4 text-uppercase"
+          >
+            Cancel
+          </b-button>
+          <b-button @click="create" variant="primary" :disabled="saving" class="text-uppercase">
+            Create &amp; Send
             <b-spinner small class="ml-1" v-if="saving" />
           </b-button>
         </b-form>
@@ -118,10 +124,10 @@ export default {
   computed: {
     ...mapGetters(['claimSchemas', 'dids']),
     availableSchemas() {
-      return this.claimSchemas.map(schema => ({ value: schema.id, text: schema.alias }));
+      return this.claimSchemas.map(schema => ({ value: schema.id, text: schema.label }));
     },
     availableDids() {
-      return this.dids.map(did => ({ value: did.id, text: did.alias }));
+      return this.dids.map(did => ({ value: did.id, text: did.label }));
     },
     schemaPropertiesCollection() {
       if (!this.schema) {
