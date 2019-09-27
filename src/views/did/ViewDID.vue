@@ -1,9 +1,9 @@
 <template>
   <b-row no-gutters>
-    <b-col cols="12" lg="8">
+    <b-col>
       <Loader :loading="loading">
         <b-card>
-          <h3 class="mb-3 text-primary">DID Document</h3>
+          <h3 class="mb-3 text-primary">Persona</h3>
           <hr>
           <b-row>
             <b-col cols="6">
@@ -20,7 +20,7 @@
                 />
                 <b-form-text id="id-desc">
                   <fa icon="unlock-alt" />
-                  This is your DID's unique ID, that you might choose to share.
+                  This is your persona's unique ID, that you might choose to share.
                 </b-form-text>
               </b-form-group>
               <b-form-group
@@ -69,7 +69,7 @@
                   </b-input-group-append>
                   <b-form-text id="label-desc">
                     <fa icon="user-lock" />
-                    This label is an easier memorizable form of your DID.
+                    This label is an easier memorizable form of your persona.
                     Your labels will be kept private.
                   </b-form-text>
                 </b-input-group>
@@ -113,7 +113,7 @@
           <Loader :loading="loadingClaims" text="Loading claims...">
             <template v-if="!claims || !claims.length">
               <b-alert show variant="info">
-                No claims defined for this DID yet.
+                No claims defined for this persona yet.
               </b-alert>
             </template>
             <template v-else>
@@ -131,9 +131,6 @@
             </b-button>
           </Loader>
         </b-card>
-        <b-button to="/vault/dids" variant="light" class="text-uppercase mt-4">
-          <fa icon="angle-left" /> Back to DIDs
-        </b-button>
       </Loader>
     </b-col>
   </b-row>
@@ -150,7 +147,7 @@ export default {
     ClaimList,
   },
   computed: {
-    ...mapGetters(['claimSchemas']),
+    ...mapGetters(['claims', 'claimSchemas']),
   },
   data() {
     return {
@@ -162,20 +159,18 @@ export default {
       label: '',
       avatar: '',
       savingAvatar: false,
-      claims: [],
     };
   },
   props: {
     did: String,
   },
   async created() {
-    const { data: didDetails } = await api.getDID(this.did);
+    const { data: didDetails } = await api.getActiveDID();
     this.label = didDetails.label;
     this.avatar = didDetails.avatar;
     this.loading = false;
 
-    const { data: claims } = await api.getDIDClaims(this.did);
-    this.claims = claims;
+    await this.$store.dispatch('listClaims');
     this.loadingClaims = false;
   },
   methods: {
@@ -189,10 +184,7 @@ export default {
     },
     renameLabel() {
       this.savingLabel = true;
-      this.$store.dispatch('renameDIDLabel', {
-        didId: this.did,
-        label: this.label,
-      }).then((label) => {
+      this.$store.dispatch('renameDIDLabel', this.label).then((label) => {
         this.label = label;
         this.editingLabel = false;
         this.savingLabel = false;
@@ -207,10 +199,7 @@ export default {
       reader.readAsDataURL(file);
       reader.onload = async (e) => {
         this.savingAvatar = true;
-        await this.$store.dispatch('changeDIDAvatar', {
-          didId: this.did,
-          avatar: e.target.result,
-        });
+        await this.$store.dispatch('changeDIDAvatar', e.target.result);
         this.avatar = e.target.result;
         this.savingAvatar = false;
       };

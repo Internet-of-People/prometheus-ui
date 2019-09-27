@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import BootstrapVue from 'bootstrap-vue';
 import VeeValidate from 'vee-validate';
+import VueClipboard from 'vue-clipboard2';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
   faAngleRight,
@@ -9,6 +10,11 @@ import {
   faCircleNotch,
   faUnlockAlt,
   faUserLock,
+  faHeart,
+  faWallet,
+  faLaptop,
+  faAddressCard,
+  faFileSignature,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faLaughWink,
@@ -23,6 +29,9 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 
+VueClipboard.config.autoSetContainer = true;
+Vue.use(VueClipboard);
+
 library.add([
   faAngleLeft, // <fa icon="angle-left" />
   faAngleRight, // <fa icon="angle-right" />
@@ -34,6 +43,11 @@ library.add([
   faTelegram, // <fa :icon="['fab', 'telegram']" />
   faUnlockAlt, // <fa icon="unlock-alt" />
   faUserLock, // <fa icon="user-lock" />
+  faHeart, // <fa icon="heart" />
+  faWallet, // <fa icon="wallet" />
+  faLaptop, // <fa icon="laptop" />
+  faAddressCard, // <fa icon="address-card" />
+  faFileSignature, // <fa icon="file-signature" />
 ]);
 Vue.component('fa', FontAwesomeIcon);
 

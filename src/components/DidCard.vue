@@ -8,11 +8,11 @@
     class="mb-3">
     <b-button
       size="sm"
-      :to="{ name: 'viewDID', params: { did: did.id } }"
       variant="primary"
       class="float-right mb-3 text-uppercase"
+      @click="onDidCardButtonClick"
     >
-      View <fa icon="angle-right" />
+      Set to Active
     </b-button>
   </b-card>
 </template>
@@ -27,6 +27,12 @@ export default {
       id: String,
       avatar: String,
       status: String,
+    },
+  },
+  methods: {
+    async onDidCardButtonClick() {
+      await this.$store.dispatch('setActiveDID', this.did.id);
+      this.$router.push({ name: 'viewDID', params: { did: this.did.id } });
     },
   },
 };

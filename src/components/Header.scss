@@ -1,0 +1,60 @@
+@import '@/assets/style/_variables.scss';
+
+.breadcrumb {
+  background-color: white;
+  -webkit-border-radius: $content-border-radius;
+  -moz-border-radius: $content-border-radius;
+  border-radius: $content-border-radius;
+}
+
+.app-name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $primary;
+}
+
+.app-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  img {
+    width: 3rem;
+  }
+}
+
+.logo-without-profile {
+  width: 2rem; 
+}
+
+.active-did {
+  .avatar {
+    height: auto;
+    width: 2rem;
+    margin-right: 1rem;
+  }
+
+  .did-label {
+    display: inline-block;
+    align-items: center;
+    margin-right: 1rem;
+  }
+}
+
+li {
+  svg {
+    margin-right:1rem;
+  }
+}
+
+.did-created {
+  .did-label {
+    display: inline-block;
+    margin-left: 1rem;
+  }
+
+  .did-avatar {
+    width: 3rem;
+  }
+}
