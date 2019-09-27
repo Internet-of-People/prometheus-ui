@@ -1,14 +1,13 @@
 <template>
-  <b-container fluid class="vertical-fill">
-    <b-row class="vertical-fill">
-      <b-col cols="2" v-if="showSideBar" class="p-0 pt-2 m-0">
-        <SideBar :app-name="appName" />
-      </b-col>
-      <b-col v-bind:cols="showSideBar?10:12" class="m-0 p-0">
-        <TopBar v-if="showSideBar" />
-        <Content>
-          <router-view :app-name="appName" />
-        </Content>
+  <b-container>
+    <b-row :class="showHeader?'':'mt-3'">
+      <b-col cols="12">
+        <Header :app-name="appName" v-if="showHeader" />
+        <b-row class="content" no-gutters>
+          <b-col>
+            <router-view :app-name="appName" :key="$route.fullPath" />
+          </b-col>
+        </b-row>
       </b-col>
     </b-row>
     <b-row align-v="end">
@@ -19,24 +18,21 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import api from './api';
 import {
-  Content,
   Footer,
-  SideBar,
-  TopBar,
+  Header,
 } from '@/components';
 
 export default {
   name: 'App',
   components: {
     Footer,
-    SideBar,
-    TopBar,
-    Content,
+    Header,
   },
   computed: {
     ...mapGetters(['appName']),
-    showSideBar() {
+    showHeader() {
       return this.$route.name !== 'intro';
     },
   },
@@ -45,8 +41,13 @@ export default {
       await this.$store.dispatch('authenticate');
       await this.$store.dispatch('listDIDs');
       await this.$store.dispatch('listClaimSchemas');
-
-      this.$router.push({ name: 'listDIDs' });
+      const activeDid = await api.getActiveDIDID();
+      if (activeDid.data) {
+        await this.$store.dispatch('setActiveDID', activeDid.data);
+        this.$router.push({ name: 'viewDID', params: { did: activeDid.data } });
+      } else {
+        this.$router.push({ name: 'listDIDs' });
+      }
     } catch (err) {
       this.$router.push({ name: 'intro' });
     }

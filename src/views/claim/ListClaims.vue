@@ -11,6 +11,11 @@
       </b-button>
     </b-alert>
 
+    <Tooltip id="claim-list-tooltip">
+      This page provides an overview over the claims you have created about your personas.
+      You can request more and more signatures from people you want to attest your statements.
+    </Tooltip>
+
     <ClaimList
       :claims="claims"
       :schemas="claimSchemas"
@@ -21,12 +26,13 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { ClaimList, Loader } from '@/components';
+import { ClaimList, Loader, Tooltip } from '@/components';
 
 export default {
   components: {
     ClaimList,
     Loader,
+    Tooltip,
   },
   computed: {
     ...mapGetters(['claims', 'claimSchemas']),

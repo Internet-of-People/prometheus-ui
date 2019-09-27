@@ -2,7 +2,17 @@
   <Loader :loading="loading">
     <b-alert show variant="warning">
       Please note down all the following phrases in correct order.
+      <b-button
+        size="sm"
+        class="ml-3 text-uppercase"
+        variant="outline-primary"
+        v-clipboard:copy="wordsString"
+        v-clipboard:success="onCopyWords"
+      >
+        Copy Words
+      </b-button>
     </b-alert>
+
     <MnemonicWords :words="words" readonly />
     <b-row class="clear mt-4">
       <b-col>
@@ -28,6 +38,11 @@ export default {
       words: [],
     };
   },
+  computed: {
+    wordsString() {
+      return this.words.join(' ');
+    },
+  },
   components: {
     Loader,
     MnemonicWords,
@@ -43,6 +58,14 @@ export default {
     },
     restoreVault() {
       this.$router.push({ name: 'validateVault' });
+    },
+    onCopyWords() {
+      this.$bvToast.toast('Your passphrase has been copied to your clipboard.', {
+        title: 'Copied!',
+        variant: 'success',
+        toaster: 'b-toaster-bottom-left',
+        solid: true,
+      });
     },
   },
 };

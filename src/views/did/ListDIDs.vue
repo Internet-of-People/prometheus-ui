@@ -2,11 +2,15 @@
     <Loader :loading="loading">
       <template v-if="dids.length">
         <Tooltip id="dids-tooltip" v-if="dids.length">
-          Here you can view your DIDs. Creating a new DID takes seconds. <br>
-          After a DID is created, it will by default have a deterministically created
-          avatar and label, but both can easily be changed on the DID's page.
+          Here you can view your personas. Creating a new persona takes seconds. <br>
+          After a persona is created, it will by default have a deterministically created
+          avatar and label, but both can easily be changed on the persona's page.
         </Tooltip>
-        <FilterBar v-if="dids.length" v-model="searchTerm" text="Type here to filter your DIDs" />
+        <FilterBar
+          v-if="dids.length"
+          v-model="searchTerm"
+          text="Type here to filter your personas"
+        />
         <DidCard
           v-for="did in filteredDids"
           :did="did"
@@ -19,8 +23,8 @@
           <b-button
             @click="createNewDID"
             variant="primary"
-            class="mt-3 d-block">
-            CREATE YOUR FIRST DID
+            class="mt-3 d-block text-uppercase">
+            Create Your First Persona
           </b-button>
         </b-alert>
       </template>
@@ -30,7 +34,7 @@
         v-if="!filteredDids.length && this.searchTerm.length"
         class="mt-3"
       >
-        No DIDs found with the term "{{ this.searchTerm }}"
+        No personas found with the term "{{ this.searchTerm }}"
       </b-alert>
     </Loader>
 </template>
