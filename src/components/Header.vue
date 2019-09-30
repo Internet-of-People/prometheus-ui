@@ -220,7 +220,7 @@ export default {
       this.sign.error = '';
       try {
         const result = await api.signClaim(this.sign.message);
-        this.sign.signature = JSON.stringify(result.data);
+        this.sign.signature = result.data;
       } catch (e) {
         if (e.response && e.response.data) {
           this.sign.error = e.response.data;

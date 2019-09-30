@@ -203,7 +203,7 @@ export default {
       });
       this.saving = false;
       const { data } = await api.getClaimWitnessMessage(this.createdClaimId);
-      this.claimMessageToSign = JSON.stringify(data);
+      this.claimMessageToSign = data;
       this.$bvModal.show('modal-claim-created');
     },
   },

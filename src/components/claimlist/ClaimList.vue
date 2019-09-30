@@ -158,7 +158,7 @@ export default {
     async onRequestSignatureButtonInListClick(claim) {
       this.claimBeingHandled = claim;
       const { data } = await api.getClaimWitnessMessage(claim.id);
-      this.claimMessageToSign = JSON.stringify(data);
+      this.claimMessageToSign = data;
       this.$bvModal.show('modal-claim-request-signature');
     },
     onImportSignatureButtonInListClick(claim) {
