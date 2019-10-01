@@ -152,20 +152,37 @@ const router = new Router({
 });
 
 router.beforeEach(async (to, from, next) => {
+  let vaultExists = false;
+  let activeDid;
   try {
-    if (to.meta.requiresAuth) {
-      const activeDid = await api.getActiveDIDID();
-      if (!activeDid.data) { // no active did is set
-        if (to.name !== 'listDIDs' && to.name !== 'vaultCreated') {
-          next({ name: 'listDIDs' });
-          return;
-        }
-      }
-    }
-  } catch (err) {
-    if (to.name !== 'intro' && to.name !== null) {
-      next({ name: 'intro' });
+    const resp = await api.getActiveDIDID();
+    activeDid = resp.data;
+    vaultExists = true;
+  } catch {
+    console.log('Vault does not exist');
+  }
+
+  if (vaultExists && !to.meta.requiresAuth) {
+    if (activeDid) {
+      next({ name: 'viewDID', params: { did: activeDid } });
       return;
+    }
+
+    next({ name: 'listDIDs' });
+    return;
+  }
+
+  if (!vaultExists && to.meta.requiresAuth) {
+    next({ name: 'intro' });
+    return;
+  }
+
+  if (to.meta.requiresAuth) {
+    if (!activeDid) { // no active did is set
+      if (to.name !== 'listDIDs' && to.name !== 'vaultCreated') {
+        next({ name: 'listDIDs' });
+        return;
+      }
     }
   }
 
