@@ -8,40 +8,40 @@
               <b-img :src="activeDid.avatar" alt="avatar image" class="avatar" />
               <div class="did-label">{{ activeDid.label }}</div>
             </template>
+            <b-dropdown-text>
+              Your Other Personas:
+            </b-dropdown-text>
             <b-dropdown-item
               v-for="did in dids"
               :key="did.id"
               :class="did.id===activeDid.id?'d-none':''"
               @click="onDidSelected(did.id)"
             >
-              <b-img :src="did.avatar" alt="avatar image" class="avatar" />
-              {{ did.label }}
+              <div class="avatar-container">
+                <b-img :src="did.avatar" alt="avatar image" class="avatar" />
+              </div>
+              <div>{{ did.label }}</div>
             </b-dropdown-item>
             <b-dropdown-divider />
             <b-dropdown-item @click="onCreateDid">
               <fa icon="address-card" />
               Create New Persona
             </b-dropdown-item>
-            <b-dropdown-divider />
             <b-dropdown-item @click="onSignMessageMenuButtonClick">
               <fa icon="file-signature" />
               Sign Message
             </b-dropdown-item>
-            <b-dropdown-divider />
             <b-dropdown-item disabled href="#">
               <fa icon="wallet" />
               Wallets (soon!)
             </b-dropdown-item>
-            <b-dropdown-divider />
             <b-dropdown-item disabled href="#">
               <fa icon="laptop" />
               Devices (soon!)
             </b-dropdown-item>
-            <b-dropdown-divider />
             <b-dropdown-item :to="{name:'listClaims'}">
               View All Claims
             </b-dropdown-item>
-            <b-dropdown-divider />
             <b-dropdown-item :to="{name:'listDIDs'}">
               View All Personas
             </b-dropdown-item>

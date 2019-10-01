@@ -78,18 +78,18 @@
             <b-col cols="3">
               <div>Your Avatar</div>
               <div style="position:relative;">
-                <b-img :src="avatar" fluid-grow alt="avatar image" class="mt-2 d-block"/>
+                <b-img :src="avatar.src" fluid-grow alt="avatar image" class="mt-2 d-block"/>
 
                 <b-button
                   size="sm"
                   variant="primary"
                   class="text-uppercase mt-3 d-block"
                   @click="$refs.avatarSelector.click()"
-                  :disabled="savingAvatar"
+                  :disabled="avatar.saving"
                   style="position:absolute;bottom:0.5rem;left:0.5rem"
                 >
                   Change
-                  <b-spinner small v-if="savingAvatar" />
+                  <b-spinner small v-if="avatar.saving" />
                 </b-button>
               </div>
               <b-form-text>
@@ -100,10 +100,13 @@
               <input
                 ref="avatarSelector"
                 type="file"
-                :v-model="avatar"
+                :v-model="avatar.src"
                 class="d-none"
                 accept=".png"
                 @change="changeAvatar" />
+              <b-alert v-if="avatar.showError" show class="mt-2 mb-0" variant="danger">
+                Maximum image size is 10MB
+              </b-alert>
             </b-col>
           </b-row>
         </b-card>
@@ -157,8 +160,11 @@ export default {
       labelBeforeEdit: '',
       savingLabel: false,
       label: '',
-      avatar: '',
-      savingAvatar: false,
+      avatar: {
+        src: '',
+        showError: false,
+        saving: false,
+      },
     };
   },
   props: {
@@ -167,7 +173,7 @@ export default {
   async created() {
     const { data: didDetails } = await api.getActiveDID();
     this.label = didDetails.label;
-    this.avatar = didDetails.avatar;
+    this.avatar.src = didDetails.avatar;
     this.loading = false;
 
     await this.$store.dispatch('listClaims');
@@ -191,17 +197,24 @@ export default {
       });
     },
     changeAvatar(event) {
+      this.avatar.showError = false;
       // file reader logic is taken from docs
       // https://developer.mozilla.org/en-US/docs/Web/API/FileReader/onload
       // get file and then read converted file. Hence, nested event
       const file = event.currentTarget.files[0];
+
+      if (file.size > 10 * 1000 * 1000) {
+        this.avatar.showError = true;
+        return;
+      }
+
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = async (e) => {
-        this.savingAvatar = true;
+        this.avatar.saving = true;
         await this.$store.dispatch('changeDIDAvatar', e.target.result);
-        this.avatar = e.target.result;
-        this.savingAvatar = false;
+        this.avatar.src = e.target.result;
+        this.avatar.saving = false;
       };
     },
   },

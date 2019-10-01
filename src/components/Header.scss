@@ -31,20 +31,59 @@
 .active-did {
   .avatar {
     height: auto;
-    width: 2rem;
+    max-width: 50px;
+    max-height: 20px;
     margin-right: 1rem;
   }
 
-  .did-label {
-    display: inline-block;
-    align-items: center;
-    margin-right: 1rem;
-  }
-}
+  .dropdown {
+    width: 250px;
 
-li {
-  svg {
-    margin-right:1rem;
+    button {
+      text-align: left;
+
+      .did-label {
+        display: inline-block;
+        align-items: center;
+        margin-right: 1rem;
+        text-align: left;
+        display: inline-block;
+        min-width: 100px;
+        max-width: 150px;
+        white-space: nowrap;
+        overflow: hidden !important;
+        text-overflow: ellipsis;
+        vertical-align: bottom;
+      }
+    }
+
+    ul {
+      li {
+        width: 250px;
+
+        div {
+          max-width:170px;
+          display: inline-block;
+          white-space: nowrap;
+          overflow: hidden !important;
+          text-overflow: ellipsis;
+          vertical-align: bottom;
+        }
+
+        div.avatar-container {
+          width: 35px;
+          display: inline-block;
+
+          img {
+            max-width: 30px;
+          }
+        }
+
+        svg {
+          margin-right:1rem;
+        }
+      }
+    }
   }
 }
 
