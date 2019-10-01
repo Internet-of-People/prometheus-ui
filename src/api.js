@@ -18,6 +18,7 @@ export default {
   initVault: phrase => api.post('/vault', phrase),
 
   listDIDs: () => api.get('/vault/dids'),
+  getDID: id => api.get(`/vault/dids/${id}`),
   getActiveDID: () => api.get('/vault/dids/_'),
   getDIDClaims: () => api.get('/vault/dids/_/claims'),
   createDID: () => api.post('/vault/dids', JSON.stringify('')),
@@ -31,7 +32,7 @@ export default {
   listClaimSchemas: () => api.get('/claim-schemas'),
 
   // SIGNING
-  getClaimWitnessMessage: claimId => api.get(`/vault/dids/_/claims/${claimId}/witness-request`),
+  getClaimWitnessMessage: (didId, claimId) => api.get(`/vault/dids/${didId}/claims/${claimId}/witness-request`),
   signClaim: payload => api.post('/vault/dids/_/sign-claim', payload),
-  importClaimWitnessMessage: (claimId, signature) => api.put(`/vault/dids/_/claims/${claimId}/witness-signature`, signature),
+  importClaimWitnessMessage: (didId, claimId, signature) => api.put(`/vault/dids/${didId}/claims/${claimId}/witness-signature`, signature),
 };

@@ -5,7 +5,7 @@
         <Header :app-name="appName" v-if="showHeader" />
         <b-row class="content" no-gutters>
           <b-col>
-            <router-view :app-name="appName" :key="$route.fullPath" />
+            <router-view :app-name="appName" v-if="!appIsInitializing" :key="$route.fullPath" />
           </b-col>
         </b-row>
       </b-col>
@@ -18,7 +18,6 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import api from './api';
 import {
   Footer,
   Header,
@@ -31,26 +30,10 @@ export default {
     Header,
   },
   computed: {
-    ...mapGetters(['appName']),
+    ...mapGetters(['appIsInitializing', 'appName']),
     showHeader() {
       return this.$route.name !== 'intro';
     },
-  },
-  async beforeCreate() {
-    try {
-      await this.$store.dispatch('authenticate');
-      await this.$store.dispatch('listDIDs');
-      await this.$store.dispatch('listClaimSchemas');
-      const activeDid = await api.getActiveDIDID();
-      if (activeDid.data) {
-        await this.$store.dispatch('setActiveDID', activeDid.data);
-        this.$router.push({ name: 'viewDID', params: { did: activeDid.data } });
-      } else {
-        this.$router.push({ name: 'listDIDs' });
-      }
-    } catch (err) {
-      this.$router.push({ name: 'intro' });
-    }
   },
 };
 </script>

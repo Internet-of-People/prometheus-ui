@@ -1,4 +1,6 @@
 <template>
+  <div>
+    <h3 class="mb-3 text-primary">All Personas</h3>
     <Loader :loading="loading">
       <template v-if="dids.length">
         <Tooltip id="dids-tooltip" v-if="dids.length">
@@ -37,6 +39,7 @@
         No personas found with the term "{{ this.searchTerm }}"
       </b-alert>
     </Loader>
+  </div>
 </template>
 
 <script>

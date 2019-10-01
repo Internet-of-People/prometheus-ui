@@ -3,18 +3,21 @@
     <b-row no-gutters v-if="showProfile" class="mb-2 header-with-profile">
       <b-col cols="3" class="active-did">
         <template v-if="activeDid">
-          <b-dropdown variant="primary" class="scrollable-menu">
+          <b-dropdown
+            variant="primary"
+            class="scrollable-menu"
+          >
             <template v-slot:button-content>
               <b-img :src="activeDid.avatar" alt="avatar image" class="avatar" />
               <div class="did-label">{{ activeDid.label }}</div>
             </template>
-            <b-dropdown-text>
-              Your Other Personas:
+            <b-dropdown-text v-if="dids.length>1">
+              Your Personas:
             </b-dropdown-text>
             <b-dropdown-item
               v-for="did in dids"
               :key="did.id"
-              :class="did.id===activeDid.id?'d-none':''"
+              :class="did.id===activeDid.id?'active':''"
               @click="onDidSelected(did.id)"
             >
               <div class="avatar-container">
@@ -22,7 +25,7 @@
               </div>
               <div>{{ did.label }}</div>
             </b-dropdown-item>
-            <b-dropdown-divider />
+            <b-dropdown-divider v-if="dids.length>1" />
             <b-dropdown-item @click="onCreateDid">
               <fa icon="address-card" />
               Create New Persona
@@ -39,14 +42,16 @@
               <fa icon="laptop" />
               Devices (soon!)
             </b-dropdown-item>
-            <b-dropdown-item :to="{name:'listClaims'}">
+            <b-dropdown-item :to="{name:'listClaims'}" :class="getClassIfActive('listClaims')">
               View All Claims
             </b-dropdown-item>
-            <b-dropdown-item :to="{name:'listDIDs'}">
+            <b-dropdown-item :to="{name:'listDIDs'}" :class="getClassIfActive('listDIDs')">
               View All Personas
             </b-dropdown-item>
             <b-dropdown-divider />
-            <b-dropdown-item :to="{ name: 'about' }">About</b-dropdown-item>
+            <b-dropdown-item :to="{ name: 'about' }" :class="getClassIfActive('about')">
+              About
+            </b-dropdown-item>
           </b-dropdown>
         </template>
       </b-col>
@@ -250,6 +255,9 @@ export default {
         return !this.vErrors.has(ref);
       }
       return null;
+    },
+    getClassIfActive(expected) {
+      return expected === this.$route.name ? 'active' : '';
     },
   },
 };
