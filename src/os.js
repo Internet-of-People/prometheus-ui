@@ -3,7 +3,7 @@ export function openUrl(url) {
     /* eslint-disable import/no-unresolved, global-require */
     require('electron').shell.openExternal(url);
   } catch (err) {
-    window.location = url;
+    window.open(url, '_blank');
   }
 }
 
