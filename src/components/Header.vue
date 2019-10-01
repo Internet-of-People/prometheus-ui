@@ -11,7 +11,7 @@
               <b-img :src="activeDid.avatar" alt="avatar image" class="avatar" />
               <div class="did-label">{{ activeDid.label }}</div>
             </template>
-            <b-dropdown-text v-if="dids.length>1">
+            <b-dropdown-text :v-if="dids.length>1">
               Your Personas:
             </b-dropdown-text>
             <b-dropdown-item
@@ -25,7 +25,7 @@
               </div>
               <div>{{ did.label }}</div>
             </b-dropdown-item>
-            <b-dropdown-divider v-if="dids.length>1" />
+            <b-dropdown-divider :v-if="dids.length>1" />
             <b-dropdown-item @click="onCreateDid">
               <fa icon="address-card" />
               Create New Persona
