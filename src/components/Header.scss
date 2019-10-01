@@ -59,6 +59,19 @@
 
     ul {
       li {
+        &.active {
+          position: relative;
+          &::before {
+            content: ' ';
+            position: absolute;
+            left:0;
+            top:0;
+            width:5px;
+            height:100%;
+            background-color: $primary;
+          }
+        }
+
         width: 250px;
 
         div {

@@ -114,15 +114,16 @@
           <h3 class="text-primary">Claims</h3>
           <hr>
           <Loader :loading="loadingClaims" text="Loading claims...">
-            <template v-if="!claims || !claims.length">
+            <template v-if="!activeDidClaims || !activeDidClaims.length">
               <b-alert show variant="info">
                 No claims defined for this persona yet.
               </b-alert>
             </template>
             <template v-else>
               <ClaimList
-                :claims="claims"
+                :claims="activeDidClaims"
                 :schemas="claimSchemas"
+                @listUpdated="refreshClaimList"
               />
             </template>
             <b-button
@@ -150,7 +151,7 @@ export default {
     ClaimList,
   },
   computed: {
-    ...mapGetters(['claims', 'claimSchemas']),
+    ...mapGetters(['activeDidClaims', 'claimSchemas']),
   },
   data() {
     return {
@@ -170,16 +171,20 @@ export default {
   props: {
     did: String,
   },
-  async created() {
+  async mounted() {
     const { data: didDetails } = await api.getActiveDID();
     this.label = didDetails.label;
     this.avatar.src = didDetails.avatar;
     this.loading = false;
 
-    await this.$store.dispatch('listClaims');
+    this.loadingClaims = true;
+    await this.$store.dispatch('listActiveDidClaims');
     this.loadingClaims = false;
   },
   methods: {
+    async refreshClaimList() {
+      await this.$store.dispatch('listActiveDidClaims');
+    },
     editLabel() {
       this.editingLabel = true;
       this.labelBeforeEdit = this.label;

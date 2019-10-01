@@ -202,7 +202,7 @@ export default {
         content: this.claimContent,
       });
       this.saving = false;
-      const { data } = await api.getClaimWitnessMessage(this.createdClaimId);
+      const { data } = await api.getClaimWitnessMessage(this.activeDid.id, this.createdClaimId);
       this.claimMessageToSign = data;
       this.$bvModal.show('modal-claim-created');
     },

@@ -8,25 +8,45 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     appName: 'PROMETHEUS',
+    appIsInitializing: true,
     dids: [],
     activeDid: undefined,
+    activeDidClaims: [],
     claims: [],
     claimSchemas: [],
     version,
   },
   getters: {
     appName: state => state.appName,
+    appIsInitializing: state => state.appIsInitializing,
     version: state => state.version,
     dids: state => state.dids,
     activeDid: state => state.activeDid,
+    activeDidClaims: state => state.activeDidClaims,
     claims: state => state.claims,
     claimSchemas: state => state.claimSchemas,
   },
+  plugins: [async (store) => {
+    store.state.appIsInitializing = true;
+
+    try {
+      const activeDidResp = await api.getActiveDIDID();
+
+      if (activeDidResp.data) {
+        await Promise.all([
+          store.dispatch('setActiveDID', activeDidResp.data),
+          store.dispatch('listDIDs'),
+          store.dispatch('listClaimSchemas'),
+        ]);
+      }
+    } catch (e) {
+      // app is not yet authenticated
+    }
+
+    store.state.appIsInitializing = false;
+  }],
   actions: {
     // TODO: generic error handling for all API calls
-    async authenticate() { // TODO: check it in a different way
-      await api.listDIDs();
-    },
     async listDIDs(context) {
       const response = await api.listDIDs();
       context.commit('LIST_DIDS', response.data);
@@ -38,15 +58,10 @@ export default new Vuex.Store({
     },
     async setActiveDID(context, activeDidId) {
       await api.setActiveDIDID(activeDidId);
-
-      const response = await api.listDIDs();
-      context.commit('LIST_DIDS', response.data);
-
-      const activeDid = response.data.filter(did => did.id === activeDidId)[0];
-      context.commit('SET_ACTIVE_DID', activeDid);
+      const response = await api.getDID(activeDidId);
+      context.commit('SET_ACTIVE_DID', response.data);
     },
     async renameDIDLabel(context, label) {
-      console.log(label);
       await api.renameDIDLabel(label);
       context.commit('RENAME_DID_LABEL', label);
       return label;
@@ -58,6 +73,10 @@ export default new Vuex.Store({
     async listClaims(context) {
       const response = await api.listClaims();
       context.commit('LIST_CLAIMS', response.data);
+    },
+    async listActiveDidClaims(context) {
+      const response = await api.getDIDClaims(context.state.activeDid.id);
+      context.commit('LIST_ACTIVE_DID_CLAIMS', response.data);
     },
     async createClaim(context, payload) {
       const { data } = await api.createClaim(payload);
@@ -94,6 +113,9 @@ export default new Vuex.Store({
     },
     LIST_CLAIMS: (state, claims) => {
       state.claims = claims;
+    },
+    LIST_ACTIVE_DID_CLAIMS: (state, claims) => {
+      state.activeDidClaims = claims;
     },
     LIST_CLAIM_SCHEMAS: (state, claimSchemas) => {
       state.claimSchemas = claimSchemas;

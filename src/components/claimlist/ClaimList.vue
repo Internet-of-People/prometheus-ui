@@ -157,7 +157,7 @@ export default {
   methods: {
     async onRequestSignatureButtonInListClick(claim) {
       this.claimBeingHandled = claim;
-      const { data } = await api.getClaimWitnessMessage(claim.id);
+      const { data } = await api.getClaimWitnessMessage(claim.subject_id, claim.id);
       this.claimMessageToSign = data;
       this.$bvModal.show('modal-claim-request-signature');
     },
@@ -178,10 +178,12 @@ export default {
 
       try {
         await api.importClaimWitnessMessage(
+          this.claimBeingHandled.subject_id,
           this.claimBeingHandled.id,
           this.importSignature.signature,
         );
-        await this.$store.dispatch('listClaims');
+
+        this.$emit('listUpdated');
         this.$bvModal.hide('modal-claim-import-signature');
       } catch (e) {
         if (e.response && e.response.data) {

@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import api from '@/api';
 import {
   Introduction,
   CreateNewVault,
@@ -18,7 +19,7 @@ Vue.use(Router);
 const SIGNED_IN_HOME_URL = '/vault/dids';
 const GUEST_HOME_URL = '/';
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   scrollBehavior() {
     return { x: 0, y: 0 };
@@ -149,3 +150,26 @@ export default new Router({
     },
   ],
 });
+
+router.beforeEach(async (to, from, next) => {
+  try {
+    if (to.meta.requiresAuth) {
+      const activeDid = await api.getActiveDIDID();
+      if (!activeDid.data) { // no active did is set
+        if (to.name !== 'listDIDs' && to.name !== 'vaultCreated') {
+          next({ name: 'listDIDs' });
+          return;
+        }
+      }
+    }
+  } catch (err) {
+    if (to.name !== 'intro' && to.name !== null) {
+      next({ name: 'intro' });
+      return;
+    }
+  }
+
+  next();
+});
+
+export default router;

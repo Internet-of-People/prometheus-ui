@@ -52,7 +52,12 @@ export default {
     async createDID() {
       this.loading = true;
       const { id } = await this.$store.dispatch('createDID');
-      await this.$store.dispatch('setActiveDID', id);
+      await Promise.all([
+        this.$store.dispatch('setActiveDID', id),
+        this.$store.dispatch('listDIDs'),
+        this.$store.dispatch('listClaimSchemas'),
+      ]);
+
       this.loading = false;
       this.$router.push({ name: 'viewDID', params: { did: id } });
     },
