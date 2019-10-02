@@ -6,12 +6,21 @@ img {
   display: inline-block;
 }
 
-.content {
-  background-color: white;
-  -webkit-border-radius: $content-border-radius;
-  -moz-border-radius: $content-border-radius;
-  border-radius: $content-border-radius;
-  padding: 2rem;
+.content-container {
+  margin:0;
+
+  .sidebar {
+    padding:0;
+    padding-right: 10px;
+  }
+
+  .content {
+    background-color: white;
+    -webkit-border-radius: $content-border-radius;
+    -moz-border-radius: $content-border-radius;
+    border-radius: $content-border-radius;
+    padding: 2rem;
+  }
 }
 
 .scrollable-menu {

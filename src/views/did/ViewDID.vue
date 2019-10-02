@@ -31,9 +31,9 @@
                   <b-form-input
                     id="label"
                     name="label"
-                    v-model="label"
+                    v-model="label.label"
                     aria-describedby="label-desc"
-                    :readonly="!editingLabel"
+                    :readonly="!label.editing"
                     @keyup.enter="renameLabel()"
                     @keyup.esc="cancelLabel()"
                     @dblclick="editLabel()"
@@ -43,20 +43,20 @@
                       size="sm"
                       variant="outline-secondary"
                       class="text-uppercase"
-                      v-if="editingLabel"
+                      v-if="label.editing"
                       @click="cancelLabel"
-                      :disabled="savingLabel">
+                      :disabled="label.saving">
                       Cancel
                     </b-button>
                     <b-button
                       size="sm"
                       variant="outline-primary"
                       class="text-uppercase"
-                      v-if="editingLabel"
+                      v-if="label.editing"
                       @click="renameLabel"
-                      :disabled="savingLabel">
+                      :disabled="label.saving">
                       Save
-                      <b-spinner small v-if="savingLabel" />
+                      <b-spinner small v-if="label.saving" />
                     </b-button>
                     <b-button
                       size="sm"
@@ -157,10 +157,12 @@ export default {
     return {
       loading: true,
       loadingClaims: true,
-      editingLabel: false,
-      labelBeforeEdit: '',
-      savingLabel: false,
-      label: '',
+      label: {
+        label: '',
+        saving: false,
+        beforeEdit: '',
+        editing: false,
+      },
       avatar: {
         src: '',
         showError: false,
@@ -173,7 +175,7 @@ export default {
   },
   async mounted() {
     const { data: didDetails } = await api.getActiveDID();
-    this.label = didDetails.label;
+    this.label.label = didDetails.label;
     this.avatar.src = didDetails.avatar;
     this.loading = false;
 
@@ -186,19 +188,19 @@ export default {
       await this.$store.dispatch('listActiveDidClaims');
     },
     editLabel() {
-      this.editingLabel = true;
-      this.labelBeforeEdit = this.label;
+      this.label.editing = true;
+      this.label.beforeEdit = this.label.label;
     },
     cancelLabel() {
-      this.label = this.labelBeforeEdit;
-      this.editingLabel = false;
+      this.label.label = this.label.beforeEdit;
+      this.label.editing = false;
     },
     renameLabel() {
-      this.savingLabel = true;
-      this.$store.dispatch('renameDIDLabel', this.label).then((label) => {
-        this.label = label;
-        this.editingLabel = false;
-        this.savingLabel = false;
+      this.label.saving = true;
+      this.$store.dispatch('renameDIDLabel', this.label.label).then((label) => {
+        this.label.label = label;
+        this.label.editing = false;
+        this.label.saving = false;
       });
     },
     changeAvatar(event) {

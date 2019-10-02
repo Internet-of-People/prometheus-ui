@@ -1,0 +1,114 @@
+@import '@/assets/style/_variables.scss';
+
+.content-container {
+  .sidebar-inner {
+    height:100%;
+
+    .sidebar-title{
+      font-weight: lighter;
+      padding-top:1rem;
+      padding-left:1rem;
+    }
+  }
+  
+  .content {
+    padding:0;
+    padding-bottom: 20px;
+
+    .list-group {
+      .personas {
+        max-height: 200px;
+        overflow-y: auto;
+      }
+
+      .active-persona {
+        padding: 0.75rem 1.25rem;
+        position: relative;
+
+        &::before {
+          content: ' ';
+          position: absolute;
+          left:0;
+          top:0;
+          width:5px;
+          margin-top:5px;
+          height:80%;
+          background-color: $primary;
+        }
+        
+        .avatar-container {
+          width: 45px;
+          display: inline-block;
+
+          img {
+            max-width: 30px;
+          }
+        }
+        
+        div.label {
+          display: inline-block;
+          max-width: 130px;
+          white-space: nowrap;
+          overflow: hidden !important;
+          text-overflow: ellipsis;
+          vertical-align: bottom;
+
+          &.screen-xl {
+            max-width: 150px;
+          }
+        }
+      }
+
+      .list-group-item {
+        border:0;
+        background: none;
+        cursor: pointer;
+
+        &.top-border {
+          border-top: 1px solid rgba(0, 0, 0, 0.125);
+        }
+
+        &.active {
+          color: #495057;
+          &::before {
+            content: ' ';
+            position: absolute;
+            left:0;
+            top:0;
+            width:5px;
+            margin-top:5px;
+            height:80%;
+            background-color: $primary;
+          }
+        }
+
+        &:hover {
+          background-color: $primary;
+          color:white;
+        }
+
+        div.label {
+          display: inline-block;
+          max-width: 130px;
+          white-space: nowrap;
+          overflow: hidden !important;
+          text-overflow: ellipsis;
+          vertical-align: bottom;
+
+          &.screen-xl {
+            max-width: 150px;
+          }
+        }
+
+        .avatar-container {
+          width: 45px;
+          display: inline-block;
+
+          img {
+            max-width: 30px;
+          }
+        }
+      }
+    }
+  }
+}

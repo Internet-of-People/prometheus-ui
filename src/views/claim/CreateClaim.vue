@@ -1,6 +1,6 @@
 <template>
     <b-row>
-      <b-col cols="8">
+      <b-col cols="12">
         <h3 class="mb-3 text-primary">Create New Claim</h3>
         <hr>
         <Tooltip id="create-claim-tooltip">
