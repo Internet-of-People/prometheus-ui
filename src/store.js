@@ -15,6 +15,7 @@ export default new Vuex.Store({
     claims: [],
     claimSchemas: [],
     version,
+    words: [],
   },
   getters: {
     appName: state => state.appName,
@@ -25,6 +26,7 @@ export default new Vuex.Store({
     activeDidClaims: state => state.activeDidClaims,
     claims: state => state.claims,
     claimSchemas: state => state.claimSchemas,
+    words: state => state.words,
   },
   plugins: [async (store) => {
     store.state.appIsInitializing = true;
@@ -87,6 +89,13 @@ export default new Vuex.Store({
       const response = await api.listClaimSchemas();
       context.commit('LIST_CLAIM_SCHEMAS', response.data);
     },
+    async getWords(context) {
+      const response = await api.generateVault();
+      context.commit('SET_WORDS', response.data);
+    },
+    clearWords(context) {
+      context.commit('SET_WORDS', []);
+    },
   },
   mutations: {
     SET_ACTIVE_DID: (state, did) => {
@@ -119,6 +128,9 @@ export default new Vuex.Store({
     },
     LIST_CLAIM_SCHEMAS: (state, claimSchemas) => {
       state.claimSchemas = claimSchemas;
+    },
+    SET_WORDS: (state, words) => {
+      state.words = words;
     },
   },
 });
