@@ -65,6 +65,11 @@ export default new Vuex.Store({
     },
     async renameDIDLabel(context, label) {
       await api.renameDIDLabel(label);
+      if (label.trim() === '') {
+        const { data } = await api.getActiveDID();
+        const originalLabel = data.label;
+        label = originalLabel;
+      }
       context.commit('RENAME_DID_LABEL', label);
       return label;
     },
@@ -111,6 +116,10 @@ export default new Vuex.Store({
         }
         return did;
       });
+
+      if (state.activeDid) {
+        state.activeDid.label = label;
+      }
     },
     CHANGE_DID_AVATAR: (state, avatar) => {
       state.dids.map((did) => {
@@ -119,6 +128,10 @@ export default new Vuex.Store({
         }
         return did;
       });
+
+      if (state.activeDid) {
+        state.activeDid.avatar = avatar;
+      }
     },
     LIST_CLAIMS: (state, claims) => {
       state.claims = claims;

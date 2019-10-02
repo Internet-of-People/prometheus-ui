@@ -42,18 +42,24 @@
     button {
       text-align: left;
 
-      .did-label {
-        display: inline-block;
-        align-items: center;
-        margin-right: 1rem;
+      .button-inner {
         text-align: left;
         display: inline-block;
-        min-width: 100px;
-        max-width: 150px;
-        white-space: nowrap;
-        overflow: hidden !important;
-        text-overflow: ellipsis;
-        vertical-align: bottom;
+        width: 95%;
+
+        .did-label {
+          display: inline-block;
+          align-items: center;
+          margin-right: 1rem;
+          text-align: left;
+          display: inline-block;
+          min-width: 100px;
+          max-width: 150px;
+          white-space: nowrap;
+          overflow: hidden !important;
+          text-overflow: ellipsis;
+          vertical-align: bottom;
+        }
       }
     }
 
@@ -97,16 +103,5 @@
         }
       }
     }
-  }
-}
-
-.did-created {
-  .did-label {
-    display: inline-block;
-    margin-left: 1rem;
-  }
-
-  .did-avatar {
-    width: 3rem;
   }
 }

@@ -1,10 +1,24 @@
 <template>
   <b-container>
-    <b-row :class="showHeader?'':'mt-3'">
+    <b-row v-if="isIntroPage" class="mt-3">
+      <b-col>
+        <b-row class="content-container">
+          <b-col class="content">
+            <router-view :app-name="appName" v-if="!appIsInitializing" :key="$route.fullPath" />
+          </b-col>
+        </b-row>
+      </b-col>
+    </b-row>
+    <b-row v-else>
+      <DidCreatedModal />
+      <SignMessageModal />
       <b-col cols="12">
-        <Header :app-name="appName" v-if="showHeader" />
-        <b-row class="content" no-gutters>
-          <b-col>
+        <Header :app-name="appName" />
+        <b-row class="content-container">
+          <b-col lg="3" class="sidebar d-sm-none d-md-none d-lg-block" v-if="needsSideBar">
+            <SideBar v-if="!appIsInitializing" />
+          </b-col>
+          <b-col sm="12" md="12" :lg="needsSideBar?9:12" class="content">
             <router-view :app-name="appName" v-if="!appIsInitializing" :key="$route.fullPath" />
           </b-col>
         </b-row>
@@ -19,20 +33,29 @@
 <script>
 import { mapGetters } from 'vuex';
 import {
+  DidCreatedModal,
   Footer,
   Header,
+  SideBar,
+  SignMessageModal,
 } from '@/components';
 
 export default {
   name: 'App',
   components: {
+    DidCreatedModal,
     Footer,
     Header,
+    SideBar,
+    SignMessageModal,
   },
   computed: {
     ...mapGetters(['appIsInitializing', 'appName']),
-    showHeader() {
-      return this.$route.name !== 'intro';
+    isIntroPage() {
+      return this.$route.name === 'intro';
+    },
+    needsSideBar() {
+      return this.$route.meta.requiresAuth && this.$route.name !== 'vaultCreated';
     },
   },
 };
