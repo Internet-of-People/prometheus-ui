@@ -27,18 +27,18 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import { Loader, MnemonicWords } from '@/components';
-import api from '@/api';
 
 export default {
   name: 'CreateNewVault',
   data() {
     return {
       loading: true,
-      words: [],
     };
   },
   computed: {
+    ...mapGetters(['words']),
     wordsString() {
       return this.words.join(' ');
     },
@@ -48,12 +48,12 @@ export default {
     MnemonicWords,
   },
   async beforeCreate() {
-    const { data: words } = await api.generateVault();
-    this.words = words;
+    await this.$store.dispatch('getWords');
     this.loading = false;
   },
   methods: {
     goBack() {
+      this.$store.dispatch('clearWords');
       this.$router.push({ name: 'intro' });
     },
     restoreVault() {

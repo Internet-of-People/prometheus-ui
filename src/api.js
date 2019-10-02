@@ -15,6 +15,7 @@ const api = axios.create({
 export default {
   generateVault: () => api.post('/bip39'),
   validatePhrase: phrase => api.post('/bip39/validate-phrase', phrase),
+  validateWord: word => api.post('/bip39/validate-word', JSON.stringify(word)),
   initVault: phrase => api.post('/vault', phrase),
 
   listDIDs: () => api.get('/vault/dids'),
