@@ -21,12 +21,22 @@
       v-if="claimTableItems.length"
     >
       <template slot="signatures" slot-scope="data">
-          <b-badge variant="danger" v-if="data.item.claim.proof.length===0">0 signature</b-badge>
-          <b-badge variant="success" v-if="data.item.claim.proof.length>0">
+          <b-button
+            v-if="data.item.claim.proof.length===0"
+            disabled
+            variant="danger"
+            size="sm"
+            >0 signature</b-button>
+          <b-button
+            v-if="data.item.claim.proof.length>0"
+            variant="success"
+            size="sm"
+            @click="onSignatureDetails(data.item.claim)"
+            >
             {{ data.item.claim.proof.length }}
             <template v-if="data.item.claim.proof.length===1">signature</template>
             <template v-else>signatures</template>
-          </b-badge>
+          </b-button>
       </template>
       <template slot="actions" slot-scope="data">
         <b-button
@@ -61,6 +71,27 @@
     >
       <pre>{{ claimBeingHandled }}</pre>
     </b-modal>
+
+    <b-modal
+      id="modal-signature-details"
+      :title="claimBeingHandled.schema_name + ' Signatures'"
+      no-close-on-esc
+      ok-only
+      size="xl"
+      ok-title="CLOSE"
+    >
+      <b-table
+        :items="fetchSignatureRows()"
+        :fields="['ID', 'Witness ID', 'Issued At', 'Expires On']"
+        class="mt-3"
+        hover
+        show-empty
+        outlined
+        sticky-header="40px"
+        empty-text="No properties"
+      ></b-table>
+    </b-modal>
+
     <b-modal
       id="modal-claim-request-signature"
       title="Witness Message"
@@ -142,6 +173,7 @@ export default {
       searchTerm: '',
       claimMessageToSign: '',
       claimBeingHandled: {},
+      signatureToLoad: [],
       importSignature: {
         error: '',
         loading: false,
@@ -155,6 +187,12 @@ export default {
     },
   },
   methods: {
+    formatDate(timestamp) {
+      const date = new Date(timestamp * 1000);
+      // eslint-disable-next-line
+      const iso = date.toISOString().match(/(\d{4}\-\d{2}\-\d{2})T(\d{2}:\d{2}:\d{2})/);
+      return `${iso[1]} ${iso[2]}`;
+    },
     async onRequestSignatureButtonInListClick(claim) {
       this.claimBeingHandled = claim;
       const { data } = await api.getClaimWitnessMessage(claim.subject_id, claim.id);
@@ -170,6 +208,20 @@ export default {
     onDetailsButtonInListClick(claim) {
       this.claimBeingHandled = claim;
       this.$bvModal.show('modal-claim-details');
+    },
+    onSignatureDetails(claim) {
+      this.claimBeingHandled = claim;
+      this.signatureToLoad = claim.proof;
+      this.$bvModal.show('modal-signature-details');
+    },
+    fetchSignatureRows() {
+      const rows = this.signatureToLoad;
+      return rows.map((row, index) => ({
+        ID: index,
+        'Witness ID': row.signer_id,
+        'Issued At': this.formatDate(row.issued_at.secs_since_epoch),
+        'Expires On': this.formatDate(row.valid_until.secs_since_epoch),
+      }));
     },
 
     async onImportClaimSignatureButtonClick() {
