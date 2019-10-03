@@ -54,7 +54,6 @@
           <b-spinner small v-if="loading" />
           <fa icon="angle-right" v-if="!loading" />
         </b-button>
-        <b-button variant="outline-primary" @click="demoFill" class="float-right">demo</b-button>
       </b-col>
     </b-row>
   </div>
@@ -103,35 +102,6 @@ export default {
     }
   },
   methods: {
-    demoFill() {
-      this.inputWords = [
-        'include',
-        'pear',
-        'escape',
-        'sail',
-        'spy',
-        'orange',
-        'cute',
-        'despair',
-        'witness',
-        'trouble',
-        'sleep',
-        'torch',
-        'wire',
-        'burst',
-        'unable',
-        'brass',
-        'expose',
-        'fiction',
-        'drift',
-        'clock',
-        'duck',
-        'oxygen',
-        'aerobic',
-        'already',
-      ];
-      this.selectedWordsPos.every(elem => this.selectedWords.push(this.inputWords[elem]));
-    },
     fetchHintText(pos) {
       if (this.words.length) {
         this.currentPos = pos;
