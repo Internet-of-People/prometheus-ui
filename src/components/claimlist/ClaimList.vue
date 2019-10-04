@@ -20,25 +20,7 @@
       empty-text="No properties"
       v-if="claimTableItems.length"
     >
-      <template slot="signatures" slot-scope="data">
-          <b-button
-            v-if="data.item.claim.proof.length===0"
-            disabled
-            variant="danger"
-            size="sm"
-            >0 signature</b-button>
-          <b-button
-            v-if="data.item.claim.proof.length>0"
-            variant="success"
-            size="sm"
-            @click="onSignatureDetails(data.item.claim)"
-            >
-            {{ data.item.claim.proof.length }}
-            <template v-if="data.item.claim.proof.length===1">signature</template>
-            <template v-else>signatures</template>
-          </b-button>
-      </template>
-      <template slot="actions" slot-scope="data">
+      <template slot="details" slot-scope="data">
         <b-button
           size="sm"
           variant="outline-primary mr-2"
@@ -46,19 +28,38 @@
         >
           Details
         </b-button>
+      </template>
+      <template slot="signatures" slot-scope="data">
+        <div class="mr-2 d-inline-block">
+          <b-badge v-if="data.item.claim.proof.length===0">0 signature</b-badge>
+          <b-badge variant="success" v-if="data.item.claim.proof.length>0">
+            {{ data.item.claim.proof.length }}
+            <template v-if="data.item.claim.proof.length===1">signature</template>
+            <template v-else>signatures</template>
+          </b-badge>
+        </div>
         <b-button
           size="sm"
           variant="outline-primary mr-2"
           @click="onRequestSignatureButtonInListClick(data.item.claim)"
         >
-          Request Signature
+          Request
         </b-button>
         <b-button
           size="sm"
           variant="outline-primary"
+          class="mr-2"
           @click="onImportSignatureButtonInListClick(data.item.claim)"
         >
-          Import Signature
+          Import
+        </b-button>
+        <b-button
+          v-if="data.item.claim.proof.length>0"
+          size="sm"
+          variant="outline-primary"
+          @click="onSignatureDetails(data.item.claim)"
+        >
+          View
         </b-button>
       </template>
     </b-table>
@@ -260,7 +261,7 @@ export default {
       if (this.showDidLabel) {
         return ['name', 'value', 'did', 'signatures', 'actions'];
       }
-      return ['name', 'value', 'signatures', 'actions'];
+      return ['name', 'value', 'details', 'signatures'];
     },
   },
 };

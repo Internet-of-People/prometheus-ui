@@ -8,7 +8,7 @@
           <b-row>
             <b-col cols="6">
               <b-form-group
-                label="DID ID"
+                label="ID"
                 label-for="did"
               >
                 <b-form-input

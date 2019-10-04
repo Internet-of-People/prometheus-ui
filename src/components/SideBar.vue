@@ -4,13 +4,13 @@
       Your Personas
     </div>
     <b-list-group>
-      <div class="active-persona">
+      <b-list-group-item class="active-persona" @click="onDidSelected(activeDid.id)">
         <div class="avatar-container">
           <b-img :src="activeDid.avatar" alt="avatar image" class="avatar" />
         </div>
         <div class="label d-xl-none">{{ activeDid.label }}</div>
         <div class="label screen-xl d-lg-none d-xl-inline-block">{{ activeDid.label }}</div>
-      </div>
+      </b-list-group-item>
       <div class="personas">
         <b-list-group-item
           v-for="did in dids"
