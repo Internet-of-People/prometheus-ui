@@ -58,7 +58,7 @@ const getClaimTableItems = (claims, schemas, searchTerm, showDidLabel) => claims
     };
 
     if (showDidLabel) {
-      row.did = claim.subject_label;
+      row.persona = claim.subject_label;
     }
 
     return row;

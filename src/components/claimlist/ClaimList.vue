@@ -259,7 +259,7 @@ export default {
     },
     getTableFields() {
       if (this.showDidLabel) {
-        return ['name', 'value', 'did', 'signatures', 'actions'];
+        return ['name', 'value', 'persona', 'signatures'];
       }
       return ['name', 'value', 'details', 'signatures'];
     },
