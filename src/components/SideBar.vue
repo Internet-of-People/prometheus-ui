@@ -25,11 +25,12 @@
           <div class="label screen-xl d-lg-none d-xl-inline-block">{{ did.label }}</div>
         </b-list-group-item>
       </div>
-      <b-list-group-item class="top-border" @click="onCreateDid">
-        <fa icon="address-card" />
-        Create New Persona
+      <b-list-group-item class="text-right no-hover">
+        <b-button size="sm" @click="onCreateDid" variant="outline-primary">
+          <fa icon="address-card" class="mr-2" />Create New Persona
+        </b-button>
       </b-list-group-item>
-      <b-list-group-item @click="onSignMessageMenuButtonClick">
+      <b-list-group-item @click="onSignMessageMenuButtonClick" class="top-border" >
         <fa icon="file-signature" />
         Sign Message
       </b-list-group-item>
@@ -89,5 +90,5 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-@import './SideBar.scss';
+  @import './SideBar.scss';
 </style>

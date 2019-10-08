@@ -17,14 +17,12 @@
       <b-col cols="12">
         <Header :app-name="appName" />
         <b-row class="content-container">
-          <Loader :loading="appIsInitializing">
-            <b-col lg="3" class="sidebar d-sm-none d-md-none d-lg-block" v-if="needsSideBar">
-              <SideBar v-if="!appIsInitializing" />
-            </b-col>
-            <b-col sm="12" md="12" :lg="needsSideBar?9:12" class="content">
-              <router-view :app-name="appName" v-if="!appIsInitializing" :key="$route.fullPath" />
-            </b-col>
-          </Loader>
+          <b-col lg="3" class="sidebar d-sm-none d-md-none d-lg-block" v-if="needsSideBar">
+            <SideBar v-if="!appIsInitializing" />
+          </b-col>
+          <b-col sm="12" md="12" :lg="needsSideBar?9:12" class="content">
+            <router-view :app-name="appName" v-if="!appIsInitializing" :key="$route.fullPath" />
+          </b-col>
         </b-row>
       </b-col>
     </b-row>

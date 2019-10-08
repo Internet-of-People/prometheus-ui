@@ -80,6 +80,10 @@ export default {
   },
   mounted() {
     EventBus.$on('open-sign-message-modal', () => {
+      this.message = '';
+      this.signing = false;
+      this.signature = '';
+      this.error = '';
       this.$bvModal.show('modal-sign-message');
     });
   },

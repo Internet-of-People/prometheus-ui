@@ -10,7 +10,7 @@
       padding-left:1rem;
     }
   }
-  
+
   .content {
     padding:0;
     padding-bottom: 20px;
@@ -35,7 +35,7 @@
           height:80%;
           background-color: $primary;
         }
-        
+
         .avatar-container {
           width: 45px;
           display: inline-block;
@@ -44,7 +44,7 @@
             max-width: 30px;
           }
         }
-        
+
         div.label {
           display: inline-block;
           max-width: 130px;
@@ -85,6 +85,11 @@
         &:hover {
           background-color: $primary;
           color:white;
+        }
+
+        &.no-hover {
+          background-color:white;
+          cursor: default;
         }
 
         div.label {
