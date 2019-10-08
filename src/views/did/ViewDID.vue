@@ -1,14 +1,14 @@
 <template>
   <b-row no-gutters>
-    <b-col cols="12" lg="8">
+    <b-col>
       <Loader :loading="loading">
         <b-card>
-          <h3 class="mb-3 text-primary">DID Document</h3>
+          <h3 class="mb-3 text-primary">Persona</h3>
           <hr>
           <b-row>
             <b-col cols="6">
               <b-form-group
-                label="DID ID"
+                label="ID"
                 label-for="did"
               >
                 <b-form-input
@@ -20,7 +20,7 @@
                 />
                 <b-form-text id="id-desc">
                   <fa icon="unlock-alt" />
-                  This is your DID's unique ID, that you might choose to share.
+                  This is your persona's unique ID, that you might choose to share.
                 </b-form-text>
               </b-form-group>
               <b-form-group
@@ -31,9 +31,9 @@
                   <b-form-input
                     id="label"
                     name="label"
-                    v-model="label"
+                    v-model="label.label"
                     aria-describedby="label-desc"
-                    :readonly="!editingLabel"
+                    :readonly="!label.editing"
                     @keyup.enter="renameLabel()"
                     @keyup.esc="cancelLabel()"
                     @dblclick="editLabel()"
@@ -43,20 +43,20 @@
                       size="sm"
                       variant="outline-secondary"
                       class="text-uppercase"
-                      v-if="editingLabel"
+                      v-if="label.editing"
                       @click="cancelLabel"
-                      :disabled="savingLabel">
+                      :disabled="label.saving">
                       Cancel
                     </b-button>
                     <b-button
                       size="sm"
                       variant="outline-primary"
                       class="text-uppercase"
-                      v-if="editingLabel"
+                      v-if="label.editing"
                       @click="renameLabel"
-                      :disabled="savingLabel">
+                      :disabled="label.saving">
                       Save
-                      <b-spinner small v-if="savingLabel" />
+                      <b-spinner small v-if="label.saving" />
                     </b-button>
                     <b-button
                       size="sm"
@@ -69,7 +69,7 @@
                   </b-input-group-append>
                   <b-form-text id="label-desc">
                     <fa icon="user-lock" />
-                    This label is an easier memorizable form of your DID.
+                    This label is an easier memorizable form of your persona.
                     Your labels will be kept private.
                   </b-form-text>
                 </b-input-group>
@@ -78,18 +78,18 @@
             <b-col cols="3">
               <div>Your Avatar</div>
               <div style="position:relative;">
-                <b-img :src="avatar" fluid-grow alt="avatar image" class="mt-2 d-block"/>
+                <b-img :src="avatar.src" fluid-grow alt="avatar image" class="mt-2 d-block"/>
 
                 <b-button
                   size="sm"
                   variant="primary"
                   class="text-uppercase mt-3 d-block"
                   @click="$refs.avatarSelector.click()"
-                  :disabled="savingAvatar"
+                  :disabled="avatar.saving"
                   style="position:absolute;bottom:0.5rem;left:0.5rem"
                 >
                   Change
-                  <b-spinner small v-if="savingAvatar" />
+                  <b-spinner small v-if="avatar.saving" />
                 </b-button>
               </div>
               <b-form-text>
@@ -100,10 +100,13 @@
               <input
                 ref="avatarSelector"
                 type="file"
-                :v-model="avatar"
+                :v-model="avatar.src"
                 class="d-none"
                 accept=".png"
                 @change="changeAvatar" />
+              <b-alert v-if="avatar.showError" show class="mt-2 mb-0" variant="danger">
+                Maximum image size is 10MB
+              </b-alert>
             </b-col>
           </b-row>
         </b-card>
@@ -111,15 +114,16 @@
           <h3 class="text-primary">Claims</h3>
           <hr>
           <Loader :loading="loadingClaims" text="Loading claims...">
-            <template v-if="!claims || !claims.length">
+            <template v-if="!activeDidClaims || !activeDidClaims.length">
               <b-alert show variant="info">
-                No claims defined for this DID yet.
+                No claims defined for this persona yet.
               </b-alert>
             </template>
             <template v-else>
               <ClaimList
-                :claims="claims"
+                :claims="activeDidClaims"
                 :schemas="claimSchemas"
+                @listUpdated="refreshClaimList"
               />
             </template>
             <b-button
@@ -131,9 +135,6 @@
             </b-button>
           </Loader>
         </b-card>
-        <b-button to="/vault/dids" variant="light" class="text-uppercase mt-4">
-          <fa icon="angle-left" /> Back to DIDs
-        </b-button>
       </Loader>
     </b-col>
   </b-row>
@@ -150,69 +151,77 @@ export default {
     ClaimList,
   },
   computed: {
-    ...mapGetters(['claimSchemas']),
+    ...mapGetters(['activeDidClaims', 'claimSchemas']),
   },
   data() {
     return {
       loading: true,
       loadingClaims: true,
-      editingLabel: false,
-      labelBeforeEdit: '',
-      savingLabel: false,
-      label: '',
-      avatar: '',
-      savingAvatar: false,
-      claims: [],
+      label: {
+        label: '',
+        saving: false,
+        beforeEdit: '',
+        editing: false,
+      },
+      avatar: {
+        src: '',
+        showError: false,
+        saving: false,
+      },
     };
   },
   props: {
     did: String,
   },
-  async created() {
-    const { data: didDetails } = await api.getDID(this.did);
-    this.label = didDetails.label;
-    this.avatar = didDetails.avatar;
+  async mounted() {
+    const { data: didDetails } = await api.getActiveDID();
+    this.label.label = didDetails.label;
+    this.avatar.src = didDetails.avatar;
     this.loading = false;
 
-    const { data: claims } = await api.getDIDClaims(this.did);
-    this.claims = claims;
+    this.loadingClaims = true;
+    await this.$store.dispatch('listActiveDidClaims');
     this.loadingClaims = false;
   },
   methods: {
+    async refreshClaimList() {
+      await this.$store.dispatch('listActiveDidClaims');
+    },
     editLabel() {
-      this.editingLabel = true;
-      this.labelBeforeEdit = this.label;
+      this.label.editing = true;
+      this.label.beforeEdit = this.label.label;
     },
     cancelLabel() {
-      this.label = this.labelBeforeEdit;
-      this.editingLabel = false;
+      this.label.label = this.label.beforeEdit;
+      this.label.editing = false;
     },
     renameLabel() {
-      this.savingLabel = true;
-      this.$store.dispatch('renameDIDLabel', {
-        didId: this.did,
-        label: this.label,
-      }).then((label) => {
-        this.label = label;
-        this.editingLabel = false;
-        this.savingLabel = false;
+      this.label.saving = true;
+      this.$store.dispatch('renameDIDLabel', this.label.label).then((label) => {
+        this.label.label = label;
+        this.label.editing = false;
+        this.label.saving = false;
       });
     },
     changeAvatar(event) {
+      this.avatar.showError = false;
       // file reader logic is taken from docs
       // https://developer.mozilla.org/en-US/docs/Web/API/FileReader/onload
       // get file and then read converted file. Hence, nested event
       const file = event.currentTarget.files[0];
+
+      if (file.size > 10 * 1000 * 1000) {
+        this.avatar.showError = true;
+        return;
+      }
+
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = async (e) => {
-        this.savingAvatar = true;
-        await this.$store.dispatch('changeDIDAvatar', {
-          didId: this.did,
-          avatar: e.target.result,
-        });
-        this.avatar = e.target.result;
-        this.savingAvatar = false;
+        this.avatar.saving = true;
+        await this.$store.dispatch('changeDIDAvatar', e.target.result);
+        this.avatar.src = e.target.result;
+        this.avatar.saving = false;
       };
     },
   },

@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import api from '@/api';
 import {
   Introduction,
   CreateNewVault,
@@ -13,17 +14,12 @@ import {
   ViewClaim,
 } from '@/views';
 
-import {
-  TopCreateNewClaimButton,
-  TopCreateNewDIDButton,
-} from '@/components';
-
 Vue.use(Router);
 
 const SIGNED_IN_HOME_URL = '/vault/dids';
 const GUEST_HOME_URL = '/';
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   scrollBehavior() {
     return { x: 0, y: 0 };
@@ -34,7 +30,7 @@ export default new Router({
       path: '/',
       name: 'intro',
       component: Introduction,
-      meta: { requiresAuth: false },
+      meta: { requiresAuth: false, showProfile: false },
     },
     {
       path: '/createnewvault',
@@ -49,6 +45,7 @@ export default new Router({
         ],
         title: 'Create New Vault',
         homeUrl: GUEST_HOME_URL,
+        showProfile: false,
       },
     },
     {
@@ -64,6 +61,7 @@ export default new Router({
         ],
         title: 'Create New Vault',
         homeUrl: GUEST_HOME_URL,
+        showProfile: false,
       },
     },
     {
@@ -79,6 +77,7 @@ export default new Router({
         ],
         title: 'Create New Vault',
         homeUrl: GUEST_HOME_URL,
+        showProfile: false,
       },
     },
     {
@@ -89,7 +88,7 @@ export default new Router({
         requiresAuth: true,
         title: 'Vault / DIDs',
         homeUrl: SIGNED_IN_HOME_URL,
-        topBarButton: TopCreateNewDIDButton,
+        showProfile: true,
       },
     },
     {
@@ -98,23 +97,21 @@ export default new Router({
       component: ViewDID,
       meta: {
         requiresAuth: true,
-        breadcrumb: route => [
-          { text: 'DIDs', to: '/vault/dids', rel: 'parent' },
-          { text: route.params.did },
-        ],
         title: 'DID Details',
         homeUrl: SIGNED_IN_HOME_URL,
+        showProfile: true,
       },
       props: true,
     },
     {
-      path: '/vault/claims/create/:did?',
+      path: '/vault/claims/create',
       name: 'createClaim',
       component: CreateClaim,
       meta: {
         requiresAuth: true,
         title: 'Vault / Claims / Create New',
         homeUrl: SIGNED_IN_HOME_URL,
+        showProfile: true,
       },
       props: true,
     },
@@ -124,12 +121,9 @@ export default new Router({
       component: ListClaims,
       meta: {
         requiresAuth: true,
-        breadcrumb: () => [
-          { text: 'Claims', active: true },
-        ],
         title: 'Claims',
         homeUrl: SIGNED_IN_HOME_URL,
-        topBarButton: TopCreateNewClaimButton,
+        showProfile: true,
       },
     },
     {
@@ -138,12 +132,9 @@ export default new Router({
       component: ViewClaim,
       meta: {
         requiresAuth: true,
-        breadcrumb: route => [
-          { text: 'Claims', to: '/vault/claims', rel: 'parent' },
-          { text: route.params.id },
-        ],
         title: 'Claims Details',
         homeUrl: SIGNED_IN_HOME_URL,
+        showProfile: true,
       },
     },
     {
@@ -154,7 +145,48 @@ export default new Router({
         requiresAuth: true,
         title: 'About',
         homeUrl: SIGNED_IN_HOME_URL,
+        showProfile: true,
       },
     },
   ],
 });
+
+router.beforeEach(async (to, from, next) => {
+  let vaultExists = false;
+  let activeDid;
+  try {
+    const resp = await api.getActiveDIDID();
+    activeDid = resp.data;
+    vaultExists = true;
+  } catch {
+    console.log('Vault does not exist');
+  }
+
+  if (vaultExists && !to.meta.requiresAuth) {
+    if (activeDid) {
+      next({ name: 'viewDID', params: { did: activeDid } });
+      return;
+    }
+
+    next({ name: 'listDIDs' });
+    return;
+  }
+
+  if (!vaultExists && to.meta.requiresAuth) {
+    next({ name: 'intro' });
+    return;
+  }
+
+  if (to.meta.requiresAuth) {
+    if (!activeDid) { // no active did is set
+      if (to.name !== 'listDIDs' && to.name !== 'vaultCreated') {
+        next({ name: 'listDIDs' });
+        return;
+      }
+    }
+  }
+
+  next();
+});
+
+export default router;

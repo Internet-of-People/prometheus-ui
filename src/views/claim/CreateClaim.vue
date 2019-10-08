@@ -1,6 +1,8 @@
 <template>
     <b-row>
-      <b-col cols="8">
+      <b-col cols="12">
+        <h3 class="mb-3 text-primary">Create New Claim</h3>
+        <hr>
         <Tooltip id="create-claim-tooltip">
           Claims are statements about yourself, ranging from simple things like
           "I have brown eyes!" to a full digital representation of your passport.
@@ -9,25 +11,6 @@
           decide to share them with other people.
         </Tooltip>
         <b-form @submit.stop.prevent="onSubmit">
-          <b-form-group
-            label="Applies to:"
-            label-for="subjectDid"
-            description="The DID this claim should apply to."
-          >
-            <b-form-select
-              id="did"
-              name="did"
-              :options="availableDids ? availableDids : []"
-              v-model="did"
-              v-validate="{ required: true }"
-              :state="validateState('did')"
-            >
-              <template slot="first">
-                <option :value="undefined" disabled selected>-- Please select a DID --</option>
-              </template>
-            </b-form-select>
-          </b-form-group>
-          <hr>
           <b-card>
             <b-form-group
               label="Schema:"
@@ -61,45 +44,76 @@
               />
             </template>
           </b-card>
-          <hr>
-          <b-form-group
-            label="Witnesses:"
-            label-for="witnesses"
-            description="In many cases, other people will not rely on your word alone and
-            you need to present witnesses for your statement. Select one or more witnesses
-            from your contacts or dedicated service providers."
-          >
-            <b-form-input
-              id="witnesses"
-              name="witnesses"
-              v-model="witnesses"
-              v-validate="{ required: true }"
-              :state="validateState('witnesses')"
-              aria-describedby="witnesses-live-feedback"
-            />
-            <b-form-invalid-feedback id="witnesses-live-feedback">
-              You have to add at least one witness's DID.
-            </b-form-invalid-feedback>
-          </b-form-group>
+          <b-card class="mt-3">
+            <b-alert show>Automatic Witness Requests coming soon!</b-alert>
+            <b-form-group
+              label="Witnesses:"
+              label-for="witnesses"
+              description="In many cases, other people will not rely on your word alone and
+              you need to present witnesses for your statement. Select one or more witnesses
+              from your contacts or dedicated service providers."
+            >
+              <b-form-input
+                id="witnesses"
+                name="witnesses"
+                v-model="witnesses"
+                v-validate="{ required: true }"
+                :state="validateState('witnesses')"
+                aria-describedby="witnesses-live-feedback"
+                disabled
+              />
+              <b-form-invalid-feedback id="witnesses-live-feedback">
+                You have to add at least one witness's DID.
+              </b-form-invalid-feedback>
+            </b-form-group>
+          </b-card>
           <hr>
           <b-button
-            :to="{ name: 'listClaims' }"
+            @click="$router.go(-1)"
             variant="light"
             class="mr-4 text-uppercase"
           >
-            Cancel
+            <fa icon="angle-left" /> Back
           </b-button>
-          <b-button @click="create" variant="primary" :disabled="saving" class="text-uppercase">
-            Create &amp; Send
-            <b-spinner small class="ml-1" v-if="saving" />
+          <b-button @click="create" variant="primary" class="text-uppercase">
+            Create
           </b-button>
         </b-form>
+        <b-modal
+          id="modal-claim-created"
+          title="Your Claim has been Created!"
+          no-close-on-esc
+          hide-footer
+        >
+          <b-alert show variant="success">
+            In the future, Prometheus will be able to automatically request signatures for your
+            claims from your contacts and/or service providers. Until then, you can manually
+            gather signatures for your claims by asking your peers to sign this message:
+          </b-alert>
+
+          <b-input-group class="mt-3">
+            <b-form-input :value="claimMessageToSign" disabled></b-form-input>
+            <b-input-group-append>
+              <b-button
+                variant="outline-primary"
+                v-clipboard:copy="claimMessageToSign"
+                v-clipboard:success="onCopyMessage"
+                class="text-uppercase"
+                :disabled="saving"
+              >
+                Copy &amp; Close
+                <b-spinner small class="ml-1" v-if="saving" />
+              </b-button>
+            </b-input-group-append>
+          </b-input-group>
+        </b-modal>
       </b-col>
     </b-row>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
+import api from '@/api';
 import {
   NumberField, Tooltip, StringField,
 } from '@/components';
@@ -110,19 +124,18 @@ export default {
     StringField,
     Tooltip,
   },
-  props: {
-    did: String,
-  },
   data() {
     return {
       schema: null,
       saving: false,
       claimContent: {},
       witnesses: '',
+      createdClaimId: '',
+      claimMessageToSign: '',
     };
   },
   computed: {
-    ...mapGetters(['claimSchemas', 'dids']),
+    ...mapGetters(['claimSchemas', 'dids', 'activeDid']),
     availableSchemas() {
       return this.claimSchemas.map(schema => ({ value: schema.id, text: schema.label }));
     },
@@ -175,21 +188,23 @@ export default {
       }
       return null;
     },
+    async onCopyMessage() {
+      this.$router.push({ name: 'viewDID', params: { did: this.activeDid.id } });
+    },
     async create() {
       if (!await this.$validator.validateAll()) {
         return;
       }
+
       this.saving = true;
-      await this.$store.dispatch('createClaim', {
-        didId: this.did,
-        data: {
-          schema: this.schema,
-          content: this.claimContent,
-        },
+      this.createdClaimId = await this.$store.dispatch('createClaim', {
+        schema: this.schema,
+        content: this.claimContent,
       });
       this.saving = false;
-
-      this.$router.push({ name: 'viewDID', params: { did: this.did } });
+      const { data } = await api.getClaimWitnessMessage(this.activeDid.id, this.createdClaimId);
+      this.claimMessageToSign = data;
+      this.$bvModal.show('modal-claim-created');
     },
   },
 };

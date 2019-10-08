@@ -1,5 +1,5 @@
 <template>
-  <b-container fluid>
+  <b-container>
     <b-row class="text-center justify-content-md-center" align-h="center">
       <b-col cols="6" md="4" lg="2">
         <b-img :src="require('@/assets/images/logo.svg')" fluid alt="Responsive image" />

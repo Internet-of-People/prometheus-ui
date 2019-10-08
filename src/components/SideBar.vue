@@ -1,67 +1,94 @@
 <template>
-  <b-container id="sidebar" class="p-0">
-    <div class="justify-content-center text-center">
-      <router-link :to="homeUrl">
-        <b-img :src="require('@/assets/images/logo.svg')" alt="Prometheus logo" />
-        <span class="d-none d-lg-inline">{{ appName }}</span>
-      </router-link>
+  <div class="content sidebar-inner">
+    <div class="sidebar-title">
+      Your Personas
     </div>
-    <b-nav vertical class="mt-4 text-uppercase" v-if="showNavItems">
-      <b-nav-item
-        v-for="item in menuItems"
-        :key="item.name"
-        :active="currentPage === item.link.name"
-        :to="item.link"
-        :disabled="item.disabled"
+    <b-list-group>
+      <b-list-group-item class="active-persona" @click="onDidSelected(activeDid.id)">
+        <div class="avatar-container">
+          <b-img :src="activeDid.avatar" alt="avatar image" class="avatar" />
+        </div>
+        <div class="label d-xl-none">{{ activeDid.label }}</div>
+        <div class="label screen-xl d-lg-none d-xl-inline-block">{{ activeDid.label }}</div>
+      </b-list-group-item>
+      <div class="personas">
+        <b-list-group-item
+          v-for="did in dids"
+          :key="did.id"
+          :class="did.id===activeDid.id?'d-none':''"
+          @click="onDidSelected(did.id)"
+        >
+          <div class="avatar-container">
+            <b-img :src="did.avatar" alt="avatar image" class="avatar" />
+          </div>
+          <div class="label d-xl-none">{{ did.label }}</div>
+          <div class="label screen-xl d-lg-none d-xl-inline-block">{{ did.label }}</div>
+        </b-list-group-item>
+      </div>
+      <b-list-group-item class="text-right no-hover">
+        <b-button size="sm" @click="onCreateDid" variant="outline-primary">
+          <fa icon="address-card" class="mr-2" />Create New Persona
+        </b-button>
+      </b-list-group-item>
+      <b-list-group-item @click="onSignMessageMenuButtonClick" class="top-border" >
+        <fa icon="file-signature" />
+        Sign Message
+      </b-list-group-item>
+      <b-list-group-item href="#" disabled>
+        <fa icon="wallet" />
+        Wallets (soon!)
+      </b-list-group-item>
+      <b-list-group-item href="#" disabled>
+        <fa icon="laptop" />
+        Devices (soon!)
+      </b-list-group-item>
+      <b-list-group-item
+        :to="{name:'listClaims'}"
+        :class="getClassIfActive('listClaims')"
       >
-        {{item.name}}
-      </b-nav-item>
-    </b-nav>
-  </b-container>
+        View All Claims
+      </b-list-group-item>
+      <b-list-group-item
+        :to="{name:'listDIDs'}"
+        :class="getClassIfActive('listDIDs')"
+      >
+        View All Personas
+      </b-list-group-item>
+      <b-list-group-item
+        :to="{ name: 'about' }"
+        :class="getClassIfActive('about')+' top-border'"
+      >
+        About
+      </b-list-group-item>
+    </b-list-group>
+  </div>
 </template>
-
 <script>
+import { mapGetters } from 'vuex';
+import EventBus from '@/eventbus';
+
 export default {
-  name: 'SideBar',
-  props: {
-    appName: {
-      type: String,
-      default: '',
-    },
-  },
   computed: {
-    showNavItems() {
-      return this.$route.meta.requiresAuth;
+    ...mapGetters(['activeDid', 'dids']),
+  },
+  methods: {
+    async onDidSelected(id) {
+      await this.$store.dispatch('setActiveDID', id);
+      this.$router.push({ name: 'viewDID', params: { did: id } });
     },
-  },
-  data() {
-    return {
-      menuItems: [
-        { name: 'DIDs', link: { name: 'listDIDs' } },
-        { name: 'Claims', link: { name: 'listClaims' } },
-        { name: 'Wallets (soon!)', link: '/vault/wallets', disabled: true }, // TBD
-        { name: 'Devices (soon!)', link: '/vault/devices', disabled: true }, // TBD
-        { name: 'About', link: { name: 'about' } },
-      ],
-      currentPage: '',
-      homeUrl: '',
-    };
-  },
-  watch: {
-    // if the route hash is changed, we updates the logo's URL and
-    // the current page to be able to decide in the menu, where are we.
-    $route() {
-      this.currentPage = this.$route.name;
-      this.homeUrl = this.$route.meta.homeUrl;
+    async onCreateDid() {
+      const createdDid = await this.$store.dispatch('createDID');
+      EventBus.$emit('open-did-created-modal', createdDid);
     },
-  },
-  beforeMount() {
-    this.currentPage = this.$route.name;
-    this.homeUrl = this.$route.meta.homeUrl;
+    onSignMessageMenuButtonClick() {
+      EventBus.$emit('open-sign-message-modal');
+    },
+    getClassIfActive(expected) {
+      return expected === this.$route.name ? 'active' : '';
+    },
   },
 };
 </script>
-
 <style scoped lang="scss">
-@import './SideBar.scss';
+  @import './SideBar.scss';
 </style>

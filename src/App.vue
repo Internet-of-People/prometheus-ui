@@ -1,14 +1,29 @@
 <template>
-  <b-container fluid class="vertical-fill">
-    <b-row class="vertical-fill">
-      <b-col cols="2" v-if="showSideBar" class="p-0 pt-2 m-0">
-        <SideBar :app-name="appName" />
+  <b-container>
+    <b-row v-if="isIntroPage" class="mt-3">
+      <b-col>
+        <b-row class="content-container">
+          <b-col class="content">
+            <Loader :loading="appIsInitializing">
+              <router-view :app-name="appName" v-if="!appIsInitializing" :key="$route.fullPath" />
+            </Loader>
+          </b-col>
+        </b-row>
       </b-col>
-      <b-col v-bind:cols="showSideBar?10:12" class="m-0 p-0">
-        <TopBar v-if="showSideBar" />
-        <Content>
-          <router-view :app-name="appName" />
-        </Content>
+    </b-row>
+    <b-row v-else>
+      <DidCreatedModal />
+      <SignMessageModal />
+      <b-col cols="12">
+        <Header :app-name="appName" />
+        <b-row class="content-container">
+          <b-col lg="3" class="sidebar d-sm-none d-md-none d-lg-block" v-if="needsSideBar">
+            <SideBar v-if="!appIsInitializing" />
+          </b-col>
+          <b-col sm="12" md="12" :lg="needsSideBar?9:12" class="content">
+            <router-view :app-name="appName" v-if="!appIsInitializing" :key="$route.fullPath" />
+          </b-col>
+        </b-row>
       </b-col>
     </b-row>
     <b-row align-v="end">
@@ -20,36 +35,32 @@
 <script>
 import { mapGetters } from 'vuex';
 import {
-  Content,
+  DidCreatedModal,
   Footer,
+  Header,
+  Loader,
   SideBar,
-  TopBar,
+  SignMessageModal,
 } from '@/components';
 
 export default {
   name: 'App',
   components: {
+    DidCreatedModal,
     Footer,
+    Header,
+    Loader,
     SideBar,
-    TopBar,
-    Content,
+    SignMessageModal,
   },
   computed: {
-    ...mapGetters(['appName']),
-    showSideBar() {
-      return this.$route.name !== 'intro';
+    ...mapGetters(['appIsInitializing', 'appName']),
+    isIntroPage() {
+      return this.$route.name === 'intro';
     },
-  },
-  async beforeCreate() {
-    try {
-      await this.$store.dispatch('authenticate');
-      await this.$store.dispatch('listDIDs');
-      await this.$store.dispatch('listClaimSchemas');
-
-      this.$router.push({ name: 'listDIDs' });
-    } catch (err) {
-      this.$router.push({ name: 'intro' });
-    }
+    needsSideBar() {
+      return this.$route.meta.requiresAuth && this.$route.name !== 'vaultCreated';
+    },
   },
 };
 </script>

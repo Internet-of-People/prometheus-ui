@@ -1,6 +1,15 @@
-#footer{
-  position: fixed;
-  bottom:0;
-  left: 0;
-  background-color: #ffffff;
+@import '@/assets/style/_variables.scss';
+
+.footer{
+  background-color: white;
+  -webkit-border-radius: $content-border-radius;
+  -moz-border-radius: $content-border-radius;
+  border-radius: $content-border-radius;
+  padding: 1rem;
+
+  .heart {
+    svg {
+      color: red;
+    }
+  }
 }
